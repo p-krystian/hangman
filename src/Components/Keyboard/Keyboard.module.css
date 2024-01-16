@@ -1,0 +1,18 @@
+.keyboard{
+  border: var(--border);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 95%;
+}
+.keys{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+.write{
+  margin-top: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

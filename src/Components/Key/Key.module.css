@@ -1,0 +1,24 @@
+.key{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light);
+  border: var(--border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.1rem;
+  font-size: 1.8rem;
+  width: 1.5em;
+  height: 1.5em;
+  user-select: none;
+  transition:
+    color 0.1s ease-in,
+    border 0.1s ease-in;
+}
+.key:hover{
+  color: var(--second);
+  border-color: var(--darker);
+}
+.wide{
+  width: 5em;
+}

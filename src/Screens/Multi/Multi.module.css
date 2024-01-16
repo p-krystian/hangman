@@ -1,0 +1,31 @@
+.games{
+  width: 22rem;
+  min-height: 16rem;
+  height: 75%;
+  border: 0.25rem solid var(--darker);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: auto;
+}
+.info{
+  text-align: center;
+  font-family: 'Roboto Mono';
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+.buttons{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  justify-content: space-evenly;
+}
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}

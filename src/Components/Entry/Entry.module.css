@@ -1,0 +1,9 @@
+.entry{
+  color: var(--main);
+  font-family: 'Roboto Mono';
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  grid-area: entry;
+  text-align: center;
+  width: 90%;
+}

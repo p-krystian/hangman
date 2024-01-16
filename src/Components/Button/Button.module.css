@@ -1,0 +1,19 @@
+.button{
+  display: inline-block;
+  min-width: 10rem;
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin: 0.2rem;
+  font-family: 'Roboto Mono';
+  background-color: transparent;
+  border-radius: 0.5rem;
+  border: var(--border);
+  color: var(--main);
+  cursor: pointer;
+  transition: filter 0.1s ease-in;
+  text-decoration: none;
+  text-align: center;
+}
+.button:hover{
+  filter: brightness(75%);
+}

@@ -1,0 +1,10 @@
+.header{
+  font-family: 'Ubuntu';
+  display: block;
+  font-size: 80px;
+  color: var(--second);
+  text-align: center;
+  cursor: default;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
