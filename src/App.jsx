@@ -11,7 +11,8 @@ function App(){
   const [gameData, setGameData] = useState({
     entry: '',
     nicks: ['', ''],
-    points: [0, 0]
+    points: [0, 0],
+    rounds: [0, 0]
   })
   const gameContext = {
     ...gameData,

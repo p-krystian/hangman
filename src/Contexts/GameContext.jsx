@@ -4,6 +4,7 @@ const GameContext = createContext({
   entry: null,
   nicks: [],
   points: [],
+  rounds: [],
   change: () => {}
 })
 
