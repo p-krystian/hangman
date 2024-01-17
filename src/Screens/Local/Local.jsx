@@ -2,7 +2,6 @@ import WriteNicks from '../../Views/WriteNicks/WriteNicks'
 import Game from '../../Views/Game/Game'
 import WriteEntry from '../../Views/WriteEntry/WriteEntry'
 import EndGame from '../../Views/EndGame/EndGame'
-import Resoult from '../../Views/Resoult/Resoult'
 import Button from '../../Components/Button/Button'
 import { useState, useRef, useContext, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -13,28 +12,19 @@ function Local(){
   const gameContext = useContext(GameContext)
   const [stage, setStage] = useState('writeNicks')
   const currentPlayer = useRef(0)
-  const round = useRef(0)
-
-  const endGameClick = () => (
-    setStage((round.current < 6) ? 'writeEntry' : 'resoult')
-  )
-  function clean(){
-    currentPlayer.current = 0
-    round.current = 0
-    gameContext.change({entry: '', nicks: ['', ''], points: [0, 0]})
-    setStage('writeNicks')
-  }
 
   const gameEnd = useCallback(resoult => {
     if (resoult === 'win'){
       const points = gameContext.points
       points[currentPlayer.current]++
-      gameContext.change(current => ({...current, points: points}))
+      gameContext.change(current => ({...current, points}))
     }
-    round.current++
+    const rounds = gameContext.rounds
+    rounds[currentPlayer.current]++
+    gameContext.change(current => ({...current, rounds}))
     currentPlayer.current = +!currentPlayer.current
     setStage('endGame')
-  }, [round, currentPlayer, gameContext])
+  }, [currentPlayer, gameContext])
 
   return (
    stage === 'writeEntry' ? (
@@ -50,17 +40,11 @@ function Local(){
         onWin={ () => gameEnd('win') }
       />
     ) : stage === 'endGame' ? (
-      <EndGame enter={ endGameClick }>
-        <Button onClick={ endGameClick }>
+      <EndGame enter={ () => setStage('writeEntry') }>
+        <Button onClick={ () => setStage('writeEntry') }>
           Dalej
         </Button>
       </EndGame>
-    ) : stage === 'resoult' ? (
-      <Resoult enter={ clean } >
-        <Button onClick={ clean }>
-          Jeszcze raz
-        </Button>
-      </Resoult>
     ) : (
       <WriteNicks
         back={ () => navigate('/') }
