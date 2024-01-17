@@ -4,10 +4,9 @@
 }
 .resoult{
   font-family: 'Roboto Mono';
-  font-size: 2em;
-  width: 340px;
-  height: 340px;
-  margin: auto;
+  font-size: 2rem;
+  width: 18rem;
+  height: 18rem;
 }
 .resoult img{
   width: 100%;
@@ -29,7 +28,7 @@
   color: var(--light);
 }
 .entry{
-  font-size: 48px;
+  font-size: 1.8rem;
   font-family: 'Roboto Mono';
   /* color: var(--light); */
   display: block;
@@ -38,17 +37,18 @@
 .prefix{
   color: var(--darker);
 }
-.buttons{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-area: bottom;
-}
 .container{
-  min-height: calc(100vh - 240px);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   grid-area: main;
+  flex: 1;
+}
+.wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
