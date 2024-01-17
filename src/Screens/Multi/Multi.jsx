@@ -1,5 +1,6 @@
 import styles from './Multi.module.css'
 import Button from '../../Components/Button/Button'
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 
 function MultiPlayer(){
@@ -11,10 +12,10 @@ function MultiPlayer(){
             Brak dostępnych gier
           </span>
         </div>
-        <div className={ styles.buttons }>
+        <ButtonWrap>
           <Button link='/'>Anuluj</Button>
           <Button link='/new-game'>Utwórz</Button>
-        </div>
+        </ButtonWrap>
       </div>
     </HeaderWrap>
   )

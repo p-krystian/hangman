@@ -1,6 +1,7 @@
 import Input from '../../Components/Input/Input'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import styles from './WriteNicks.module.css'
@@ -81,7 +82,7 @@ function WriteNicks({ back, next, single }){
             keyEvent={ char => write(char, focused) }
           />
         </div>
-        <div className={ styles.buttons }>
+        <ButtonWrap>
           <Button onClick={ back }>Anuluj</Button>
           {
             pass ? (
@@ -90,7 +91,7 @@ function WriteNicks({ back, next, single }){
               <Button disabled={ true }>Dalej</Button>
             )
           }
-        </div>
+        </ButtonWrap>
       </div>
     </HeaderWrap>
   )

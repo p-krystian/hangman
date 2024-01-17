@@ -1,6 +1,7 @@
 import Entry from '../../Components/Entry/Entry'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import GameContext from '../../Contexts/GameContext'
 import styles from './WriteEntry.module.css'
@@ -54,7 +55,7 @@ function WriteEntry({ back, next, text }){
           <Entry>{ entry }{ entry.length < 20 && prompt }</Entry>
           <Keyboard keyEvent={ modifyText } write={ true } />
         </div>
-        <div className={ styles.buttons } >
+        <ButtonWrap>
           <Button onClick={ back }>Wstecz</Button>
           {
             entry.length >= 3 ? (
@@ -63,7 +64,7 @@ function WriteEntry({ back, next, text }){
               <Button disabled>Dalej</Button>
             )
           }
-        </div>
+        </ButtonWrap>
       </div>
     </HeaderWrap>
   )
