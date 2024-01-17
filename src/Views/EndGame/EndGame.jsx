@@ -1,4 +1,5 @@
 import Button from '../../Components/Button/Button'
+import Points from '../../Components/Points/Points'
 import { useContext, useEffect } from 'react'
 import GameContext from '../../Contexts/GameContext'
 import styles from './EndGame.module.css'
@@ -28,6 +29,7 @@ function EndGame({ children, enter }){
 
   return (
     <>
+      <Points />
       <div className={ styles.container }>
         <div className={ styles.resoult }>
           <img src={ resoult.img } />
