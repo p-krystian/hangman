@@ -11,23 +11,13 @@ function Game({ back, onLose, onWin }){
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
   const [mistakes, setMistakes] = useState(0)
-  // const sounds = useRef((() => {
-  //   // const r = require.context('../../Assets/Sounds', false, /(bad|good).\.mp3$/)
-  // 	let soundsObj = {}
-  //   r.keys().forEach(item => (
-  //     soundsObj[item.replace('./', '')] = r(item)
-  //   ))
-  // 	return soundsObj
-  // })())
 
   function clickKey(char, key){
     setGuessed(g => [...new Set(g.concat(char))])
     if ([...key.classList].some(e => /(correct|mistake)/.test(e)))
       return
-    // const rand = parseInt(Math.random()*3)
     if (entry.toUpperCase().includes(char)){
       key.classList.add('correct')
-      // new Audio(sounds.current[`good${rand}.mp3`]).play().catch(() => {})
     }
     else{
       if (mistakes >= 9){
@@ -37,7 +27,6 @@ function Game({ back, onLose, onWin }){
       }
       setMistakes(m => m + 1)
       key.classList.add('mistake')
-      // new Audio(sounds.current[`bad${rand}.mp3`]).play().catch(() => {})
     }
   }
   function winEnd(){
