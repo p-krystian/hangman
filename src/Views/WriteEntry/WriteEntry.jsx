@@ -6,6 +6,7 @@ import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import GameContext from '../../Contexts/GameContext'
 import styles from './WriteEntry.module.css'
 import clickSound from '../../Assets/Sounds/click0.mp3'
+import words from '../../Assets/words.json'
 import { useState, useContext, useEffect, useCallback } from 'react'
 
 function WriteEntry({ back, next, text }){
@@ -19,6 +20,13 @@ function WriteEntry({ back, next, text }){
     ))
     next()
   }, [gameContext, entry, next])
+
+  const writeRandom = useCallback(() => {
+    const randomIndex = Math.floor(Math.random()*words.length)
+    const randomWord = words.at(randomIndex)
+    setEntry(randomWord)
+  }, [])
+
   function modifyText(char){
     new Audio(clickSound).play().catch(() => {})
     switch (char){
@@ -64,6 +72,7 @@ function WriteEntry({ back, next, text }){
               <Button disabled>Dalej</Button>
             )
           }
+          <Button onClick={ writeRandom }>Losuj</Button>
         </ButtonWrap>
       </div>
     </HeaderWrap>

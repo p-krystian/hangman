@@ -33,6 +33,7 @@
   /* color: var(--light); */
   display: block;
   line-height: 1.8;
+  text-transform: uppercase;
 }
 .prefix{
   color: var(--darker);
