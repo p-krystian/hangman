@@ -26,10 +26,17 @@ function Local(){
     setStage('endGame')
   }, [currentPlayer, gameContext])
 
+  const entryBack = useCallback(() => {
+    if (gameContext.rounds.some(n => n)){
+      return navigate('/')
+    }
+    setStage('writeNicks')
+  }, [gameContext])
+
   return (
    stage === 'writeEntry' ? (
       <WriteEntry
-        back={ () => setStage('writeNicks') }
+        back={ () => entryBack() }
         next={ () => setStage('game') }
         text={ `Hasło dla ${gameContext.nicks[currentPlayer.current]}:` }
       />
