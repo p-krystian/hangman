@@ -8,12 +8,7 @@ function MenuStart(){
   const gameContext = useContext(GameContext)
 
   useEffect(() => {
-    gameContext.change(current => ({
-      ...current,
-      entry: '',
-      nicks: ['', ''],
-      points: [0, 0]
-    }))
+    gameContext.reset()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

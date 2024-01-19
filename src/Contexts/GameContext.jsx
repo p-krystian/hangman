@@ -5,7 +5,8 @@ const GameContext = createContext({
   nicks: [],
   points: [],
   rounds: [],
-  change: () => {}
+  change: () => {},
+  reset: () => {}
 })
 
 export default GameContext

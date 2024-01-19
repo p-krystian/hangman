@@ -8,15 +8,16 @@ import LocalMenu from './Screens/Local/Local'
 import MultiMenu from './Screens/Multi/Multi'
 
 function App(){
-  const [gameData, setGameData] = useState({
-    entry: '',
-    nicks: ['', ''],
-    points: [0, 0],
-    rounds: [0, 0]
-  })
+  const [gameData, setGameData] = useState({})
   const gameContext = {
     ...gameData,
-    change: setGameData
+    change: setGameData,
+    reset: () => setGameData({
+      entry: '',
+      nicks: ['', ''],
+      points: [0, 0],
+      rounds: [0, 0]
+    })
   }
 
   return (
