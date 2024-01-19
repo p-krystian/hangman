@@ -1,46 +1,60 @@
-import Entry from '../../Components/Entry/Entry'
-import Keyboard from '../../Components/Keyboard/Keyboard'
+import Game from '../../Views/Game/Game'
+import EndGame from '../../Views/EndGame/EndGame'
 import Button from '../../Components/Button/Button'
-import { useState } from 'react'
+import GameContext from '../../Contexts/GameContext'
+import words from '../../Assets/words.json'
+import { useContext, useEffect, useState, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+function SingleGame(){
+  const navigate = useNavigate()
+  const gameContext = useContext(GameContext)
+  const [stage, setStage] = useState('game')
 
-function NewGame(){
-  const [gameName, setGameName] = useState('')
-  const prompt = <span className={ "styles.prompt" }>_</span>
+  const gameEnd = useCallback(result => {
+    const pointsAdd = +(result === 'win')
+    gameContext.change(current => ({
+      ...current,
+      points: [current.points[0]+pointsAdd, 0],
+      rounds: [current.rounds[0]+1, 0]
+    }))
+    setStage('endGame')
+  }, [])
 
-  function modifyText(char){
-    switch (char){
-      case '←':
-        setGameName(n => n.substring(0, n.length - 1))
-        return
-      case '⎵':
-        char = ' '
-        /* falls through */
-      default:
-        setGameName(
-          n => {
-            if (n[n.length -1] === ' ' && char === ' ') return n
-            return n.concat(char.toUpperCase()).substring(0, 20)
-          }
-        )
-    }
-  }
+  const newGame = useCallback(() => {
+    const randomIndex = Math.floor(Math.random()*words.length)
+    const randomWord = words.at(randomIndex)
+
+    gameContext.change(current => ({
+      ...current,
+      entry: randomWord
+    }))
+    setStage('game')
+  }, [])
+
+  useEffect(() => {
+    gameContext.reset()
+    gameContext.change(current => ({
+      ...current,
+      nicks: ['Wynik', '']
+    }))
+    newGame()
+  }, [])
 
   return (
-    <div>
-      <Entry>{ gameName }{ gameName.length < 20 && prompt }</Entry>
-      <Keyboard keyEvent={ modifyText } write={ true } />
-      <div>
-        <Button link='/'>Wróć</Button>
-        {
-          gameName.length >= 3 ? (
-            <Button link='/game'>Dalej</Button>
-          ) : (
-            <Button disabled link='/game'>Dalej</Button>
-          )
-        }
-      </div>
-    </div>
+    stage === 'endGame' ? (
+      <EndGame enter={ () => newGame() }>
+        <Button onClick={ () => newGame() }>
+          Dalej
+        </Button>
+      </EndGame>
+    ) : (
+      <Game
+        back={ () => navigate('/') }
+        onLose={ () => gameEnd('lose') }
+        onWin={ () => gameEnd('win') }
+      />
+    )
   )
 }
-export default NewGame
+export default SingleGame
