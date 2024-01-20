@@ -1,9 +1,9 @@
 .buttons{
-  width: 250px;
+  width: 16rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
-  /* grid-area: main; */
+  align-items: stretch;
   margin: auto;
+  gap: 0.2rem;
 }
