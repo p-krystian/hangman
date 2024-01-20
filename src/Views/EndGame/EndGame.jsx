@@ -8,7 +8,7 @@ import styles from './EndGame.module.css'
 import deadImg from '../../Assets/Animation/dead.svg'
 import liveImg from '../../Assets/Animation/live.svg'
 
-function EndGame({ children, enter }){
+function EndGame({ next }){
   const gameContext = useContext(GameContext)
   const resoult = {
     img: gameContext.win ? liveImg : deadImg,
@@ -19,11 +19,11 @@ function EndGame({ children, enter }){
   useEffect(() => {
     function onEnter(e){
       if (e.keyCode === 13)
-        enter && enter()
+        next && next()
     }
     window.addEventListener('keyup', onEnter)
     return () => window.removeEventListener('keyup', onEnter)
-  }, [enter])
+  }, [next])
 
   return (
     <HeaderWrap>
@@ -40,7 +40,7 @@ function EndGame({ children, enter }){
 
         <ButtonWrap>
           <Button link="/">Menu</Button>
-          { children }
+          <Button onClick={ next }>Dalej</Button>
         </ButtonWrap>
       </div>
     </HeaderWrap>

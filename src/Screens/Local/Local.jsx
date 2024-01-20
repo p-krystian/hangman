@@ -2,7 +2,6 @@ import WriteNicks from '../../Views/WriteNicks/WriteNicks'
 import Game from '../../Views/Game/Game'
 import WriteEntry from '../../Views/WriteEntry/WriteEntry'
 import EndGame from '../../Views/EndGame/EndGame'
-import Button from '../../Components/Button/Button'
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GameContext from '../../Contexts/GameContext'
@@ -51,11 +50,9 @@ function Local(){
           onWin={ () => gameEnd('win') }
         />
       ) : stage === 'endGame' ? (
-        <EndGame enter={ () => setStage('writeEntry') }>
-          <Button onClick={ () => setStage('writeEntry') }>
-            Dalej
-          </Button>
-        </EndGame>
+        <EndGame
+          next={ () => setStage('writeEntry') }
+        />
       ) : (
         <WriteNicks
           back={ () => navigate('/') }

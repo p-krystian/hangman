@@ -1,6 +1,5 @@
 import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
-import Button from '../../Components/Button/Button'
 import GameContext from '../../Contexts/GameContext'
 import words from '../../Assets/words.json'
 import { useState, useCallback, useRef } from 'react'
@@ -40,11 +39,9 @@ function SingleGame(){
   return (
     <GameContext.Provider value={ gameData.current }>{
       stage === 'endGame' ? (
-        <EndGame enter={ () => newGame() }>
-          <Button onClick={ () => newGame() }>
-            Dalej
-          </Button>
-        </EndGame>
+        <EndGame
+          next={ () => newGame() }
+        />
       ) : (
         <Game
           exit={ () => navigate('/') }
