@@ -5,7 +5,7 @@ import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import styles from './WriteNicks.module.css'
-import clickSound from '../../Assets/Sounds/click1.mp3'
+// import clickSound from '../../Assets/Sounds/click1.mp3'
 import { useState, useCallback, useRef, useContext, useEffect } from 'react'
 
 
@@ -23,7 +23,6 @@ function WriteNicks({ back, next, single }){
   )
 
   const write = useCallback((char, focus) => {
-    new Audio(clickSound).play().catch(() => {})
     if (char === '⎵'){
       char = ' '
       if (lastChar.current[focus] === ' ')
@@ -43,10 +42,12 @@ function WriteNicks({ back, next, single }){
     })
     lastChar.current[focus] = char
   }, [])
+
   const submit = useCallback(() => {
-    gameContext.change(current => ({...current, nicks: nicks}))
+    gameContext.nicks = nicks
     next()
-  }, [nicks, next, gameContext])
+  }, [nicks, next])
+
   const keyboardActions = useCallback(e => {
     e.preventDefault()
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp')

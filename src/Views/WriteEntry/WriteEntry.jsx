@@ -9,17 +9,15 @@ import clickSound from '../../Assets/Sounds/click0.mp3'
 import words from '../../Assets/words.json'
 import { useState, useContext, useEffect, useCallback } from 'react'
 
-function WriteEntry({ back, next, text }){
+function WriteEntry({ back, next, nick }){
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const prompt = <span className={ styles.prompt }>_</span>
 
   const updateContext = useCallback(() => {
-    gameContext.change(current => (
-      {...current, entry: entry.trim()}
-    ))
+    gameContext.entry = entry.trim()
     next()
-  }, [gameContext, entry, next])
+  }, [entry, next])
 
   const writeRandom = useCallback(() => {
     const randomIndex = Math.floor(Math.random()*words.length)
@@ -59,7 +57,9 @@ function WriteEntry({ back, next, text }){
     <HeaderWrap>
       <div className={ styles.wrapper }>
         <div className={ styles.container }>
-          { text && <span className={ styles.text }>{ text }</span> }
+          <span className={ styles.text }>
+            Hasło dla { nick || '' }:
+          </span>
           <Entry>{ entry }{ entry.length < 20 && prompt }</Entry>
           <Keyboard keyEvent={ modifyText } write={ true } />
         </div>
