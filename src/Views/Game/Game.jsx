@@ -6,7 +6,7 @@ import Button from '../../Components/Button/Button'
 import GameContext from '../../Contexts/GameContext'
 import { useState, useContext } from 'react'
 
-function Game({ back, onLose, onWin }){
+function Game({ exit, onLose, onWin }){
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
@@ -21,17 +21,12 @@ function Game({ back, onLose, onWin }){
     }
     else{
       if (mistakes >= 9){
-        gameContext.change(current => ({...current, entry: `lose${entry}`}))
         onLose()
         return
       }
       setMistakes(m => m + 1)
       key.classList.add('mistake')
     }
-  }
-  function winEnd(){
-    gameContext.change(current => ({...current, entry: `win${entry}`}))
-    onWin()
   }
 
   return (
@@ -41,7 +36,7 @@ function Game({ back, onLose, onWin }){
         <Entry
           hide={ true }
           guessed={ guessed }
-          winCallback={ winEnd }
+          winCallback={ onWin }
         >
           { entry }
         </Entry>
@@ -49,7 +44,7 @@ function Game({ back, onLose, onWin }){
         <Keyboard keyEvent={ clickKey } />
       </div>
       <div className={ styles.buttons }>
-        <Button onClick={ back }>Anuluj</Button>
+        <Button onClick={ exit }>Anuluj</Button>
       </div>
     </div>
   )

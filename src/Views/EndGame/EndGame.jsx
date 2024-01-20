@@ -7,15 +7,13 @@ import GameContext from '../../Contexts/GameContext'
 import styles from './EndGame.module.css'
 import deadImg from '../../Assets/Animation/dead.svg'
 import liveImg from '../../Assets/Animation/live.svg'
-import deadSound from '../../Assets/Sounds/dead1.mp3'
 
 function EndGame({ children, enter }){
   const gameContext = useContext(GameContext)
   const resoult = {
-    win: gameContext.entry?.includes('win'),
-    img: gameContext.entry?.includes('win') ? liveImg : deadImg,
-    class: gameContext.entry?.includes('win') ? styles.win : styles.lose,
-    entry: gameContext.entry?.replace('win', '').replace('lose', '') || '?'
+    img: gameContext.win ? liveImg : deadImg,
+    class: gameContext.win ? styles.win : styles.lose,
+    entry: gameContext.entry || '?'
   }
 
   useEffect(() => {
@@ -23,8 +21,6 @@ function EndGame({ children, enter }){
       if (e.keyCode === 13)
         enter && enter()
     }
-    if (!resoult.win)
-      new Audio(deadSound).play().catch(() => {})
     window.addEventListener('keyup', onEnter)
     return () => window.removeEventListener('keyup', onEnter)
   }, [enter])
@@ -39,7 +35,7 @@ function EndGame({ children, enter }){
           <span className={ `${styles.entry} ${resoult.class}` }>
             { resoult.entry }
           </span>
-                  <Points />
+          <Points />
         </div>
 
         <ButtonWrap>
