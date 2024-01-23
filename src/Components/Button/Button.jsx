@@ -19,7 +19,11 @@ function Button(props){
         { children }
       </Link>
     ) : (
-      <button onClick={ onClick } className={ styles.button }>
+      <button
+        onClick={ onClick }
+        className={ styles.button }
+        disabled={ disabled }
+      >
         { children }
       </button>
     )
