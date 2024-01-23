@@ -5,93 +5,56 @@ import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import styles from './WriteNicks.module.css'
-// import clickSound from '../../Assets/Sounds/click1.mp3'
-import { useState, useCallback, useRef, useContext, useEffect } from 'react'
+import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
+import { useState, useContext } from 'react'
 
-
-function WriteNicks({ back, next, single }){
-  const [nicks, setNicks] = useState(single ? [''] : ['', ''])
+function WriteNicks({ back, next }){
+  const [nick0, setNicks0] = useState('')
+  const [nick1, setNicks1] = useState('')
   const [focused, setFocused] = useState(0)
-  const lastChar = useRef(['', ''])
   const gameContext = useContext(GameContext)
   const maxNickLength = 12
+  const pass = (nick0.length > 2 && nick1.length > 2) && (nick0 !== nick1)
 
-  const pass = single ? (
-    nicks[0].length > 2
-  ) : (
-    (nicks[0].length > 2 && nicks[1].length > 2) && nicks[0] !== nicks[1]
+  const keyboardWrite = useKeyboardWrite(
+    focused ? setNicks1 : setNicks0,
+    maxNickLength
   )
 
-  const write = useCallback((char, focus) => {
-    if (char === '^32'){
-      char = ' '
-      if (lastChar.current[focus] === ' ')
-        return
-    }
-    setNicks(currentNicks => {
-      const newNicks = [...currentNicks]
-      if (char === '^8')
-        newNicks[focus] = newNicks[focus].substring(
-          0,
-          newNicks[focus].length-1
-        )
-      else
-        newNicks[focus] += char
-      newNicks[focus] = newNicks[focus].substring(0, maxNickLength)
-      return newNicks
-    })
-    lastChar.current[focus] = char
-  }, [])
-
-  const submit = useCallback(() => {
-    gameContext.nicks = nicks
+  function submit(){
+    if (!pass) return
+    gameContext.nicks = [nick0, nick1]
     next()
-  }, [nicks, next])
-
-  const keyboardActions = useCallback(e => {
-    e.preventDefault()
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp')
-      setFocused(current => +!current)
-    else if (e.keyCode === 13 && pass)
-      submit()
-  }, [pass, submit])
-
-  useEffect(() => {
-    window.addEventListener('keydown', keyboardActions)
-    return () => window.removeEventListener('keydown', keyboardActions)
-  }, [keyboardActions])
+  }
 
   return (
     <HeaderWrap>
       <div className={ styles.wrapper }>
         <div className={ styles.container }>
-          {
-            nicks.map((nick, index) => (
-              <Input
-                key={ `nick-${index}` }
-                width={ 300 }
-                maxLength={ maxNickLength }
-                value={ nick }
-                focus={ index === focused }
-                placeholder={ `Nick gracza ${index+1}` }
-                click={ () => setFocused(index) }
-              />
-            ))
-          }
+          <Input
+            width={ 300 }
+            value={ nick0 }
+            focus={ focused === 0 }
+            placeholder={ 'Nick gracza 1' }
+            click={ () => setFocused(0) }
+            maxLength={ maxNickLength }
+          />
+          <Input
+            width={ 300 }
+            value={ nick1 }
+            focus={ focused === 1 }
+            placeholder={ 'Nick gracza 2' }
+            click={ () => setFocused(1) }
+            maxLength={ maxNickLength }
+          />
           <Keyboard
             write={ true }
-            keyEvent={ char => write(char, focused) }
+            keyEvent={ keyboardWrite }
           />
         </div>
         <ButtonWrap>
           <Button onClick={ back }>Anuluj</Button>
-          {
-            pass ? (
-              <Button onClick={ submit }>Dalej</Button>
-            ) : (
-              <Button disabled={ true }>Dalej</Button>
-            )
-          }
+          <Button onClick={ submit } disabled={ !pass }>Dalej</Button>
         </ButtonWrap>
       </div>
     </HeaderWrap>
