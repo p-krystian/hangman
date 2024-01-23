@@ -1,13 +1,11 @@
 import styles from './Key.module.css'
 
-function Key(props){
-  const { onClick, children, wide, id } = props
-
+function Key({ onClick, children, wide, refer }){
   return (
     <div
       className={ `${styles.key} ${wide ? styles.wide : ''}` }
       onClick={ e => onClick(children, e.target) }
-      id={ id ? id : '' }
+      ref={ refer }
     >
       { children }
     </div>

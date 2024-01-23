@@ -28,10 +28,10 @@ function WriteEntry({ back, next, nick }){
   function modifyText(char){
     new Audio(clickSound).play().catch(() => {})
     switch (char){
-      case '←':
+      case '^8':
         setEntry(e => e.substring(0, e.length - 1))
         return
-      case '⎵':
+      case '^32':
         char = ' '
         /* falls through */
       default:

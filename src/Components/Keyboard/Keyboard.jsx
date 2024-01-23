@@ -1,6 +1,6 @@
 import styles from './Keyboard.module.css'
 import Key from '../Key/Key'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 function Keyboard({ keyEvent, write }){
   const alphabet = [
@@ -10,54 +10,46 @@ function Keyboard({ keyEvent, write }){
     'P','Q','R','S','Ś','T','U',
     'V','W','X','Y','Z','Ź','Ż'
   ]
+
+  const refs = alphabet.reduce((accumulator, value) => {
+    return {...accumulator, [value]: useRef()}
+  }, {})
+
+  const wRefs = {
+    '^32': useRef(),
+    '^8': useRef()
+  }
+
   const writeKeys = (
     <div className={ styles.write }>
-      <Key id="k-space" onClick={ keyEvent } wide={ true }>⎵</Key>
-      <Key id="k-backspace" onClick={ keyEvent } wide={ true }>←</Key>
+      <Key onClick={ keyEvent } wide={ true } refer={ wRefs['^32'] }>^32</Key>
+      <Key onClick={ keyEvent } wide={ true } refer={ wRefs['^8'] }>^8</Key>
     </div>
   )
 
-  function onKeyPress(e){
-    let char = e.key.toUpperCase()
-    let key = ''
-    switch (char){
-      case ' ':
-        key = document.querySelector('#k-space')
-        keyEvent('⎵', key)
-        break
-      case 'BACKSPACE':
-        key = document.querySelector('#k-backspace')
-        keyEvent('←', key)
-        break
-      default:
-        if (alphabet.indexOf(char) === -1)
-          return
-        key = document.querySelector(`#k-${char}`)
-        keyEvent(char, key)
-    }
-    key.style.color = 'var(--darker)'
-    key.style.borderColor = 'var(--darker)'
-    setTimeout(() => {
-      key.style.color = ''
-      key.style.borderColor = ''
-    }, 150)
-  }
-  
   useEffect(() => {
-    window.addEventListener('keydown', onKeyPress)
-    return () => window.removeEventListener('keydown', onKeyPress)
-  }, [keyEvent])
+    function translate(e){
+      const refers = write ? {...refs, ...wRefs} : refs
+      let k = e.key.toUpperCase()
+      if ([32, 8].includes(e.keyCode))
+        k = `^${e.keyCode}`
+      if (Object.keys(refers).includes(k))
+        keyEvent(k, refers[k].current)
+    }
+    window.addEventListener('keydown', translate)
+    return () => window.removeEventListener('keydown', translate)
+  }, [keyEvent, write])
 
   return (
     <div className={ styles.keyboard }>
       <div className={ styles.keys }>
         { alphabet.map(char => (
-          <Key key={ `k-${char}` } id={ `k-${char}` } onClick={ keyEvent }>
+          <Key key={ `k-${char}` } onClick={ keyEvent } refer={ refs[char] }>
             { char }
           </Key>
         )) }
       </div>
-      { write ? writeKeys : '' }
+      { write && writeKeys }
     </div>
   )
 }

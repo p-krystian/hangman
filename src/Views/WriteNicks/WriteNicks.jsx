@@ -23,14 +23,14 @@ function WriteNicks({ back, next, single }){
   )
 
   const write = useCallback((char, focus) => {
-    if (char === '⎵'){
+    if (char === '^32'){
       char = ' '
       if (lastChar.current[focus] === ' ')
         return
     }
     setNicks(currentNicks => {
       const newNicks = [...currentNicks]
-      if (char === '←')
+      if (char === '^8')
         newNicks[focus] = newNicks[focus].substring(
           0,
           newNicks[focus].length-1
