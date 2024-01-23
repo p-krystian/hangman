@@ -45,7 +45,7 @@ function Local(){
         />
       ) : stage === 'game' ? (
         <Game
-          back={ () => navigate('/') }
+          exit={ () => navigate('/') }
           onLose={ () => gameEnd('lose') }
           onWin={ () => gameEnd('win') }
         />
