@@ -29,6 +29,7 @@ function Keyboard({ keyEvent, write }){
 
   useEffect(() => {
     function translate(e){
+<<<<<<< HEAD
       e.preventDefault()
 
       const refers = write ? {...refs, ...wRefs} : refs
@@ -37,6 +38,12 @@ function Keyboard({ keyEvent, write }){
       if ([32, 8].includes(e.keyCode))
         k = `^${e.keyCode}`
 
+=======
+      const refers = write ? {...refs, ...wRefs} : refs
+      let k = e.key.toUpperCase()
+      if ([32, 8].includes(e.keyCode))
+        k = `^${e.keyCode}`
+>>>>>>> 6ee92d1df80db8cf5eda62625b9f62e7bec37008
       if (Object.keys(refers).includes(k))
         keyEvent(k, refers[k].current)
     }

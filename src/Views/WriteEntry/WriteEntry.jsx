@@ -27,6 +27,37 @@ function WriteEntry({ back, next, nick }){
     setEntry(randomWord)
   }, [])
 
+<<<<<<< HEAD
+=======
+  function modifyText(char){
+    new Audio(clickSound).play().catch(() => {})
+    switch (char){
+      case '^8':
+        setEntry(e => e.substring(0, e.length - 1))
+        return
+      case '^32':
+        char = ' '
+        /* falls through */
+      default:
+        setEntry(
+          e => {
+            if (e[e.length -1] === ' ' && char === ' ') return e
+            return e.concat(char.toUpperCase()).substring(0, 20)
+          }
+        )
+    }
+  }
+
+  useEffect(() => {
+    function onEnter(e){
+      if (entry.length < 3 || e.keyCode !== 13) return
+      updateContext()
+    }
+    window.addEventListener('keyup', onEnter)
+    return () => window.removeEventListener('keyup', onEnter)
+  }, [entry, updateContext, next])
+
+>>>>>>> 6ee92d1df80db8cf5eda62625b9f62e7bec37008
   return (
     <HeaderWrap>
       <div className={ styles.wrapper }>
