@@ -5,11 +5,13 @@ import EndGame from '../../Views/EndGame/EndGame'
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GameContext from '../../Contexts/GameContext'
+import useConfirm from '../../Hooks/useConfirm'
 
 function Local(){
   const navigate = useNavigate()
   const [stage, setStage] = useState('writeNicks')
   const currentPlayer = useRef(0)
+  const confirmExit = useConfirm('Wyjść do Menu?', () => navigate('/'))
   const gameData = useRef({
     entry: '',
     nicks: [],
@@ -17,6 +19,12 @@ function Local(){
     rounds: [0, 0],
     win: false
   })
+  const entryOpts = {
+    back: gameData.current.entry ? confirmExit : () => setStage('writeNicks'),
+    backText: gameData.current.entry ? 'Anuluj' : 'Wstecz',
+    next: () => setStage('game'),
+    nick: gameData.current.nicks[currentPlayer.current]
+  }
 
   const gameEnd = useCallback(resoult => {
     if (resoult === 'win'){
@@ -28,20 +36,11 @@ function Local(){
     setStage('endGame')
   }, [])
 
-  const entryBack = useCallback(() => {
-    if (gameData.current.rounds.some(n => n)){
-      return navigate('/')
-    }
-    setStage('writeNicks')
-  }, [])
-
   return (
     <GameContext.Provider value={ gameData.current }>{
       stage === 'writeEntry' ? (
         <WriteEntry
-          back={ () => entryBack() }
-          next={ () => setStage('game') }
-          nick={ gameData.current.nicks[currentPlayer.current] }
+          { ...entryOpts }
         />
       ) : stage === 'game' ? (
         <Game

@@ -9,7 +9,7 @@ import words from '../../Assets/words.json'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import { useState, useContext, useCallback } from 'react'
 
-function WriteEntry({ back, next, nick }){
+function WriteEntry({ back, backText, next, nick }){
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const prompt = <span className={ styles.prompt }>_</span>
@@ -38,7 +38,7 @@ function WriteEntry({ back, next, nick }){
           <Keyboard keyEvent={ keyboardWrite } write={ true } />
         </div>
         <ButtonWrap>
-          <Button onClick={ back }>Wstecz</Button>
+          <Button onClick={ back }>{ backText || 'Wstecz' }</Button>
           <Button onClick={ updateContext } disabled={ entry.length < 3 }>
             Dalej
           </Button>
