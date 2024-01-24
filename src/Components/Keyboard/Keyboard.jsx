@@ -1,7 +1,7 @@
 import styles from './Keyboard.module.css'
 import Key from '../Key/Key'
 import WriteKeys from './WriteKeys'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo, useCallback } from 'react'
 
 function Keyboard({ keyEvent, write }){
   const alphabet = [
@@ -15,24 +15,29 @@ function Keyboard({ keyEvent, write }){
   const refs = alphabet.reduce((accumulator, value) => {
     return {...accumulator, [value]: useRef()}
   }, {})
-
   const wRefs = {
     '^32': useRef(),
     '^8': useRef()
   }
+  const allRefers = useMemo(() => (
+    write ? {...refs, ...wRefs} : refs
+  ), [write])
+
+  const clickEvent = useCallback(char => (
+    keyEvent(char, allRefers[char].current)
+  ), [allRefers, keyEvent])
 
   useEffect(() => {
     function translate(e){
       e.preventDefault()
 
-      const refers = write ? {...refs, ...wRefs} : refs
       let k = e.key.toUpperCase()
 
       if ([32, 8].includes(e.keyCode))
         k = `^${e.keyCode}`
 
-      if (Object.keys(refers).includes(k))
-        keyEvent(k, refers[k].current)
+      if (Object.keys(allRefers).includes(k))
+        keyEvent(k, allRefers[k].current)
     }
     window.addEventListener('keydown', translate)
     return () => window.removeEventListener('keydown', translate)
@@ -42,12 +47,12 @@ function Keyboard({ keyEvent, write }){
     <div className={ styles.keyboard }>
       <div className={ styles.keys }>
         { alphabet.map(char => (
-          <Key key={ `k-${char}` } onClick={ keyEvent } refer={ refs[char] }>
+          <Key key={ `k-${char}` } onClick={ clickEvent } refer={ refs[char] }>
             { char }
           </Key>
         )) }
       </div>
-      { write && <WriteKeys keyEvent={ keyEvent } refs={ wRefs } /> }
+      { write && <WriteKeys keyEvent={ clickEvent } refs={ wRefs } /> }
     </div>
   )
 }

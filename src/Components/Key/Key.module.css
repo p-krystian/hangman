@@ -22,3 +22,8 @@
 .wide{
   width: 5em;
 }
+.key svg{
+  fill: var(--light);
+  max-width: 80%;
+  max-height: 80%;
+}
