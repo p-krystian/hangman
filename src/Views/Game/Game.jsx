@@ -5,12 +5,14 @@ import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
 import GameContext from '../../Contexts/GameContext'
 import { useState, useContext } from 'react'
+import useConfirm from '../../Hooks/useConfirm'
 
 function Game({ exit, onLose, onWin }){
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
   const [mistakes, setMistakes] = useState(0)
+  const confirmExit = useConfirm('Zakończyć grę?', exit)
 
   function clickKey(char, key){
     setGuessed(g => [...new Set(g.concat(char))])
@@ -40,11 +42,10 @@ function Game({ exit, onLose, onWin }){
         >
           { entry }
         </Entry>
-
         <Keyboard keyEvent={ clickKey } />
       </div>
       <div className={ styles.buttons }>
-        <Button onClick={ exit }>Anuluj</Button>
+        <Button onClick={ confirmExit }>Anuluj</Button>
       </div>
     </div>
   )
