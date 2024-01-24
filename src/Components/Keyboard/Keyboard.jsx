@@ -1,5 +1,6 @@
 import styles from './Keyboard.module.css'
 import Key from '../Key/Key'
+import WriteKeys from './WriteKeys'
 import { useEffect, useRef } from 'react'
 
 function Keyboard({ keyEvent, write }){
@@ -19,13 +20,6 @@ function Keyboard({ keyEvent, write }){
     '^32': useRef(),
     '^8': useRef()
   }
-
-  const writeKeys = (
-    <div className={ styles.write }>
-      <Key onClick={ keyEvent } wide={ true } refer={ wRefs['^32'] }>^32</Key>
-      <Key onClick={ keyEvent } wide={ true } refer={ wRefs['^8'] }>^8</Key>
-    </div>
-  )
 
   useEffect(() => {
     function translate(e){
@@ -53,7 +47,7 @@ function Keyboard({ keyEvent, write }){
           </Key>
         )) }
       </div>
-      { write && writeKeys }
+      { write && <WriteKeys keyEvent={ keyEvent } refs={ wRefs } /> }
     </div>
   )
 }
