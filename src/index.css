@@ -1,13 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Ubuntu:wght@300;400&display=swap');
-/* @font-face {
-  src: url('./Assets/3PROT.TTF');
-  font-family: '3PRONG'
+
+*, *::before, *::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-@font-face {
-  src: url('./Assets/bamboo-gothic.book.ttf');
-  font-family: 'Bamboo'
+:root{
+  --main:   #6fd8c8;
+  --light:  #5e492f;
+  --second: #2c4a60;
+  --darker: #394855;
+  --good:   #007d5c;
+  --bad:    #824958;
+
+  --border: 1px solid var(--darker);
+
+  font-size: 16px;
 }
-@font-face {
-  src: url('./Assets/BAD-GRUNGE.ttf');
-  font-family: 'Bad Grunge'
-} */
+body{
+  background-color: #050505;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  user-select: none;
+  font-family: 'Roboto Mono';
+  font-size: 1rem;
+}
+#root{
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
