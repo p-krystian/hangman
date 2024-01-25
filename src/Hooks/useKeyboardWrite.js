@@ -7,7 +7,7 @@ function useKeyboardWrite(setText, maxLength){
     if (char == ' ' && (current.at(-1) == ' ' || current.length+1 == maxLength))
       return current
 
-    let newText = current.trimStart().toUpperCase()
+    let newText = current.trimLeft().toUpperCase()
     newText += char
 
     return newText.substring(0, maxLength)
