@@ -9,15 +9,15 @@ import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import { useState, useContext } from 'react'
 
 function WriteNicks({ back, next }){
-  const [nick0, setNicks0] = useState('')
-  const [nick1, setNicks1] = useState('')
+  const [nick0, setNick0] = useState('')
+  const [nick1, setNick1] = useState('')
   const [focused, setFocused] = useState(0)
   const gameContext = useContext(GameContext)
   const maxNickLength = 12
   const pass = (nick0.length > 2 && nick1.length > 2) && (nick0 !== nick1)
 
   const keyboardWrite = useKeyboardWrite(
-    focused ? setNicks1 : setNicks0,
+    focused ? setNick1 : setNick0,
     maxNickLength
   )
 
@@ -32,20 +32,18 @@ function WriteNicks({ back, next }){
       <div className={ styles.wrapper }>
         <div className={ styles.container }>
           <Input
-            width={ 300 }
-            value={ nick0 }
             focus={ focused === 0 }
+            value={ nick0 }
             placeholder={ 'Nick gracza 1' }
-            click={ () => setFocused(0) }
-            maxLength={ maxNickLength }
+            size={ maxNickLength }
+            onClick={ () => setFocused(0) }
           />
           <Input
-            width={ 300 }
-            value={ nick1 }
             focus={ focused === 1 }
+            value={ nick1 }
             placeholder={ 'Nick gracza 2' }
-            click={ () => setFocused(1) }
-            maxLength={ maxNickLength }
+            size={ maxNickLength }
+            onClick={ () => setFocused(1) }
           />
           <Keyboard
             write={ true }

@@ -1,35 +1,34 @@
 import styles from './Input.module.css'
 
+const WithCaret = ({size, show, children}) => (
+  <>
+    { children }
+    {(children.length < size && show) && (
+      <span className={ styles.caret }>_</span>
+    )}
+  </>
+)
+
 function Input(props){
-  const {
-    value,
-    maxLength,
-    ref,
-    placeholder,
-    width,
-    focus,
-    click
-  } = props
-  const prompt = <span className={ styles.prompt }>_</span>
+  const { value, focus, size, placeholder, onClick } = props
+
   return (
     <div
-      className={ `${styles.input} ${focus ? styles.focus : ''}` }
-      style={ {minWidth: `${width}px`} }
-      ref={ ref }
-      onClick={ click }
-    >
-      <div className={ styles.value }>
-        { value?.substring(0, (maxLength || 99)) }
-        { (value?.length || 0) < (maxLength || 99) && prompt }
-      </div>
-      {
-        (value?.length || 0) <= 0 && (
-          <div className={ styles.placeholder }>
-            { placeholder }
-          </div>
-        )
-      }
-    </div>
+      className={ styles.input }
+      onClick={ onClick }
+      style={ {'--size': `${size+1}ch`} }
+      focus={ focus?.toString() }
+    >{
+      value.trimLeft().length > 0 ? (
+        <WithCaret size={ size } show={ focus }>
+          { value.trimLeft() }
+        </WithCaret>
+      ) : (
+        <span className={ styles.placeholder }>
+          { placeholder }
+        </span>
+      )
+    }</div>
   )
 }
 export default Input

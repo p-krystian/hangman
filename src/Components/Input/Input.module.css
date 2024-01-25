@@ -4,35 +4,39 @@
   60% { opacity: 0; }
   100%{ opacity: 1; }
 }
+
 .input{
   color: var(--main);
+  display: flex;
+  align-items: center;
   font-family: 'Roboto Mono';
   font-size: 2.5rem;
   border: var(--border);
   border-radius: 0.5rem;
-  padding: 0.5rem;
-  position: relative;
-  width: 80%;
-  margin: auto;
+  padding: 0 0.5rem;
+  max-width: 22rem;
+  user-select: none;
+  width: var(--size);
+  height: 4rem;
+  white-space: pre;
+  overflow-x: auto;
 }
-.focus{
+.input[focus="true"]{
   border-color: var(--light);
 }
-.prompt{
+.placeholder{
+  width: 100%;
+  color: var(--light);
+  font-size: 2rem;
+  text-align: center;
+}
+.caret{
   animation: blinking 0.6s linear infinite;
 }
-.input:not(.focus) .prompt{
-  display: none;
-}
-.placeholder, .value{
-  display: inline-block;
-}
-.placeholder{
-  color: var(--light);
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-family: 'Roboto Mono';
-  font-size: 2.2rem;
+@supports selector(body:has(div)){
+  .input[focus="true"]:has(.placeholder)::before{
+    content: '_';
+    position: absolute;
+    animation: blinking 0.6s linear infinite;
+  }
 }
