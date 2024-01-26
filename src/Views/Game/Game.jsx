@@ -6,7 +6,7 @@ import Button from '../../Components/Button/Button'
 import GameContext from '../../Contexts/GameContext'
 import Confirm from '../../Components/Confirm/Confirm'
 import useFullScreen from '../../Hooks/useFullScreen'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useLayoutEffect } from 'react'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
 function Game({ exit, onLose, onWin }){
@@ -16,7 +16,7 @@ function Game({ exit, onLose, onWin }){
   const [mistakes, setMistakes] = useState(0)
   const [showExit, setShowExit] = useState(false)
 
-  useEffect(() => useFullScreen(), [])
+  useLayoutEffect(() => useFullScreen(), [])
   useEffect(() => useKeyboardControl(
     () => setShowExit(current => !current)
   ), [])
