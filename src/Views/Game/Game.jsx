@@ -4,9 +4,9 @@ import Board from '../../Components/Board/Board'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
 import GameContext from '../../Contexts/GameContext'
+import Confirm from '../../Components/Confirm/Confirm'
 import useFullScreen from '../../Hooks/useFullScreen'
 import { useState, useContext, useEffect } from 'react'
-import useConfirm from '../../Hooks/useConfirm'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
 function Game({ exit, onLose, onWin }){
@@ -14,10 +14,12 @@ function Game({ exit, onLose, onWin }){
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
   const [mistakes, setMistakes] = useState(0)
-  const confirmExit = useConfirm('Zakończyć grę?', exit)
+  const [showExit, setShowExit] = useState(false)
 
   useEffect(() => useFullScreen(), [])
-  useEffect(() => useKeyboardControl(confirmExit), [])
+  useEffect(() => useKeyboardControl(
+    () => setShowExit(current => !current)
+  ), [])
 
   function clickKey(char, key){
     setGuessed(g => [...new Set(g.concat(char))])
@@ -50,8 +52,13 @@ function Game({ exit, onLose, onWin }){
         <Keyboard keyEvent={ clickKey } />
       </div>
       <div className={ styles.buttons }>
-        <Button onClick={ confirmExit }>Anuluj</Button>
+        <Button onClick={ () => setShowExit(true) }>Anuluj</Button>
       </div>
+      {showExit && (
+        <Confirm onConfirm={ exit } onReject={ () => setShowExit(false) }>
+          Zakończyć grę?
+        </Confirm>
+      )}
     </div>
   )
 }
