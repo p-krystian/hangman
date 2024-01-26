@@ -3,6 +3,7 @@ import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
+import WithCaret from '../../Components/WithCaret/WithCaret'
 import GameContext from '../../Contexts/GameContext'
 import styles from './WriteEntry.module.css'
 import words from '../../Assets/words.json'
@@ -12,7 +13,6 @@ import { useState, useContext, useCallback } from 'react'
 function WriteEntry({ back, backText, next, nick }){
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
-  const prompt = <span className={ styles.prompt }>_</span>
   const keyboardWrite = useKeyboardWrite(setEntry, 20)
 
   const updateContext = useCallback(() => {
@@ -34,7 +34,9 @@ function WriteEntry({ back, backText, next, nick }){
           <span className={ styles.text }>
             Hasło dla { nick || '' }:
           </span>
-          <Entry>{ entry }{ entry.length < 20 && prompt }</Entry>
+          <Entry>
+            <WithCaret size={ 20 }>{ entry }</WithCaret>
+          </Entry>
           <Keyboard keyEvent={ keyboardWrite } write={ true } />
         </div>
         <ButtonWrap>

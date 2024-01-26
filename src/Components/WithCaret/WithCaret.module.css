@@ -1,0 +1,9 @@
+@keyframes blinking {
+  0%  { opacity: 1; }
+  40% { opacity: 0; }
+  60% { opacity: 0; }
+  100%{ opacity: 1; }
+}
+.caret{
+  animation: blinking 0.6s linear infinite;
+}

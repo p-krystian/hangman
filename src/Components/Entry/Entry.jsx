@@ -1,30 +1,36 @@
 import styles from './Entry.module.css'
-import { useEffect } from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
 
 function Entry(props){
   const {
-      children,
-      hide,
-      winCallback,
-      guessed
+    children,
+    hide,
+    winCallback,
+    guessed
   } = props
-  let hideText = ''
 
-  for (const char of children){
-    if (!hide) break
-    hideText += (
-      char === ' ' ? ' ' :
-      guessed.includes(char.toUpperCase()) ? char : '-'
-    )
-  }
+  const hideText = useCallback((text, guessed) => {
+    let newText = '';
+    for (const char of text){
+      newText += char === ' ' ? ' ' : (
+        guessed.includes(char) ? char : '-'
+      )
+    }
+    return newText
+  }, [])
+
+  const hiddenText = useMemo(() => (
+    hide ? hideText(children, guessed) : ''
+  ), [hide, guessed])
+
   useEffect(() => {
-    if (!hideText.includes('-') && winCallback)
+    if (!hiddenText.includes('-') && winCallback)
       winCallback()
   }, [guessed])
 
   return (
     <span className={ styles.entry }>
-      { hideText || children }
+      { hiddenText || children }
     </span>
   )
 }

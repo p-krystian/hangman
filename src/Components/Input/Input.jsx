@@ -1,13 +1,5 @@
 import styles from './Input.module.css'
-
-const WithCaret = ({size, show, children}) => (
-  <>
-    { children }
-    {(children.length < size && show) && (
-      <span className={ styles.caret }>_</span>
-    )}
-  </>
-)
+import WithCaret from '../WithCaret/WithCaret'
 
 function Input(props){
   const { value, focus, size, placeholder, onClick } = props
