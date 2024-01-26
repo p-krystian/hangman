@@ -23,7 +23,7 @@ function WriteEntry({ back, backText, next, nick }){
   const writeRandom = useCallback(() => {
     const randomIndex = Math.floor(Math.random()*words.length)
     const randomWord = words.at(randomIndex)
-    setEntry(randomWord)
+    setEntry(randomWord.toUpperCase())
   }, [])
 
   return (

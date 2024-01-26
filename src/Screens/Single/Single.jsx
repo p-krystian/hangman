@@ -10,7 +10,7 @@ function SingleGame(){
   const randomWord = words.at(Math.floor(Math.random()*words.length))
   const [stage, setStage] = useState('game')
   const gameData = useRef({
-    entry: randomWord,
+    entry: randomWord.toUpperCase(),
     nicks: ['Wynik'],
     points: [0],
     rounds: [0],
@@ -31,7 +31,7 @@ function SingleGame(){
   const newGame = useCallback(() => {
     gameData.current = {
       ...gameData.current,
-      entry: randomWord
+      entry: randomWord.toUpperCase()
     }
     setStage('game')
   }, [randomWord])
