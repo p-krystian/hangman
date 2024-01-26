@@ -1,8 +1,8 @@
-import styles from './Header.module.css'
+import './Header.css'
 
 function Header(){
   return(
-    <header className={ styles.header }>
+    <header className='header'>
       Wisielec
     </header>
   )

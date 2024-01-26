@@ -1,6 +1,5 @@
 import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
-import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import Points from '../../Components/Points/Points'
 import { useContext, useEffect } from 'react'
 import GameContext from '../../Contexts/GameContext'
@@ -26,24 +25,22 @@ function EndGame({ next }){
   }, [next])
 
   return (
-    <HeaderWrap>
-      <div className={ styles.wrapper }>
-        <div className={ styles.container }>
-          <div className={ styles.resoult }>
-            <img src={ resoult.img } />
-          </div>
-          <span className={ `${styles.entry} ${resoult.class}` }>
-            { resoult.entry }
-          </span>
-          <Points />
+    <div className={ styles.wrapper }>
+      <div className={ styles.container }>
+        <div className={ styles.resoult }>
+          <img src={ resoult.img } />
         </div>
-
-        <ButtonWrap>
-          <Button link="/">Menu</Button>
-          <Button onClick={ next }>Dalej</Button>
-        </ButtonWrap>
+        <span className={ `${styles.entry} ${resoult.class}` }>
+          { resoult.entry }
+        </span>
+        <Points />
       </div>
-    </HeaderWrap>
+
+      <ButtonWrap>
+        <Button link="/">Menu</Button>
+        <Button onClick={ next }>Dalej</Button>
+      </ButtonWrap>
+    </div>
   )
 }
 

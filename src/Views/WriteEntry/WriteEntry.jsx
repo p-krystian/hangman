@@ -2,7 +2,6 @@ import Entry from '../../Components/Entry/Entry'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
-import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import WithCaret from '../../Components/WithCaret/WithCaret'
 import GameContext from '../../Contexts/GameContext'
 import styles from './WriteEntry.module.css'
@@ -28,26 +27,24 @@ function WriteEntry({ back, backText, next, nick }){
   }, [])
 
   return (
-    <HeaderWrap>
-      <div className={ styles.wrapper }>
-        <div className={ styles.container }>
-          <span className={ styles.text }>
-            Hasło dla { nick || '' }:
-          </span>
-          <Entry>
-            <WithCaret size={ 20 }>{ entry }</WithCaret>
-          </Entry>
-          <Keyboard keyEvent={ keyboardWrite } write={ true } />
-        </div>
-        <ButtonWrap>
-          <Button onClick={ back }>{ backText || 'Wstecz' }</Button>
-          <Button onClick={ updateContext } disabled={ entry.length < 3 }>
-            Dalej
-          </Button>
-          <Button onClick={ writeRandom }>Losuj</Button>
-        </ButtonWrap>
+    <div className={ styles.wrapper }>
+      <div className={ styles.container }>
+        <span className={ styles.text }>
+          Hasło dla { nick || '' }:
+        </span>
+        <Entry>
+          <WithCaret size={ 20 }>{ entry }</WithCaret>
+        </Entry>
+        <Keyboard keyEvent={ keyboardWrite } write={ true } />
       </div>
-    </HeaderWrap>
+      <ButtonWrap>
+        <Button onClick={ back }>{ backText || 'Wstecz' }</Button>
+        <Button onClick={ updateContext } disabled={ entry.length < 3 }>
+          Dalej
+        </Button>
+        <Button onClick={ writeRandom }>Losuj</Button>
+      </ButtonWrap>
+    </div>
   )
 }
 export default WriteEntry

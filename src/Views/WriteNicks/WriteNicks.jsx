@@ -3,7 +3,6 @@ import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
-import HeaderWrap from '../../Components/HeaderWrap/HeaderWrap'
 import styles from './WriteNicks.module.css'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import { useState, useContext } from 'react'
@@ -28,34 +27,32 @@ function WriteNicks({ back, next }){
   }
 
   return (
-    <HeaderWrap>
-      <div className={ styles.wrapper }>
-        <div className={ styles.container }>
-          <Input
-            focus={ focused === 0 }
-            value={ nick0 }
-            placeholder={ 'Nick gracza 1' }
-            size={ maxNickLength }
-            onClick={ () => setFocused(0) }
-          />
-          <Input
-            focus={ focused === 1 }
-            value={ nick1 }
-            placeholder={ 'Nick gracza 2' }
-            size={ maxNickLength }
-            onClick={ () => setFocused(1) }
-          />
-          <Keyboard
-            write={ true }
-            keyEvent={ keyboardWrite }
-          />
-        </div>
-        <ButtonWrap>
-          <Button onClick={ back }>Anuluj</Button>
-          <Button onClick={ submit } disabled={ !pass }>Dalej</Button>
-        </ButtonWrap>
+    <div className={ styles.wrapper }>
+      <div className={ styles.container }>
+        <Input
+          focus={ focused === 0 }
+          value={ nick0 }
+          placeholder={ 'Nick gracza 1' }
+          size={ maxNickLength }
+          onClick={ () => setFocused(0) }
+        />
+        <Input
+          focus={ focused === 1 }
+          value={ nick1 }
+          placeholder={ 'Nick gracza 2' }
+          size={ maxNickLength }
+          onClick={ () => setFocused(1) }
+        />
+        <Keyboard
+          write={ true }
+          keyEvent={ keyboardWrite }
+        />
       </div>
-    </HeaderWrap>
+      <ButtonWrap>
+        <Button onClick={ back }>Anuluj</Button>
+        <Button onClick={ submit } disabled={ !pass }>Dalej</Button>
+      </ButtonWrap>
+    </div>
   )
 }
 
