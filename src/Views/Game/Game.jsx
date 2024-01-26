@@ -4,7 +4,8 @@ import Board from '../../Components/Board/Board'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
 import GameContext from '../../Contexts/GameContext'
-import { useState, useContext } from 'react'
+import useFullScreen from '../../Hooks/useFullScreen'
+import { useState, useContext, useEffect } from 'react'
 import useConfirm from '../../Hooks/useConfirm'
 
 function Game({ exit, onLose, onWin }){
@@ -13,6 +14,8 @@ function Game({ exit, onLose, onWin }){
   const [guessed, setGuessed] = useState([])
   const [mistakes, setMistakes] = useState(0)
   const confirmExit = useConfirm('Zakończyć grę?', exit)
+
+  useEffect(() => useFullScreen(), [])
 
   function clickKey(char, key){
     setGuessed(g => [...new Set(g.concat(char))])
