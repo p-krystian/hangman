@@ -7,6 +7,7 @@ import GameContext from '../../Contexts/GameContext'
 import useFullScreen from '../../Hooks/useFullScreen'
 import { useState, useContext, useEffect } from 'react'
 import useConfirm from '../../Hooks/useConfirm'
+import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
 function Game({ exit, onLose, onWin }){
   const gameContext = useContext(GameContext)
@@ -16,6 +17,7 @@ function Game({ exit, onLose, onWin }){
   const confirmExit = useConfirm('Zakończyć grę?', exit)
 
   useEffect(() => useFullScreen(), [])
+  useEffect(() => useKeyboardControl(confirmExit), [])
 
   function clickKey(char, key){
     setGuessed(g => [...new Set(g.concat(char))])

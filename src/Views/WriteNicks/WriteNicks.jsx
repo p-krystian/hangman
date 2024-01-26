@@ -5,7 +5,8 @@ import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import styles from './WriteNicks.module.css'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
-import { useState, useContext } from 'react'
+import useKeyboardControl from '../../Hooks/useKeyboardControl'
+import { useState, useContext, useEffect, useCallback } from 'react'
 
 function WriteNicks({ back, next }){
   const [nick0, setNick0] = useState('')
@@ -20,11 +21,18 @@ function WriteNicks({ back, next }){
     maxNickLength
   )
 
-  function submit(){
+  const submit = useCallback(() => {
     if (!pass) return
     gameContext.nicks = [nick0, nick1]
     next()
-  }
+  }, [nick0, nick1])
+
+  useEffect(() => useKeyboardControl(
+    back,
+    submit,
+    () => setFocused(0),
+    () => setFocused(1)
+  ), [back, submit])
 
   return (
     <div className={ styles.wrapper }>

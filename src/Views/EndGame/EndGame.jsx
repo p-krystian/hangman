@@ -2,27 +2,26 @@ import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import Points from '../../Components/Points/Points'
 import { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import GameContext from '../../Contexts/GameContext'
 import styles from './EndGame.module.css'
 import deadImg from '../../Assets/Animation/dead.svg'
 import liveImg from '../../Assets/Animation/live.svg'
+import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
 function EndGame({ next }){
   const gameContext = useContext(GameContext)
+  const navigate = useNavigate()
   const resoult = {
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
     entry: gameContext.entry || '?'
   }
 
-  useEffect(() => {
-    function onEnter(e){
-      if (e.keyCode === 13)
-        next && next()
-    }
-    window.addEventListener('keyup', onEnter)
-    return () => window.removeEventListener('keyup', onEnter)
-  }, [next])
+  useEffect(() => useKeyboardControl(
+    () => navigate('/'),
+    next
+  ), [next])
 
   return (
     <div className={ styles.wrapper }>

@@ -7,7 +7,8 @@ import GameContext from '../../Contexts/GameContext'
 import styles from './WriteEntry.module.css'
 import words from '../../Assets/words.json'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
-import { useState, useContext, useCallback } from 'react'
+import useKeyboardControl from '../../Hooks/useKeyboardControl'
+import { useState, useContext, useCallback, useEffect } from 'react'
 
 function WriteEntry({ back, backText, next, nick }){
   const [entry, setEntry] = useState('')
@@ -25,6 +26,11 @@ function WriteEntry({ back, backText, next, nick }){
     const randomWord = words.at(randomIndex)
     setEntry(randomWord.toUpperCase())
   }, [])
+
+  useEffect(() => useKeyboardControl(
+    back,
+    updateContext
+  ), [back, updateContext])
 
   return (
     <div className={ styles.wrapper }>
