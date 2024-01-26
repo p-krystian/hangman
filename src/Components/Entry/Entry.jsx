@@ -1,5 +1,5 @@
 import styles from './Entry.module.css'
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback } from 'react'
 
 function Entry(props){
   const {
@@ -19,9 +19,7 @@ function Entry(props){
     return newText
   }, [])
 
-  const hiddenText = useMemo(() => (
-    hide ? hideText(children, guessed) : ''
-  ), [hide, guessed])
+  const hiddenText = hide ? hideText(children, guessed) : ''
 
   useEffect(() => {
     if (!hiddenText.includes('-') && winCallback)
