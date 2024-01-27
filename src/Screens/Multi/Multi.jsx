@@ -1,4 +1,5 @@
 import Games from '../../Views/OnlineGames/OnlineGames'
+import Create from '../../Views/CreateGame/CreateGame'
 import { useState } from 'react'
 
 function MultiPlayer(){
@@ -6,9 +7,9 @@ function MultiPlayer(){
 
   return (
     stage === 'games' ? (
-      <Games />
+      <Games onCreate={ () => setStage('create') } />
     ) : (
-      "Nothing"
+      <Create back={ () => setStage('games') } />
     )
   )
 }
