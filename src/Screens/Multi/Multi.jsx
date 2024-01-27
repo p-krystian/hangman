@@ -1,20 +1,15 @@
-import styles from './Multi.module.css'
-import Button from '../../Components/Button/Button'
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
+import Games from '../../Views/OnlineGames/OnlineGames'
+import { useState } from 'react'
 
 function MultiPlayer(){
+  const [stage, setStage] = useState('games')
+
   return (
-    <div className={ styles.wrapper }>
-      <div className={ styles.games }>
-        <span className={ styles.info }>
-          Brak dostępnych gier
-        </span>
-      </div>
-      <ButtonWrap>
-        <Button link='/'>Anuluj</Button>
-        <Button link='/new-game'>Utwórz</Button>
-      </ButtonWrap>
-    </div>
+    stage === 'games' ? (
+      <Games />
+    ) : (
+      "Nothing"
+    )
   )
 }
 
