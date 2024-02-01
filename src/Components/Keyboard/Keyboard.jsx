@@ -47,7 +47,7 @@ function Keyboard({ keyEvent, write }){
     <div className={ styles.keyboard }>
       <div className={ styles.keys }>
         { alphabet.map(char => (
-          <Key key={ `k-${char}` } onClick={ clickEvent } refer={ refs[char] }>
+          <Key key={ `k-${char}` } onClick={ clickEvent } ref={ refs[char] }>
             { char }
           </Key>
         )) }
