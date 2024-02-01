@@ -28,6 +28,15 @@ function MultiPlayer(){
     socket.emit('create-game', name)
   }, [gameList])
 
+  const winCallback = useCallback(() => {
+    gameData.current.win = true
+    socket.emit('end-game', gameData.current.entry)
+  }, [])
+  const loseCallback = useCallback(() => {
+    gameData.current.win = false
+    socket.emit('end-game', false)
+  }, [])
+
   useEffect(() => {
     socket.connect()
     socket.on('connect', () => socket.emit('join-lobby'))
@@ -81,8 +90,8 @@ function MultiPlayer(){
         />
       ) : stage === 'game' ? (
         <Game
-          onWin={ () => socket.emit('end-game', gameData.current.entry) }
-          onLose={ () => socket.emit('end-game', false) }
+          onWin={ winCallback }
+          onLose={ loseCallback }
         />
     ) : stage === 'result' ? (
         <EndGame
