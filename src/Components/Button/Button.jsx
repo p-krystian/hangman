@@ -6,7 +6,8 @@ function Button(props){
     link,
     onClick,
     children,
-    disabled
+    disabled,
+    small
   } = props
 
   return(
@@ -14,15 +15,15 @@ function Button(props){
       <Link
         to={ disabled ? '' : link }
         onClick={ onClick }
-        className={ styles.button }
+        className={ `${styles.button} ${small ? styles.small : ''}` }
       >
         { children }
       </Link>
     ) : (
       <button
-        onClick={ onClick }
-        className={ styles.button }
         disabled={ disabled }
+        onClick={ disabled || onClick }
+        className={ `${styles.button} ${small ? styles.small : ''}` }
       >
         { children }
       </button>
