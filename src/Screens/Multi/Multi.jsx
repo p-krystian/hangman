@@ -3,6 +3,7 @@ import Create from '../../Views/CreateGame/CreateGame'
 import WriteEntry from '../../Views/WriteEntry/WriteEntry'
 import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
+import Connecting from '../../Views/Connecting/Connecting'
 import GameContext from '../../Contexts/GameContext'
 import { io } from "socket.io-client"
 import { useState, useEffect, useRef, useCallback } from 'react'
@@ -10,7 +11,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 const socket = io('http://127.0.0.1:8090');
 
 function MultiPlayer(){
-  const [stage, setStage] = useState('loading')
+  const [stage, setStage] = useState('connecting')
   const [gameList, setGameList] = useState([])
   const gameData = useRef({
     entry: '',
@@ -39,7 +40,9 @@ function MultiPlayer(){
 
   useEffect(() => {
     socket.connect()
-    socket.on('connect', () => socket.emit('join-lobby'))
+    socket.on('connect', () => {
+      setTimeout(() => socket.emit('join-lobby'), 300)
+    })
 
     socket.on('game-list', games => {
       setGameList(games)
@@ -70,8 +73,8 @@ function MultiPlayer(){
 
   return (
     <GameContext.Provider value={ gameData.current }>{
-      stage === 'loading' ? (
-        <h2>Ładowanie</h2>
+      stage === 'connecting' ? (
+        <Connecting />
       ) : stage === 'lobby' ? (
         <Games
           gameList={ gameList }
