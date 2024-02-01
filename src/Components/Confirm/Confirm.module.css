@@ -20,13 +20,3 @@
   justify-content: end;
   gap: 1rem;
 }
-.buttons button{
-  appearance: none;
-  font-size: 1.5rem;
-  padding: 0.2rem 0.8rem;
-  border: var(--border);
-  background: transparent;
-  color: var(--main);
-  border-radius: 0.5rem;
-  cursor: pointer;
-}

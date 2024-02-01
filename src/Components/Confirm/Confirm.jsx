@@ -1,4 +1,5 @@
 import styles from './Confirm.module.css'
+import Button from '../Button/Button'
 import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
 
@@ -15,8 +16,8 @@ function Confirm({ confirm, reject, children }){
     <div className={ styles.confirm }>
       <span>{ children }</span>
       <div className={ styles.buttons }>
-        { reject && <button onClick={ reject }>Nie</button> }
-        <button onClick={ confirm }>{ confirmText }</button>
+        { reject && <Button small={true} onClick={ reject }>Nie</Button> }
+        <Button small={true} onClick={ confirm }>{ confirmText }</Button>
       </div>
     </div>,
     popupContainer
