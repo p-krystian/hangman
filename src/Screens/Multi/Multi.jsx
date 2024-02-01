@@ -5,7 +5,7 @@ import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
 import GameContext from '../../Contexts/GameContext'
 import { io } from "socket.io-client"
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 const socket = io('http://127.0.0.1:8090');
 
@@ -19,6 +19,14 @@ function MultiPlayer(){
     rounds: [0, 0],
     win: false
   })
+
+  const createNewGame = useCallback(name => {
+    if (gameList.length >= 6){
+      setStage('lobby')
+      return
+    }
+    socket.emit('create-game', name)
+  }, [gameList])
 
   useEffect(() => {
     socket.connect()
@@ -43,10 +51,8 @@ function MultiPlayer(){
       setStage('game')
     });
     socket.on('game-data', data => {
-      gameData.current.points[0] = data.wins
-      gameData.current.points[1] = data.oWins
-      gameData.current.rounds[0] = data.rounds
-      gameData.current.rounds[1] = data.oRounds
+      gameData.current.points = [data.wins, data.oWins]
+      gameData.current.rounds = [data.rounds, data.oRounds]
       setStage('result')
     })
 
@@ -66,7 +72,7 @@ function MultiPlayer(){
       ) : stage === 'create' ? (
         <Create
           back={ () => setStage('lobby') }
-          submit={ name => socket.emit('create-game', name) }
+          submit={ createNewGame }
         />
       ) : stage === 'phrase' ? (
         <WriteEntry
