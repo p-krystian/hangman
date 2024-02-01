@@ -65,12 +65,12 @@ function MultiPlayer(){
         />
       ) : stage === 'create' ? (
         <Create
-          back={ () => setStage('games') }
+          back={ () => setStage('lobby') }
           submit={ name => socket.emit('create-game', name) }
         />
       ) : stage === 'phrase' ? (
         <WriteEntry
-          nick={ 'PRZECIWNIKA' }
+          nick={ 'przeciwnika' }
           next={ () => socket.emit('write-phrase', gameData.current.entry) }
         />
       ) : stage === 'game' ? (

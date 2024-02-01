@@ -4,12 +4,18 @@ import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import Input from '../../Components/Input/Input'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
-import { useState } from 'react'
+import useKeyboardControl from '../../Hooks/useKeyboardControl'
+import { useState, useEffect } from 'react'
 
 function Create({ back, submit }){
   const [name, setName] = useState('')
-  const maxNameLength = 10
+  const maxNameLength = 12
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
+
+  useEffect(() => useKeyboardControl(
+    back,
+    create
+  ), [create])
 
   function create(){
     if (name.length < 3)
@@ -35,7 +41,7 @@ function Create({ back, submit }){
       <ButtonWrap>
         <Button onClick={ back }>
           Anuluj
-          </Button>
+        </Button>
         <Button onClick={ create } disabled={ name.length < 3 }>
           Start
         </Button>
