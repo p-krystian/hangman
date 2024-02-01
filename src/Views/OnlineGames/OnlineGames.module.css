@@ -3,23 +3,32 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 .games{
   width: 22rem;
-  min-height: 16rem;
-  height: 75%;
+  flex-grow: 1;
+  max-height: 34rem;
   border: 0.25rem solid var(--darker);
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
-  flex-wrap: wrap;
-  margin: auto;
+  margin-top: 1rem;
+  gap: 1rem;
+  overflow-y: auto;
 }
 .info{
+  display: flex;
+  height: 100%;
+  width: 100%;
   text-align: center;
   font-family: 'Roboto Mono';
   text-transform: uppercase;
   font-size: 2rem;
+  justify-content: center;
+  align-items: center;
 }

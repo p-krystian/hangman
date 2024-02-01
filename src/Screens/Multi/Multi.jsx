@@ -36,7 +36,7 @@ function MultiPlayer(){
     });
     socket.on('opponent-exit', () => {
       console.log('opponent - exit')
-      setStage('loading')
+      // setStage('loading')
     });
     socket.on('start-game', phrase => {
       gameData.current.entry = phrase

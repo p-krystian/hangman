@@ -14,7 +14,7 @@ function Button(props){
     link ? (
       <Link
         to={ disabled ? '' : link }
-        onClick={ onClick }
+        onClick={ disabled ? () => 'disabled' : onClick }
         className={ `${styles.button} ${small ? styles.small : ''}` }
       >
         { children }
@@ -22,7 +22,7 @@ function Button(props){
     ) : (
       <button
         disabled={ disabled }
-        onClick={ disabled || onClick }
+        onClick={ disabled ? () => 'disabled' : onClick }
         className={ `${styles.button} ${small ? styles.small : ''}` }
       >
         { children }

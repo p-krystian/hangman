@@ -2,8 +2,18 @@ import styles from './OnlineGames.module.css'
 import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import Lobby from '../../Components/Lobby/Lobby'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
 function Games({ gameList, onCreate, onJoin }){
+  const navigate = useNavigate()
+
+  useEffect(() => useKeyboardControl(
+    () => navigate('/'),
+    () => gameList.length < 6 && onCreate()
+  ), [])
+
   return (
     <div className={ styles.wrapper }>
       <div className={ styles.games }>{
@@ -12,7 +22,7 @@ function Games({ gameList, onCreate, onJoin }){
             Brak dostępnych gier
           </span>
         ) : (
-          gameList.map(g => (
+          gameList.slice(0, 6).map(g => (
             <Lobby
               key={ g.id }
               name={ g.name }
@@ -23,7 +33,9 @@ function Games({ gameList, onCreate, onJoin }){
       }</div>
       <ButtonWrap>
         <Button link='/'>Menu</Button>
-        <Button onClick={ onCreate }>Utwórz</Button>
+        <Button onClick={ onCreate } disabled={ gameList.length >= 6 }>
+          Utwórz
+        </Button>
       </ButtonWrap>
     </div>
   )
