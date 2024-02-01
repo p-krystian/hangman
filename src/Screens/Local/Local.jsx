@@ -49,8 +49,8 @@ function Local(){
           />
           {askExit && (
             <Confirm
-              onConfirm={ () => navigate('/') }
-              onReject={ () => setAskExit(false) }
+              confirm={ () => navigate('/') }
+              reject={ () => setAskExit(false) }
             >
               Wyjść do Menu?
             </Confirm>

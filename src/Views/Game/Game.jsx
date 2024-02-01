@@ -55,7 +55,7 @@ function Game({ exit, onLose, onWin }){
         <Button onClick={ () => setShowExit(true) }>Anuluj</Button>
       </div>
       {showExit && (
-        <Confirm onConfirm={ exit } onReject={ () => setShowExit(false) }>
+        <Confirm confirm={ exit } reject={ () => setShowExit(false) }>
           Zakończyć grę?
         </Confirm>
       )}

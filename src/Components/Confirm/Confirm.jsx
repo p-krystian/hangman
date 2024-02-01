@@ -2,8 +2,9 @@ import styles from './Confirm.module.css'
 import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
 
-function Confirm({ onConfirm, onReject, children }){
+function Confirm({ confirm, reject, children }){
   const popupContainer = document.getElementById('popup')
+  const confirmText = reject ? 'Tak' : 'Ok'
 
   useEffect(() => {
     popupContainer.classList.add('active')
@@ -14,8 +15,8 @@ function Confirm({ onConfirm, onReject, children }){
     <div className={ styles.confirm }>
       <span>{ children }</span>
       <div className={ styles.buttons }>
-        <button onClick={ onReject }>Nie</button>
-        <button onClick={ onConfirm }>Tak</button>
+        { reject && <button onClick={ reject }>Nie</button> }
+        <button onClick={ confirm }>{ confirmText }</button>
       </div>
     </div>,
     popupContainer
