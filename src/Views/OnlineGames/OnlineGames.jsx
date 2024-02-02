@@ -32,10 +32,10 @@ function Games({ gameList, onCreate, onJoin }){
         )
       }</div>
       <ButtonWrap>
-        <Button link='/'>Menu</Button>
         <Button onClick={ onCreate } disabled={ gameList.length >= 6 }>
           Utwórz
         </Button>
+        <Button link='/'>Menu</Button>
       </ButtonWrap>
     </div>
   )

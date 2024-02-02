@@ -16,9 +16,9 @@ function Game({ exit, onLose, onWin }){
   const [mistakes, setMistakes] = useState(0)
   const [showExit, setShowExit] = useState(false)
 
-  useLayoutEffect(() => useFullScreen(), [])
+  useLayoutEffect(() => exit && useFullScreen(), [])
   useEffect(() => useKeyboardControl(
-    () => setShowExit(current => !current)
+    () => exit && setShowExit(current => !current)
   ), [])
 
   function clickKey(char, key){
@@ -51,9 +51,11 @@ function Game({ exit, onLose, onWin }){
         </Entry>
         <Keyboard keyEvent={ clickKey } />
       </div>
-      <div className={ styles.buttons }>
-        <Button onClick={ () => setShowExit(true) }>Anuluj</Button>
-      </div>
+      {exit && (
+        <div className={ styles.buttons }>
+          <Button onClick={ () => setShowExit(true) }>Anuluj</Button>
+        </div>
+      )}
       {showExit && (
         <Confirm confirm={ exit } reject={ () => setShowExit(false) }>
           Zakończyć grę?

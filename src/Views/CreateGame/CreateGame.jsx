@@ -39,11 +39,11 @@ function Create({ back, submit }){
         />
       </div>
       <ButtonWrap>
-        <Button onClick={ back }>
-          Anuluj
-        </Button>
         <Button onClick={ create } disabled={ name.length < 3 }>
           Start
+        </Button>
+        <Button onClick={ back }>
+          Anuluj
         </Button>
       </ButtonWrap>
     </div>

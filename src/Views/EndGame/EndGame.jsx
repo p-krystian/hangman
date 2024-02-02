@@ -36,8 +36,8 @@ function EndGame({ next }){
       </div>
 
       <ButtonWrap>
-        <Button link="/">Menu</Button>
         <Button onClick={ next }>Dalej</Button>
+        <Button link="/">Menu</Button>
       </ButtonWrap>
     </div>
   )

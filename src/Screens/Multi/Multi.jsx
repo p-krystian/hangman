@@ -13,6 +13,7 @@ const socket = io('http://127.0.0.1:8090');
 function MultiPlayer(){
   const [stage, setStage] = useState('connecting')
   const [gameList, setGameList] = useState([])
+  const [resultKey, setResultKey] = useState('r-0')
   const gameData = useRef({
     entry: '',
     nicks: ['Ty', 'Przeciwnik'],
@@ -65,6 +66,7 @@ function MultiPlayer(){
     socket.on('game-data', data => {
       gameData.current.points = [data.wins, data.oWins]
       gameData.current.rounds = [data.rounds, data.oRounds]
+      setResultKey(`r-${data.oRounds}`)
       setStage('result')
     })
 
@@ -98,6 +100,7 @@ function MultiPlayer(){
         />
     ) : stage === 'result' ? (
         <EndGame
+          key={ resultKey }
           next={ () => socket.emit('join-lobby') }
         />
       ) : (

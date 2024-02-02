@@ -57,8 +57,8 @@ function WriteNicks({ back, next }){
         />
       </div>
       <ButtonWrap>
-        <Button onClick={ back }>Anuluj</Button>
         <Button onClick={ submit } disabled={ !pass }>Dalej</Button>
+        <Button onClick={ back }>Anuluj</Button>
       </ButtonWrap>
     </div>
   )
