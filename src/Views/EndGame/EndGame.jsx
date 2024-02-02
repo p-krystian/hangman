@@ -36,7 +36,7 @@ function EndGame({ next }){
       </div>
 
       <ButtonWrap>
-        <Button onClick={ next }>Dalej</Button>
+        {next && <Button onClick={ next }>Dalej</Button>}
         <Button link="/">Menu</Button>
       </ButtonWrap>
     </div>

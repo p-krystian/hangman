@@ -5,16 +5,21 @@ import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
 import Connecting from '../../Views/Connecting/Connecting'
 import Waiting from '../../Views/Waiting/Waiting'
+import Alert from '../../Components/Confirm/Confirm'
 import GameContext from '../../Contexts/GameContext'
 import { io } from "socket.io-client"
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const socket = io('http://127.0.0.1:8090');
+const socket = io('http://127.0.0.1:8090')
 
 function MultiPlayer(){
+  const navigate = useNavigate()
   const [stage, setStage] = useState('connecting')
   const [gameList, setGameList] = useState([])
-  const [resultKey, setResultKey] = useState('r-0')
+  const [resultKey, setResultKey] = useState('r-1-1')
+  const [alert, setAlert] = useState(null)
+  const opponentExit = useRef(false)
   const gameData = useRef({
     entry: '',
     nicks: ['Ty', 'Przeciwnik'],
@@ -40,34 +45,71 @@ function MultiPlayer(){
     socket.emit('end-game', false)
   }, [])
 
+  const nextRound = useMemo(() => {
+    if (opponentExit.current)
+      return () => socket.emit('join-lobby')
+
+    if (gameData.current.rounds[0] !== gameData.current.rounds[1])
+      return null
+
+    return () => socket.emit('continue-game')
+  }, [resultKey])
+
+  const onOpponentExit = useCallback(() => {
+    opponentExit.current = true
+    setResultKey('r-0-0')
+    setAlert({
+      text: 'Przeciwnik stchórzył',
+      action: () => {
+        setAlert(null)
+        if (stage !== 'result')
+          socket.emit('join-lobby')
+      }
+    })
+  }, [stage])
+
+  useEffect(() => {
+    socket.on('opponent-exit', onOpponentExit)
+    return () => socket.off('opponent-exit')
+  }, [onOpponentExit])
+
   useEffect(() => {
     socket.connect()
     socket.on('connect', () => {
       setTimeout(() => socket.emit('join-lobby'), 300)
+      setAlert(current => (
+        current?.text === 'Rozłączono z serwerem' ? {
+          text: 'Połączono ponownie',
+          action: () => setAlert(null)
+        } : current
+      ))
+    })
+    socket.on('disconnect', () => {
+      setAlert({
+        text: 'Rozłączono z serwerem',
+        action: () => {
+          setAlert(null)
+          navigate('/')
+        }
+      })
     })
 
     socket.on('game-list', games => {
+      setResultKey('r-1-1')
+      opponentExit.current = false
       setGameList(games)
       setStage('lobby')
     })
-    socket.on('wait-start', () => {
-      setStage('waiting')
-    })
-    socket.on('give-phrase', () => {
-      setStage('phrase')
-    });
-    socket.on('opponent-exit', () => {
-      console.log('opponent - exit')
-      // setStage('loading')
-    });
+    socket.on('wait-start', () => setStage('waiting'))
+    socket.on('give-phrase', () => setStage('phrase'))
     socket.on('start-game', phrase => {
       gameData.current.entry = phrase
       setStage('game')
-    });
+    })
     socket.on('game-data', data => {
       gameData.current.points = [data.wins, data.oWins]
       gameData.current.rounds = [data.rounds, data.oRounds]
-      setResultKey(`r-${data.oRounds}`)
+      setResultKey(`r-${data.rounds+1}-${data.oRounds+1}`)
       setStage('result')
     })
 
@@ -99,17 +141,19 @@ function MultiPlayer(){
           onWin={ winCallback }
           onLose={ loseCallback }
         />
-    ) : stage === 'result' ? (
+      ) : stage === 'result' ? (
         <EndGame
           key={ resultKey }
-          next={ () => socket.emit('join-lobby') }
+          next={ nextRound }
         />
       ) : (
         <Waiting
           abort={ () => socket.emit('join-lobby') }
         />
       )
-    }</GameContext.Provider>
+    }
+    {alert && <Alert confirm={ alert.action }>{ alert.text }</Alert>}
+    </GameContext.Provider>
   )
 }
 
