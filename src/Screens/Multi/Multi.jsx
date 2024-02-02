@@ -4,6 +4,7 @@ import WriteEntry from '../../Views/WriteEntry/WriteEntry'
 import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
 import Connecting from '../../Views/Connecting/Connecting'
+import Waiting from '../../Views/Waiting/Waiting'
 import GameContext from '../../Contexts/GameContext'
 import { io } from "socket.io-client"
 import { useState, useEffect, useRef, useCallback } from 'react'
@@ -104,7 +105,9 @@ function MultiPlayer(){
           next={ () => socket.emit('join-lobby') }
         />
       ) : (
-        <h2>Czekanie na przeciwnika</h2>
+        <Waiting
+          abort={ () => socket.emit('join-lobby') }
+        />
       )
     }</GameContext.Provider>
   )
