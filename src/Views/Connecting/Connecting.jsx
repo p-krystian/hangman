@@ -29,7 +29,7 @@ function Connecting(){
         <Entry>ŁĄCZENIE...</Entry>
       </div>
       <ButtonWrap>
-        <Button link='/'>Menu</Button>
+        <Button link='/'>Anuluj</Button>
       </ButtonWrap>
     </div>
   )
