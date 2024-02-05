@@ -1,9 +1,10 @@
 import './Header.css'
+import logo from '../../Assets/Images/logo.svg'
 
 function Header(){
   return(
     <header className='header'>
-      Wisielec
+      <img alt='Wisielec' src={ logo } />
     </header>
   )
 }
