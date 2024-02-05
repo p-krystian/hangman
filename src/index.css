@@ -6,19 +6,23 @@
   padding: 0;
 }
 :root{
-  --main:   #6fd8c8;
-  --light:  #5e492f;
+  --main:   #225560;
+  --light:  #30225d;
   --second: #2c4a60;
-  --darker: #394855;
-  --good:   #007d5c;
-  --bad:    #824958;
+  --darker: #243b3c;
+  --good:   #0c523d;
+  --bad:    #4c1130;
 
-  --border: 1px solid var(--darker);
+  --border: 2px solid var(--darker);
 
   font-size: 16px;
 }
 body{
-  background-color: #050505;
+  background-color: #171219;
+  background-image: url('./Assets/Images/bg-no_license.jpg');
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
   color: #FFF;
   display: flex;
   align-items: center;
@@ -29,9 +33,11 @@ body{
   font-size: 1rem;
 }
 #root{
-  width: 400px;
-  height: 780px;
-  border: 3px solid white;
+  /* width: 400px; */
+  /* min-height: 100dvh; */
+  /* border: 3px solid white; */
+  min-width: 310px;
+  min-height: 620px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -50,4 +56,10 @@ body{
   align-items: center;
   justify-content: center;
   background-color: #000000aa;
+}
+
+@media (max-width: 399px){
+  :root{
+    font-size: 12px;
+  }
 }

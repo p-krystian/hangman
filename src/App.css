@@ -9,8 +9,16 @@
   cursor: default !important;
 }
 main{
+  height: calc(100vh - 7rem);
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.full main{
+  height: 100vh;
+}
+@supports (height: 100lvh) {
+  main{ height: calc(100lvh - 7rem) }
+  .full main{ height: 100lvh }
 }
