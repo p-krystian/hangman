@@ -82,6 +82,7 @@ function MultiPlayer(){
           action: () => setAlert(null)
         } : current
       ))
+      console.countReset('Trying to connect to multiplayer server')
     })
     socket.on('disconnect', () => {
       setAlert({
@@ -91,6 +92,9 @@ function MultiPlayer(){
           navigate('/')
         }
       })
+    })
+    socket.on('connect_error', () => {
+      console.count('Trying to connect to multiplayer server')
     })
     socket.connect()
 
@@ -113,7 +117,18 @@ function MultiPlayer(){
       setStage('result')
     })
 
-    return () => socket.disconnect()
+    return () => {
+      socket.off('connect')
+      socket.off('disconnect')
+      socket.off('connect_error')
+      socket.off('game-list')
+      socket.off('wait-start')
+      socket.off('give-phrase')
+      socket.off('start-game')
+      socket.off('game-data')
+      socket.disconnect()
+      console.countReset('Trying to connect to multiplayer server')
+    }
   }, [])
 
   return (
