@@ -1,8 +1,18 @@
 function useFullScreen(){
   const root = document.getElementById('root')
 
-  root.classList.add('full')
+  const setFull = () => {
+    if (root.offsetHeight > window.innerHeight)
+      root.classList.add('full')
+    else
+      root.classList.remove('full')
+  }
+  setFull()
+  window.addEventListener('resize', setFull)
 
-  return () => root.classList.remove('full')
+  return () => {
+    window.removeEventListener('resize', setFull)
+    root.classList.remove('full')
+  }
 }
 export default useFullScreen
