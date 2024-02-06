@@ -33,9 +33,6 @@ body{
   font-size: 1rem;
 }
 #root{
-  /* width: 400px; */
-  /* min-height: 100dvh; */
-  /* border: 3px solid white; */
   min-width: 310px;
   min-height: 620px;
   border-radius: 20px;
@@ -65,10 +62,11 @@ body{
   :root{ font-size: 22px; }
 }
 @media (min-width: 620px) and (orientation: landscape){
-  #root{
-    min-height: 350px;
-  }
+  #root{ min-height: 350px; }
 }
 @media (max-width: 699px) and (orientation: landscape){
   :root{ font-size: 11px; }
+}
+@media (min-width: 1580px) and (orientation: landscape){
+  :root{ font-size: 20px; }
 }
