@@ -3,10 +3,10 @@
   to    { opacity: 1 }
 }
 .board{
-  width: 300px;
-  height: 300px;
+  width: 20rem;
+  height: 20rem;
   border: var(--border);
-  border-radius: 10px;
+  border-radius: 1rem;
   grid-area: board;
   display: flex;
   justify-content: center;
@@ -15,7 +15,7 @@
 }
 .image{
   position: absolute;
-  width: 256px;
-  height: 256px;
+  width: 90%;
+  height: 90%;
   animation: show 0.15s ease-out;
 }
