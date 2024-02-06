@@ -3,6 +3,7 @@ import Entry from '../../Components/Entry/Entry'
 import Board from '../../Components/Board/Board'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import Button from '../../Components/Button/Button'
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import Confirm from '../../Components/Confirm/Confirm'
 import useFullScreen from '../../Hooks/useFullScreen'
@@ -51,11 +52,9 @@ function Game({ exit, onLose, onWin }){
         </Entry>
         <Keyboard keyEvent={ clickKey } />
       </div>
-      {exit && (
-        <div className={ styles.buttons }>
-          <Button onClick={ () => setShowExit(true) }>Anuluj</Button>
-        </div>
-      )}
+      <ButtonWrap>
+        {exit && <Button onClick={ () => setShowExit(true) }>Anuluj</Button>}
+      </ButtonWrap>
       {showExit && (
         <Confirm confirm={ exit } reject={ () => setShowExit(false) }>
           Zakończyć grę?
