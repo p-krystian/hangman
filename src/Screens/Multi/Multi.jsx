@@ -74,7 +74,6 @@ function MultiPlayer(){
   }, [onOpponentExit])
 
   useEffect(() => {
-    socket.connect()
     socket.on('connect', () => {
       setTimeout(() => socket.emit('join-lobby'), 300)
       setAlert(current => (
@@ -93,6 +92,7 @@ function MultiPlayer(){
         }
       })
     })
+    socket.connect()
 
     socket.on('game-list', games => {
       setResultKey('r-1-1')
