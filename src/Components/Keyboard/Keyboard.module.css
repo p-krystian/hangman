@@ -2,7 +2,7 @@
   border: var(--border);
   padding: 0.5rem;
   border-radius: 0.5rem;
-  /* width: 95%; */
+  grid-area: keyboard;
 }
 .keys{
   display: grid;

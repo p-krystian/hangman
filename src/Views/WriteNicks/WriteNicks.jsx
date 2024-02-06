@@ -6,7 +6,8 @@ import GameContext from '../../Contexts/GameContext'
 import styles from './WriteNicks.module.css'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
-import { useState, useContext, useEffect, useCallback } from 'react'
+import useFullScreen from '../../Hooks/useFullScreen'
+import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react'
 
 function WriteNicks({ back, next }){
   const [nick0, setNick0] = useState('')
@@ -27,6 +28,7 @@ function WriteNicks({ back, next }){
     next()
   }, [nick0, nick1])
 
+  useLayoutEffect(() => useFullScreen(), [])
   useEffect(() => useKeyboardControl(
     back,
     submit,
@@ -37,20 +39,22 @@ function WriteNicks({ back, next }){
   return (
     <div className={ styles.wrapper }>
       <div className={ styles.container }>
-        <Input
-          focus={ focused === 0 }
-          value={ nick0 }
-          placeholder={ 'Nick gracza 1' }
-          size={ maxNickLength }
-          onClick={ () => setFocused(0) }
-        />
-        <Input
-          focus={ focused === 1 }
-          value={ nick1 }
-          placeholder={ 'Nick gracza 2' }
-          size={ maxNickLength }
-          onClick={ () => setFocused(1) }
-        />
+        <div className={ styles.inputs }>
+          <Input
+            focus={ focused === 0 }
+            value={ nick0 }
+            placeholder={ 'Nick gracza 1' }
+            size={ maxNickLength }
+            onClick={ () => setFocused(0) }
+          />
+          <Input
+            focus={ focused === 1 }
+            value={ nick1 }
+            placeholder={ 'Nick gracza 2' }
+            size={ maxNickLength }
+            onClick={ () => setFocused(1) }
+          />
+        </div>
         <Keyboard
           write={ true }
           keyEvent={ keyboardWrite }

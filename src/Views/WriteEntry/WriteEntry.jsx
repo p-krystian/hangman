@@ -8,7 +8,8 @@ import styles from './WriteEntry.module.css'
 import words from '../../Assets/words.json'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
-import { useState, useContext, useCallback, useEffect } from 'react'
+import useFullScreen from '../../Hooks/useFullScreen'
+import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react'
 
 function WriteEntry({ back, backText, next, nick }){
   const [entry, setEntry] = useState('')
@@ -27,6 +28,7 @@ function WriteEntry({ back, backText, next, nick }){
     setEntry(randomWord.toUpperCase())
   }, [])
 
+  useLayoutEffect(() => useFullScreen(), [])
   useEffect(() => useKeyboardControl(
     back,
     updateContext

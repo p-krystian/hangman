@@ -12,3 +12,14 @@
   justify-content: center;
   gap: 1rem;
 }
+@media (min-width: 620px) and (orientation: landscape){
+  .game{
+    margin: auto;
+    flex: 0;
+    display: grid;
+    grid-template-areas:
+      "board entry"
+      "board keyboard";
+    align-items: end;
+  }
+}

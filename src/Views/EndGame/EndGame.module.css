@@ -2,13 +2,14 @@
   from  { opacity: 0 }
   to    { opacity: 1 }
 }
-.resoult{
+.result{
   font-family: 'Roboto Mono';
   font-size: 2rem;
   width: 18rem;
   height: 18rem;
+  grid-area: result;
 }
-.resoult img{
+.result img{
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -34,6 +35,8 @@
   display: block;
   line-height: 1.8;
   text-transform: uppercase;
+  grid-area: entry;
+  text-align: center;
 }
 .prefix{
   color: var(--darker);
@@ -52,4 +55,22 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@media (min-width: 620px) and (orientation: landscape){
+  .result{
+    width: 16rem;
+    height: 16rem;
+  }
+  .container{
+    margin: auto;
+    flex: 0;
+    min-width: 620px;
+    gap: 1rem;
+    display: grid;
+    grid-template-areas:
+      "result entry"
+      "result points";
+    justify-content: center;
+    align-items: center;
+  }
 }

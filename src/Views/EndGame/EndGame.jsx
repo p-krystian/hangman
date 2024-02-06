@@ -12,7 +12,7 @@ import useKeyboardControl from '../../Hooks/useKeyboardControl'
 function EndGame({ next }){
   const gameContext = useContext(GameContext)
   const navigate = useNavigate()
-  const resoult = {
+  const result = {
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
     entry: gameContext.entry || '?'
@@ -26,15 +26,14 @@ function EndGame({ next }){
   return (
     <div className={ styles.wrapper }>
       <div className={ styles.container }>
-        <div className={ styles.resoult }>
-          <img src={ resoult.img } />
+        <div className={ styles.result }>
+          <img src={ result.img } />
         </div>
-        <span className={ `${styles.entry} ${resoult.class}` }>
-          { resoult.entry }
+        <span className={ `${styles.entry} ${result.class}` }>
+          { result.entry }
         </span>
         <Points />
       </div>
-
       <ButtonWrap>
         {next && <Button onClick={ next }>Dalej</Button>}
         <Button link="/">Menu</Button>
