@@ -27,3 +27,9 @@
   height: 10rem;
   animation: rotate-r 3s infinite ease-in-out;
 }
+@media (min-width: 620px) and (orientation: landscape){
+  .animation{
+    width: 7rem;
+    height: 7rem;
+  }
+}

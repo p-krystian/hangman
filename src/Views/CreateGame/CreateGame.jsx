@@ -5,13 +5,15 @@ import Input from '../../Components/Input/Input'
 import Keyboard from '../../Components/Keyboard/Keyboard'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
-import { useState, useEffect } from 'react'
+import useFullScreen from '../../Hooks/useFullScreen'
+import { useState, useEffect, useLayoutEffect } from 'react'
 
 function Create({ back, submit }){
   const [name, setName] = useState('')
   const maxNameLength = 12
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
 
+  useLayoutEffect(() => useFullScreen(), [])
   useEffect(() => useKeyboardControl(
     back,
     create

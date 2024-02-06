@@ -2,7 +2,7 @@
   border: var(--border);
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 100%;
+  min-width: 18rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
