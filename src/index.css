@@ -59,7 +59,8 @@ body{
 }
 
 @media (max-width: 399px){
-  :root{
-    font-size: 12px;
-  }
+  :root{ font-size: 12px; }
+}
+@media (min-width: 600px) and (orientation: portrait){
+  :root{ font-size: 22px; }
 }
