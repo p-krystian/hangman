@@ -13,6 +13,10 @@
   align-items: center;
   position: relative;
 }
+.board.small{
+  width: 16rem;
+  height: 16rem;
+}
 .image{
   position: absolute;
   width: 90%;

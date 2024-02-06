@@ -25,7 +25,7 @@ function Connecting(){
   return (
     <div className={ styles.wrapper }>
       <div className={ styles.container }>
-        <Board progress={ progress } />
+        <Board progress={ progress } small={ true } />
         <Entry>ŁĄCZENIE...</Entry>
       </div>
       <ButtonWrap>
