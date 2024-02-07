@@ -67,6 +67,7 @@
     min-width: 620px;
     gap: 1rem;
     display: grid;
+    grid-template-columns: auto 23rem;
     grid-template-areas:
       "result entry"
       "result points";
