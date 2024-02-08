@@ -49,7 +49,7 @@ function WriteEntry({ back, backText, next, nick }){
         <Button onClick={ updateContext } disabled={ entry.length < 3 }>
           Dalej
         </Button>
-        {back && <Button onClick={ back }>{ backText || 'Wstecz' }</Button>}
+        {!!back && <Button onClick={ back }>{ backText || 'Wstecz' }</Button>}
         <Button onClick={ writeRandom }>Losuj</Button>
       </ButtonWrap>
     </div>

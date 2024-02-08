@@ -164,7 +164,7 @@ function MultiPlayer(){
         />
       )
     }
-    {alert && <Alert confirm={ alert.action }>{ alert.text }</Alert>}
+    {!!alert && <Alert confirm={ alert.action }>{ alert.text }</Alert>}
     </GameContext.Provider>
   )
 }

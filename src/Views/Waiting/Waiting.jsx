@@ -12,7 +12,7 @@ function Waiting({ abort }){
         <img src={ head } alt='X' className={ styles.animation } />
       </div>
       <ButtonWrap>
-        {abort && <Button onClick={ abort }>Anuluj</Button>}
+        {!!abort && <Button onClick={ abort }>Anuluj</Button>}
       </ButtonWrap>
     </div>
   )
