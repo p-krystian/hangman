@@ -1,8 +1,9 @@
 .keyboard{
-  border: var(--border);
+  border: 3px solid var(--button-d);
   padding: 0.5rem;
   border-radius: 0.5rem;
   grid-area: keyboard;
+  background-color: var(--dark-bg);
 }
 .keys{
   display: grid;

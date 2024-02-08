@@ -5,13 +5,14 @@
 .board{
   width: 20rem;
   height: 20rem;
-  border: var(--border);
+  border: 3px solid var(--button-d);
   border-radius: 1rem;
   grid-area: board;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  background-color: var(--dark-bg);
 }
 .board.small{
   width: 16rem;

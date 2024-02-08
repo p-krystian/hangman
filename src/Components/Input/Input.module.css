@@ -6,7 +6,7 @@
 }
 
 .input{
-  color: var(--main);
+  color: var(--white);
   display: flex;
   align-items: center;
   font-family: 'Roboto Mono';
@@ -20,13 +20,14 @@
   height: 4rem;
   white-space: pre;
   overflow-x: auto;
+  background-color: var(--dark-bg);
 }
 .input[focus="true"]{
-  border-color: var(--light);
+  border-color: var(--button-d);
 }
 .placeholder{
   width: 100%;
-  color: var(--light);
+  color: var(--button);
   font-size: 2rem;
   text-align: center;
 }

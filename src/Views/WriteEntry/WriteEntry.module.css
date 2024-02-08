@@ -10,7 +10,7 @@
 .text{
   font-family: 'Ubuntu';
   font-size: 2rem;
-  color: var(--light);
+  color: var(--button);
 }
 .wrapper{
   width: 100%;
