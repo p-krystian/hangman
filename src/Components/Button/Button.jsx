@@ -14,6 +14,7 @@ function Button(props){
     link ? (
       <Link
         to={ disabled ? '' : link }
+        disabled={ disabled }
         onClick={ disabled ? () => 'disabled' : onClick }
         className={ `${styles.button} ${small ? styles.small : ''}` }
       >

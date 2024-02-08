@@ -1,24 +1,32 @@
 .button{
+  appearance: none;
   display: inline-block;
   min-width: 10rem;
   font-size: 2rem;
-  padding: 0.5rem;
+  padding: 0.4rem;
   font-family: 'Roboto Mono';
-  background-color: transparent;
+  background-color: var(--button);
+  border: 2px solid var(--button-d);
   border-radius: 0.5rem;
-  border: var(--border);
-  color: var(--main);
+  color: var(--white);
   cursor: pointer;
-  transition: filter 0.1s ease-in;
   text-decoration: none;
   text-align: center;
+  transition:
+    background-color 150ms ease-out,
+    filter 150ms ease-in-out;
 }
 .button.small{
   font-size: 1.5rem;
-  padding: 0.2rem 0.8rem;
+  padding: 0.2rem 0.6rem;
   margin: 0;
   min-width: 4rem;
 }
 .button:hover{
-  filter: brightness(75%);
+  background-color: var(--button-d);
+}
+.button[disabled]{
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: brightness(50%);
 }
