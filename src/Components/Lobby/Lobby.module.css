@@ -1,11 +1,24 @@
+@keyframes show{
+  from  { opacity: 0 }
+  to    { opacity: 1 }
+}
+
 .lobby{
-  border: var(--border);
+  border: 3px solid var(--button-d);
+  background-color: var(--dark-bg);
   padding: 1rem;
   border-radius: 0.5rem;
   min-width: 18rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
+  opacity: 0;
+  animation-delay: 50ms;
+  animation-duration: 200ms;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in;
+  animation-name: show;
 }
 .lobby span{
   display: block;
