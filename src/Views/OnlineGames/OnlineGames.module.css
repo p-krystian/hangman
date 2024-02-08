@@ -25,9 +25,9 @@
   margin: auto;
   width: 100%;
   text-align: center;
-  font-family: 'Roboto Mono';
+  font-family: var(--font-mono);
   text-transform: uppercase;
-  font-size: 2rem;
+  font-size: 2.2rem;
   justify-content: center;
   align-items: center;
 }

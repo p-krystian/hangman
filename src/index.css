@@ -1,5 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Ubuntu:wght@300;400&display=swap');
-
+@font-face {
+  src: url('./Assets/Fonts/humaroid.otf');
+  font-family: 'Humaroid';
+  font-display: fallback;
+}
+@font-face {
+  src: url('./Assets/Fonts/kingthings.ttf');
+  font-family: 'Kingthings';
+  font-display: fallback;
+}
+@font-face {
+  src: url('./Assets/Fonts/unutterable.ttf');
+  font-family: 'Unutterable';
+  font-display: fallback;
+}
 *, *::before, *::after{
   box-sizing: border-box;
   margin: 0;
@@ -10,6 +23,7 @@
   --light:  #30225d;
   --second: #2c4a60;
   --darker: #243b3c;
+  --border: 2px solid var(--darker);
 
 
   --white:    #dadada;
@@ -19,8 +33,9 @@
   --correct:  #0c523d;
   --mistake:  #4c1130;
 
-
-  --border: 2px solid var(--darker);
+  --font-mono:    'Kingthings';
+  --font-main:    'Unutterable';
+  --font-simple:  'Humaroid';
 
   font-size: 16px;
 }
@@ -36,7 +51,7 @@ body{
   justify-content: center;
   min-height: 100vh;
   user-select: none;
-  font-family: 'Roboto Mono';
+  font-family: var(--font-simple);
   font-size: 1rem;
 }
 #root{

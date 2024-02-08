@@ -9,7 +9,7 @@
   color: var(--white);
   display: flex;
   align-items: center;
-  font-family: 'Roboto Mono';
+  font-family: var(--font-mono);
   font-size: 2.5rem;
   border: var(--border);
   border-radius: 0.5rem;
@@ -28,8 +28,8 @@
 .placeholder{
   width: 100%;
   color: var(--button);
-  font-size: 2rem;
   text-align: center;
+  font-family: var(--font-simple);
 }
 @supports selector(body:has(div)){
   .input[focus="true"]:has(.placeholder)::before{

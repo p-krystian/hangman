@@ -1,4 +1,5 @@
 import styles from './Key.module.css'
+import './Key.css'
 import { forwardRef } from 'react'
 
 function Key({ onClick, children, wide }, ref){
