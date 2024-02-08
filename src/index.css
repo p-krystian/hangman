@@ -40,12 +40,13 @@
   font-size: 16px;
 }
 body{
-  background-color: #171219;
+  background-color: #090909;
+  /* TODO: Add correct background */
   background-image: url('./Assets/Images/bg-no_license.jpg');
   background-size: cover;
-  background-position: top;
+  background-position: center;
   background-attachment: fixed;
-  color: #FFF;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;

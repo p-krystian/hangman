@@ -2,6 +2,7 @@ function useFullScreen(){
   const root = document.getElementById('root')
 
   const setFull = () => {
+    // TODO: Try to find better solution
     if (root.offsetHeight > window.innerHeight)
       root.classList.add('full')
     else

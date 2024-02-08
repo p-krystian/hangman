@@ -23,6 +23,8 @@ function Game({ exit, onLose, onWin }){
   ), [])
 
   function clickKey(char, key){
+    // TODO: Check char in gessed instead of checking class
+    // TODO: Remove focus from key after click
     setGuessed(g => [...new Set(g.concat(char))])
     if ([...key.classList].some(e => /(correct|mistake)/.test(e)))
       return
