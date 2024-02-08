@@ -1,13 +1,3 @@
-.correct{
-  color: var(--good) !important;
-  border-color: var(--good) !important;
-  cursor: default !important;
-}
-.mistake{
-  color: var(--bad) !important;
-  border-color: var(--bad) !important;
-  cursor: default !important;
-}
 main{
   min-height: calc(100vh - 7rem);
   flex-grow: 1;

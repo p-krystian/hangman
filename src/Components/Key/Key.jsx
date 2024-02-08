@@ -3,13 +3,13 @@ import { forwardRef } from 'react'
 
 function Key({ onClick, children, wide }, ref){
   return (
-    <div
+    <button
       className={ `${styles.key} ${wide ? styles.wide : ''}` }
       onClick={ () => onClick(children) }
       ref={ ref }
     >
       { children }
-    </div>
+    </button>
   )
 }
 export default forwardRef(Key)

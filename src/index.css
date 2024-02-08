@@ -10,12 +10,13 @@
   --light:  #30225d;
   --second: #2c4a60;
   --darker: #243b3c;
-  --good:   #0c523d;
-  --bad:    #4c1130;
+
 
   --white:    #dadada;
   --button:   #225560;
   --button-d: #023540;
+  --correct:  #0c523d;
+  --mistake:  #4c1130;
 
 
   --border: 2px solid var(--darker);

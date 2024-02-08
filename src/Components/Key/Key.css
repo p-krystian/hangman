@@ -1,0 +1,8 @@
+button.mistake{
+  background-color: var(--mistake);
+  pointer-events: none;
+}
+button.correct{
+  background-color: var(--correct);
+  pointer-events: none;
+}

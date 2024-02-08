@@ -20,26 +20,19 @@
   animation-timing-function: ease-in-out;
 }
 .win{
-  color: var(--good);
+  color: var(--correct);
 }
 .lose{
-  color: var(--bad);
-}
-.neutral{
-  color: var(--light);
+  color: var(--mistake);
 }
 .entry{
   font-size: 1.8rem;
   font-family: 'Roboto Mono';
-  /* color: var(--light); */
   display: block;
   line-height: 1.8;
   text-transform: uppercase;
   grid-area: entry;
   text-align: center;
-}
-.prefix{
-  color: var(--darker);
 }
 .container{
   display: flex;
