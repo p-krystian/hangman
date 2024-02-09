@@ -30,7 +30,10 @@ function MultiPlayer(){
 
   const createNewGame = useCallback(name => {
     if (gameList.length >= 6){
-      setStage('lobby')
+      setAlert({
+        children: 'Już utworzono maksymalną liczbę gier',
+        confirm: () => setAlert(null)
+      })
       return
     }
     socket.emit('create-game', name)
@@ -59,8 +62,8 @@ function MultiPlayer(){
     opponentExit.current = true
     setResultKey('r-0-0')
     setAlert({
-      text: 'Przeciwnik stchórzył',
-      action: () => {
+      children: 'Przeciwnik stchórzył',
+      confirm: () => {
         setAlert(null)
         if (stage !== 'result')
           socket.emit('join-lobby')
@@ -74,34 +77,43 @@ function MultiPlayer(){
   }, [onOpponentExit])
 
   useEffect(() => {
+    socket.on('game-list', games => {
+      setGameList(games)
+      if (stage !== 'create'){
+        setResultKey('r-1-1')
+        opponentExit.current = false
+        setStage('lobby')
+      }
+    })
+
+    return () => socket.off('game-list')
+  }, [stage])
+
+  useEffect(() => {
     socket.on('connect', () => {
       setTimeout(() => socket.emit('join-lobby'), 300)
       setAlert(current => (
-        current?.text === 'Rozłączono z serwerem' ? {
-          text: 'Połączono ponownie',
-          action: () => setAlert(null)
+        current?.children === 'Rozłączono z serwerem' ? {
+          children: 'Połączono ponownie',
+          confirm: () => setAlert(null)
         } : current
       ))
     })
     socket.on('disconnect', () => {
       setAlert({
-        text: 'Rozłączono z serwerem',
-        action: () => {
+        children: 'Rozłączono z serwerem',
+        confirm: () => {
           setAlert(null)
           navigate('/')
         }
       })
     })
     socket.on('connect_error', () => {
+      console.clear()
+      console.warn('Online server connection error')
     })
     socket.connect()
 
-    socket.on('game-list', games => {
-      setResultKey('r-1-1')
-      opponentExit.current = false
-      setGameList(games)
-      setStage('lobby')
-    })
     socket.on('wait-start', () => setStage('waiting'))
     socket.on('give-phrase', () => setStage('phrase'))
     socket.on('start-game', phrase => {
@@ -119,7 +131,6 @@ function MultiPlayer(){
       socket.off('connect')
       socket.off('disconnect')
       socket.off('connect_error')
-      socket.off('game-list')
       socket.off('wait-start')
       socket.off('give-phrase')
       socket.off('start-game')
@@ -164,7 +175,7 @@ function MultiPlayer(){
         />
       )
     }
-    {!!alert && <Alert confirm={ alert.action }>{ alert.text }</Alert>}
+    {!!alert && <Alert {...alert} />}
     </GameContext.Provider>
   )
 }
