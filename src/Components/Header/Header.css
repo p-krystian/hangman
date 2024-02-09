@@ -1,13 +1,13 @@
 .header{
-  font-family: 'Ubuntu';
+  font-family: var(--font-main);
   display: flex;
   font-size: 5rem;
-  color: var(--second);
+  color: var(--main-d);
   text-align: center;
   cursor: default;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  height: 7rem;
+  height: var(--header-y);
 }
 .full .header{
   display: none;

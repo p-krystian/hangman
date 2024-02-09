@@ -10,7 +10,7 @@
 .text{
   font-family: var(--font-simple);
   font-size: 2.6rem;
-  color: var(--button);
+  color: var(--main);
 }
 .wrapper{
   width: 100%;

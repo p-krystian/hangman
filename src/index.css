@@ -19,17 +19,10 @@
   padding: 0;
 }
 :root{
-  --main:   #225560;
-  --light:  #30225d;
-  --second: #2c4a60;
-  --darker: #243b3c;
-  --border: 2px solid var(--darker);
-
-
   --white:    #dadada;
   --dark-bg:  #050505;
-  --button:   #225560;
-  --button-d: #023540;
+  --main:     #225560;
+  --main-d:   #023540;
   --correct:  #0c523d;
   --mistake:  #4c1130;
 
@@ -37,7 +30,8 @@
   --font-main:    'Unutterable';
   --font-simple:  'Humaroid';
 
-  font-size: 16px;
+  font-size:  16px;
+  --header-y: 7rem;
 }
 body{
   background-color: #090909;

@@ -5,7 +5,7 @@
 .board{
   width: 20rem;
   height: 20rem;
-  border: 3px solid var(--button-d);
+  border: 3px solid var(--main-d);
   border-radius: 1rem;
   grid-area: board;
   display: flex;

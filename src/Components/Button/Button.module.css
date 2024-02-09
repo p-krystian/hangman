@@ -5,8 +5,8 @@
   font-size: 2rem;
   padding: 0.4rem;
   font-family: var(--font-main);
-  background-color: var(--button);
-  border: 2px solid var(--button-d);
+  background-color: var(--main);
+  border: 2px solid var(--main-d);
   border-radius: 0.5rem;
   color: var(--white);
   cursor: pointer;
@@ -24,7 +24,7 @@
   min-width: 4rem;
 }
 .button:hover{
-  background-color: var(--button-d);
+  background-color: var(--main-d);
 }
 .button[disabled]{
   pointer-events: none;
