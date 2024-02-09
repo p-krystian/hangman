@@ -7,7 +7,7 @@ import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import Confirm from '../../Components/Confirm/Confirm'
 import useFullScreen from '../../Hooks/useFullScreen'
-import { useState, useContext, useEffect, useLayoutEffect } from 'react'
+import { useState, useContext, useEffect, useLayoutEffect, useCallback } from 'react'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
 function Game({ exit, onLose, onWin }){
@@ -22,24 +22,21 @@ function Game({ exit, onLose, onWin }){
     () => exit && setShowExit(current => !current)
   ), [])
 
-  function clickKey(char, key){
-    // TODO: Check char in gessed instead of checking class
-    // TODO: Remove focus from key after click
-    setGuessed(g => [...new Set(g.concat(char))])
-    if ([...key.classList].some(e => /(correct|mistake)/.test(e)))
+  const clickKey = useCallback((char, key) => {
+    if (guessed.includes(char))
       return
-    if (entry.toUpperCase().includes(char)){
+
+    if (entry.includes(char)){
       key.classList.add('correct')
+      setGuessed(g => g.includes(char) ? g : g.concat(char))
     }
     else{
-      if (mistakes >= 9){
-        onLose()
-        return
-      }
-      setMistakes(m => m + 1)
       key.classList.add('mistake')
+      if (mistakes >= 9)
+        return onLose()
+      setMistakes(m => m + 1)
     }
-  }
+  }, [guessed, mistakes])
 
   return (
     <div className={ styles.container }>
