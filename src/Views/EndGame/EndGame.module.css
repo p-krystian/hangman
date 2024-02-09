@@ -34,7 +34,7 @@
   text-transform: uppercase;
   grid-area: entry;
   text-align: center;
-  text-shadow: 0 0 0.5rem #000;
+  text-shadow: 0 0 0.5rem var(--dark-bg);
 }
 .container{
   display: flex;
