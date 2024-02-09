@@ -79,7 +79,7 @@ body{
   :root{ font-size: 22px; }
 }
 @media (min-width: 620px) and (orientation: landscape){
-  #root{ min-height: 350px; }
+  #root{ min-height: 280px; }
 }
 @media (max-width: 699px) and (orientation: landscape){
   :root{ font-size: 11px; }

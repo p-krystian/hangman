@@ -1,5 +1,5 @@
 main{
-  min-height: calc(100vh - 7rem);
+  min-height: calc(100vh - var(--header-y));
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -8,7 +8,7 @@ main{
 .full main{
   min-height: 100vh;
 }
-@supports (height: 100lvh) {
-  main{ min-height: calc(100lvh - 7rem) }
+@supports (height: 100lvh){
+  main{ min-height: calc(100lvh - var(--header-y)) }
   .full main{ min-height: 100lvh }
 }
