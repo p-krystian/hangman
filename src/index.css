@@ -35,8 +35,7 @@
 }
 body{
   background-color: #090909;
-  /* TODO: Add correct background */
-  background-image: url('./Assets/Images/bg-no_license.jpg');
+  background-image: url('./Assets/Images/bg.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -69,7 +68,8 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000aa;
+  background-color: #00000088;
+  backdrop-filter: blur(2px);
 }
 
 @media (max-width: 399px){
