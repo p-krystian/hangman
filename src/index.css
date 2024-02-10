@@ -4,7 +4,7 @@
   font-display: fallback;
 }
 @font-face {
-  src: url('./Assets/Fonts/kingthings.ttf');
+  src: url('./Assets/Fonts/kingthings.otf');
   font-family: 'Kingthings';
   font-display: fallback;
 }
@@ -26,9 +26,9 @@
   --correct:  #0c523d;
   --mistake:  #6c1120;
 
-  --font-mono:    'Kingthings';
-  --font-main:    'Unutterable';
-  --font-simple:  'Humaroid';
+  --font-mono:    'Kingthings', monospace;
+  --font-main:    'Unutterable','Comic Sans MS';
+  --font-simple:  'Humaroid', system-ui;
 
   font-size:  16px;
   --header-y: 7rem;
