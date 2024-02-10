@@ -11,7 +11,10 @@ import { io } from "socket.io-client"
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const socket = io(import.meta.env.VITE_SOCKET_URL, { autoConnect: false })
+const socket = io(import.meta.env.VITE_SOCKET_URL, {
+  autoConnect: false,
+  path: import.meta.env.VITE_SOCKET_PATH || '/socket.io/'
+})
 
 function MultiPlayer(){
   const navigate = useNavigate()
