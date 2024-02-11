@@ -25,6 +25,7 @@
   --main-d:   #023540;
   --correct:  #0c523d;
   --mistake:  #6c1120;
+  --darker-a: #00000088;
 
   --font-mono:    'Kingthings', monospace;
   --font-main:    'Unutterable','Comic Sans MS';
@@ -68,7 +69,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #00000088;
+  background-color: var(--darker-a);
   backdrop-filter: blur(2px);
 }
 
