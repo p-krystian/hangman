@@ -9,7 +9,7 @@ import deadImg from '../../Assets/Animation/dead.svg'
 import liveImg from '../../Assets/Animation/live.svg'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 
-function EndGame({ next }){
+function EndGame({ next, pointsID }){
   const gameContext = useContext(GameContext)
   const navigate = useNavigate()
   const result = {
@@ -32,7 +32,7 @@ function EndGame({ next }){
         <span className={ `${styles.entry} ${result.class}` }>
           { result.entry }
         </span>
-        <Points />
+        <Points key={ pointsID || 'r-1-1' } />
       </div>
       <ButtonWrap>
         <Button onClick={ next } disabled={ !next }>Dalej</Button>

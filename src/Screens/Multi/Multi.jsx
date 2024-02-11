@@ -169,7 +169,7 @@ function MultiPlayer(){
         />
       ) : stage === 'result' ? (
         <EndGame
-          key={ resultKey }
+          pointsID={ resultKey }
           next={ nextRound }
         />
       ) : (
