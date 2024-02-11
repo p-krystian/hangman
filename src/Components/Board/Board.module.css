@@ -23,4 +23,5 @@
   width: 90%;
   height: 90%;
   animation: show 0.15s ease-out;
+  filter: brightness(var(--svg-bright));
 }

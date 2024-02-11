@@ -25,7 +25,11 @@
 .animation{
   width: 10rem;
   height: 10rem;
+  font-size: 7rem;
+  text-align: center;
+  font-family: var(--font-main);
   animation: rotate-r 3s infinite ease-in-out;
+  filter: brightness(var(--svg-bright));
 }
 @media (min-width: 620px) and (orientation: landscape){
   .animation{

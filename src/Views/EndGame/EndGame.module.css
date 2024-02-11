@@ -12,6 +12,7 @@
 .result img{
   width: 100%;
   height: 100%;
+  filter: brightness(var(--svg-bright));
   opacity: 0;
   animation-name: show;
   animation-duration: 0.3s;
