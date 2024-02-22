@@ -13,7 +13,7 @@ Interface language: `PL`\
 Hangman's game.\
 You can play alone or with another people.\
 Multiplayer allows to play on one device or two via a WebSocket server.\
-Socket.IO server code is not public.\
+Socket.IO server code is not public.
 
 ## TODOs
 - Sounds effects
@@ -26,7 +26,7 @@ In the project directory, you can run:
 `npm install` - to install dependences\
 `npm run dev` - to start a local development server\
 `npm run build` - to build a production app\
-`npm run preview` - to run Vite in preview mode\
+`npm run preview` - to run Vite in preview mode
 
 ## Learn More
 Official React website: [https://react.dev/](https://react.dev/)\
