@@ -34,6 +34,11 @@ function MultiPlayer(){
   }
   const gameData = useRef({...initialData})
 
+  const backupData = useCallback(() => {
+    gameData.current.prevPoints = [...gameData.current.points]
+    gameData.current.prevRounds = [...gameData.current.rounds]
+  }, [])
+
   const createNewGame = useCallback(name => {
     if (gameList.length >= 6){
       setAlert({
@@ -65,6 +70,7 @@ function MultiPlayer(){
   }, [resultKey])
 
   const onOpponentExit = useCallback(() => {
+    backupData()
     opponentExit.current = true
     setResultKey('r-0-0')
     setAlert({
@@ -128,8 +134,7 @@ function MultiPlayer(){
       setStage('game')
     })
     socket.on('game-data', data => {
-      gameData.current.prevPoints = [...gameData.current.points]
-      gameData.current.prevRounds = [...gameData.current.rounds]
+      backupData()
       gameData.current.points = [data.wins, data.oWins]
       gameData.current.rounds = [data.rounds, data.oRounds]
       setResultKey(`r-${data.rounds+1}-${data.oRounds+1}`)
