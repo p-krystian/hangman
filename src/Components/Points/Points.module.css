@@ -7,3 +7,7 @@
   letter-spacing: 0.1rem;
   grid-area: points;
 }
+.point{
+  display: flex;
+  align-items: center;
+}

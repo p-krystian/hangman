@@ -1,0 +1,21 @@
+@keyframes slide-up{
+  0%    { transform: translateY(0%) }
+  100%  { transform: translateY(-100%) }
+}
+.counter{
+  display: inline-block;
+  list-style-type: none;
+  height: 1.1em;
+  overflow-y: hidden;
+}
+.counter li{
+  display: block;
+  text-align: center;
+  animation-duration: 400ms;
+  animation-delay: 200ms;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+}
+.slide li{
+  animation-name: slide-up;
+}
