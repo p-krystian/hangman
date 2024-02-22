@@ -13,7 +13,9 @@ function SingleGame(){
     entry: randomWord.toUpperCase(),
     nicks: ['Wynik'],
     points: [0],
+    prevPoints: [0],
     rounds: [0],
+    prevRounds: [0],
     win: false
   })
 
@@ -21,7 +23,9 @@ function SingleGame(){
     const pointsAdd = +(result === 'win')
     gameData.current = {
       ...gameData.current,
+      prevPoints: [...gameData.current.points],
       points: [gameData.current.points[0]+pointsAdd],
+      prevRounds: [...gameData.current.rounds],
       rounds: [gameData.current.rounds[0]+1],
       win: Boolean(result === 'win')
     }

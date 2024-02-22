@@ -16,7 +16,9 @@ function Local(){
     entry: '',
     nicks: [],
     points: [0, 0],
+    prevPoints: [0, 0],
     rounds: [0, 0],
+    prevRounds: [0, 0],
     win: false
   })
   const entryOpts = {
@@ -31,6 +33,8 @@ function Local(){
   }
 
   const gameEnd = useCallback(resoult => {
+    gameData.current.prevPoints = [...gameData.current.points]
+    gameData.current.prevRounds = [...gameData.current.rounds]
     if (resoult === 'win'){
       gameData.current.points[currentPlayer.current]++
     }

@@ -4,7 +4,9 @@ const GameContext = createContext({
   entry: null,
   nicks: [],
   points: [],
+  prevPoints: [],
   rounds: [],
+  prevRounds: [],
   win: false
 })
 
