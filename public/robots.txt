@@ -1,0 +1,9 @@
+User-agent: *
+User-agent: AdsBot-Google
+Disallow: /assets
+Disallow: /api
+Disallow: /multiplayer
+Disallow: /multi
+
+User-agent: ia_archiver
+Disallow: /
