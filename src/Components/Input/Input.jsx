@@ -1,8 +1,19 @@
 import styles from './Input.module.css'
 import WithCaret from '../WithCaret/WithCaret'
+import { useEffect, useRef } from 'react'
+import usePlaySound from '../../Hooks/usePlaySound'
 
 function Input(props){
+  const prevValue = useRef("")
   const { value, focus, size, placeholder, onClick } = props
+
+  useEffect(() => {
+    if (value === prevValue.current)
+      return
+
+    usePlaySound('click')
+    prevValue.current = value
+  }, [value])
 
   return (
     <div

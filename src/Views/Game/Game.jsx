@@ -9,6 +9,7 @@ import Confirm from '../../Components/Confirm/Confirm'
 import useFullScreen from '../../Hooks/useFullScreen'
 import { useState, useContext, useEffect, useLayoutEffect, useCallback } from 'react'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
+import usePlaySound from '../../Hooks/usePlaySound'
 
 function Game({ exit, onLose, onWin }){
   const gameContext = useContext(GameContext)
@@ -29,12 +30,14 @@ function Game({ exit, onLose, onWin }){
     if (entry.includes(char)){
       key.classList.add('correct')
       setGuessed(g => g.includes(char) ? g : g.concat(char))
+      usePlaySound('good')
     }
     else{
       key.classList.add('mistake')
       if (mistakes >= 9)
         return onLose()
       setMistakes(m => m + 1)
+      usePlaySound('bad')
     }
   }, [guessed, mistakes])
 

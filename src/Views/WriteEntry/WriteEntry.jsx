@@ -9,6 +9,7 @@ import words from '../../Assets/words.json'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
+import usePlaySound from '../../Hooks/usePlaySound'
 import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react'
 
 function WriteEntry({ back, backText, next, nick }){
@@ -33,6 +34,12 @@ function WriteEntry({ back, backText, next, nick }){
     back,
     updateContext
   ), [back, updateContext])
+
+  useEffect(() => {
+    if (entry === '')
+      return
+    usePlaySound('click')
+  }, [entry])
 
   return (
     <div className={ styles.wrapper }>

@@ -8,6 +8,7 @@ import styles from './EndGame.module.css'
 import deadImg from '../../Assets/Animation/dead.svg'
 import liveImg from '../../Assets/Animation/live.svg'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
+import usePlaySound from '../../Hooks/usePlaySound'
 
 function EndGame({ next, pointsID }){
   const gameContext = useContext(GameContext)
@@ -15,6 +16,7 @@ function EndGame({ next, pointsID }){
   const result = {
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
+    audio: gameContext.win ? 'alive' : 'dead',
     entry: gameContext.entry || '?'
   }
 
@@ -22,6 +24,10 @@ function EndGame({ next, pointsID }){
     () => navigate('/'),
     next
   ), [next])
+
+  useEffect(() => usePlaySound(
+    result.audio
+  ), [])
 
   return (
     <div className={ styles.wrapper }>
