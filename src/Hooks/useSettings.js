@@ -1,5 +1,5 @@
 const get = () => ({
-  soundVolume: JSON.parse(localStorage.getItem('hmSoundVolume')) || 2
+  soundVolume: +JSON.parse(localStorage.getItem('soundVolume'))
 })
 
 const set = (key, value) => {
@@ -7,4 +7,4 @@ const set = (key, value) => {
   return get()
 }
 
-export default {...get(), set}
+export default () => ({...get(), set})

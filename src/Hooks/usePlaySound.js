@@ -1,7 +1,9 @@
 import files from '../Assets/Sounds'
-import settings from './useSettings'
+import useSettings from './useSettings'
 
 function usePlaySound(name){
+  const settings = useSettings()
+
   if (!files[name] || settings.soundVolume < 1)
     return
 
