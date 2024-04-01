@@ -1,0 +1,6 @@
+.icon{
+  height: 100%;
+  fill: var(--white);
+  stroke: var(--white);
+  stroke-linecap: round;
+}
