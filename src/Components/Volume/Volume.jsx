@@ -3,8 +3,8 @@ import useSettings from '../../Hooks/useSettings'
 import styles from './Volume.module.css'
 
 function Volume(_, ref){
-  const settings = useSettings()
-  const [vol, setVol] = useState(settings.soundVolume)
+  const [getSettings, setSettings] = useSettings()
+  const [vol, setVol] = useState(getSettings().soundVolume)
 
   const levels = [
     <path d="m 13,2 c 0,0 5,6 0,12" fill="none" strokeWidth="1.2" key="v1" />,
@@ -15,7 +15,7 @@ function Volume(_, ref){
   useImperativeHandle(ref, () => ({
     click: () => setVol(currentVol => {
       const newVol = currentVol > 2 ? 0 : currentVol + 1
-      settings.set('soundVolume', newVol)
+      setSettings('soundVolume', newVol)
       return newVol
     }),
   }), [])
