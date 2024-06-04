@@ -1,0 +1,29 @@
+{
+  "stworzenia": [
+    "pies", "kot", "kura"
+  ],
+  "matematyka": [
+    "figury geometryczne", "działania"
+  ],
+  "historia": [
+    "państwa", "wydarzenia"
+  ],
+  "geografia": [
+    "państwa", "miasta", "rzeki", "jeziora", "góry"
+  ],
+  "informatyka": [
+    "podzespoły", "systemy", "aplikacje", "urządzenia"
+  ],
+  "motoryzacja": [
+    "samochody", "części"
+  ],
+  "przedmioty": [
+    "szklanka", "zatyczka", "okulary"
+  ],
+  "jedzenie": [
+    "śniadania", "obiady", "desery", "fast foody"
+  ],
+  "kino": [
+    "aktorzy", "filmy", "seriale", "reżyserzy"
+  ]
+}

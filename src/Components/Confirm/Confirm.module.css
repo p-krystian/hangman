@@ -8,9 +8,18 @@
   background-color: var(--dark-bg);
   width: 20rem;
 }
+.confirm.long{
+  font-size: 1.6rem;
+  padding: 0.8rem;
+  width: 22rem;
+  text-align: left;
+}
 .confirm span{
   display: block;
   margin-bottom: 1rem;
+}
+.confirm.long span{
+  margin-bottom: 0.2rem;
 }
 .buttons{
   width: 100%;
@@ -19,4 +28,7 @@
   flex-wrap: wrap;
   justify-content: end;
   gap: 1rem;
+}
+.confirm.long .buttons{
+  padding: 0.1rem 0.5rem;
 }
