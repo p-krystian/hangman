@@ -12,6 +12,8 @@ function usePlaySound(name){
   audio.volume = getSettings().soundVolume * 0.33
 
   const playing = audio.play()
-  playing?.then(() => audio.pause()).catch(() => 'none')
+  if (playing){
+    playing.then(() => 'none').catch(() => 'none')
+  }
 }
 export default usePlaySound
