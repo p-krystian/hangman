@@ -3,7 +3,7 @@ import Button from '../Button/Button'
 import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
 
-function Confirm({ confirm, reject, children }){
+function Confirm({ confirm, reject, long, children }){
   const popupContainer = document.getElementById('popup')
   const confirmText = reject ? 'Tak' : 'Ok'
 
@@ -13,7 +13,7 @@ function Confirm({ confirm, reject, children }){
   }, [])
 
   return createPortal(
-    <div className={ styles.confirm }>
+    <div className={ `${styles.confirm} ${long ? styles.long : ''}` }>
       <span>{ children }</span>
       <div className={ styles.buttons }>
         { reject && <Button small={true} onClick={ reject }>Nie</Button> }
