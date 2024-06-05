@@ -26,5 +26,4 @@ function Points(){
     }</div>
   )
 }
-
 export default Points

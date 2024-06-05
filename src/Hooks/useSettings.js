@@ -12,5 +12,4 @@ const set = (key, value) => {
   localStorage.setItem('hmSettings', JSON.stringify(settings))
   return get()
 }
-
 export default () => [get, set]

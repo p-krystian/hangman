@@ -7,5 +7,4 @@ function Center({ children }){
     </div>
   )
 }
-
 export default Center
