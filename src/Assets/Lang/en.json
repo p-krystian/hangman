@@ -27,5 +27,12 @@
   "waitingOpponent": "Waiting for the opponent",
   "randomize": "Random",
   "phraseFor": "Phrase for ",
-  "nick": "Player name"
+  "nick": "Player name",
+  "you": "You",
+  "opponent": "Opponent",
+  "opponents": "opponent",
+  "maxGames": "The maximum number of games has already been created",
+  "opponentExit": "The opponent chickened out",
+  "serverDisconnect": "Server disconnect",
+  "serverReconnected": "Reconnected to server"
 }

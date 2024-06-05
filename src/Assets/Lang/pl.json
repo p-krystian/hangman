@@ -27,5 +27,12 @@
   "waitingOpponent": "Oczekiwanie na przeciwnika",
   "randomize": "Losuj",
   "phraseFor": "Hasło dla ",
-  "nick": "Nick gracza"
+  "nick": "Nick gracza",
+  "you": "Ty",
+  "opponent": "Przeciwnik",
+  "opponents": "przeciwnika",
+  "maxGames": "Już utworzono maksymalną liczbę gier",
+  "opponentExit": "Przeciwnik stchórzył",
+  "serverDisconnect": "Rozłączono z serwerem",
+  "serverReconnected": "Połączono ponownie"
 }

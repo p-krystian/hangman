@@ -7,6 +7,7 @@ import Connecting from '../../Views/Connecting/Connecting'
 import Waiting from '../../Views/Waiting/Waiting'
 import Alert from '../../Components/Confirm/Confirm'
 import GameContext from '../../Contexts/GameContext'
+import useLanguage from '../../Hooks/useLanguage'
 import { io } from "socket.io-client"
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -17,6 +18,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL, {
 })
 
 function MultiPlayer(){
+  const [l] = useLanguage()
   const navigate = useNavigate()
   const [stage, setStage] = useState('connecting')
   const [gameList, setGameList] = useState([])
@@ -25,7 +27,7 @@ function MultiPlayer(){
   const opponentExit = useRef(false)
   const initialData = {
     entry: '',
-    nicks: ['Ty', 'Przeciwnik'],
+    nicks: [l('you'), l('opponent')],
     points: [0, 0],
     prevPoints: [0, 0],
     rounds: [0, 0],
@@ -42,7 +44,7 @@ function MultiPlayer(){
   const createNewGame = useCallback(name => {
     if (gameList.length >= 6){
       setAlert({
-        children: 'Już utworzono maksymalną liczbę gier',
+        children: l('maxGames'),
         confirm: () => setAlert(null)
       })
       return
@@ -74,7 +76,7 @@ function MultiPlayer(){
     opponentExit.current = true
     setResultKey('r-0-0')
     setAlert({
-      children: 'Przeciwnik stchórzył',
+      children: l('opponentExit'),
       confirm: () => {
         setAlert(null)
         if (stage !== 'result')
@@ -106,15 +108,15 @@ function MultiPlayer(){
     socket.on('connect', () => {
       setTimeout(() => socket.emit('join-lobby'), 300)
       setAlert(current => (
-        current?.children === 'Rozłączono z serwerem' ? {
-          children: 'Połączono ponownie',
+        current?.children === l('serverDisconnect') ? {
+          children: l('serverReconnected'),
           confirm: () => setAlert(null)
         } : current
       ))
     })
     socket.on('disconnect', () => {
       setAlert({
-        children: 'Rozłączono z serwerem',
+        children: l('serverDisconnect'),
         confirm: () => {
           setAlert(null)
           navigate('/')
@@ -170,7 +172,7 @@ function MultiPlayer(){
         />
       ) : stage === 'phrase' ? (
         <WriteEntry
-          nick={ 'przeciwnika' }
+          nick={ l('opponents') }
           next={ () => socket.emit('write-phrase', gameData.current.entry) }
         />
       ) : stage === 'game' ? (
