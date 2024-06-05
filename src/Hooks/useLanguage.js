@@ -11,6 +11,7 @@ function useLanguage(){
     if (languages.availables.includes(wanted)){
       setCurrent(wanted)
       setSettings('language', wanted)
+      document.title = languages[wanted].language.title
     }
   }
   const lang = key => languages[current].language[key]
