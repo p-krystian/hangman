@@ -3,10 +3,9 @@ import useSettings from './useSettings'
 import { useState } from 'react'
 
 const [getSettings, setSettings] = useSettings()
-const saved = getSettings().language
 
 function useLanguage(){
-  const [current, setCurrent] = useState(saved)
+  const [current, setCurrent] = useState(getSettings().language)
 
   const setLanguage = wanted => {
     if (languages.availables.includes(wanted)){
@@ -15,7 +14,7 @@ function useLanguage(){
     }
   }
   const lang = key => languages[current].language[key]
-  const extra = (type, key) => languages[type][key]
+  const extra = type => languages[current][type]
 
   return [lang, extra, setLanguage]
 }
