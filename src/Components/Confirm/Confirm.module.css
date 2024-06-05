@@ -7,6 +7,7 @@
   border-radius: 0.5rem;
   background-color: var(--dark-bg);
   width: 20rem;
+  white-space: pre-line;
 }
 .confirm.long{
   font-size: 1.6rem;
