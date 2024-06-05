@@ -7,9 +7,11 @@ import styles from './WriteNicks.module.css'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
+import useLanguage from '../../Hooks/useLanguage'
 import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react'
 
 function WriteNicks({ back, next }){
+  const [l] = useLanguage()
   const [nick0, setNick0] = useState('')
   const [nick1, setNick1] = useState('')
   const [focused, setFocused] = useState(0)
@@ -43,14 +45,14 @@ function WriteNicks({ back, next }){
           <Input
             focus={ focused === 0 }
             value={ nick0 }
-            placeholder={ 'Nick gracza 1' }
+            placeholder={ `${l('nick')} 1` }
             size={ maxNickLength }
             onClick={ () => setFocused(0) }
           />
           <Input
             focus={ focused === 1 }
             value={ nick1 }
-            placeholder={ 'Nick gracza 2' }
+            placeholder={ `${l('nick')} 2` }
             size={ maxNickLength }
             onClick={ () => setFocused(1) }
           />
@@ -61,8 +63,8 @@ function WriteNicks({ back, next }){
         />
       </div>
       <ButtonWrap>
-        <Button onClick={ submit } disabled={ !pass }>Dalej</Button>
-        <Button onClick={ back }>Anuluj</Button>
+        <Button onClick={ submit } disabled={ !pass }>{ l('next') }</Button>
+        <Button onClick={ back }>{ l('cancel') }</Button>
       </ButtonWrap>
     </div>
   )

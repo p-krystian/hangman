@@ -1,4 +1,5 @@
 import Button from '../../Components/Button/Button'
+import useLanguage from '../../Hooks/useLanguage'
 import Volume from '../../Components/Volume/Volume'
 import Confirm from '../../Components/Confirm/Confirm'
 import Center from '../../Components/Center/Center'
@@ -9,6 +10,7 @@ import { useRef, useState } from 'react'
 function MenuStart(){
   const volumeRef = useRef()
   const [showInfo, setShowInfo] = useState(false)
+  const [l, _, setLanguage] = useLanguage()
 
   function exit(){
     window.close()
@@ -24,18 +26,19 @@ function MenuStart(){
         <Button onClick={ () => setShowInfo(true) } small>
           <InfoSymbol />
         </Button>
+        <Button onClick={ () => setLanguage(l('lang') === 'PL' ? 'en' : 'pl') } small>
+          { l('lang') }
+        </Button>
       </div>
-      <Button link='/single'>Solo</Button>
-      <Button link='/local'>Lokalnie</Button>
-      <Button link='/multi'>Online</Button>
-      <Button onClick={ exit }>Wyjdź</Button>
+      <Button link='/single'>{ l('single') }</Button>
+      <Button link='/local'>{ l('local') }</Button>
+      <Button link='/multi'>{ l('online') }</Button>
+      <Button onClick={ exit }>{ l('exit') }</Button>
 
       { showInfo && <Confirm confirm={ () => setShowInfo(false) } long>
-        Gra w Wisielca napisana z użyciem React-a oraz Vite.<br/>
-        Umożliwia grę samemu lub w dwie osoby, na jednym urządzeniu lub online.<br/>
-        Autorem wszystkich użytych grafik jest autor gry.<br/>
-        <br/>
-        <Center>by Krystian Piątek</Center>
+        { l('info') }
+        <br/><br/>
+        <Center>{ l('signature') }</Center>
       </Confirm> }
     </div>
   )

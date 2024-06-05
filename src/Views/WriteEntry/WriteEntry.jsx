@@ -10,9 +10,11 @@ import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
 import usePlaySound from '../../Hooks/usePlaySound'
+import useLanguage from '../../Hooks/useLanguage'
 import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react'
 
 function WriteEntry({ back, backText, next, nick }){
+  const [l] = useLanguage()
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const keyboardWrite = useKeyboardWrite(setEntry, 20)
@@ -45,7 +47,7 @@ function WriteEntry({ back, backText, next, nick }){
     <div className={ styles.wrapper }>
       <div className={ styles.container }>
         <span className={ styles.text }>
-          Hasło dla { nick || '' }:
+          { l('phraseFor') }{ nick || '' }:
         </span>
         <Entry>
           <WithCaret size={ 20 }>{ entry }</WithCaret>
@@ -54,10 +56,10 @@ function WriteEntry({ back, backText, next, nick }){
       </div>
       <ButtonWrap>
         <Button onClick={ updateContext } disabled={ entry.length < 3 }>
-          Dalej
+          { l('next') }
         </Button>
-        {!!back && <Button onClick={ back }>{ backText || 'Wstecz' }</Button>}
-        <Button onClick={ writeRandom }>Losuj</Button>
+        {!!back && <Button onClick={ back }>{ backText || l('back') }</Button>}
+        <Button onClick={ writeRandom }>{ l('randomize') }</Button>
       </ButtonWrap>
     </div>
   )

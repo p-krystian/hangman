@@ -1,10 +1,11 @@
 import './Header.css'
-import logo from '../../Assets/Images/logo-alpha.svg'
+import useLanguage from '../../Hooks/useLanguage'
 
 function Header(){
+  const [l, extra] = useLanguage()
   return(
     <header className='header'>
-      <img alt='Wisielec' src={ logo } />
+      <img alt={ l('hangman') } src={ extra('logo') } />
     </header>
   )
 }

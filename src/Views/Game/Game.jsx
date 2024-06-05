@@ -10,8 +10,10 @@ import useFullScreen from '../../Hooks/useFullScreen'
 import { useState, useContext, useEffect, useLayoutEffect, useCallback } from 'react'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import usePlaySound from '../../Hooks/usePlaySound'
+import useLanguage from '../../Hooks/useLanguage'
 
 function Game({ exit, onLose, onWin }){
+  const [l] = useLanguage()
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
@@ -55,11 +57,13 @@ function Game({ exit, onLose, onWin }){
         <Keyboard keyEvent={ clickKey } />
       </div>
       <ButtonWrap>
-        {!!exit && <Button onClick={ () => setShowExit(true) }>Anuluj</Button>}
+        {!!exit && <Button onClick={ () => setShowExit(true) }>
+          { l('cancel') }
+        </Button>}
       </ButtonWrap>
       {!!showExit && (
         <Confirm confirm={ exit } reject={ () => setShowExit(false) }>
-          Zakończyć grę?
+          { l('endGame') }
         </Confirm>
       )}
     </div>

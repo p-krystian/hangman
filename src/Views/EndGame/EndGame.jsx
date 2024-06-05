@@ -7,10 +7,12 @@ import GameContext from '../../Contexts/GameContext'
 import styles from './EndGame.module.css'
 import deadImg from '../../Assets/Animation/dead.svg'
 import liveImg from '../../Assets/Animation/live.svg'
+import useLanguage from '../../Hooks/useLanguage'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import usePlaySound from '../../Hooks/usePlaySound'
 
 function EndGame({ next, pointsID }){
+  const [l] = useLanguage()
   const gameContext = useContext(GameContext)
   const navigate = useNavigate()
   const result = {
@@ -41,8 +43,8 @@ function EndGame({ next, pointsID }){
         <Points key={ pointsID || 'r-1-1' } />
       </div>
       <ButtonWrap>
-        <Button onClick={ next } disabled={ !next }>Dalej</Button>
-        <Button link="/">Menu</Button>
+        <Button onClick={ next } disabled={ !next }>{ l('next') }</Button>
+        <Button link="/">{ l('menu') }</Button>
       </ButtonWrap>
     </div>
   )
