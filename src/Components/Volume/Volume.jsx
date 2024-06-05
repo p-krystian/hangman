@@ -34,5 +34,4 @@ function Volume(_, ref){
     </svg>
   )
 }
-
 export default forwardRef(Volume)
