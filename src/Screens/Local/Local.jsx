@@ -6,8 +6,10 @@ import Confirm from '../../Components/Confirm/Confirm'
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GameContext from '../../Contexts/GameContext'
+import useLanguage from '../../Hooks/useLanguage'
 
 function Local(){
+  const [l] = useLanguage()
   const navigate = useNavigate()
   const [stage, setStage] = useState('writeNicks')
   const [askExit, setAskExit] = useState(false)
@@ -27,7 +29,7 @@ function Local(){
     ) : (
       () => setStage('writeNicks')
     ),
-    backText: gameData.current.entry ? 'Anuluj' : 'Wstecz',
+    backText: gameData.current.entry ? l('cancel') : l('back'),
     next: () => setStage('game'),
     nick: gameData.current.nicks[currentPlayer.current]
   }
@@ -56,7 +58,7 @@ function Local(){
               confirm={ () => navigate('/') }
               reject={ () => setAskExit(false) }
             >
-              Wyjść do Menu?
+              { l('exitToMenu') }
             </Confirm>
           )}
         </>

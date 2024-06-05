@@ -6,10 +6,12 @@ import Keyboard from '../../Components/Keyboard/Keyboard'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
+import useLanguage from '../../Hooks/useLanguage'
 import { useState, useEffect, useLayoutEffect } from 'react'
 
 function Create({ back, submit }){
   const [name, setName] = useState('')
+  const [l] = useLanguage()
   const maxNameLength = 12
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
 
@@ -32,7 +34,7 @@ function Create({ back, submit }){
         <Input
           focus={ true }
           value={ name }
-          placeholder={ 'Podaj nazwę' }
+          placeholder={ l('enterName') }
           size={ maxNameLength }
         />
         <Keyboard
@@ -42,10 +44,10 @@ function Create({ back, submit }){
       </div>
       <ButtonWrap>
         <Button onClick={ create } disabled={ name.length < 3 }>
-          Start
+          { l('start') }
         </Button>
         <Button onClick={ back }>
-          Anuluj
+          { l('cancel') }
         </Button>
       </ButtonWrap>
     </div>

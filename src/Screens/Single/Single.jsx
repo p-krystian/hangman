@@ -2,16 +2,18 @@ import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
 import GameContext from '../../Contexts/GameContext'
 import words from '../../Assets/words.json'
+import useLanguage from '../../Hooks/useLanguage'
 import { useState, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function SingleGame(){
   const navigate = useNavigate()
+  const [l] = useLanguage()
   const randomWord = words.at(Math.floor(Math.random()*words.length))
   const [stage, setStage] = useState('game')
   const gameData = useRef({
     entry: randomWord.toUpperCase(),
-    nicks: ['Wynik'],
+    nicks: [l('result')],
     points: [0],
     prevPoints: [0],
     rounds: [0],
