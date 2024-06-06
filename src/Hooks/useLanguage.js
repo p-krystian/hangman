@@ -3,6 +3,7 @@ import useSettings from './useSettings'
 import { useState } from 'react'
 
 const [getSettings, setSettings] = useSettings()
+document.title = languages[getSettings().language].language.title
 
 function useLanguage(){
   const [current, setCurrent] = useState(getSettings().language)

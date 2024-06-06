@@ -2,7 +2,7 @@ import Button from '../../Components/Button/Button'
 import useLanguage from '../../Hooks/useLanguage'
 import Volume from '../../Components/Volume/Volume'
 import Confirm from '../../Components/Confirm/Confirm'
-import Center from '../../Components/Center/Center'
+import Info from '../../Components/Info/Info'
 import InfoSymbol from '../../Components/InfoSymbol/InfoSymbol'
 import styles from './Start.module.css'
 import { useRef, useState } from 'react'
@@ -42,11 +42,11 @@ function MenuStart(){
       <Button link='/multi'>{ l('online') }</Button>
       <Button onClick={ exit }>{ l('exit') }</Button>
 
-      { showInfo && <Confirm confirm={ () => setShowInfo(false) } long>
-        { l('info') }
-        <br/><br/>
-        <Center>{ l('signature') }</Center>
-      </Confirm> }
+      { showInfo && (
+        <Confirm confirm={ () => setShowInfo(false) } long>
+          <Info />
+        </Confirm>
+      ) }
     </div>
   )
 }
