@@ -10,7 +10,14 @@ import { useRef, useState } from 'react'
 function MenuStart(){
   const volumeRef = useRef()
   const [showInfo, setShowInfo] = useState(false)
-  const [l, _, setLanguage] = useLanguage()
+  const [l, extraLang, setLanguage] = useLanguage()
+
+  function nextLanguage(){
+    const allLangs = extraLang().availables
+    const currentIndex = allLangs.indexOf(extraLang().code)
+    const nextLang = allLangs[currentIndex+1] || allLangs[0]
+    setLanguage(nextLang)
+  }
 
   function exit(){
     window.close()
@@ -26,8 +33,8 @@ function MenuStart(){
         <Button onClick={ () => setShowInfo(true) } small>
           <InfoSymbol />
         </Button>
-        <Button onClick={ () => setLanguage(l('lang') === 'PL' ? 'en' : 'pl') } small>
-          { l('lang') }
+        <Button onClick={ () => nextLanguage() } small>
+          { extraLang().symbol }
         </Button>
       </div>
       <Button link='/single'>{ l('single') }</Button>

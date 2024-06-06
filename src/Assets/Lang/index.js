@@ -1,9 +1,8 @@
 import polish from './pl.json'
 import polishWords from './words-PL.json'
 import polishLogo from '../Images/logo-alpha.svg'
-import polishFlag from '../Images/flag-pl.svg'
 import english from './en.json'
-import englishFlag from '../Images/flag-en.svg'
+import englishLogo from '../Images/logo.svg'
 
 export default {
   availables: ['pl', 'en'],
@@ -11,12 +10,12 @@ export default {
     language: polish,
     words: polishWords,
     logo: polishLogo,
-    flag: polishFlag
+    symbol: '🇵🇱'
   },
   en: {
     language: english,
     words: {},
-    logo: polishLogo,
-    flag: englishFlag
+    logo: englishLogo,
+    symbol: '🇺🇸'
   }
 }

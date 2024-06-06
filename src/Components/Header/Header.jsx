@@ -2,10 +2,10 @@ import './Header.css'
 import useLanguage from '../../Hooks/useLanguage'
 
 function Header(){
-  const [l, extra] = useLanguage()
+  const [l, extraLang] = useLanguage()
   return(
     <header className='header'>
-      <img alt={ l('hangman') } src={ extra('logo') } />
+      <img alt={ l('hangman') } src={ extraLang().logo } />
     </header>
   )
 }
