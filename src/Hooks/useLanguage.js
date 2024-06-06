@@ -15,7 +15,11 @@ function useLanguage(){
     }
   }
   const lang = key => languages[current].language[key]
-  const extra = type => languages[current][type]
+  const extra = () => ({
+    availables: languages.availables,
+    code: current,
+    ...languages[current]
+  })
 
   return [lang, extra, setLanguage]
 }
