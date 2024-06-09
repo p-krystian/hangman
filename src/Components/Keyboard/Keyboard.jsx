@@ -1,16 +1,12 @@
 import styles from './Keyboard.module.css'
 import Key from '../Key/Key'
 import WriteKeys from './WriteKeys'
+import useLanguage from '../../Hooks/useLanguage'
 import { useEffect, useRef, useMemo, useCallback } from 'react'
 
 function Keyboard({ keyEvent, write }){
-  const alphabet = [
-    'A','Ą','B','C','Ć','D','E',
-    'Ę','F','G','H','I','J','K',
-    'L','Ł','M','N','Ń','O','Ó',
-    'P','Q','R','S','Ś','T','U',
-    'V','W','X','Y','Z','Ź','Ż'
-  ]
+  const [l] = useLanguage()
+  const alphabet = l('alphabet').split('')
 
   const refs = alphabet.reduce((accumulator, value) => {
     return {...accumulator, [value]: useRef()}
