@@ -1,5 +1,12 @@
 {
   "lang": "PL",
+  "languageWord": "Język",
+  "volumeWord": "Głośność",
+  "infoWord": "Informacje",
+  "spaceWord": "Odstęp",
+  "backspaceWord": "Usuń ostani",
+  "win": "Wygrana",
+  "lose": "Przegrana",
   "hangman": "Wisielec",
   "title": "Wisielec - graj online!",
   "single": "solo",

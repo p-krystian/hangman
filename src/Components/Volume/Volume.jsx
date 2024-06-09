@@ -1,9 +1,11 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
 import useSettings from '../../Hooks/useSettings'
+import useLanguage from '../../Hooks/useLanguage'
 import styles from './Volume.module.css'
 
 function Volume(_, ref){
   const [getSettings, setSettings] = useSettings()
+  const [l] = useLanguage()
   const [vol, setVol] = useState(getSettings().soundVolume)
 
   const levels = [
@@ -22,6 +24,7 @@ function Volume(_, ref){
 
   return (
     <svg viewBox="0 0 16 16" className={ styles.icon }>
+      <title>{ l('volumeWord') }</title>
       <path fill="currentColor" d="M 7.7,0 C 7.5,0 7.3,0 7.1,0.2 L 3.3,4.4 H 0.5 C 0.2,4.4 2.8e-5,4.6 0,4.9 v 6.9 c 2.8e-5,0.3 0.2,0.5 0.5,0.5 h 2.8 l 3.9,3.6 C 7.5,16.2 8,15.9 8,15.5 V 0.5 C 8,0.3 7.9,0.1 7.7,0 Z" />
       { vol === 0 ? (
         <>

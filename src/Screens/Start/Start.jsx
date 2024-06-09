@@ -27,13 +27,25 @@ function MenuStart(){
   return (
     <div className={ styles.buttons }>
       <div className={ styles.small }>
-        <Button onClick={ () => volumeRef.current.click() } small>
+        <Button
+          onClick={ () => volumeRef.current.click() }
+          value={ l('volumeWord') }
+          small
+        >
           <Volume ref={ volumeRef } />
         </Button>
-        <Button onClick={ () => setShowInfo(true) } small>
+        <Button
+          onClick={ () => setShowInfo(true) }
+          value={ l('infoWord') }
+          small
+        >
           <InfoSymbol />
         </Button>
-        <Button onClick={ () => nextLanguage() } small>
+        <Button
+          onClick={ () => nextLanguage() }
+          value={ l('languageWord') }
+          small
+        >
           { extraLang().symbol }
         </Button>
       </div>

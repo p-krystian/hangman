@@ -1,5 +1,12 @@
 {
   "lang": "EN",
+  "languageWord": "Language",
+  "volumeWord": "Volume",
+  "infoWord": "About",
+  "spaceWord": "Space",
+  "backspaceWord": "Backspace",
+  "win": "Win",
+  "lose": "Lose",
   "hangman": "Hangman",
   "title": "Hangman - play online!",
   "single": "Single",
