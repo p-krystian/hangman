@@ -6,7 +6,11 @@
   background-color: var(--dark-bg);
 }
 .keys{
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(7, 1fr); */
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  width: 21.2rem;
+  justify-content: center;
 }
