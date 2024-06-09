@@ -1,0 +1,8 @@
+.category{
+  font-size: 1.6rem;
+  grid-area: category;
+  white-space: break-spaces;
+}
+.category span{
+  text-transform: uppercase;
+}

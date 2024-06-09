@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.25rem 1rem;
 }
 @media (min-width: 620px) and (orientation: landscape){
   .game{
@@ -18,6 +18,7 @@
     flex: 0;
     display: grid;
     grid-template-areas:
+      "board category"
       "board entry"
       "board keyboard";
     align-items: end;
