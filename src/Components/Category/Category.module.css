@@ -3,6 +3,20 @@
   grid-area: category;
   white-space: break-spaces;
 }
-.category span{
+.name{
   text-transform: uppercase;
+}
+.short{
+  font-size: 2.2rem;
+  text-align: center;
+  line-height: 0.8;
+  margin-bottom: 0.6rem;
+}
+.short .prefix{
+  display: none;
+}
+@media (min-width: 620px) and (orientation: landscape){
+  .short .prefix{
+    display: inline;
+  }
 }

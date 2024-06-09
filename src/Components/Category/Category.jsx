@@ -15,9 +15,13 @@ function Category({ entry, short }){
   }, [entry, words])
 
   return (
-    <div className={ styles.category }>
-      { !short && `${l('phraseCategory')}:  ` }
-      <span>{ category }</span>
+    <div className={ `${styles.category} ${short ? styles.short : ''}` }>
+      <span className={ styles.prefix }>
+        { `${l('phraseCategory')}:${short ? '\n' : '  '}` }
+      </span>
+      <span className={ styles.name }>
+        { category }
+      </span>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import Points from '../../Components/Points/Points'
+import Category from '../../Components/Category/Category'
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GameContext from '../../Contexts/GameContext'
@@ -37,6 +38,7 @@ function EndGame({ next, pointsID }){
         <div className={ styles.result }>
           <img src={ result.img } />
         </div>
+        <Category entry={ result.entry } short />
         <span className={ `${styles.entry} ${result.class}` }>
           { result.entry }
         </span>
