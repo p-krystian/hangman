@@ -34,5 +34,7 @@
   "maxGames": "Już utworzono maksymalną liczbę gier",
   "opponentExit": "Przeciwnik stchórzył",
   "serverDisconnect": "Rozłączono z serwerem",
-  "serverReconnected": "Połączono ponownie"
+  "serverReconnected": "Połączono ponownie",
+  "phraseCategory": "Kategoria hasła",
+  "categoryUnknown": "nieznana"
 }

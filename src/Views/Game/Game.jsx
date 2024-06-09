@@ -6,6 +6,7 @@ import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import GameContext from '../../Contexts/GameContext'
 import Confirm from '../../Components/Confirm/Confirm'
+import Category from '../../Components/Category/Category'
 import useFullScreen from '../../Hooks/useFullScreen'
 import { useState, useContext, useEffect, useLayoutEffect, useCallback } from 'react'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
@@ -47,6 +48,7 @@ function Game({ exit, onLose, onWin }){
     <div className={ styles.container }>
       <div className={ styles.game }>
         <Board progress={ mistakes } />
+        <Category entry={ entry } />
         <Entry
           hide={ true }
           guessed={ guessed }

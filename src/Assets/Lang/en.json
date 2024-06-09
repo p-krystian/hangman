@@ -34,5 +34,7 @@
   "maxGames": "The maximum number of games has already been created",
   "opponentExit": "The opponent chickened out",
   "serverDisconnect": "Server disconnect",
-  "serverReconnected": "Reconnected to server"
+  "serverReconnected": "Reconnected to server",
+  "phraseCategory": "Phrase category",
+  "categoryUnknown": "unknown"
 }
