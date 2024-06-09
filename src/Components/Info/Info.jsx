@@ -3,6 +3,7 @@ import styles from './Info.module.css'
 
 function Info(){
   const [l] = useLanguage()
+  const version = import.meta.env.VITE_APP_VERSION
   const authorURL = import.meta.env.VITE_AUTHOR_URL
 
   return(
@@ -10,6 +11,7 @@ function Info(){
       { l('info') }
       <br/><br/>
       <p>
+        { `v${version} - ` }
         <a href={ authorURL } target="_blank">
           { l('signature') }
         </a>
