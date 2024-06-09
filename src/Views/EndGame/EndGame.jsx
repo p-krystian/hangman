@@ -20,7 +20,8 @@ function EndGame({ next, pointsID }){
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
     audio: gameContext.win ? 'alive' : 'dead',
-    entry: gameContext.entry || '?'
+    entry: gameContext.entry || '?',
+    name:  gameContext.win ? l('win') : l('lose'),
   }
 
   useEffect(() => useKeyboardControl(
@@ -36,7 +37,7 @@ function EndGame({ next, pointsID }){
     <div className={ styles.wrapper }>
       <div className={ styles.container }>
         <div className={ styles.result }>
-          <img src={ result.img } />
+          <img src={ result.img } alt={ result.name } />
         </div>
         <Category entry={ result.entry } short />
         <span className={ `${styles.entry} ${result.class}` }>
