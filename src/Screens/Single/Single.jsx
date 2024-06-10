@@ -8,9 +8,7 @@ import random from 'random'
 
 const randomizer = (l, words) => {
   const randomCat = random.choice(Object.keys(words))
-  const randomWord = random.choice(words[randomCat] || [l('randomize')])
-  random.use(randomWord)
-  return randomWord
+  return random.choice(words[randomCat] || [l('randomize')])
 }
 
 function SingleGame(){
