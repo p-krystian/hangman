@@ -10,6 +10,7 @@ import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
 import usePlaySound from '../../Hooks/usePlaySound'
 import useLanguage from '../../Hooks/useLanguage'
+import random from 'random'
 import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react'
 
 function WriteEntry({ back, backText, next, nick }){
@@ -26,12 +27,9 @@ function WriteEntry({ back, backText, next, nick }){
 
   const writeRandom = useCallback(() => {
     const words = extraLang().words
-    const categories = Object.keys(words)
-    const dictionary = words[categories.at(
-      Math.floor(Math.random() * categories.length)
-    )] || [l('randomize')]
-    const index = Math.floor(Math.random() * dictionary.length)
-    const randomWord = dictionary.at(index)
+    const randomCat = random.choice(Object.keys(words))
+    const randomWord = random.choice(words[randomCat] || [l('randomize')])
+    random.use(randomWord)
     setEntry(randomWord.toUpperCase())
   }, [])
 

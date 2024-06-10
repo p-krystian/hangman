@@ -4,14 +4,13 @@ import GameContext from '../../Contexts/GameContext'
 import useLanguage from '../../Hooks/useLanguage'
 import { useState, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import random from 'random'
 
 const randomizer = (l, words) => {
-  const categories = Object.keys(words)
-  const dictionary = words[categories.at(
-    Math.floor(Math.random() * categories.length)
-  )] || [l('randomize')]
-  const index = Math.floor(Math.random() * dictionary.length)
-  return dictionary.at(index)
+  const randomCat = random.choice(Object.keys(words))
+  const randomWord = random.choice(words[randomCat] || [l('randomize')])
+  random.use(randomWord)
+  return randomWord
 }
 
 function SingleGame(){
