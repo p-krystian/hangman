@@ -1,15 +1,23 @@
 import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
 import GameContext from '../../Contexts/GameContext'
-import words from '../../Assets/words.json'
 import useLanguage from '../../Hooks/useLanguage'
 import { useState, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+const randomizer = (l, words) => {
+  const categories = Object.keys(words)
+  const dictionary = words[categories.at(
+    Math.floor(Math.random() * categories.length)
+  )] || [l('randomize')]
+  const index = Math.floor(Math.random() * dictionary.length)
+  return dictionary.at(index)
+}
+
 function SingleGame(){
   const navigate = useNavigate()
-  const [l] = useLanguage()
-  const randomWord = words.at(Math.floor(Math.random()*words.length))
+  const [l, extraLang] = useLanguage()
+  const randomWord = randomizer(l, extraLang().words)
   const [stage, setStage] = useState('game')
   const gameData = useRef({
     entry: randomWord.toUpperCase(),

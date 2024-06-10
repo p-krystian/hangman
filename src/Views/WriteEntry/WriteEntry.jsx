@@ -5,7 +5,6 @@ import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import WithCaret from '../../Components/WithCaret/WithCaret'
 import GameContext from '../../Contexts/GameContext'
 import styles from './WriteEntry.module.css'
-import words from '../../Assets/words.json'
 import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
@@ -14,7 +13,7 @@ import useLanguage from '../../Hooks/useLanguage'
 import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react'
 
 function WriteEntry({ back, backText, next, nick }){
-  const [l] = useLanguage()
+  const [l, extraLang] = useLanguage()
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const keyboardWrite = useKeyboardWrite(setEntry, 20)
@@ -26,8 +25,13 @@ function WriteEntry({ back, backText, next, nick }){
   }, [entry, next])
 
   const writeRandom = useCallback(() => {
-    const randomIndex = Math.floor(Math.random()*words.length)
-    const randomWord = words.at(randomIndex)
+    const words = extraLang().words
+    const categories = Object.keys(words)
+    const dictionary = words[categories.at(
+      Math.floor(Math.random() * categories.length)
+    )] || [l('randomize')]
+    const index = Math.floor(Math.random() * dictionary.length)
+    const randomWord = dictionary.at(index)
     setEntry(randomWord.toUpperCase())
   }, [])
 
