@@ -29,7 +29,6 @@ function WriteEntry({ back, backText, next, nick }){
     const words = extraLang().words
     const randomCat = random.choice(Object.keys(words))
     const randomWord = random.choice(words[randomCat] || [l('randomize')])
-    random.use(randomWord)
     setEntry(randomWord.toUpperCase())
   }, [])
 
