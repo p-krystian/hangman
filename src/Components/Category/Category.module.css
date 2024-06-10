@@ -3,6 +3,9 @@
   font-size: calc(-0.2rem * var(--_s) + 2.6rem);
   grid-area: category;
   white-space: break-spaces;
+  max-width: 22.4rem;
+  max-height: 1em;
+  overflow: hidden;
 }
 .name{
   text-transform: uppercase;
@@ -12,6 +15,7 @@
   text-align: center;
   line-height: 0.8;
   margin-bottom: 0.6rem;
+  max-height: unset;
 }
 .short .prefix{
   display: none;
