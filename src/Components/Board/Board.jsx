@@ -10,7 +10,7 @@ function Board({ progress, small }){
   return (
     <div
       className={ `${styles.board} ${small ? styles.small : ''}` }
-      style={ {'--s': keyboardSize} }
+      style={ {'--_s': keyboardSize} }
     >
       { imagesName.map((src, index) => (
         <img

@@ -1,5 +1,6 @@
 .category{
-  font-size: 1.6rem;
+  --_s: 5;
+  font-size: calc(-0.2rem * var(--_s) + 2.6rem);
   grid-area: category;
   white-space: break-spaces;
 }

@@ -5,6 +5,7 @@ import styles from './Category.module.css'
 function Category({ entry, short }){
   const [category, setCategory] = useState('...')
   const [l, extra] = useLanguage()
+  const keyboardSize = Math.ceil(l('alphabet').length / 7)
   const words = extra().words
 
   useEffect(() => {
@@ -15,7 +16,10 @@ function Category({ entry, short }){
   }, [entry, words])
 
   return (
-    <div className={ `${styles.category} ${short ? styles.short : ''}` }>
+    <div
+      className={ `${styles.category} ${short ? styles.short : ''}` }
+      style={ {'--_s': keyboardSize} }
+    >
       <span className={ styles.prefix }>
         { `${l('phraseCategory')}:${short ? '\n' : '  '}` }
       </span>

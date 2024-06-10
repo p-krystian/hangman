@@ -3,10 +3,9 @@
   to    { opacity: 1 }
 }
 .board{
-  --s: 5;
-
-  width: calc(var(--s) * 3.21rem + 5rem);
-  height: calc(var(--s) * 3.21rem + 5rem);
+  --_s: 5;
+  width: calc(var(--_s) * 2.7rem + 7.4rem);
+  height: calc(var(--_s) * 2.7rem + 7.4rem);
   border: 3px solid var(--main-d);
   border-radius: 1rem;
   grid-area: board;
