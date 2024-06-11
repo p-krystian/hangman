@@ -45,5 +45,6 @@
   "serverReconnected": "Połączono ponownie",
   "phraseCategory": "Kategoria hasła",
   "categoryUnknown": "nieznana",
-  "unsupportedLang": "W tym języku nie można grać w trybie online"
+  "unsupportedLang": "W tym języku nie można grać w trybie online",
+  "oldVersion": "Używasz zbyt starej wersji. Spróbuj odświeżyć stronę"
 }
