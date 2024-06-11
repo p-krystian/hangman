@@ -8,7 +8,7 @@
 
 ## About
 Code language: `EN`\
-Interface language: `PL` and `EN`\
+Interface language: `EN` and `PL`\
 \
 Hangman's game.\
 You can play alone or with another people.\
@@ -16,9 +16,12 @@ Multiplayer allows to play on one device or two via a WebSocket server.\
 Socket.IO server code is not public.
 
 ## TODOs
-- Better Sounds effects
+- Better sounds effects
 - Better UX
 - Performance improvements
+- Expanding the words base
+- Security fixes
+- Eliminate bugs
 
 ## Running
 In the project directory, you can run:
