@@ -31,7 +31,7 @@
   animation: rotate-r 3s infinite ease-in-out;
   filter: brightness(var(--svg-bright));
 }
-@media (min-width: 620px) and (orientation: landscape){
+@media (min-width: 620px) and (min-aspect-ratio: 15/11){
   .animation{
     width: 7rem;
     height: 7rem;

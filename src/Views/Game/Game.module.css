@@ -12,7 +12,7 @@
   justify-content: center;
   gap: 0.25rem 1rem;
 }
-@media (min-width: 620px) and (orientation: landscape){
+@media (min-width: 620px) and (min-aspect-ratio: 15/11){
   .game{
     margin: auto;
     flex: 0;
