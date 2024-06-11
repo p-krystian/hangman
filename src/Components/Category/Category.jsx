@@ -28,7 +28,7 @@ function Category({ entry, short }){
     for (let i = 0; i <= cache.category.length; i++){
       setTimeout(
         () => setCategory(cache.category.substring(0, i)),
-        i * 150
+        i * 150 + 500
       )
     }
   }, [entry, words])
