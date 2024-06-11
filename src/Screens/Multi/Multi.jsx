@@ -62,11 +62,12 @@ function MultiPlayer(){
   }, [])
 
   const nextRound = useMemo(() => {
-    if (opponentExit.current)
-      return () => socket.emit('join-lobby')
-
-    if (gameData.current.rounds[0] !== gameData.current.rounds[1])
+    if (opponentExit.current){
+      return () => socket.emit('join-lobby', [l('lang'), l('alphabet')])
+    }
+    if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
       return null
+    }
 
     return () => socket.emit('continue-game')
   }, [resultKey])
@@ -79,8 +80,9 @@ function MultiPlayer(){
       children: l('opponentExit'),
       confirm: () => {
         setAlert(null)
-        if (stage !== 'result')
-          socket.emit('join-lobby')
+        if (stage !== 'result'){
+          socket.emit('join-lobby', [l('lang'), l('alphabet')])
+        }
       }
     })
   }, [stage])
@@ -106,7 +108,9 @@ function MultiPlayer(){
 
   useEffect(() => {
     socket.on('connect', () => {
-      setTimeout(() => socket.emit('join-lobby'), 300)
+      setTimeout(() => {
+        socket.emit('join-lobby', [l('lang'), l('alphabet')])
+      }, 300)
       setAlert(current => (
         current?.children === l('serverDisconnect') ? {
           children: l('serverReconnected'),
@@ -117,6 +121,15 @@ function MultiPlayer(){
     socket.on('disconnect', () => {
       setAlert({
         children: l('serverDisconnect'),
+        confirm: () => {
+          setAlert(null)
+          navigate('/')
+        }
+      })
+    })
+    socket.on('unsupported-lang', () => {
+      setAlert({
+        children: l('unsupportedLang'),
         confirm: () => {
           setAlert(null)
           navigate('/')
@@ -146,6 +159,7 @@ function MultiPlayer(){
     return () => {
       socket.off('connect')
       socket.off('disconnect')
+      socket.off('unsupported-lang')
       socket.off('connect_error')
       socket.off('wait-start')
       socket.off('give-phrase')
@@ -187,7 +201,7 @@ function MultiPlayer(){
         />
       ) : (
         <Waiting
-          abort={ () => socket.emit('join-lobby') }
+          abort={ () => socket.emit('join-lobby', [l('lang'), l('alphabet')]) }
         />
       )
     }

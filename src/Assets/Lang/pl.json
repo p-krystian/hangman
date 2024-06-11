@@ -1,5 +1,5 @@
 {
-  "lang": "PL",
+  "lang": "pl",
   "alphabet": "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŻŹ",
   "languageWord": "Język",
   "volumeWord": "Głośność",
@@ -44,5 +44,6 @@
   "serverDisconnect": "Rozłączono z serwerem",
   "serverReconnected": "Połączono ponownie",
   "phraseCategory": "Kategoria hasła",
-  "categoryUnknown": "nieznana"
+  "categoryUnknown": "nieznana",
+  "unsupportedLang": "W tym języku nie można grać w trybie online"
 }
