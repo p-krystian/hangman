@@ -45,5 +45,6 @@
   "serverReconnected": "Reconnected to server",
   "phraseCategory": "Phrase category",
   "categoryUnknown": "unknown",
-  "unsupportedLang": "This language is not supported for online mode"
+  "unsupportedLang": "This language is not supported for online mode",
+  "oldVersion": "You are using an old version. Try refresh the page"
 }

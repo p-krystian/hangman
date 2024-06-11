@@ -16,6 +16,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL, {
   autoConnect: false,
   path: import.meta.env.VITE_SOCKET_PATH || '/socket.io/'
 })
+const v = import.meta.env.VITE_APP_VERSION
 
 function MultiPlayer(){
   const [l] = useLanguage()
@@ -63,7 +64,7 @@ function MultiPlayer(){
 
   const nextRound = useMemo(() => {
     if (opponentExit.current){
-      return () => socket.emit('join-lobby', [l('lang'), l('alphabet')])
+      return () => socket.emit('join-lobby', [l('lang'), l('alphabet')], v)
     }
     if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
       return null
@@ -81,11 +82,21 @@ function MultiPlayer(){
       confirm: () => {
         setAlert(null)
         if (stage !== 'result'){
-          socket.emit('join-lobby', [l('lang'), l('alphabet')])
+          socket.emit('join-lobby', [l('lang'), l('alphabet')], v)
         }
       }
     })
   }, [stage])
+
+  const exitAlert = useCallback(content => {
+    setAlert({
+      children: content,
+      confirm: () => {
+        setAlert(null)
+        navigate('/')
+      }
+    })
+  }, [])
 
   useEffect(() => {
     socket.on('opponent-exit', onOpponentExit)
@@ -109,7 +120,7 @@ function MultiPlayer(){
   useEffect(() => {
     socket.on('connect', () => {
       setTimeout(() => {
-        socket.emit('join-lobby', [l('lang'), l('alphabet')])
+        socket.emit('join-lobby', [l('lang'), l('alphabet')], v)
       }, 300)
       setAlert(current => (
         current?.children === l('serverDisconnect') ? {
@@ -118,24 +129,9 @@ function MultiPlayer(){
         } : current
       ))
     })
-    socket.on('disconnect', () => {
-      setAlert({
-        children: l('serverDisconnect'),
-        confirm: () => {
-          setAlert(null)
-          navigate('/')
-        }
-      })
-    })
-    socket.on('unsupported-lang', () => {
-      setAlert({
-        children: l('unsupportedLang'),
-        confirm: () => {
-          setAlert(null)
-          navigate('/')
-        }
-      })
-    })
+    socket.on('disconnect', () => exitAlert(l('serverDisconnect')))
+    socket.on('unsupported-lang', () => exitAlert(l('unsupportedLang')))
+    socket.on('old-version', () => exitAlert(l('oldVersion')))
     socket.on('connect_error', () => {
       console.clear()
       console.warn('Online server connection error')
@@ -160,6 +156,7 @@ function MultiPlayer(){
       socket.off('connect')
       socket.off('disconnect')
       socket.off('unsupported-lang')
+      socket.off('old-version')
       socket.off('connect_error')
       socket.off('wait-start')
       socket.off('give-phrase')
@@ -200,9 +197,9 @@ function MultiPlayer(){
           next={ nextRound }
         />
       ) : (
-        <Waiting
-          abort={ () => socket.emit('join-lobby', [l('lang'), l('alphabet')]) }
-        />
+        <Waiting abort={
+          () => socket.emit('join-lobby', [l('lang'), l('alphabet')], v)
+        }/>
       )
     }
     {!!alert && <Alert {...alert} />}
