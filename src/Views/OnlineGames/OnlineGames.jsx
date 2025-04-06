@@ -3,7 +3,7 @@ import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import Lobby from '../../Components/Lobby/Lobby'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useLanguage from '../../Hooks/useLanguage'
 

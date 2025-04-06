@@ -4,7 +4,7 @@ import WriteEntry from '../../Views/WriteEntry/WriteEntry'
 import EndGame from '../../Views/EndGame/EndGame'
 import Confirm from '../../Components/Confirm/Confirm'
 import { useState, useRef, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import GameContext from '../../Contexts/GameContext'
 import useLanguage from '../../Hooks/useLanguage'
 

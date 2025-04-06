@@ -3,7 +3,7 @@ import EndGame from '../../Views/EndGame/EndGame'
 import GameContext from '../../Contexts/GameContext'
 import useLanguage from '../../Hooks/useLanguage'
 import { useState, useCallback, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import random from 'random'
 
 const randomizer = (l, words) => {

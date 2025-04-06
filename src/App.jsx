@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, HashRouter as Router } from 'react-router'
 import Header from './Components/Header/Header'
 import StartMenu from './Screens/Start/Start'
 import SingleMenu from './Screens/Single/Single'
@@ -8,7 +8,7 @@ import MultiMenu from './Screens/Multi/Multi'
 
 function App(){
   return (
-    <>
+    <Router>
       <Header />
       <main>
         <Routes>
@@ -18,7 +18,7 @@ function App(){
           <Route path='*' element={ <StartMenu /> } />
         </Routes>
       </main>
-    </>
+    </Router>
   )
 }
 

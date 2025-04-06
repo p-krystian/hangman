@@ -10,7 +10,7 @@ import GameContext from '../../Contexts/GameContext'
 import useLanguage from '../../Hooks/useLanguage'
 import { io } from "socket.io-client"
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 const socket = io(import.meta.env.VITE_SOCKET_URL, {
   autoConnect: false,
