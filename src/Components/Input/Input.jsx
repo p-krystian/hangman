@@ -21,7 +21,7 @@ function Input(props){
       className={ styles.input }
       onClick={ onClick }
       style={ {'--size': `${size+1}ch`} }
-      focus={ focus?.toString() }
+      data-focus={ focus?.toString() }
     >{
       value.trimLeft().length > 0 ? (
         <WithCaret size={ size } show={ focus }>

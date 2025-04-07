@@ -22,7 +22,7 @@
   overflow-x: auto;
   background-color: var(--dark-bg);
 }
-.input[focus="true"]{
+.input[data-focus="true"]{
   border-color: var(--main);
 }
 .placeholder{
@@ -32,7 +32,7 @@
   font-family: var(--font-simple);
 }
 @supports selector(body:has(div)){
-  .input[focus="true"]:has(.placeholder)::before{
+  .input[data-focus="true"]:has(.placeholder)::before{
     content: '_';
     position: absolute;
     animation: blinking 0.6s linear infinite;
