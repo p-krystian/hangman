@@ -12,7 +12,7 @@ function Info(){
       <br/><br/>
       <p>
         { `v${version} - ` }
-        <a href={ authorURL } target="_blank">
+        <a href={ authorURL } target="_blank" rel="noreferrer">
           { l('signature') }
         </a>
       </p>
