@@ -31,7 +31,7 @@ function Category({ entry, short }){
         i * 150 + 500
       )
     }
-  }, [entry, words])
+  }, [entry, words, l])
 
   return (
     <div

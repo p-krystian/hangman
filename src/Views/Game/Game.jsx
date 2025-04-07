@@ -45,7 +45,7 @@ function Game({ exit, onLose, onWin }){
       setMistakes(m => m + 1)
       playSound('bad')
     }
-  }, [guessed, mistakes])
+  }, [guessed, mistakes, playSound, entry, onLose])
 
   return (
     <div className={ styles.container }>

@@ -7,7 +7,7 @@ import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useFullScreen from '../../Hooks/useFullScreen'
 import useLanguage from '../../Hooks/useLanguage'
-import { useState, useEffect, useLayoutEffect } from 'react'
+import { useState, useEffect, useLayoutEffect, useCallback } from 'react'
 
 function Create({ back, submit }){
   const [name, setName] = useState('')
@@ -18,17 +18,18 @@ function Create({ back, submit }){
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
-  useEffect(() => keyboardControl(
-    back,
-    create
-  ), [create, keyboardControl])
 
-  function create(){
+  const create = useCallback(() => {
     if (name.length < 3)
       return
 
     submit(name.substring(0, maxNameLength))
-  }
+  }, [name, submit, maxNameLength]);
+
+  useEffect(() => keyboardControl(
+    back,
+    create
+  ), [create, keyboardControl, back])
 
   return (
     <div className={ styles.wrapper }>

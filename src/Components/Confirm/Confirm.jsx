@@ -12,7 +12,7 @@ function Confirm({ confirm, reject, long, children }){
   useEffect(() => {
     popupContainer.classList.add('active')
     return () => popupContainer.classList.remove('active')
-  }, [])
+  }, [popupContainer.classList])
 
   return createPortal(
     <div className={ `${styles.confirm} ${long ? styles.long : ''}` }>

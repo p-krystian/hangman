@@ -24,7 +24,7 @@ function Entry(props){
   useEffect(() => {
     if (!hiddenText.includes('-') && winCallback)
       winCallback()
-  }, [guessed])
+  }, [guessed, hiddenText, winCallback])
 
   return (
     <span className={ styles.entry }>

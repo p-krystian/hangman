@@ -20,7 +20,7 @@ function Volume(_, ref){
       setSettings('soundVolume', newVol)
       return newVol
     }),
-  }), [])
+  }), [setSettings])
 
   return (
     <svg viewBox="0 0 16 16" className={ styles.icon }>

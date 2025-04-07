@@ -30,7 +30,7 @@ function WriteNicks({ back, next }){
     if (!pass) return
     gameContext.nicks = [nick0, nick1]
     next()
-  }, [nick0, nick1])
+  }, [nick0, nick1, pass, next, gameContext])
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
   useEffect(() => keyboardControl(

@@ -26,14 +26,14 @@ function WriteEntry({ back, backText, next, nick }){
     if (entry.length < 3) return
     gameContext.entry = entry.trim()
     next()
-  }, [entry, next])
+  }, [entry, next, gameContext])
 
   const writeRandom = useCallback(() => {
     const words = extraLang().words
     const randomCat = random.choice(Object.keys(words))
     const randomWord = random.choice(words[randomCat] || [l('randomize')])
     setEntry(randomWord.toUpperCase())
-  }, [])
+  }, [extraLang, l])
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
   useEffect(() => keyboardControl(
