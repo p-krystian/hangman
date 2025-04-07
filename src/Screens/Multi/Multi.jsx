@@ -26,7 +26,7 @@ function MultiPlayer(){
   const [resultKey, setResultKey] = useState('r-1-1')
   const [alert, setAlert] = useState(null)
   const opponentExit = useRef(false)
-  const initialData = {
+  const initialData = useMemo(() => ({
     entry: '',
     nicks: [l('you'), l('opponent')],
     points: [0, 0],
@@ -34,7 +34,7 @@ function MultiPlayer(){
     rounds: [0, 0],
     prevRounds: [0, 0],
     win: false
-  }
+  }), [l])
   const gameData = useRef({...initialData})
 
   const backupData = useCallback(() => {
@@ -51,7 +51,7 @@ function MultiPlayer(){
       return
     }
     socket.emit('create-game', name)
-  }, [gameList])
+  }, [gameList, l])
 
   const winCallback = useCallback(() => {
     gameData.current.win = true
@@ -71,7 +71,8 @@ function MultiPlayer(){
     }
 
     return () => socket.emit('continue-game')
-  }, [resultKey])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resultKey, l])
 
   const onOpponentExit = useCallback(() => {
     backupData()
@@ -86,7 +87,7 @@ function MultiPlayer(){
         }
       }
     })
-  }, [stage])
+  }, [stage, l, backupData])
 
   const exitAlert = useCallback(content => {
     setAlert({
@@ -96,7 +97,7 @@ function MultiPlayer(){
         navigate('/')
       }
     })
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     socket.on('opponent-exit', onOpponentExit)
@@ -115,7 +116,7 @@ function MultiPlayer(){
     })
 
     return () => socket.off('game-list')
-  }, [stage])
+  }, [stage, initialData])
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -164,7 +165,7 @@ function MultiPlayer(){
       socket.off('game-data')
       socket.disconnect()
     }
-  }, [])
+  }, [backupData, exitAlert, l])
 
   return (
     <GameContext.Provider value={ gameData.current }>{
