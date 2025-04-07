@@ -1,16 +1,15 @@
 import styles from './Key.module.css'
 import './Key.css'
-import { forwardRef } from 'react'
 
-function Key({ onClick, children, wide }, ref){
+function Key({ onClick, children, char, wide }){
   return (
     <button
       className={ `${styles.key} ${wide ? styles.wide : ''}` }
-      onClick={ () => onClick(children) }
-      ref={ ref }
+      onClick={ onClick }
+      data-char={ char }
     >
       { children }
     </button>
   )
 }
-export default forwardRef(Key)
+export default Key

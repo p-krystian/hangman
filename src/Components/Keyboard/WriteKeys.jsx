@@ -2,12 +2,12 @@ import Key from '../Key/Key'
 import useLanguage from '../../Hooks/useLanguage'
 import styles from './WriteKeys.module.css'
 
-function WriteKeys({ keyEvent, refs }){
+function WriteKeys({ keyEvent }){
   const [l] = useLanguage()
 
   return(
     <div className={ styles.keys }>
-      <Key onClick={ () => keyEvent('^32') } wide={ true } ref={ refs['^32'] }>
+      <Key onClick={ e => keyEvent(e, '^32') } wide={ true } char={ '^32' }>
         <svg viewBox="0 0 64 32">
           <title>{ l('spaceWord') }</title>
           <path
@@ -16,7 +16,7 @@ function WriteKeys({ keyEvent, refs }){
           />
         </svg>
       </Key>
-      <Key onClick={ () => keyEvent('^8') } wide={ true } ref={ refs['^8'] }>
+      <Key onClick={ e => keyEvent(e, '^8') } wide={ true } char={ '^8' }>
         <svg viewBox="0 0 64 32">
           <title>{ l('backspaceWord') }</title>
           <path
