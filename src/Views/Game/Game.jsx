@@ -15,13 +15,14 @@ import useLanguage from '../../Hooks/useLanguage'
 
 function Game({ exit, onLose, onWin }){
   const [l] = useLanguage()
+  const fullScreenManager = useFullScreen()
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
   const [mistakes, setMistakes] = useState(0)
   const [showExit, setShowExit] = useState(false)
 
-  useLayoutEffect(() => useFullScreen(), [])
+  useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
   useEffect(() => useKeyboardControl(
     () => exit && setShowExit(current => !current)
   ), [])

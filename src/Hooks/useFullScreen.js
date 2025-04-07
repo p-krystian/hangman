@@ -21,4 +21,5 @@ function useFullScreen(){
     root.classList.remove('full')
   }
 }
-export default useFullScreen
+
+export default () => useFullScreen

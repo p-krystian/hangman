@@ -15,6 +15,7 @@ import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'r
 
 function WriteEntry({ back, backText, next, nick }){
   const [l, extraLang] = useLanguage()
+  const fullScreenManager = useFullScreen()
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const keyboardWrite = useKeyboardWrite(setEntry, 20)
@@ -32,7 +33,7 @@ function WriteEntry({ back, backText, next, nick }){
     setEntry(randomWord.toUpperCase())
   }, [])
 
-  useLayoutEffect(() => useFullScreen(), [])
+  useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
   useEffect(() => useKeyboardControl(
     back,
     updateContext

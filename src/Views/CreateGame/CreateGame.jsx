@@ -12,10 +12,11 @@ import { useState, useEffect, useLayoutEffect } from 'react'
 function Create({ back, submit }){
   const [name, setName] = useState('')
   const [l] = useLanguage()
+  const fullScreenManager = useFullScreen()
   const maxNameLength = 12
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
 
-  useLayoutEffect(() => useFullScreen(), [])
+  useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
   useEffect(() => useKeyboardControl(
     back,
     create
