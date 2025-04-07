@@ -20,4 +20,4 @@ function usePlaySound(name){
   audio.volume = getSettings().soundVolume * 0.2
   audio.play().catch(() => `Don't throw error`)
 }
-export default usePlaySound
+export default () => usePlaySound

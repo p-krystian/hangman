@@ -16,6 +16,7 @@ import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'r
 function WriteEntry({ back, backText, next, nick }){
   const [l, extraLang] = useLanguage()
   const fullScreenManager = useFullScreen()
+  const playSound = usePlaySound()
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const keyboardWrite = useKeyboardWrite(setEntry, 20)
@@ -42,8 +43,8 @@ function WriteEntry({ back, backText, next, nick }){
   useEffect(() => {
     if (entry === '')
       return
-    usePlaySound('click')
-  }, [entry])
+    playSound('click')
+  }, [entry, playSound])
 
   return (
     <div className={ styles.wrapper }>

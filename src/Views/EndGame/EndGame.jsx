@@ -14,6 +14,7 @@ import usePlaySound from '../../Hooks/usePlaySound'
 
 function EndGame({ next, pointsID }){
   const [l] = useLanguage()
+  const playSound = usePlaySound()
   const gameContext = useContext(GameContext)
   const navigate = useNavigate()
   const result = {
@@ -29,9 +30,9 @@ function EndGame({ next, pointsID }){
     next
   ), [next])
 
-  useEffect(() => usePlaySound(
+  useEffect(() => playSound(
     result.audio
-  ), [])
+  ), [playSound, result.audio])
 
   return (
     <div className={ styles.wrapper }>

@@ -5,15 +5,16 @@ import usePlaySound from '../../Hooks/usePlaySound'
 
 function Input(props){
   const prevValue = useRef("")
+  const playSound = usePlaySound()
   const { value, focus, size, placeholder, onClick } = props
 
   useEffect(() => {
     if (value === prevValue.current)
       return
 
-    usePlaySound('click')
+    playSound('click')
     prevValue.current = value
-  }, [value])
+  }, [value, playSound])
 
   return (
     <div

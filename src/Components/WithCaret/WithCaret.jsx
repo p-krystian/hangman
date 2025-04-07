@@ -4,7 +4,7 @@ function WithCaret({size, show, children}) {
   return(
     <>
       { children }
-      {(children.length < size && (show ?? true)) && (
+      {(children.length < size && ([undefined, null].includes(show) ? true : show)) && (
         <span className={ styles.caret }>_</span>
       )}
     </>

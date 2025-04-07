@@ -16,6 +16,7 @@ import useLanguage from '../../Hooks/useLanguage'
 function Game({ exit, onLose, onWin }){
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()
+  const playSound = usePlaySound()
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
@@ -34,14 +35,14 @@ function Game({ exit, onLose, onWin }){
     if (entry.includes(char)){
       key.classList.add('correct')
       setGuessed(g => g.includes(char) ? g : g.concat(char))
-      usePlaySound('good')
+      playSound('good')
     }
     else{
       key.classList.add('mistake')
       if (mistakes >= 9)
         return onLose()
       setMistakes(m => m + 1)
-      usePlaySound('bad')
+      playSound('bad')
     }
   }, [guessed, mistakes])
 
