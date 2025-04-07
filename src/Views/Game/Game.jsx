@@ -17,6 +17,7 @@ function Game({ exit, onLose, onWin }){
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()
   const playSound = usePlaySound()
+  const keyboardControl = useKeyboardControl()
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
   const [guessed, setGuessed] = useState([])
@@ -24,9 +25,9 @@ function Game({ exit, onLose, onWin }){
   const [showExit, setShowExit] = useState(false)
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
-  useEffect(() => useKeyboardControl(
+  useEffect(() => keyboardControl(
     () => exit && setShowExit(current => !current)
-  ), [])
+  ), [keyboardControl, exit])
 
   const clickKey = useCallback((char, key) => {
     if (guessed.includes(char))

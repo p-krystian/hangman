@@ -13,14 +13,15 @@ function Create({ back, submit }){
   const [name, setName] = useState('')
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()
+  const keyboardControl = useKeyboardControl()
   const maxNameLength = 12
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
-  useEffect(() => useKeyboardControl(
+  useEffect(() => keyboardControl(
     back,
     create
-  ), [create])
+  ), [create, keyboardControl])
 
   function create(){
     if (name.length < 3)

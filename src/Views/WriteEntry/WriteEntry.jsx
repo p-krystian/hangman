@@ -17,6 +17,7 @@ function WriteEntry({ back, backText, next, nick }){
   const [l, extraLang] = useLanguage()
   const fullScreenManager = useFullScreen()
   const playSound = usePlaySound()
+  const keyboardControl = useKeyboardControl()
   const [entry, setEntry] = useState('')
   const gameContext = useContext(GameContext)
   const keyboardWrite = useKeyboardWrite(setEntry, 20)
@@ -35,10 +36,10 @@ function WriteEntry({ back, backText, next, nick }){
   }, [])
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
-  useEffect(() => useKeyboardControl(
+  useEffect(() => keyboardControl(
     back,
     updateContext
-  ), [back, updateContext])
+  ), [back, updateContext, keyboardControl])
 
   useEffect(() => {
     if (entry === '')

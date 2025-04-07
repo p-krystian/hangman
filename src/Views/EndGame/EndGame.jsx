@@ -15,6 +15,7 @@ import usePlaySound from '../../Hooks/usePlaySound'
 function EndGame({ next, pointsID }){
   const [l] = useLanguage()
   const playSound = usePlaySound()
+  const keyboardControl = useKeyboardControl()
   const gameContext = useContext(GameContext)
   const navigate = useNavigate()
   const result = {
@@ -25,10 +26,10 @@ function EndGame({ next, pointsID }){
     name:  gameContext.win ? l('win') : l('lose'),
   }
 
-  useEffect(() => useKeyboardControl(
+  useEffect(() => keyboardControl(
     () => navigate('/'),
     next
-  ), [next])
+  ), [next, keyboardControl, navigate])
 
   useEffect(() => playSound(
     result.audio

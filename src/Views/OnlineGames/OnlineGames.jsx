@@ -10,11 +10,12 @@ import useLanguage from '../../Hooks/useLanguage'
 function Games({ gameList, onCreate, onJoin }){
   const navigate = useNavigate()
   const [l] = useLanguage()
+  const keyboardControl = useKeyboardControl()
 
-  useEffect(() => useKeyboardControl(
+  useEffect(() => keyboardControl(
     () => navigate('/'),
     () => gameList.length < 6 && onCreate()
-  ), [])
+  ), [keyboardControl, navigate, onCreate, gameList.length])
 
   return (
     <div className={ styles.wrapper }>

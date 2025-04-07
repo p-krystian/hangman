@@ -13,6 +13,7 @@ import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'r
 function WriteNicks({ back, next }){
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()
+  const keyboardControl = useKeyboardControl()
   const [nick0, setNick0] = useState('')
   const [nick1, setNick1] = useState('')
   const [focused, setFocused] = useState(0)
@@ -32,12 +33,12 @@ function WriteNicks({ back, next }){
   }, [nick0, nick1])
 
   useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
-  useEffect(() => useKeyboardControl(
+  useEffect(() => keyboardControl(
     back,
     submit,
     () => setFocused(0),
     () => setFocused(1)
-  ), [back, submit])
+  ), [back, submit, keyboardControl])
 
   return (
     <div className={ styles.wrapper }>

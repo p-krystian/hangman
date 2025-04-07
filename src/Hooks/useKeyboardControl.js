@@ -20,4 +20,4 @@ function useKeyboardControl(back, enter, up, down){
 
   return () => window.removeEventListener('keyup', listen)
 }
-export default useKeyboardControl
+export default () => useKeyboardControl
