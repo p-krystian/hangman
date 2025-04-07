@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2019: true },
+  env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -8,7 +8,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' },
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
   settings: { react: { version: '19.1' } },
   plugins: ['react-refresh'],
   rules: {
