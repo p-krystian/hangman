@@ -1,6 +1,10 @@
 import styles from './ButtonWrap.module.css'
 
-function ButtonWrap({ children }){
+interface ButtonWrapProps{
+  children: React.ReactNode
+}
+
+function ButtonWrap({ children }: ButtonWrapProps){
   return (
     <div className={ styles.buttons }>
       { children }
