@@ -9,13 +9,14 @@ for (const file of Object.values(files)){
   audio.play().catch(() => `Don't throw error`)
 }
 
-function usePlaySound(name){
+function usePlaySound(name: string) {
   const [getSettings] = useSettings()
 
-  if (!files[name] || getSettings().soundVolume < 1){
+  if (!Object.keys(files).includes(name) || getSettings().soundVolume < 1){
     return
   }
-  const audio = new Audio(files[name])
+  const src = files[name as keyof typeof files]
+  const audio = new Audio(src)
   audio.load()
   audio.volume = getSettings().soundVolume * 0.2
   audio.play().catch(() => `Don't throw error`)
