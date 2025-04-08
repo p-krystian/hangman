@@ -1,5 +1,5 @@
 function useFullScreen(){
-  const root = document.getElementById('root')
+  const root = document.getElementById('root')!
   let lastWindowH = 0
 
   const setFull = () => {
