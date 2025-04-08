@@ -11,5 +11,5 @@ export default defineConfig({
     port: 8080,
     open: true
   },
-  esbuild: { target: 'es2019' }
+  esbuild: { target: 'es2020' }
 })
