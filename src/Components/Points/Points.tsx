@@ -13,13 +13,13 @@ function Points(){
           <span>{ nick }:</span>
           &#160;
           <NumberSlider
-            current={ gameContext.points[i] }
-            old={ gameContext.prevPoints[i] }
+            current={ gameContext.points[i] || 0 }
+            old={ gameContext.prevPoints[i] || 0 }
           />
           &#47;
           <NumberSlider
-            current={ gameContext.rounds[i] }
-            old={ gameContext.prevRounds[i] }
+            current={ gameContext.rounds[i] || 0 }
+            old={ gameContext.prevRounds[i] || 0 }
           />
         </div>
       ))
