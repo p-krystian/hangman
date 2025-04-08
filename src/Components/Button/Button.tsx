@@ -1,22 +1,30 @@
 import { Link } from 'react-router'
 import styles from './Button.module.css'
 
-function Button(props){
+interface ButtonProps {
+  link?: string
+  onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => unknown
+  value?: string
+  children: React.ReactNode
+  disabled?: boolean,
+  small?: boolean
+}
+
+function Button(props: ButtonProps){
   const {
     link,
     onClick,
     value,
     children,
-    disabled,
-    small
+    disabled = false,
+    small = false
   } = props
 
   return(
     link ? (
       <Link
         to={ disabled ? '' : link }
-        disabled={ disabled }
-        value={ value }
+        data-disabled={ disabled }
         onClick={ disabled ? () => 'disabled' : onClick }
         className={ `${styles.button} ${small ? styles.small : ''}` }
       >
