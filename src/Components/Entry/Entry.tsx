@@ -1,15 +1,15 @@
 import styles from './Entry.module.css'
 import { useEffect, useCallback } from 'react'
 
-function Entry(props){
-  const {
-    children,
-    hide,
-    winCallback,
-    guessed
-  } = props
+interface EntryProps{
+  children: string;
+  hide?: boolean;
+  winCallback: () => void;
+  guessed: string[];
+}
 
-  const hideText = useCallback((text, guessed) => {
+function Entry({children, hide, winCallback, guessed}:EntryProps){
+  const hideText = useCallback((text:string, guessed:string[]) => {
     let newText = '';
     for (const char of text){
       newText += char === ' ' ? ' ' : (
