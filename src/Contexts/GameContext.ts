@@ -1,16 +1,16 @@
 import { createContext } from 'react'
 
-interface GameContextProps{
+export interface GameContextType{
   entry: string
-  nicks: [string, string?]
-  points: [number, number?]
-  prevPoints: [number, number?]
-  rounds: [number, number?]
-  prevRounds: [number, number?]
+  nicks: string[]
+  points: number[]
+  prevPoints: number[]
+  rounds: number[]
+  prevRounds: number[]
   win: boolean
 }
 
-const GameContext = createContext<GameContextProps>({
+const GameContext = createContext<GameContextType>({
   entry: '',
   nicks: [''],
   points: [0],

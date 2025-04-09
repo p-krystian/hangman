@@ -5,7 +5,7 @@ import EndGame from '../../Views/EndGame/EndGame'
 import Confirm from '../../Components/Confirm/Confirm'
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router'
-import GameContext from '../../Contexts/GameContext'
+import GameContext, { GameContextType } from '../../Contexts/GameContext'
 import useLanguage from '../../Hooks/useLanguage'
 
 function Local(){
@@ -14,7 +14,7 @@ function Local(){
   const [stage, setStage] = useState('writeNicks')
   const [askExit, setAskExit] = useState(false)
   const currentPlayer = useRef(0)
-  const gameData = useRef({
+  const gameData = useRef<GameContextType>({
     entry: '',
     nicks: [],
     points: [0, 0],
@@ -34,7 +34,7 @@ function Local(){
     nick: gameData.current.nicks[currentPlayer.current]
   }
 
-  const gameEnd = useCallback(resoult => {
+  const gameEnd = useCallback((resoult:string) => {
     gameData.current.prevPoints = [...gameData.current.points]
     gameData.current.prevRounds = [...gameData.current.rounds]
     if (resoult === 'win'){
