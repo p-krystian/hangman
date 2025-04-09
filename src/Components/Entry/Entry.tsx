@@ -2,7 +2,7 @@ import styles from './Entry.module.css'
 import { useEffect, useCallback } from 'react'
 
 interface EntryProps{
-  children: string;
+  children: React.ReactNode;
   hide?: boolean;
   winCallback?: () => void;
   guessed?: string[];
@@ -19,7 +19,7 @@ function Entry({children, hide, winCallback=() => {}, guessed=[]}:EntryProps){
     return newText
   }, [])
 
-  const hiddenText = hide ? hideText(children, guessed) : ''
+  const hiddenText = hide && typeof children === 'string' ? hideText(children, guessed) : ''
 
   useEffect(() => {
     if (!hiddenText.includes('-') && winCallback)

@@ -13,7 +13,14 @@ import useLanguage from '../../Hooks/useLanguage'
 import random from 'random'
 import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react'
 
-function WriteEntry({ back, backText, next, nick }){
+interface WriteEntryProps {
+  back?: () => void
+  backText?: string
+  next: () => void
+  nick?: string
+}
+
+function WriteEntry({ back, backText, next, nick }: WriteEntryProps){
   const [l, extraLang] = useLanguage()
   const fullScreenManager = useFullScreen()
   const playSound = usePlaySound()
@@ -30,8 +37,8 @@ function WriteEntry({ back, backText, next, nick }){
 
   const writeRandom = useCallback(() => {
     const words = extraLang().words
-    const randomCat = random.choice(Object.keys(words))
-    const randomWord = random.choice(words[randomCat] || [l('randomize')])
+    const randomCat = random.choice(Object.keys(words)) as string
+    const randomWord = random.choice(words[randomCat] || [l('randomize')]) as string
     setEntry(randomWord.toUpperCase())
   }, [extraLang, l])
 
