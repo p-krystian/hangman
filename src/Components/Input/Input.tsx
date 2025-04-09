@@ -3,7 +3,15 @@ import WithCaret from '../WithCaret/WithCaret'
 import { useEffect, useRef } from 'react'
 import usePlaySound from '../../Hooks/usePlaySound'
 
-function Input(props){
+interface InputProps{
+  value: string;
+  focus?: boolean;
+  size: number;
+  placeholder: string;
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+function Input(props: InputProps){
   const prevValue = useRef("")
   const playSound = usePlaySound()
   const { value, focus, size, placeholder, onClick } = props
@@ -20,12 +28,12 @@ function Input(props){
     <div
       className={ styles.input }
       onClick={ onClick }
-      style={ {'--size': `${size+1}ch`} }
+      style={ {'--size': `${size+1}ch`} as React.CSSProperties }
       data-focus={ focus?.toString() }
     >{
-      value.trimLeft().length > 0 ? (
+      value.trimStart().length > 0 ? (
         <WithCaret size={ size } show={ focus }>
-          { value.trimLeft() }
+          { value.trimStart() }
         </WithCaret>
       ) : (
         <span className={ styles.placeholder }>
