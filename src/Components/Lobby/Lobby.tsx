@@ -2,7 +2,12 @@ import styles from './Lobby.module.css'
 import Button from '../Button/Button'
 import useLanguage from '../../Hooks/useLanguage'
 
-function Lobby({ name, submit }){
+interface LobbyProps {
+  name: string
+  submit: () => void
+}
+
+function Lobby({ name, submit }: LobbyProps){
   const [l] = useLanguage()
 
   return (
