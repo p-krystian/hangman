@@ -6,7 +6,8 @@ import EndGame from '../../Views/EndGame/EndGame'
 import Connecting from '../../Views/Connecting/Connecting'
 import Waiting from '../../Views/Waiting/Waiting'
 import Alert from '../../Components/Confirm/Confirm'
-import GameContext from '../../Contexts/GameContext'
+import GameContext, { GameContextType } from '../../Contexts/GameContext'
+import GameType from '../../Types/OnlineGame'
 import useLanguage from '../../Hooks/useLanguage'
 import { io } from "socket.io-client"
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
@@ -18,15 +19,20 @@ const socket = io(import.meta.env.VITE_SOCKET_URL, {
 })
 const v = import.meta.env.VITE_APP_VERSION
 
+interface AlertType{
+  children: React.ReactNode
+  confirm: () => void
+}
+
 function MultiPlayer(){
   const [l] = useLanguage()
   const navigate = useNavigate()
   const [stage, setStage] = useState('connecting')
-  const [gameList, setGameList] = useState([])
+  const [gameList, setGameList] = useState<GameType[]>([])
   const [resultKey, setResultKey] = useState('r-1-1')
-  const [alert, setAlert] = useState(null)
+  const [alert, setAlert] = useState<AlertType | null>(null)
   const opponentExit = useRef(false)
-  const initialData = useMemo(() => ({
+  const initialData = useMemo<GameContextType>(() => ({
     entry: '',
     nicks: [l('you'), l('opponent')],
     points: [0, 0],
@@ -35,14 +41,14 @@ function MultiPlayer(){
     prevRounds: [0, 0],
     win: false
   }), [l])
-  const gameData = useRef({...initialData})
+  const gameData = useRef<GameContextType>({...initialData})
 
   const backupData = useCallback(() => {
     gameData.current.prevPoints = [...gameData.current.points]
     gameData.current.prevRounds = [...gameData.current.rounds]
   }, [])
 
-  const createNewGame = useCallback(name => {
+  const createNewGame = useCallback((name:string) => {
     if (gameList.length >= 6){
       setAlert({
         children: l('maxGames'),
@@ -67,7 +73,7 @@ function MultiPlayer(){
       return () => socket.emit('join-lobby', [l('lang'), l('alphabet')], v)
     }
     if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
-      return null
+      return () => {}
     }
 
     return () => socket.emit('continue-game')
@@ -89,7 +95,7 @@ function MultiPlayer(){
     })
   }, [stage, l, backupData])
 
-  const exitAlert = useCallback(content => {
+  const exitAlert = useCallback((content:string) => {
     setAlert({
       children: content,
       confirm: () => {
@@ -100,11 +106,19 @@ function MultiPlayer(){
   }, [navigate])
 
   useEffect(() => {
+    const cleanup = () => {
+      socket.off('opponent-exit', onOpponentExit)
+    }
+
     socket.on('opponent-exit', onOpponentExit)
-    return () => socket.off('opponent-exit')
+    return cleanup
   }, [onOpponentExit])
 
   useEffect(() => {
+    const cleanup = () => {
+      socket.off('game-list')
+    }
+
     socket.on('game-list', games => {
       setGameList(games)
       if (stage !== 'create'){
@@ -114,8 +128,7 @@ function MultiPlayer(){
         gameData.current = {...initialData}
       }
     })
-
-    return () => socket.off('game-list')
+    return cleanup
   }, [stage, initialData])
 
   useEffect(() => {
