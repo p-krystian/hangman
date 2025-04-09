@@ -6,8 +6,15 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import useLanguage from '../../Hooks/useLanguage'
+import GameType from '../../Types/OnlineGame'
 
-function Games({ gameList, onCreate, onJoin }){
+interface GamesProps {
+  gameList: GameType[]
+  onCreate: () => void
+  onJoin: (id: string) => void
+}
+
+function Games({ gameList, onCreate, onJoin }: GamesProps){
   const navigate = useNavigate()
   const [l] = useLanguage()
   const keyboardControl = useKeyboardControl()
