@@ -12,7 +12,12 @@ import useLanguage from '../../Hooks/useLanguage'
 import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import usePlaySound from '../../Hooks/usePlaySound'
 
-function EndGame({ next, pointsID }){
+interface EndGameProps {
+  next: () => void;
+  pointsID: string;
+}
+
+function EndGame({ next, pointsID }: EndGameProps){
   const [l] = useLanguage()
   const playSound = usePlaySound()
   const keyboardControl = useKeyboardControl()
