@@ -13,14 +13,20 @@ import useKeyboardControl from '../../Hooks/useKeyboardControl'
 import usePlaySound from '../../Hooks/usePlaySound'
 import useLanguage from '../../Hooks/useLanguage'
 
-function Game({ exit, onLose, onWin }){
+interface GameProps {
+  exit?: () => void
+  onLose: () => void
+  onWin: () => void
+}
+
+function Game({ exit, onLose, onWin }: GameProps){
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()
   const playSound = usePlaySound()
   const keyboardControl = useKeyboardControl()
   const gameContext = useContext(GameContext)
   const entry = gameContext.entry || '?'
-  const [guessed, setGuessed] = useState([])
+  const [guessed, setGuessed] = useState<string[]>([])
   const [mistakes, setMistakes] = useState(0)
   const [showExit, setShowExit] = useState(false)
 
@@ -29,7 +35,7 @@ function Game({ exit, onLose, onWin }){
     () => exit && setShowExit(current => !current)
   ), [keyboardControl, exit])
 
-  const clickKey = useCallback((char, key) => {
+  const clickKey = useCallback((char: string, key: Element) => {
     if (guessed.includes(char))
       return
 
@@ -67,7 +73,7 @@ function Game({ exit, onLose, onWin }){
         </Button>}
       </ButtonWrap>
       {!!showExit && (
-        <Confirm confirm={ exit } reject={ () => setShowExit(false) }>
+        <Confirm confirm={ () => exit && exit() } reject={ () => setShowExit(false) }>
           { l('endGame') }
         </Confirm>
       )}
