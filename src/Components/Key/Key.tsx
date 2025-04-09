@@ -1,7 +1,14 @@
 import styles from './Key.module.css'
 import './Key.css'
 
-function Key({ onClick, children, char, wide }){
+interface KeyProps {
+  onClick: () => void
+  children: React.ReactNode
+  char: string
+  wide?: boolean
+}
+
+function Key({ onClick, children, char, wide }: KeyProps){
   return (
     <button
       className={ `${styles.key} ${wide ? styles.wide : ''}` }
