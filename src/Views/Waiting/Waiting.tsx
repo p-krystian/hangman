@@ -4,7 +4,11 @@ import Button from '../../Components/Button/Button'
 import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
 import useLanguage from '../../Hooks/useLanguage'
 
-function Waiting({ abort }){
+interface WaitingProps {
+  abort?: () => void
+}
+
+function Waiting({ abort }: WaitingProps){
   const [l] = useLanguage()
 
   return (
@@ -14,7 +18,7 @@ function Waiting({ abort }){
         <img src={ head } alt='X' className={ styles.animation } />
       </div>
       <ButtonWrap>
-        {!!abort && <Button onClick={ abort }>{ l('cancel') }</Button>}
+        { !!abort && <Button onClick={ abort }>{ l('cancel') }</Button> }
       </ButtonWrap>
     </div>
   )
