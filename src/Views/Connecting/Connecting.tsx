@@ -28,7 +28,7 @@ function Connecting(){
     <div className={ styles.wrapper }>
       <div className={ styles.container }>
         <Board progress={ progress } small={ true } />
-        <Entry>{ l('connecting') }...</Entry>
+        <Entry>{ `${l('connecting')}...` }</Entry>
       </div>
       <ButtonWrap>
         <Button link='/'>Anuluj</Button>

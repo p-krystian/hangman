@@ -4,11 +4,11 @@ import { useEffect, useCallback } from 'react'
 interface EntryProps{
   children: string;
   hide?: boolean;
-  winCallback: () => void;
-  guessed: string[];
+  winCallback?: () => void;
+  guessed?: string[];
 }
 
-function Entry({children, hide, winCallback, guessed}:EntryProps){
+function Entry({children, hide, winCallback=() => {}, guessed=[]}:EntryProps){
   const hideText = useCallback((text:string, guessed:string[]) => {
     let newText = '';
     for (const char of text){
