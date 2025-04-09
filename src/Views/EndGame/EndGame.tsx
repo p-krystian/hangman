@@ -14,7 +14,7 @@ import usePlaySound from '../../Hooks/usePlaySound'
 
 interface EndGameProps {
   next: () => void;
-  pointsID: string;
+  pointsID?: string;
 }
 
 function EndGame({ next, pointsID }: EndGameProps){

@@ -1,14 +1,14 @@
 import Game from '../../Views/Game/Game'
 import EndGame from '../../Views/EndGame/EndGame'
-import GameContext from '../../Contexts/GameContext'
+import GameContext, { GameContextType } from '../../Contexts/GameContext'
 import useLanguage from '../../Hooks/useLanguage'
 import { useState, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import random from 'random'
 
-const randomizer = (l, words) => {
-  const randomCat = random.choice(Object.keys(words))
-  return random.choice(words[randomCat] || [l('randomize')])
+const randomizer = (l: (word: string) => string, words:Record<string, string[]>) => {
+  const randomCat = random.choice(Object.keys(words)) as keyof typeof words
+  return random.choice(words[randomCat] || [l('randomize')]) as string
 }
 
 function SingleGame(){
@@ -16,7 +16,7 @@ function SingleGame(){
   const [l, extraLang] = useLanguage()
   const randomWord = randomizer(l, extraLang().words)
   const [stage, setStage] = useState('game')
-  const gameData = useRef({
+  const gameData = useRef<GameContextType>({
     entry: randomWord.toUpperCase(),
     nicks: [l('result')],
     points: [0],
@@ -26,7 +26,7 @@ function SingleGame(){
     win: false
   })
 
-  const gameEnd = useCallback(result => {
+  const gameEnd = useCallback((result: string) => {
     const pointsAdd = +(result === 'win')
     gameData.current = {
       ...gameData.current,
