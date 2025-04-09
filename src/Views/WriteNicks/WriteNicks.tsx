@@ -10,7 +10,12 @@ import useFullScreen from '../../Hooks/useFullScreen'
 import useLanguage from '../../Hooks/useLanguage'
 import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react'
 
-function WriteNicks({ back, next }){
+interface WriteNicksProps {
+  back: () => void
+  next: () => void
+}
+
+function WriteNicks({ back, next }: WriteNicksProps){
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()
   const keyboardControl = useKeyboardControl()
