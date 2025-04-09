@@ -14,7 +14,7 @@ interface ExtraLang extends AvailableLang {
 type LanguageHook = [
   (word: string) => string,
   () => ExtraLang,
-  (wanted: LangCode) => void
+  (wanted: string) => void
 ]
 
 const get = (word: string) => currentLang.language[word] || ''
@@ -24,12 +24,13 @@ function useLanguage():LanguageHook{
   const [current, setCurrent] = useState<LangCode>(getSettings().language as LangCode)
   currentLang = languages[current]
 
-  const setLanguage = (wanted: LangCode) => {
+  const setLanguage = (wanted: string) => {
     if (availables.includes(wanted)){
-      setCurrent(wanted)
-      setSettings('language', wanted)
-      currentLang = languages[wanted]
-      document.title = languages[wanted].language.title
+      const newLang = wanted as LangCode
+      setCurrent(newLang)
+      setSettings('language', newLang)
+      currentLang = languages[newLang]
+      document.title = languages[newLang].language.title
     }
   }
   const extra = ():ExtraLang => ({

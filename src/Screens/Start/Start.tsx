@@ -8,7 +8,7 @@ import styles from './Start.module.css'
 import { useRef, useState } from 'react'
 
 function MenuStart(){
-  const volumeRef = useRef()
+  const volumeRef = useRef({click: () => {}})
   const [showInfo, setShowInfo] = useState(false)
   const [l, extraLang, setLanguage] = useLanguage()
 
@@ -28,7 +28,7 @@ function MenuStart(){
     <div className={ styles.buttons }>
       <div className={ styles.small }>
         <Button
-          onClick={ () => volumeRef.current.click() }
+          onClick={ () => volumeRef.current?.click() }
           value={ l('volumeWord') }
           small
         >

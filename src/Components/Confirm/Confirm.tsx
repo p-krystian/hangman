@@ -8,7 +8,7 @@ interface ConfirmProps{
   confirm: () => void
   reject?: () => void
   long?: boolean
-  children: string
+  children: React.ReactNode
 }
 
 function Confirm({ confirm, reject, long, children }: ConfirmProps){
