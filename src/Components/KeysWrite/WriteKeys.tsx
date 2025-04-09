@@ -3,7 +3,7 @@ import useLanguage from '../../Hooks/useLanguage'
 import styles from './WriteKeys.module.css'
 
 interface WriteKeysProps{
-  keyEvent: (e?:React.MouseEvent, char?:string) => void
+  keyEvent: (e:React.MouseEvent, char:string) => void
 }
 
 function WriteKeys({ keyEvent }:WriteKeysProps){

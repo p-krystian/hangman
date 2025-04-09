@@ -4,30 +4,40 @@ import WriteKeys from '../KeysWrite/WriteKeys'
 import useLanguage from '../../Hooks/useLanguage'
 import { useEffect, useRef, useCallback, useMemo } from 'react'
 
-function Keyboard({ keyEvent, write }){
+interface KeyboardProps {
+  keyEvent: (char: string, key: Element) => void,
+  write?: boolean
+}
+
+function Keyboard({ keyEvent, write }: KeyboardProps){
   const [l] = useLanguage()
-  const keyboardRef = useRef(null)
+  const keyboardRef = useRef<HTMLDivElement>(null)
 
   const alphabet = useMemo(
     () => l('alphabet').split(''),
     [l]
   )
 
-  const clickEvent = useCallback((e, char) => (
-    keyEvent(char, e.target)
+  const clickEvent = useCallback((e: React.MouseEvent, char: string) => (
+    keyEvent(char, e.target as Element)
   ), [keyEvent])
 
   useEffect(() => {
-    function translate(e){
+    function translate(e:KeyboardEvent){
       e.preventDefault()
 
       let k = e.key.toUpperCase()
 
-      if ([32, 8].includes(e.keyCode))
-        k = `^${e.keyCode}`
+      if (k === ' '){
+        k = '^32'
+      }
+      else if (k === 'BACKSPACE'){
+        k = '^8'
+      }
 
-      if (['^8', '^32', ...alphabet].includes(k))
-        keyEvent(k, keyboardRef.current.querySelector(`[data-char="${k}"]`))
+      if (['^8', '^32', ...alphabet].includes(k) && keyboardRef.current){
+        keyEvent(k, keyboardRef.current.querySelector(`[data-char="${k}"]`)!)
+      }
     }
     window.addEventListener('keydown', translate)
     return () => window.removeEventListener('keydown', translate)
@@ -36,9 +46,9 @@ function Keyboard({ keyEvent, write }){
   return (
     <div className={ styles.keyboard } ref={ keyboardRef }>
       <div className={ styles.keys }>
-        { alphabet.map(char => (
-          <Key key={ `k-${char}` } onClick={ e => clickEvent(e, char) } char={ char }>
-            { char }
+        { alphabet.map(ch => (
+          <Key key={ `k-${ch}` } onClick={ (e: React.MouseEvent) => clickEvent(e, ch) } char={ ch }>
+            { ch }
           </Key>
         )) }
       </div>

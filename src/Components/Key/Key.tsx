@@ -2,7 +2,7 @@ import styles from './Key.module.css'
 import './Key.css'
 
 interface KeyProps {
-  onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void
+  onClick: (e: React.MouseEvent) => void
   children: React.ReactNode
   char: string
   wide?: boolean
