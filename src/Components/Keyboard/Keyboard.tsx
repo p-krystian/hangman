@@ -1,47 +1,47 @@
-import styles from './Keyboard.module.css'
-import Key from '../Key/Key'
-import WriteKeys from '../KeysWrite/WriteKeys'
-import useLanguage from '../../Hooks/useLanguage'
-import { useEffect, useRef, useCallback, useMemo } from 'react'
+import styles from './Keyboard.module.css';
+import Key from '../Key/Key';
+import WriteKeys from '../KeysWrite/WriteKeys';
+import useLanguage from '../../Hooks/useLanguage';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 
 interface KeyboardProps {
-  keyEvent: (char: string, key: Element) => void,
-  write?: boolean
+  keyEvent: (char: string, key: Element) => void;
+  write?: boolean;
 }
 
 function Keyboard({ keyEvent, write }: KeyboardProps){
-  const [l] = useLanguage()
-  const keyboardRef = useRef<HTMLDivElement>(null)
+  const [l] = useLanguage();
+  const keyboardRef = useRef<HTMLDivElement>(null);
 
   const alphabet = useMemo(
     () => l('alphabet').split(''),
     [l]
-  )
+  );
 
   const clickEvent = useCallback((e: React.MouseEvent, char: string) => (
     keyEvent(char, e.target as Element)
-  ), [keyEvent])
+  ), [keyEvent]);
 
   useEffect(() => {
-    function translate(e:KeyboardEvent){
-      e.preventDefault()
+    function translate(e: KeyboardEvent){
+      e.preventDefault();
 
-      let k = e.key.toUpperCase()
+      let k = e.key.toUpperCase();
 
       if (k === ' '){
-        k = '^32'
+        k = '^32';
       }
       else if (k === 'BACKSPACE'){
-        k = '^8'
+        k = '^8';
       }
 
       if (['^8', '^32', ...alphabet].includes(k) && keyboardRef.current){
-        keyEvent(k, keyboardRef.current.querySelector(`[data-char="${k}"]`)!)
+        keyEvent(k, keyboardRef.current.querySelector(`[data-char="${k}"]`)!);
       }
     }
-    window.addEventListener('keydown', translate)
-    return () => window.removeEventListener('keydown', translate)
-  }, [keyEvent, alphabet])
+    window.addEventListener('keydown', translate);
+    return () => window.removeEventListener('keydown', translate);
+  }, [keyEvent, alphabet]);
 
   return (
     <div className={ styles.keyboard } ref={ keyboardRef }>
@@ -54,6 +54,6 @@ function Keyboard({ keyEvent, write }: KeyboardProps){
       </div>
       { write && <WriteKeys keyEvent={ clickEvent } /> }
     </div>
-  )
+  );
 }
-export default Keyboard
+export default Keyboard;

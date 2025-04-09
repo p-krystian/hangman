@@ -11,25 +11,25 @@ function useKeyboardControl(
     'arrowleft': up,
     'arrowright': down,
     'arrowdown': down
-  } as const
+  } as const;
 
   const listen = (e: KeyboardEvent) => {
-    const code = e.key.toLowerCase()
+    const code = e.key.toLowerCase();
 
     if (!Object.keys(actions).includes(code)){
-      return
+      return;
     }
 
-    const key = code as keyof typeof actions
-    const action = actions[key]
-    console.log(action)
+    const key = code as keyof typeof actions;
+    const action = actions[key];
+    console.log(action);
     if (typeof action === 'function'){
-      action()
+      action();
     }
 
-  }
-  window.addEventListener('keyup', listen)
+  };
+  window.addEventListener('keyup', listen);
 
-  return () => window.removeEventListener('keyup', listen)
+  return () => window.removeEventListener('keyup', listen);
 }
-export default () => useKeyboardControl
+export default () => useKeyboardControl;

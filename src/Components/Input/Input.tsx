@@ -1,7 +1,7 @@
-import styles from './Input.module.css'
-import WithCaret from '../WithCaret/WithCaret'
-import { useEffect, useRef } from 'react'
-import usePlaySound from '../../Hooks/usePlaySound'
+import styles from './Input.module.css';
+import WithCaret from '../WithCaret/WithCaret';
+import { useEffect, useRef } from 'react';
+import usePlaySound from '../../Hooks/usePlaySound';
 
 interface InputProps{
   value: string;
@@ -12,17 +12,17 @@ interface InputProps{
 }
 
 function Input(props: InputProps){
-  const prevValue = useRef("")
-  const playSound = usePlaySound()
-  const { value, focus, size, placeholder, onClick } = props
+  const prevValue = useRef('');
+  const playSound = usePlaySound();
+  const { value, focus, size, placeholder, onClick } = props;
 
   useEffect(() => {
     if (value === prevValue.current)
-      return
+      return;
 
-    playSound('click')
-    prevValue.current = value
-  }, [value, playSound])
+    playSound('click');
+    prevValue.current = value;
+  }, [value, playSound]);
 
   return (
     <div
@@ -41,6 +41,6 @@ function Input(props: InputProps){
         </span>
       )
     }</div>
-  )
+  );
 }
-export default Input
+export default Input;

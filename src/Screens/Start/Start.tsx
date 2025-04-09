@@ -1,27 +1,27 @@
-import Button from '../../Components/Button/Button'
-import useLanguage from '../../Hooks/useLanguage'
-import Volume from '../../Components/Volume/Volume'
-import Confirm from '../../Components/Confirm/Confirm'
-import Info from '../../Components/Info/Info'
-import InfoSymbol from '../../Components/InfoSymbol/InfoSymbol'
-import styles from './Start.module.css'
-import { useRef, useState } from 'react'
+import Button from '../../Components/Button/Button';
+import useLanguage from '../../Hooks/useLanguage';
+import Volume from '../../Components/Volume/Volume';
+import Confirm from '../../Components/Confirm/Confirm';
+import Info from '../../Components/Info/Info';
+import InfoSymbol from '../../Components/InfoSymbol/InfoSymbol';
+import styles from './Start.module.css';
+import { useRef, useState } from 'react';
 
 function MenuStart(){
-  const volumeRef = useRef({click: () => {}})
-  const [showInfo, setShowInfo] = useState(false)
-  const [l, extraLang, setLanguage] = useLanguage()
+  const volumeRef = useRef({click: () => {}});
+  const [showInfo, setShowInfo] = useState(false);
+  const [l, extraLang, setLanguage] = useLanguage();
 
   function nextLanguage(){
-    const allLangs = extraLang().availables
-    const currentIndex = allLangs.indexOf(extraLang().code)
-    const nextLang = allLangs[currentIndex+1] || allLangs[0]
-    setLanguage(nextLang)
+    const allLangs = extraLang().availables;
+    const currentIndex = allLangs.indexOf(extraLang().code);
+    const nextLang = allLangs[currentIndex+1] || allLangs[0];
+    setLanguage(nextLang);
   }
 
   function exit(){
-    window.close()
-    location.href = import.meta.env.VITE_EXIT_URL
+    window.close();
+    location.href = import.meta.env.VITE_EXIT_URL;
   }
 
   return (
@@ -60,6 +60,6 @@ function MenuStart(){
         </Confirm>
       ) }
     </div>
-  )
+  );
 }
-export default MenuStart
+export default MenuStart;

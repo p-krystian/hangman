@@ -1,28 +1,28 @@
-import styles from './OnlineGames.module.css'
-import Button from '../../Components/Button/Button'
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
-import Lobby from '../../Components/Lobby/Lobby'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router'
-import useKeyboardControl from '../../Hooks/useKeyboardControl'
-import useLanguage from '../../Hooks/useLanguage'
-import GameType from '../../Types/OnlineGame'
+import styles from './OnlineGames.module.css';
+import Button from '../../Components/Button/Button';
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
+import Lobby from '../../Components/Lobby/Lobby';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import useKeyboardControl from '../../Hooks/useKeyboardControl';
+import useLanguage from '../../Hooks/useLanguage';
+import GameType from '../../Types/OnlineGame';
 
 interface GamesProps {
-  gameList: GameType[]
-  onCreate: () => void
-  onJoin: (id: string) => void
+  gameList: GameType[];
+  onCreate: () => void;
+  onJoin: (id: string) => void;
 }
 
 function Games({ gameList, onCreate, onJoin }: GamesProps){
-  const navigate = useNavigate()
-  const [l] = useLanguage()
-  const keyboardControl = useKeyboardControl()
+  const navigate = useNavigate();
+  const [l] = useLanguage();
+  const keyboardControl = useKeyboardControl();
 
   useEffect(() => keyboardControl(
     () => navigate('/'),
     () => gameList.length < 6 && onCreate()
-  ), [keyboardControl, navigate, onCreate, gameList.length])
+  ), [keyboardControl, navigate, onCreate, gameList.length]);
 
   return (
     <div className={ styles.wrapper }>
@@ -48,6 +48,6 @@ function Games({ gameList, onCreate, onJoin }: GamesProps){
         <Button link='/'>{ l('menu') }</Button>
       </ButtonWrap>
     </div>
-  )
+  );
 }
-export default Games
+export default Games;

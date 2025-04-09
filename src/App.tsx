@@ -1,21 +1,21 @@
-import './App.css'
-import { Routes, Route, HashRouter as Router } from 'react-router'
-import Header from './Components/Header/Header'
-import StartMenu from './Screens/Start/Start'
-import SingleMenu from './Screens/Single/Single'
-import LocalMenu from './Screens/Local/Local'
-import MultiMenu from './Screens/Multi/Multi'
-import useLanguage from './Hooks/useLanguage'
-import { useEffect } from 'react'
+import './App.css';
+import { Routes, Route, HashRouter as Router } from 'react-router';
+import Header from './Components/Header/Header';
+import StartMenu from './Screens/Start/Start';
+import SingleMenu from './Screens/Single/Single';
+import LocalMenu from './Screens/Local/Local';
+import MultiMenu from './Screens/Multi/Multi';
+import useLanguage from './Hooks/useLanguage';
+import { useEffect } from 'react';
 
 function App(){
-  const [, extraLang, setLang] = useLanguage()
+  const [, extraLang, setLang] = useLanguage();
 
   useEffect(() => {
-    setLang(extraLang().code)
-    console.log('App loaded')
+    setLang(extraLang().code);
+    console.log('App loaded');
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <Router>
@@ -29,7 +29,7 @@ function App(){
         </Routes>
       </main>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

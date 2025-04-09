@@ -1,11 +1,11 @@
-import styles from './Key.module.css'
-import './Key.css'
+import styles from './Key.module.css';
+import './Key.css';
 
 interface KeyProps {
-  onClick: (e: React.MouseEvent) => void
-  children: React.ReactNode
-  char: string
-  wide?: boolean
+  onClick: (e: React.MouseEvent) => void;
+  children: React.ReactNode;
+  char: string;
+  wide?: boolean;
 }
 
 function Key({ onClick, children, char, wide }: KeyProps){
@@ -17,6 +17,6 @@ function Key({ onClick, children, char, wide }: KeyProps){
     >
       { children }
     </button>
-  )
+  );
 }
-export default Key
+export default Key;

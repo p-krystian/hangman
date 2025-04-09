@@ -1,26 +1,26 @@
-import { useImperativeHandle, useState } from 'react'
-import useSettings from '../../Hooks/useSettings'
-import useLanguage from '../../Hooks/useLanguage'
-import styles from './Volume.module.css'
+import { useImperativeHandle, useState } from 'react';
+import useSettings from '../../Hooks/useSettings';
+import useLanguage from '../../Hooks/useLanguage';
+import styles from './Volume.module.css';
 
 function Volume({ ref }: { ref: React.ForwardedRef<unknown> }) {
-  const [getSettings, setSettings] = useSettings()
-  const [l] = useLanguage()
-  const [vol, setVol] = useState(getSettings().soundVolume)
+  const [getSettings, setSettings] = useSettings();
+  const [l] = useLanguage();
+  const [vol, setVol] = useState(getSettings().soundVolume);
 
   const levels = [
     <path d="m 13,2 c 0,0 5,6 0,12" fill="none" stroke="currentColor" strokeWidth="1.2" key="v1" />,
     <path d="m 11.5,3.5 c 0,0 3,4 0,9" fill="none" stroke="currentColor" strokeWidth="1.2" key="v2" />,
     <path d="m 9.5,5 c 0,0 2,3 0,6" fill="none" stroke="currentColor" strokeWidth="1.2" key="v3" />
-  ]
+  ];
 
   useImperativeHandle(ref, () => ({
     click: () => setVol(currentVol => {
-      const newVol = currentVol > 2 ? 0 : currentVol + 1
-      setSettings('soundVolume', newVol)
-      return newVol
+      const newVol = currentVol > 2 ? 0 : currentVol + 1;
+      setSettings('soundVolume', newVol);
+      return newVol;
     }),
-  }), [setSettings])
+  }), [setSettings]);
 
   return (
     <svg viewBox="0 0 16 16" className={ styles.icon }>
@@ -35,6 +35,6 @@ function Volume({ ref }: { ref: React.ForwardedRef<unknown> }) {
         levels.splice(vol * (-1))
       ) }
     </svg>
-  )
+  );
 }
-export default Volume
+export default Volume;

@@ -1,49 +1,49 @@
-import Input from '../../Components/Input/Input'
-import Keyboard from '../../Components/Keyboard/Keyboard'
-import Button from '../../Components/Button/Button'
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
-import GameContext from '../../Contexts/GameContext'
-import styles from './WriteNicks.module.css'
-import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
-import useKeyboardControl from '../../Hooks/useKeyboardControl'
-import useFullScreen from '../../Hooks/useFullScreen'
-import useLanguage from '../../Hooks/useLanguage'
-import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react'
+import Input from '../../Components/Input/Input';
+import Keyboard from '../../Components/Keyboard/Keyboard';
+import Button from '../../Components/Button/Button';
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
+import GameContext from '../../Contexts/GameContext';
+import styles from './WriteNicks.module.css';
+import useKeyboardWrite from '../../Hooks/useKeyboardWrite';
+import useKeyboardControl from '../../Hooks/useKeyboardControl';
+import useFullScreen from '../../Hooks/useFullScreen';
+import useLanguage from '../../Hooks/useLanguage';
+import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react';
 
 interface WriteNicksProps {
-  back: () => void
-  next: () => void
+  back: () => void;
+  next: () => void;
 }
 
 function WriteNicks({ back, next }: WriteNicksProps){
-  const [l] = useLanguage()
-  const fullScreenManager = useFullScreen()
-  const keyboardControl = useKeyboardControl()
-  const [nick0, setNick0] = useState('')
-  const [nick1, setNick1] = useState('')
-  const [focused, setFocused] = useState(0)
-  const gameContext = useContext(GameContext)
-  const maxNickLength = 12
-  const pass = (nick0.length > 2 && nick1.length > 2) && (nick0 !== nick1)
+  const [l] = useLanguage();
+  const fullScreenManager = useFullScreen();
+  const keyboardControl = useKeyboardControl();
+  const [nick0, setNick0] = useState('');
+  const [nick1, setNick1] = useState('');
+  const [focused, setFocused] = useState(0);
+  const gameContext = useContext(GameContext);
+  const maxNickLength = 12;
+  const pass = (nick0.length > 2 && nick1.length > 2) && (nick0 !== nick1);
 
   const keyboardWrite = useKeyboardWrite(
     focused ? setNick1 : setNick0,
     maxNickLength
-  )
+  );
 
   const submit = useCallback(() => {
-    if (!pass) return
-    gameContext.nicks = [nick0, nick1]
-    next()
-  }, [nick0, nick1, pass, next, gameContext])
+    if (!pass) return;
+    gameContext.nicks = [nick0, nick1];
+    next();
+  }, [nick0, nick1, pass, next, gameContext]);
 
-  useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
+  useLayoutEffect(() => fullScreenManager(), [fullScreenManager]);
   useEffect(() => keyboardControl(
     back,
     submit,
     () => setFocused(0),
     () => setFocused(1)
-  ), [back, submit, keyboardControl])
+  ), [back, submit, keyboardControl]);
 
   return (
     <div className={ styles.wrapper }>
@@ -74,7 +74,7 @@ function WriteNicks({ back, next }: WriteNicksProps){
         <Button onClick={ back }>{ l('cancel') }</Button>
       </ButtonWrap>
     </div>
-  )
+  );
 }
 
-export default WriteNicks
+export default WriteNicks;

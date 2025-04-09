@@ -1,6 +1,6 @@
 interface Settings{
-  soundVolume: number
-  language: string
+  soundVolume: number;
+  language: string;
 }
 type SettingKey = keyof Settings
 type SettingValue = Settings[SettingKey]
@@ -12,19 +12,19 @@ type SettingsHook = [
 const defaultSettings = JSON.stringify({
   soundVolume: 2,
   language: 'pl'
-})
+});
 
 const get = () => (
   JSON.parse(localStorage.getItem('hmSettings') || defaultSettings) as Settings
-)
+);
 
-const set = (key:SettingKey, value:SettingValue) => {
+const set = (key: SettingKey, value: SettingValue) => {
   const newSettings = {
     ...get(),
     [key]: value
-  }
-  localStorage.setItem('hmSettings', JSON.stringify(newSettings))
-  return get()
-}
+  };
+  localStorage.setItem('hmSettings', JSON.stringify(newSettings));
+  return get();
+};
 
-export default ():SettingsHook => [get, set]
+export default (): SettingsHook => [get, set];

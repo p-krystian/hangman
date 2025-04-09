@@ -1,7 +1,7 @@
-import useLanguage from '../../Hooks/useLanguage'
+import useLanguage from '../../Hooks/useLanguage';
 
 function InfoSymbol(){
-  const [l] = useLanguage()
+  const [l] = useLanguage();
 
   return (
     <svg viewBox="0 0 64 64" style={ {height: '100%'} }>
@@ -10,6 +10,6 @@ function InfoSymbol(){
       <circle r="5" cx="32" cy="20" fill="currentColor" />
       <line x1="32" y1="30" x2="32" y2="50" stroke="currentColor" strokeWidth="6" />
     </svg>
-  )
+  );
 }
-export default InfoSymbol
+export default InfoSymbol;

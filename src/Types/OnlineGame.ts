@@ -1,6 +1,6 @@
 interface OnlineGame {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
 
-export default OnlineGame
+export default OnlineGame;

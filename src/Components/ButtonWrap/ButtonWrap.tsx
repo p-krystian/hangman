@@ -1,7 +1,7 @@
-import styles from './ButtonWrap.module.css'
+import styles from './ButtonWrap.module.css';
 
 interface ButtonWrapProps{
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 function ButtonWrap({ children }: ButtonWrapProps){
@@ -9,6 +9,6 @@ function ButtonWrap({ children }: ButtonWrapProps){
     <div className={ styles.buttons }>
       { children }
     </div>
-  )
+  );
 }
-export default ButtonWrap
+export default ButtonWrap;

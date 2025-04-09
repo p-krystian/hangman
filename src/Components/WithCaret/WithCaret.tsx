@@ -1,4 +1,4 @@
-import styles from './WithCaret.module.css'
+import styles from './WithCaret.module.css';
 
 interface WithCaretProps {
   size: number;
@@ -14,6 +14,6 @@ function WithCaret({size, show, children}: WithCaretProps) {
         <span className={ styles.caret }>_</span>
       )}
     </>
-  )
+  );
 }
-export default WithCaret
+export default WithCaret;

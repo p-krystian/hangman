@@ -1,13 +1,13 @@
-import Key from '../Key/Key'
-import useLanguage from '../../Hooks/useLanguage'
-import styles from './WriteKeys.module.css'
+import Key from '../Key/Key';
+import useLanguage from '../../Hooks/useLanguage';
+import styles from './WriteKeys.module.css';
 
 interface WriteKeysProps{
-  keyEvent: (e:React.MouseEvent, char:string) => void
+  keyEvent: (e: React.MouseEvent, char: string) => void;
 }
 
-function WriteKeys({ keyEvent }:WriteKeysProps){
-  const [l] = useLanguage()
+function WriteKeys({ keyEvent }: WriteKeysProps){
+  const [l] = useLanguage();
 
   return(
     <div className={ styles.keys }>
@@ -30,6 +30,6 @@ function WriteKeys({ keyEvent }:WriteKeysProps){
         </svg>
       </Key>
     </div>
-  )
+  );
 }
-export default WriteKeys
+export default WriteKeys;

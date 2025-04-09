@@ -1,36 +1,36 @@
-import styles from './Confirm.module.css'
-import Button from '../Button/Button'
-import useLanguage from '../../Hooks/useLanguage'
-import { createPortal } from 'react-dom'
-import { useEffect } from 'react'
+import styles from './Confirm.module.css';
+import Button from '../Button/Button';
+import useLanguage from '../../Hooks/useLanguage';
+import { createPortal } from 'react-dom';
+import { useEffect } from 'react';
 
 interface ConfirmProps{
-  confirm: () => void
-  reject?: () => void
-  long?: boolean
-  children: React.ReactNode
+  confirm: () => void;
+  reject?: () => void;
+  long?: boolean;
+  children: React.ReactNode;
 }
 
 function Confirm({ confirm, reject, long, children }: ConfirmProps){
-  const [l] = useLanguage()
-  const popupContainer = document.getElementById('popup')!
-  const confirmText = reject ? l('yes') : l('ok')
+  const [l] = useLanguage();
+  const popupContainer = document.getElementById('popup')!;
+  const confirmText = reject ? l('yes') : l('ok');
 
   useEffect(() => {
-    popupContainer.classList.add('active')
+    popupContainer.classList.add('active');
     // popupContainer.focus()
-    return () => popupContainer.classList.remove('active')
-  }, [popupContainer])
+    return () => popupContainer.classList.remove('active');
+  }, [popupContainer]);
 
   return createPortal(
     <div className={ `${styles.confirm} ${long ? styles.long : ''}` }>
       <span>{ children }</span>
       <div className={ styles.buttons }>
-        { reject && <Button small={true} onClick={ reject }>{ l('no') }</Button> }
-        <Button small={true} onClick={ confirm }>{ confirmText }</Button>
+        { reject && <Button small={ true } onClick={ reject }>{ l('no') }</Button> }
+        <Button small={ true } onClick={ confirm }>{ confirmText }</Button>
       </div>
     </div>,
     popupContainer
-  )
+  );
 }
-export default Confirm
+export default Confirm;

@@ -1,13 +1,13 @@
-import { Link } from 'react-router'
-import styles from './Button.module.css'
+import { Link } from 'react-router';
+import styles from './Button.module.css';
 
 interface ButtonProps {
-  link?: string
-  onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => unknown
-  value?: string
-  children: React.ReactNode
-  disabled?: boolean,
-  small?: boolean
+  link?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => unknown;
+  value?: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+  small?: boolean;
 }
 
 function Button(props: ButtonProps){
@@ -18,7 +18,7 @@ function Button(props: ButtonProps){
     children,
     disabled = false,
     small = false
-  } = props
+  } = props;
 
   return(
     link ? (
@@ -40,6 +40,6 @@ function Button(props: ButtonProps){
         { children }
       </button>
     )
-  )
+  );
 }
-export default Button
+export default Button;

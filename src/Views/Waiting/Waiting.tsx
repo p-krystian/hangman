@@ -1,15 +1,15 @@
-import styles from './Waiting.module.css'
-import head from '../../Assets/Animation/head.svg'
-import Button from '../../Components/Button/Button'
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
-import useLanguage from '../../Hooks/useLanguage'
+import styles from './Waiting.module.css';
+import head from '../../Assets/Animation/head.svg';
+import Button from '../../Components/Button/Button';
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
+import useLanguage from '../../Hooks/useLanguage';
 
 interface WaitingProps {
-  abort?: () => void
+  abort?: () => void;
 }
 
 function Waiting({ abort }: WaitingProps){
-  const [l] = useLanguage()
+  const [l] = useLanguage();
 
   return (
     <div className={ styles.wrapper }>
@@ -21,6 +21,6 @@ function Waiting({ abort }: WaitingProps){
         { !!abort && <Button onClick={ abort }>{ l('cancel') }</Button> }
       </ButtonWrap>
     </div>
-  )
+  );
 }
-export default Waiting
+export default Waiting;

@@ -1,14 +1,14 @@
-import styles from './Lobby.module.css'
-import Button from '../Button/Button'
-import useLanguage from '../../Hooks/useLanguage'
+import styles from './Lobby.module.css';
+import Button from '../Button/Button';
+import useLanguage from '../../Hooks/useLanguage';
 
 interface LobbyProps {
-  name: string
-  submit: () => void
+  name: string;
+  submit: () => void;
 }
 
 function Lobby({ name, submit }: LobbyProps){
-  const [l] = useLanguage()
+  const [l] = useLanguage();
 
   return (
     <div className={ styles.lobby }>
@@ -17,6 +17,6 @@ function Lobby({ name, submit }: LobbyProps){
         { l('join') }
       </Button>
     </div>
-  )
+  );
 }
-export default Lobby
+export default Lobby;

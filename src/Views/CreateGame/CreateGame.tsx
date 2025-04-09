@@ -1,13 +1,13 @@
-import styles from './CreateGame.module.css'
-import Button from '../../Components/Button/Button'
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap'
-import Input from '../../Components/Input/Input'
-import Keyboard from '../../Components/Keyboard/Keyboard'
-import useKeyboardWrite from '../../Hooks/useKeyboardWrite'
-import useKeyboardControl from '../../Hooks/useKeyboardControl'
-import useFullScreen from '../../Hooks/useFullScreen'
-import useLanguage from '../../Hooks/useLanguage'
-import { useState, useEffect, useLayoutEffect, useCallback } from 'react'
+import styles from './CreateGame.module.css';
+import Button from '../../Components/Button/Button';
+import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
+import Input from '../../Components/Input/Input';
+import Keyboard from '../../Components/Keyboard/Keyboard';
+import useKeyboardWrite from '../../Hooks/useKeyboardWrite';
+import useKeyboardControl from '../../Hooks/useKeyboardControl';
+import useFullScreen from '../../Hooks/useFullScreen';
+import useLanguage from '../../Hooks/useLanguage';
+import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 
 interface CreateGameProps {
   back: () => void;
@@ -15,26 +15,26 @@ interface CreateGameProps {
 }
 
 function Create({ back, submit }: CreateGameProps){
-  const [name, setName] = useState('')
-  const [l] = useLanguage()
-  const fullScreenManager = useFullScreen()
-  const keyboardControl = useKeyboardControl()
-  const maxNameLength = 12
-  const keyboardWrite = useKeyboardWrite(setName, maxNameLength)
+  const [name, setName] = useState('');
+  const [l] = useLanguage();
+  const fullScreenManager = useFullScreen();
+  const keyboardControl = useKeyboardControl();
+  const maxNameLength = 12;
+  const keyboardWrite = useKeyboardWrite(setName, maxNameLength);
 
-  useLayoutEffect(() => fullScreenManager(), [fullScreenManager])
+  useLayoutEffect(() => fullScreenManager(), [fullScreenManager]);
 
   const create = useCallback(() => {
     if (name.length < 3)
-      return
+      return;
 
-    submit(name.substring(0, maxNameLength))
+    submit(name.substring(0, maxNameLength));
   }, [name, submit, maxNameLength]);
 
   useEffect(() => keyboardControl(
     back,
     create
-  ), [create, keyboardControl, back])
+  ), [create, keyboardControl, back]);
 
   return (
     <div className={ styles.wrapper }>
@@ -59,6 +59,6 @@ function Create({ back, submit }: CreateGameProps){
         </Button>
       </ButtonWrap>
     </div>
-  )
+  );
 }
-export default Create
+export default Create;

@@ -1,10 +1,10 @@
-import styles from './Points.module.css'
-import GameContext from '../../Contexts/GameContext'
-import NumberSlider from '../NumberSlider/NumberSlider'
-import { useContext } from 'react'
+import styles from './Points.module.css';
+import GameContext from '../../Contexts/GameContext';
+import NumberSlider from '../NumberSlider/NumberSlider';
+import { useContext } from 'react';
 
 function Points(){
-  const gameContext = useContext(GameContext)
+  const gameContext = useContext(GameContext);
 
   return (
     <div className={ styles.points }>{
@@ -24,6 +24,6 @@ function Points(){
         </div>
       ))
     }</div>
-  )
+  );
 }
-export default Points
+export default Points;
