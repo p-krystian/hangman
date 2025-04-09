@@ -2,7 +2,11 @@ import Key from '../Key/Key'
 import useLanguage from '../../Hooks/useLanguage'
 import styles from './WriteKeys.module.css'
 
-function WriteKeys({ keyEvent }){
+interface WriteKeysProps{
+  keyEvent: (e?:React.MouseEvent, char?:string) => void
+}
+
+function WriteKeys({ keyEvent }:WriteKeysProps){
   const [l] = useLanguage()
 
   return(

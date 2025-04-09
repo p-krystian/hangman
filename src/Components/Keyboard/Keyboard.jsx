@@ -1,6 +1,6 @@
 import styles from './Keyboard.module.css'
 import Key from '../Key/Key'
-import WriteKeys from './WriteKeys'
+import WriteKeys from '../KeysWrite/WriteKeys'
 import useLanguage from '../../Hooks/useLanguage'
 import { useEffect, useRef, useCallback, useMemo } from 'react'
 
