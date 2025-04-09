@@ -2,8 +2,8 @@ import useLanguage from '../../Hooks/useLanguage'
 import { useState, useEffect } from 'react'
 import styles from './Category.module.css'
 
-const cache = {word: 'null', category: 'undefinded'}
-const findCategory = (word, dict, unknown) => {
+const cache = {word: 'null', category: 'undefined'}
+const findCategory = (word:string, dict:Record<string, string[]>, unknown:string) => {
   for (const cat of Object.keys(dict)){
     if (dict[cat].find(e => e.toUpperCase() === word.toUpperCase())){
       return cat
@@ -12,7 +12,12 @@ const findCategory = (word, dict, unknown) => {
   return unknown
 }
 
-function Category({ entry, short }){
+interface CategoryProps {
+  entry: string;
+  short?: boolean;
+}
+
+function Category({ entry, short }: CategoryProps){
   const [category, setCategory] = useState('\t')
   const [l, extraLang] = useLanguage()
   const keyboardSize = Math.ceil(l('alphabet').length / 7)
@@ -36,7 +41,7 @@ function Category({ entry, short }){
   return (
     <div
       className={ `${styles.category} ${short ? styles.short : ''}` }
-      style={ {'--_s': keyboardSize} }
+      style={ {'--_s': keyboardSize} as React.CSSProperties }
     >
       <span className={ styles.prefix }>
         { `${l('phraseCategory')}:${short ? '\n' : '  '}` }

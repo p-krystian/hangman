@@ -7,7 +7,7 @@ import englishLogo from '../Images/logo-beta-en.webp'
 
 export interface AvailableLang{
   language: Record<string, string>,
-  words: Record<string, object>,
+  words: Record<string, string[]>,
   logo: string,
   symbol: string
 }
