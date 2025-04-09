@@ -9,7 +9,12 @@ import useFullScreen from '../../Hooks/useFullScreen'
 import useLanguage from '../../Hooks/useLanguage'
 import { useState, useEffect, useLayoutEffect, useCallback } from 'react'
 
-function Create({ back, submit }){
+interface CreateGameProps {
+  back: () => void;
+  submit: (name: string) => void;
+}
+
+function Create({ back, submit }: CreateGameProps){
   const [name, setName] = useState('')
   const [l] = useLanguage()
   const fullScreenManager = useFullScreen()

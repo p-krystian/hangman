@@ -8,7 +8,7 @@ interface InputProps{
   focus?: boolean;
   size: number;
   placeholder: string;
-  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 function Input(props: InputProps){
