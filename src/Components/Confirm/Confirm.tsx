@@ -4,15 +4,23 @@ import useLanguage from '../../Hooks/useLanguage'
 import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
 
-function Confirm({ confirm, reject, long, children }){
+interface ConfirmProps{
+  confirm: () => void
+  reject?: () => void
+  long?: boolean
+  children: string
+}
+
+function Confirm({ confirm, reject, long, children }: ConfirmProps){
   const [l] = useLanguage()
-  const popupContainer = document.getElementById('popup')
+  const popupContainer = document.getElementById('popup')!
   const confirmText = reject ? l('yes') : l('ok')
 
   useEffect(() => {
     popupContainer.classList.add('active')
+    // popupContainer.focus()
     return () => popupContainer.classList.remove('active')
-  }, [popupContainer.classList])
+  }, [popupContainer])
 
   return createPortal(
     <div className={ `${styles.confirm} ${long ? styles.long : ''}` }>
