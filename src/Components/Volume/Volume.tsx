@@ -1,9 +1,9 @@
-import { forwardRef, useImperativeHandle, useState } from 'react'
+import { useImperativeHandle, useState } from 'react'
 import useSettings from '../../Hooks/useSettings'
 import useLanguage from '../../Hooks/useLanguage'
 import styles from './Volume.module.css'
 
-function Volume(_, ref){
+function Volume({ ref }: { ref: React.ForwardedRef<unknown> }) {
   const [getSettings, setSettings] = useSettings()
   const [l] = useLanguage()
   const [vol, setVol] = useState(getSettings().soundVolume)
@@ -37,4 +37,4 @@ function Volume(_, ref){
     </svg>
   )
 }
-export default forwardRef(Volume)
+export default Volume
