@@ -11,6 +11,9 @@ const findCategory = (word: string, dict: Record<string, string[]>, unknown: str
   }
   return unknown;
 };
+const showPartString = (str: string, i: number) => (
+  `${str.substring(0, i)}${' '.repeat(str.length - i)}`
+);
 
 interface CategoryProps {
   entry: string;
@@ -31,7 +34,10 @@ function Category({ entry, short }: CategoryProps) {
     cache.word = entry;
     cache.category = findCategory(entry, words, l('categoryUnknown'));
     for (let i = 0; i <= cache.category.length; i++) {
-      setTimeout(() => setCategory(cache.category.substring(0, i)), i * 150 + 500);
+      setTimeout(
+        () => setCategory(showPartString(cache.category, i)),
+        i * 150 + 500
+      );
     }
   }, [entry, words, l]);
 
@@ -40,8 +46,12 @@ function Category({ entry, short }: CategoryProps) {
       className={ `${styles.category} ${short ? styles.short : ''}` }
       style={ { '--_s': keyboardSize } as React.CSSProperties }
     >
-      <span className={ styles.prefix }>{`${l('phraseCategory')}:${short ? '\n' : '  '}`}</span>
-      <span className={ styles.name }>{category}</span>
+      <span className={ styles.prefix }>
+        { `${l('phraseCategory')}:${short ? '\n' : '  '}` }
+      </span>
+      <span className={ styles.name }>
+        { category }
+      </span>
     </div>
   );
 }
