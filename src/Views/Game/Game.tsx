@@ -57,7 +57,7 @@ function Game({ exit, onLose, onWin }: GameProps){
     <div className={ styles.container }>
       <div className={ styles.game }>
         <Board progress={ mistakes } />
-        <Category entry={ entry } />
+        <Category entry={ entry } animation />
         <Entry
           hide={ true }
           guessed={ guessed }

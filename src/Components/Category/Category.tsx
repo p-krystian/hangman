@@ -2,14 +2,15 @@ import useLanguage from '../../Hooks/useLanguage';
 import { useState, useEffect } from 'react';
 import styles from './Category.module.css';
 
-const cache = { word: 'null', category: 'undefined' };
-const findCategory = (word: string, dict: Record<string, string[]>, unknown: string) => {
+const previous = { entry: '123', category: '' };
+
+const findCategory = (word: string, dict: Record<string, string[]>) => {
   for (const cat of Object.keys(dict)) {
     if (dict[cat].find((e) => e.toUpperCase() === word.toUpperCase())) {
       return cat;
     }
   }
-  return unknown;
+  return null;
 };
 const showPartString = (str: string, i: number) => (
   `${str.substring(0, i)}${' '.repeat(str.length - i)}`
@@ -18,28 +19,36 @@ const showPartString = (str: string, i: number) => (
 interface CategoryProps {
   entry: string;
   short?: boolean;
+  animation?: boolean;
 }
 
-function Category({ entry, short }: CategoryProps) {
+function Category({ entry, short, animation }: CategoryProps) {
   const [category, setCategory] = useState('\t');
   const [l, extraLang] = useLanguage();
   const keyboardSize = Math.ceil(l('alphabet').length / 7);
   const words = extraLang().words;
 
   useEffect(() => {
-    if (entry === cache.word) {
-      setCategory(cache.category);
+    if (!animation && previous.entry === entry) {
+      setCategory(previous.category);
       return;
     }
-    cache.word = entry;
-    cache.category = findCategory(entry, words, l('categoryUnknown'));
-    for (let i = 0; i <= cache.category.length; i++) {
+    const category = findCategory(entry, words) || l('categoryUnknown');
+    previous.entry = entry;
+    previous.category = category;
+
+    if (!animation) {
+      setCategory(category);
+      return;
+    }
+
+    for (let i = 0; i <= category.length; i++) {
       setTimeout(
-        () => setCategory(showPartString(cache.category, i)),
+        () => setCategory(showPartString(category, i)),
         i * 150 + 500
       );
     }
-  }, [entry, words, l]);
+  }, [entry, words, l, animation]);
 
   return (
     <div
