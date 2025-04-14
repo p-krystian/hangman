@@ -1,6 +1,6 @@
 .button{
   appearance: none;
-  display: inline-block;
+  display: inline-grid;
   min-width: 10rem;
   font-size: 2rem;
   padding: 0.4rem;
@@ -13,6 +13,7 @@
   text-decoration: none;
   text-transform: lowercase;
   text-align: center;
+  place-items: center;
   transition:
     background-color 150ms ease-out,
     filter 150ms ease-in-out;
@@ -32,4 +33,9 @@
   pointer-events: none;
   cursor: not-allowed;
   filter: brightness(50%);
+}
+button img{
+  width: 85%;
+  height: 85%;
+  object-fit: cover;
 }

@@ -46,7 +46,7 @@ function MenuStart(){
           value={ l('languageWord') }
           small
         >
-          { extraLang().symbol }
+          <img src={ extraLang().symbol } alt={ extraLang().code } />
         </Button>
       </div>
       <Button link='/single'>{ l('single') }</Button>
