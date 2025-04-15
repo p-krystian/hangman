@@ -22,7 +22,6 @@ function useKeyboardControl(
 
     const key = code as keyof typeof actions;
     const action = actions[key];
-    console.log(action);
     if (typeof action === 'function'){
       action();
     }
