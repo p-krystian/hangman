@@ -6,15 +6,15 @@ import { useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import random from 'random';
 
-const randomizer = (l: (word: string) => string, words: Record<string, string[]>) => {
-  const randomCat = random.choice(Object.keys(words)) as keyof typeof words;
-  return random.choice(words[randomCat] || [l('randomize')]) as string;
+const randomizer = (fallback: string, words: Record<string, string[]>) => {
+  const randomWord = random.choice(Object.values(words).flat());
+  return randomWord || fallback;
 };
 
 function SingleGame(){
   const navigate = useNavigate();
   const [l, extraLang] = useLanguage();
-  const randomWord = randomizer(l, extraLang().words);
+  const randomWord = randomizer(l('randomize'), extraLang().words);
   const [stage, setStage] = useState('game');
   const gameData = useRef<GameContextType>({
     entry: randomWord.toUpperCase(),
