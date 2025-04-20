@@ -13,7 +13,6 @@ function App(){
 
   useEffect(() => {
     setLang(extraLang().code);
-    console.log('App loaded');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
