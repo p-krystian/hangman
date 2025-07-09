@@ -70,7 +70,7 @@ function MultiPlayer(){
 
   const nextRound = useMemo(() => {
     if (opponentExit.current){
-      return () => socket.emit('join-lobby', [l('lang'), l('alphabet')], v);
+      return () => socket.emit('join-lobby', l('lang'), v);
     }
     if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
       return () => {};
@@ -89,7 +89,7 @@ function MultiPlayer(){
       confirm: () => {
         setAlert(null);
         if (stage !== 'result'){
-          socket.emit('join-lobby', [l('lang'), l('alphabet')], v);
+          socket.emit('join-lobby', l('lang'), v);
         }
       }
     });
@@ -134,7 +134,7 @@ function MultiPlayer(){
   useEffect(() => {
     socket.on('connect', () => {
       setTimeout(() => {
-        socket.emit('join-lobby', [l('lang'), l('alphabet')], v);
+        socket.emit('join-lobby', l('lang'), v);
       }, 300);
       setAlert(current => (
         current?.children === l('serverDisconnect') ? {
@@ -212,7 +212,7 @@ function MultiPlayer(){
         />
       ) : (
         <Waiting abort={
-          () => socket.emit('join-lobby', [l('lang'), l('alphabet')], v)
+          () => socket.emit('join-lobby', l('lang'), v)
         }/>
       )
     }
