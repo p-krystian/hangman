@@ -68,15 +68,15 @@ function Game({ exit, onLose, onWin }: GameProps){
         <Keyboard keyEvent={ clickKey } />
       </div>
       <ButtonWrap>
-        {!!exit && <Button onClick={ () => setShowExit(true) }>
+        { !!exit && <Button onClick={ () => setShowExit(true) }>
           { l('cancel') }
-        </Button>}
+        </Button> }
       </ButtonWrap>
-      {!!showExit && (
+      { !!showExit && (
         <Confirm confirm={ () => exit && exit() } reject={ () => setShowExit(false) }>
           { l('endGame') }
         </Confirm>
-      )}
+      ) }
     </div>
   );
 }

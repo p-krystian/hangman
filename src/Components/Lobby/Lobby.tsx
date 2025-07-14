@@ -12,7 +12,7 @@ function Lobby({ name, submit }: LobbyProps){
 
   return (
     <div className={ styles.lobby }>
-      <span>{name}</span>
+      <span>{ name }</span>
       <Button small={ true } onClick={ submit }>
         { l('join') }
       </Button>

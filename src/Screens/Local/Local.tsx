@@ -53,14 +53,14 @@ function Local(){
           <WriteEntry
             { ...entryOpts }
           />
-          {askExit && (
+          { askExit && (
             <Confirm
               confirm={ () => navigate('/') }
               reject={ () => setAskExit(false) }
             >
               { l('exitToMenu') }
             </Confirm>
-          )}
+          ) }
         </>
       ) : stage === 'game' ? (
         <Game

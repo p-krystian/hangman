@@ -4,7 +4,6 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
-import stylistic from '@stylistic/eslint-plugin';
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -27,25 +26,19 @@ export default tseslint.config(
       "react": reactPlugin,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      "@stylistic": stylistic,
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      "react/prop-types": "warn",
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
       ],
       "react/jsx-curly-spacing": [
         "warn",
-        { when: "always", allowMultiline: true },
+        { when: "always", allowMultiline: true, children: { when: "always" } },
       ],
       semi: ["warn", "always"],
-      "@stylistic/member-delimiter-style": "error",
-      "@stylistic/function-call-spacing": "error",
-      "@stylistic/quotes": ["warn", "single"],
-      "@stylistic/type-annotation-spacing": "warn"
     },
     settings: {
       react: {

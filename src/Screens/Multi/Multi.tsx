@@ -1,18 +1,18 @@
-import Games from '@/Views/OnlineGames/OnlineGames';
-import Create from '@/Views/CreateGame/CreateGame';
-import WriteEntry from '@/Views/WriteEntry/WriteEntry';
-import Game from '@/Views/Game/Game';
-import EndGame from '@/Views/EndGame/EndGame';
-import Connecting from '@/Views/Connecting/Connecting';
-import Waiting from '@/Views/Waiting/Waiting';
 import Alert from '@/Components/Confirm/Confirm';
-import GameContext, { GameContextType } from '@/Contexts/GameContext';
-import GameType from '@/Types/OnlineGame';
-import useLanguage, { getCurrentCode } from '@/Hooks/useLanguage';
-import { io } from 'socket.io-client';
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router';
 import { appVersion, env, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
+import GameContext, { GameContextType } from '@/Contexts/GameContext';
+import useLanguage, { getCurrentCode } from '@/Hooks/useLanguage';
+import GameType from '@/Types/OnlineGame';
+import Connecting from '@/Views/Connecting/Connecting';
+import Create from '@/Views/CreateGame/CreateGame';
+import EndGame from '@/Views/EndGame/EndGame';
+import Game from '@/Views/Game/Game';
+import Games from '@/Views/OnlineGames/OnlineGames';
+import Waiting from '@/Views/Waiting/Waiting';
+import WriteEntry from '@/Views/WriteEntry/WriteEntry';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { io } from 'socket.io-client';
 
 const socket = io(env.SOCKET_URL, {
   autoConnect: false,
@@ -23,12 +23,12 @@ const socket = io(env.SOCKET_URL, {
   }
 });
 
-interface AlertType{
+interface AlertType {
   children: React.ReactNode;
   confirm: () => void;
 }
 
-function MultiPlayer(){
+function MultiPlayer() {
   const [l] = useLanguage();
   const navigate = useNavigate();
   const [stage, setStage] = useState('connecting');
@@ -53,7 +53,7 @@ function MultiPlayer(){
   }, []);
 
   const createNewGame = useCallback((name: string) => {
-    if (gameList.length >= 6){
+    if (gameList.length >= 6) {
       setAlert({
         children: l('maxGames'),
         confirm: () => setAlert(null)
@@ -73,15 +73,15 @@ function MultiPlayer(){
   }, []);
 
   const nextRound = useMemo(() => {
-    if (opponentExit.current){
+    if (opponentExit.current) {
       return () => socket.emit(sOut.JOIN_LOBBY);
     }
-    if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
-      return () => {};
+    if (gameData.current.rounds[0] !== gameData.current.rounds[1]) {
+      return () => { };
     }
 
     return () => socket.emit(sOut.NEXT_ROUND);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultKey, l]);
 
   const onOpponentExit = useCallback(() => {
@@ -92,7 +92,7 @@ function MultiPlayer(){
       children: l('opponentExit'),
       confirm: () => {
         setAlert(null);
-        if (stage !== 'result'){
+        if (stage !== 'result') {
           socket.emit(sOut.JOIN_LOBBY);
         }
       }
@@ -125,11 +125,11 @@ function MultiPlayer(){
 
     socket.on('game-list', games => {
       setGameList(games);
-      if (stage !== 'create'){
+      if (stage !== 'create') {
         setResultKey('r-1-1');
         opponentExit.current = false;
         setStage('lobby');
-        gameData.current = {...initialData};
+        gameData.current = { ...initialData };
       }
     });
     return cleanup;
@@ -166,7 +166,7 @@ function MultiPlayer(){
       backupData();
       gameData.current.points = [data.wins, data.oWins];
       gameData.current.rounds = [data.rounds, data.oRounds];
-      setResultKey(`r-${data.rounds+1}-${data.oRounds+1}`);
+      setResultKey(`r-${data.rounds + 1}-${data.oRounds + 1}`);
       setStage('result');
     });
 
@@ -217,10 +217,10 @@ function MultiPlayer(){
       ) : (
         <Waiting abort={
           () => socket.emit(sOut.JOIN_LOBBY)
-        }/>
+        } />
       )
     }
-    {!!alert && <Alert { ...alert } />}
+      { !!alert && <Alert { ...alert } /> }
     </GameContext.Provider>
   );
 }

@@ -10,9 +10,9 @@ function WithCaret({size, show, children}: WithCaretProps) {
   return(
     <>
       { children }
-      {(children.length < size && (show === undefined || show === null ? true : show)) && (
+      { (children.length < size && (show === undefined || show === null ? true : show)) && (
         <span className={ styles.caret }>_</span>
-      )}
+      ) }
     </>
   );
 }

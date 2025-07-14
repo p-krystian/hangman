@@ -69,7 +69,7 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps){
         <Button onClick={ updateContext } disabled={ entry.length < 3 }>
           { l('next') }
         </Button>
-        {!!back && <Button onClick={ back }>{ backText || l('back') }</Button>}
+        { !!back && <Button onClick={ back }>{ backText || l('back') }</Button> }
         <Button onClick={ writeRandom }>{ l('randomize') }</Button>
       </ButtonWrap>
     </div>

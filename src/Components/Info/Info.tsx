@@ -7,7 +7,7 @@ function Info() {
 
   return (
     <div className={ styles.info }>
-      {l('info')}
+      { l('info') }
       <br /><br />
       <p>
         { `v${appVersion} - ` }
