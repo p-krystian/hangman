@@ -8,16 +8,19 @@ import Waiting from '../../Views/Waiting/Waiting';
 import Alert from '../../Components/Confirm/Confirm';
 import GameContext, { GameContextType } from '../../Contexts/GameContext';
 import GameType from '../../Types/OnlineGame';
-import useLanguage from '../../Hooks/useLanguage';
+import useLanguage, { getCurrentCode } from '../../Hooks/useLanguage';
 import { io } from 'socket.io-client';
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 
 const socket = io(import.meta.env.VITE_SOCKET_URL, {
   autoConnect: false,
-  path: import.meta.env.VITE_SOCKET_PATH || '/socket.io/'
+  path: import.meta.env.VITE_SOCKET_PATH || '/socket.io/',
+  query: {
+    version: import.meta.env.VITE_APP_VERSION,
+    language: getCurrentCode()
+  }
 });
-const v = import.meta.env.VITE_APP_VERSION;
 
 interface AlertType{
   children: React.ReactNode;
@@ -61,22 +64,22 @@ function MultiPlayer(){
 
   const winCallback = useCallback(() => {
     gameData.current.win = true;
-    socket.emit('end-game', gameData.current.entry);
+    socket.emit('end-round', gameData.current.entry);
   }, []);
   const loseCallback = useCallback(() => {
     gameData.current.win = false;
-    socket.emit('end-game', false);
+    socket.emit('end-round', false);
   }, []);
 
   const nextRound = useMemo(() => {
     if (opponentExit.current){
-      return () => socket.emit('join-lobby', l('lang'), v);
+      return () => socket.emit('join-lobby');
     }
     if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
       return () => {};
     }
 
-    return () => socket.emit('continue-game');
+    return () => socket.emit('next-round');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultKey, l]);
 
@@ -89,7 +92,7 @@ function MultiPlayer(){
       confirm: () => {
         setAlert(null);
         if (stage !== 'result'){
-          socket.emit('join-lobby', l('lang'), v);
+          socket.emit('join-lobby');
         }
       }
     });
@@ -134,7 +137,7 @@ function MultiPlayer(){
   useEffect(() => {
     socket.on('connect', () => {
       setTimeout(() => {
-        socket.emit('join-lobby', l('lang'), v);
+        socket.emit('join-lobby');
       }, 300);
       setAlert(current => (
         current?.children === l('serverDisconnect') ? {
@@ -212,7 +215,7 @@ function MultiPlayer(){
         />
       ) : (
         <Waiting abort={
-          () => socket.emit('join-lobby', l('lang'), v)
+          () => socket.emit('join-lobby')
         }/>
       )
     }
