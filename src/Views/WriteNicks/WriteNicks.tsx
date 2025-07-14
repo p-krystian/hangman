@@ -1,13 +1,13 @@
-import Input from '../../Components/Input/Input';
-import Keyboard from '../../Components/Keyboard/Keyboard';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import GameContext from '../../Contexts/GameContext';
+import Input from '@/Components/Input/Input';
+import Keyboard from '@/Components/Keyboard/Keyboard';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import GameContext from '@/Contexts/GameContext';
 import styles from './WriteNicks.module.css';
-import useKeyboardWrite from '../../Hooks/useKeyboardWrite';
-import useKeyboardControl from '../../Hooks/useKeyboardControl';
-import useFullScreen from '../../Hooks/useFullScreen';
-import useLanguage from '../../Hooks/useLanguage';
+import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useFullScreen from '@/Hooks/useFullScreen';
+import useLanguage from '@/Hooks/useLanguage';
 import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react';
 
 interface WriteNicksProps {

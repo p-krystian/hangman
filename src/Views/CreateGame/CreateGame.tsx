@@ -1,12 +1,12 @@
 import styles from './CreateGame.module.css';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import Input from '../../Components/Input/Input';
-import Keyboard from '../../Components/Keyboard/Keyboard';
-import useKeyboardWrite from '../../Hooks/useKeyboardWrite';
-import useKeyboardControl from '../../Hooks/useKeyboardControl';
-import useFullScreen from '../../Hooks/useFullScreen';
-import useLanguage from '../../Hooks/useLanguage';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import Input from '@/Components/Input/Input';
+import Keyboard from '@/Components/Keyboard/Keyboard';
+import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useFullScreen from '@/Hooks/useFullScreen';
+import useLanguage from '@/Hooks/useLanguage';
 import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 
 interface CreateGameProps {

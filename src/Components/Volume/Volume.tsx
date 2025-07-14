@@ -1,6 +1,6 @@
 import { useImperativeHandle, useState } from 'react';
-import useSettings from '../../Hooks/useSettings';
-import useLanguage from '../../Hooks/useLanguage';
+import useSettings from '@/Hooks/useSettings';
+import useLanguage from '@/Hooks/useLanguage';
 import styles from './Volume.module.css';
 
 function Volume({ ref }: { ref: React.ForwardedRef<unknown> }) {

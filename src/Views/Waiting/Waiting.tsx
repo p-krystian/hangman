@@ -1,8 +1,8 @@
 import styles from './Waiting.module.css';
-import head from '../../Assets/Animation/head.svg';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import useLanguage from '../../Hooks/useLanguage';
+import head from '@/Assets/Animation/head.svg';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import useLanguage from '@/Hooks/useLanguage';
 
 interface WaitingProps {
   abort?: () => void;

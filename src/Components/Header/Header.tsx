@@ -1,5 +1,5 @@
 import './Header.css';
-import useLanguage from '../../Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLanguage';
 
 function Header(){
   const [l, extraLang] = useLanguage();

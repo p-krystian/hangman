@@ -1,4 +1,4 @@
-import useLanguage from '../../Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLanguage';
 import { useState, useEffect } from 'react';
 import styles from './Category.module.css';
 

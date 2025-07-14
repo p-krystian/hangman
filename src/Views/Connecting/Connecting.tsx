@@ -1,9 +1,9 @@
 import styles from './Connecting.module.css';
-import Board from '../../Components/Board/Board';
-import Entry from '../../Components/Entry/Entry';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import useLanguage from '../../Hooks/useLanguage';
+import Board from '@/Components/Board/Board';
+import Entry from '@/Components/Entry/Entry';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import useLanguage from '@/Hooks/useLanguage';
 import { useEffect, useState } from 'react';
 
 function Connecting(){

@@ -1,7 +1,7 @@
-import Game from '../../Views/Game/Game';
-import EndGame from '../../Views/EndGame/EndGame';
-import GameContext, { GameContextType } from '../../Contexts/GameContext';
-import useLanguage from '../../Hooks/useLanguage';
+import Game from '@/Views/Game/Game';
+import EndGame from '@/Views/EndGame/EndGame';
+import GameContext, { GameContextType } from '@/Contexts/GameContext';
+import useLanguage from '@/Hooks/useLanguage';
 import { useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import random from 'random';

@@ -1,16 +1,16 @@
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import Points from '../../Components/Points/Points';
-import Category from '../../Components/Category/Category';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import Points from '@/Components/Points/Points';
+import Category from '@/Components/Category/Category';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import GameContext from '../../Contexts/GameContext';
+import GameContext from '@/Contexts/GameContext';
 import styles from './EndGame.module.css';
-import deadImg from '../../Assets/Animation/dead.svg';
-import liveImg from '../../Assets/Animation/live.svg';
-import useLanguage from '../../Hooks/useLanguage';
-import useKeyboardControl from '../../Hooks/useKeyboardControl';
-import usePlaySound from '../../Hooks/usePlaySound';
+import deadImg from '@/Assets/Animation/dead.svg';
+import liveImg from '@/Assets/Animation/live.svg';
+import useLanguage from '@/Hooks/useLanguage';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import usePlaySound from '@/Hooks/usePlaySound';
 
 interface EndGameProps {
   next: () => void;

@@ -1,8 +1,8 @@
 import styles from './Board.module.css';
-import svgs from '../../Assets/Animation';
-import bg from '../../Assets/Images/board-bg.svg';
-import fg from '../../Assets/Images/board-fg.svg';
-import useLanguage from '../../Hooks/useLanguage';
+import svgs from '@/Assets/Animation';
+import bg from '@/Assets/Images/board-bg.svg';
+import fg from '@/Assets/Images/board-fg.svg';
+import useLanguage from '@/Hooks/useLanguage';
 
 interface BoardProps{
   progress: number;

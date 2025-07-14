@@ -1,7 +1,7 @@
 import styles from './Keyboard.module.css';
-import Key from '../Key/Key';
-import WriteKeys from '../KeysWrite/WriteKeys';
-import useLanguage from '../../Hooks/useLanguage';
+import Key from '@/Components/Key/Key';
+import WriteKeys from '@/Components/KeysWrite/WriteKeys';
+import useLanguage from '@/Hooks/useLanguage';
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 
 interface KeyboardProps {

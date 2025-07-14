@@ -1,15 +1,15 @@
-import Entry from '../../Components/Entry/Entry';
-import Keyboard from '../../Components/Keyboard/Keyboard';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import WithCaret from '../../Components/WithCaret/WithCaret';
-import GameContext from '../../Contexts/GameContext';
+import Entry from '@/Components/Entry/Entry';
+import Keyboard from '@/Components/Keyboard/Keyboard';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import WithCaret from '@/Components/WithCaret/WithCaret';
+import GameContext from '@/Contexts/GameContext';
 import styles from './WriteEntry.module.css';
-import useKeyboardWrite from '../../Hooks/useKeyboardWrite';
-import useKeyboardControl from '../../Hooks/useKeyboardControl';
-import useFullScreen from '../../Hooks/useFullScreen';
-import usePlaySound from '../../Hooks/usePlaySound';
-import useLanguage from '../../Hooks/useLanguage';
+import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useFullScreen from '@/Hooks/useFullScreen';
+import usePlaySound from '@/Hooks/usePlaySound';
+import useLanguage from '@/Hooks/useLanguage';
 import random from 'random';
 import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react';
 

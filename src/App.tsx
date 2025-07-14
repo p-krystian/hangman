@@ -1,11 +1,11 @@
 import './App.css';
 import { Routes, Route, HashRouter as Router } from 'react-router';
-import Header from './Components/Header/Header';
-import StartMenu from './Screens/Start/Start';
-import SingleMenu from './Screens/Single/Single';
-import LocalMenu from './Screens/Local/Local';
-import MultiMenu from './Screens/Multi/Multi';
-import useLanguage from './Hooks/useLanguage';
+import Header from '@/Components/Header/Header';
+import StartMenu from '@/Screens/Start/Start';
+import SingleMenu from '@/Screens/Single/Single';
+import LocalMenu from '@/Screens/Local/Local';
+import MultiMenu from '@/Screens/Multi/Multi';
+import useLanguage from '@/Hooks/useLanguage';
 import { useEffect } from 'react';
 
 function App(){

@@ -1,12 +1,12 @@
-import styles from './OnlineGames.module.css';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import Lobby from '../../Components/Lobby/Lobby';
+import styles from '@/Views/OnlineGames/OnlineGames.module.css';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import Lobby from '@/Components/Lobby/Lobby';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import useKeyboardControl from '../../Hooks/useKeyboardControl';
-import useLanguage from '../../Hooks/useLanguage';
-import GameType from '../../Types/OnlineGame';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useLanguage from '@/Hooks/useLanguage';
+import GameType from '@/Types/OnlineGame';
 
 interface GamesProps {
   gameList: GameType[];

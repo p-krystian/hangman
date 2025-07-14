@@ -1,6 +1,6 @@
 import styles from './Lobby.module.css';
-import Button from '../Button/Button';
-import useLanguage from '../../Hooks/useLanguage';
+import Button from '@/Components/Button/Button';
+import useLanguage from '@/Hooks/useLanguage';
 
 interface LobbyProps {
   name: string;

@@ -1,5 +1,5 @@
-import Key from '../Key/Key';
-import useLanguage from '../../Hooks/useLanguage';
+import Key from '@/Components/Key/Key';
+import useLanguage from '@/Hooks/useLanguage';
 import styles from './WriteKeys.module.css';
 
 interface WriteKeysProps{

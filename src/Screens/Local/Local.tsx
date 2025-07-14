@@ -1,12 +1,12 @@
-import WriteNicks from '../../Views/WriteNicks/WriteNicks';
-import Game from '../../Views/Game/Game';
-import WriteEntry from '../../Views/WriteEntry/WriteEntry';
-import EndGame from '../../Views/EndGame/EndGame';
-import Confirm from '../../Components/Confirm/Confirm';
+import WriteNicks from '@/Views/WriteNicks/WriteNicks';
+import Game from '@/Views/Game/Game';
+import WriteEntry from '@/Views/WriteEntry/WriteEntry';
+import EndGame from '@/Views/EndGame/EndGame';
+import Confirm from '@/Components/Confirm/Confirm';
 import { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router';
-import GameContext, { GameContextType } from '../../Contexts/GameContext';
-import useLanguage from '../../Hooks/useLanguage';
+import GameContext, { GameContextType } from '@/Contexts/GameContext';
+import useLanguage from '@/Hooks/useLanguage';
 
 function Local(){
   const [l] = useLanguage();

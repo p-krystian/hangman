@@ -1,6 +1,6 @@
 import styles from './Points.module.css';
-import GameContext from '../../Contexts/GameContext';
-import NumberSlider from '../NumberSlider/NumberSlider';
+import GameContext from '@/Contexts/GameContext';
+import NumberSlider from '@/Components/NumberSlider/NumberSlider';
 import { useContext } from 'react';
 
 function Points(){

@@ -1,17 +1,17 @@
 import styles from './Game.module.css';
-import Entry from '../../Components/Entry/Entry';
-import Board from '../../Components/Board/Board';
-import Keyboard from '../../Components/Keyboard/Keyboard';
-import Button from '../../Components/Button/Button';
-import ButtonWrap from '../../Components/ButtonWrap/ButtonWrap';
-import GameContext from '../../Contexts/GameContext';
-import Confirm from '../../Components/Confirm/Confirm';
-import Category from '../../Components/Category/Category';
-import useFullScreen from '../../Hooks/useFullScreen';
+import Entry from '@/Components/Entry/Entry';
+import Board from '@/Components/Board/Board';
+import Keyboard from '@/Components/Keyboard/Keyboard';
+import Button from '@/Components/Button/Button';
+import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import GameContext from '@/Contexts/GameContext';
+import Confirm from '@/Components/Confirm/Confirm';
+import Category from '@/Components/Category/Category';
+import useFullScreen from '@/Hooks/useFullScreen';
 import { useState, useContext, useEffect, useLayoutEffect, useCallback } from 'react';
-import useKeyboardControl from '../../Hooks/useKeyboardControl';
-import usePlaySound from '../../Hooks/usePlaySound';
-import useLanguage from '../../Hooks/useLanguage';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import usePlaySound from '@/Hooks/usePlaySound';
+import useLanguage from '@/Hooks/useLanguage';
 
 interface GameProps {
   exit?: () => void;

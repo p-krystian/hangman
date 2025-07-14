@@ -1,9 +1,9 @@
-import Button from '../../Components/Button/Button';
-import useLanguage from '../../Hooks/useLanguage';
-import Volume from '../../Components/Volume/Volume';
-import Confirm from '../../Components/Confirm/Confirm';
-import Info from '../../Components/Info/Info';
-import InfoSymbol from '../../Components/InfoSymbol/InfoSymbol';
+import Button from '@/Components/Button/Button';
+import useLanguage from '@/Hooks/useLanguage';
+import Volume from '@/Components/Volume/Volume';
+import Confirm from '@/Components/Confirm/Confirm';
+import Info from '@/Components/Info/Info';
+import InfoSymbol from '@/Components/InfoSymbol/InfoSymbol';
 import styles from './Start.module.css';
 import { useRef, useState } from 'react';
 import { env } from '@/conf';

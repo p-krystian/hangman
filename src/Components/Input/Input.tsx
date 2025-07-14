@@ -1,7 +1,7 @@
 import styles from './Input.module.css';
-import WithCaret from '../WithCaret/WithCaret';
+import WithCaret from '@/Components/WithCaret/WithCaret';
 import { useEffect, useRef } from 'react';
-import usePlaySound from '../../Hooks/usePlaySound';
+import usePlaySound from '@/Hooks/usePlaySound';
 
 interface InputProps{
   value: string;
