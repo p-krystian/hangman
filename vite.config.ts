@@ -11,5 +11,10 @@ export default defineConfig({
     port: 8080,
     open: true
   },
+  resolve: {
+    alias: {
+      '@/': '/src/'
+    }
+  },
   esbuild: { target: 'es2020' }
 });
