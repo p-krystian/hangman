@@ -12,12 +12,13 @@ import useLanguage, { getCurrentCode } from '../../Hooks/useLanguage';
 import { io } from 'socket.io-client';
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router';
+import { appVersion, env, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
 
-const socket = io(import.meta.env.VITE_SOCKET_URL, {
+const socket = io(env.SOCKET_URL, {
   autoConnect: false,
-  path: import.meta.env.VITE_SOCKET_PATH || '/socket.io/',
+  path: env.SOCKET_PATH,
   query: {
-    version: import.meta.env.VITE_APP_VERSION,
+    version: appVersion,
     language: getCurrentCode()
   }
 });
@@ -59,27 +60,27 @@ function MultiPlayer(){
       });
       return;
     }
-    socket.emit('create-game', name);
+    socket.emit(sOut.CREATE_GAME, name);
   }, [gameList, l]);
 
   const winCallback = useCallback(() => {
     gameData.current.win = true;
-    socket.emit('end-round', gameData.current.entry);
+    socket.emit(sOut.END_ROUND, gameData.current.entry);
   }, []);
   const loseCallback = useCallback(() => {
     gameData.current.win = false;
-    socket.emit('end-round', false);
+    socket.emit(sOut.END_ROUND, false);
   }, []);
 
   const nextRound = useMemo(() => {
     if (opponentExit.current){
-      return () => socket.emit('join-lobby');
+      return () => socket.emit(sOut.JOIN_LOBBY);
     }
     if (gameData.current.rounds[0] !== gameData.current.rounds[1]){
       return () => {};
     }
 
-    return () => socket.emit('next-round');
+    return () => socket.emit(sOut.NEXT_ROUND);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultKey, l]);
 
@@ -92,7 +93,7 @@ function MultiPlayer(){
       confirm: () => {
         setAlert(null);
         if (stage !== 'result'){
-          socket.emit('join-lobby');
+          socket.emit(sOut.JOIN_LOBBY);
         }
       }
     });
@@ -110,10 +111,10 @@ function MultiPlayer(){
 
   useEffect(() => {
     const cleanup = () => {
-      socket.off('opponent-exit', onOpponentExit);
+      socket.off(sIn.OPPONENT_EXIT, onOpponentExit);
     };
 
-    socket.on('opponent-exit', onOpponentExit);
+    socket.on(sIn.OPPONENT_EXIT, onOpponentExit);
     return cleanup;
   }, [onOpponentExit]);
 
@@ -137,7 +138,7 @@ function MultiPlayer(){
   useEffect(() => {
     socket.on('connect', () => {
       setTimeout(() => {
-        socket.emit('join-lobby');
+        socket.emit(sOut.JOIN_LOBBY);
       }, 300);
       setAlert(current => (
         current?.children === l('serverDisconnect') ? {
@@ -147,21 +148,21 @@ function MultiPlayer(){
       ));
     });
     socket.on('disconnect', () => exitAlert(l('serverDisconnect')));
-    socket.on('unsupported-lang', () => exitAlert(l('unsupportedLang')));
-    socket.on('old-version', () => exitAlert(l('oldVersion')));
+    socket.on(sIn.UNSUPPORTED_LANG, () => exitAlert(l('unsupportedLang')));
+    socket.on(sIn.OLD_VERSION, () => exitAlert(l('oldVersion')));
     socket.on('connect_error', () => {
       console.clear();
       console.warn('Online server connection error');
     });
     socket.connect();
 
-    socket.on('wait-start', () => setStage('waiting'));
-    socket.on('give-phrase', () => setStage('phrase'));
-    socket.on('start-game', phrase => {
+    socket.on(sIn.WAIT_START, () => setStage('waiting'));
+    socket.on(sIn.GIVE_PHRASE, () => setStage('phrase'));
+    socket.on(sIn.START_GAME, phrase => {
       gameData.current.entry = phrase;
       setStage('game');
     });
-    socket.on('game-data', data => {
+    socket.on(sIn.GAME_DATA, data => {
       backupData();
       gameData.current.points = [data.wins, data.oWins];
       gameData.current.rounds = [data.rounds, data.oRounds];
@@ -172,13 +173,13 @@ function MultiPlayer(){
     return () => {
       socket.off('connect');
       socket.off('disconnect');
-      socket.off('unsupported-lang');
-      socket.off('old-version');
+      socket.off(sIn.UNSUPPORTED_LANG);
+      socket.off(sIn.OLD_VERSION);
       socket.off('connect_error');
-      socket.off('wait-start');
-      socket.off('give-phrase');
-      socket.off('start-game');
-      socket.off('game-data');
+      socket.off(sIn.WAIT_START);
+      socket.off(sIn.GIVE_PHRASE);
+      socket.off(sIn.START_GAME);
+      socket.off(sIn.GAME_DATA);
       socket.disconnect();
     };
   }, [backupData, exitAlert, l]);
@@ -190,7 +191,7 @@ function MultiPlayer(){
       ) : stage === 'lobby' ? (
         <Games
           gameList={ gameList }
-          onJoin={ id => socket.emit('join-game', id) }
+          onJoin={ id => socket.emit(sOut.JOIN_GAME, id) }
           onCreate={ () => setStage('create') }
         />
       ) : stage === 'create' ? (
@@ -201,7 +202,7 @@ function MultiPlayer(){
       ) : stage === 'phrase' ? (
         <WriteEntry
           nick={ l('opponents') }
-          next={ () => socket.emit('write-phrase', gameData.current.entry) }
+          next={ () => socket.emit(sOut.WRITE_PHRASE, gameData.current.entry) }
         />
       ) : stage === 'game' ? (
         <Game
@@ -215,7 +216,7 @@ function MultiPlayer(){
         />
       ) : (
         <Waiting abort={
-          () => socket.emit('join-lobby')
+          () => socket.emit(sOut.JOIN_LOBBY)
         }/>
       )
     }

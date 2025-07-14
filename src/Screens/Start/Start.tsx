@@ -6,6 +6,7 @@ import Info from '../../Components/Info/Info';
 import InfoSymbol from '../../Components/InfoSymbol/InfoSymbol';
 import styles from './Start.module.css';
 import { useRef, useState } from 'react';
+import { env } from '@/conf';
 
 function MenuStart(){
   const volumeRef = useRef({click: () => {}});
@@ -21,7 +22,7 @@ function MenuStart(){
 
   function exit(){
     window.close();
-    location.href = import.meta.env.VITE_EXIT_URL;
+    location.href = env.EXIT_URL;
   }
 
   return (
