@@ -41,4 +41,6 @@ function useLanguage(): LanguageHook{
 
   return [get, extra, setLanguage];
 }
+
+export const getCurrentCode = () => get('lang');
 export default useLanguage;
