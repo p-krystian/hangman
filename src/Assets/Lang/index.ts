@@ -1,14 +1,14 @@
-import pl from './pl.json';
-import plWords from './words-pl.json';
-import plLogo from '../Images/logo-beta-pl.webp';
-import plSymbol from '../Images/symbol-pl.svg';
+import pl from './pl/translations.json';
+import plWords from './pl/words.json';
+import plLogo from './pl/logo-beta.webp';
+import plSymbol from './pl/symbol.svg';
 
-import en from './en.json';
-import enWords from './words-en.json';
-import enLogo from '../Images/logo-beta-en.webp';
-import enSymbol from '../Images/symbol-en.svg';
+import en from './en/translations.json';
+import enWords from './en/words.json';
+import enLogo from './en/logo-beta.webp';
+import enSymbol from './en/symbol.svg';
 
-export interface AvailableLang{
+export interface AvailableLang {
   language: Record<string, string>;
   words: Record<string, string[]>;
   logo: string;
