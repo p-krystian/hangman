@@ -19,13 +19,13 @@ type LanguageHook = [
 
 const get = (word: string) => currentLang.language[word] || '';
 
-function useLanguage(): LanguageHook{
+function useLanguage(): LanguageHook {
   const [getSettings, setSettings] = useSettings();
   const [current, setCurrent] = useState<LangCode>(getSettings().language as LangCode);
   currentLang = languages[current];
 
   const setLanguage = (wanted: string) => {
-    if (availables.includes(wanted)){
+    if (availables.includes(wanted)) {
       const newLang = wanted as LangCode;
       setCurrent(newLang);
       setSettings('language', newLang);

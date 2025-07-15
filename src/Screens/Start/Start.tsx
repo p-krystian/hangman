@@ -1,65 +1,65 @@
 import Button from '@/Components/Button/Button';
-import useLanguage from '@/Hooks/useLanguage';
-import Volume from '@/Components/Volume/Volume';
 import Confirm from '@/Components/Confirm/Confirm';
 import Info from '@/Components/Info/Info';
 import InfoSymbol from '@/Components/InfoSymbol/InfoSymbol';
-import styles from './Start.module.css';
-import { useRef, useState } from 'react';
+import Volume from '@/Components/Volume/Volume';
 import { env } from '@/conf';
+import useLanguage from '@/Hooks/useLanguage';
+import { useRef, useState } from 'react';
+import styles from './Start.module.css';
 
-function MenuStart(){
-  const volumeRef = useRef({click: () => {}});
+function MenuStart() {
+  const volumeRef = useRef({ click: () => { } });
   const [showInfo, setShowInfo] = useState(false);
   const [l, extraLang, setLanguage] = useLanguage();
 
-  function nextLanguage(){
+  function nextLanguage() {
     const allLangs = extraLang().availables;
     const currentIndex = allLangs.indexOf(extraLang().code);
-    const nextLang = allLangs[currentIndex+1] || allLangs[0];
+    const nextLang = allLangs[currentIndex + 1] || allLangs[0];
     setLanguage(nextLang);
   }
 
-  function exit(){
+  function exit() {
     window.close();
     location.href = env.EXIT_URL;
   }
 
   return (
-    <div className={ styles.buttons }>
-      <div className={ styles.small }>
+    <div className={styles.buttons}>
+      <div className={styles.small}>
         <Button
-          onClick={ () => volumeRef.current?.click() }
-          value={ l('volumeWord') }
+          onClick={() => volumeRef.current?.click()}
+          value={l('volumeWord')}
           small
         >
-          <Volume ref={ volumeRef } />
+          <Volume ref={volumeRef} />
         </Button>
         <Button
-          onClick={ () => setShowInfo(true) }
-          value={ l('infoWord') }
+          onClick={() => setShowInfo(true)}
+          value={l('infoWord')}
           small
         >
           <InfoSymbol />
         </Button>
         <Button
-          onClick={ () => nextLanguage() }
-          value={ l('languageWord') }
+          onClick={() => nextLanguage()}
+          value={l('languageWord')}
           small
         >
-          <img src={ extraLang().symbol } alt={ extraLang().code } />
+          <img src={extraLang().symbol} alt={extraLang().code} />
         </Button>
       </div>
-      <Button link='/single'>{ l('single') }</Button>
-      <Button link='/local'>{ l('local') }</Button>
-      <Button link='/multi'>{ l('online') }</Button>
-      <Button onClick={ exit }>{ l('exit') }</Button>
+      <Button link='/single'>{l('single')}</Button>
+      <Button link='/local'>{l('local')}</Button>
+      <Button link='/multi'>{l('online')}</Button>
+      <Button onClick={exit}>{l('exit')}</Button>
 
-      { showInfo && (
-        <Confirm confirm={ () => setShowInfo(false) } long>
+      {showInfo && (
+        <Confirm confirm={() => setShowInfo(false)} long>
           <Info />
         </Confirm>
-      ) }
+      )}
     </div>
   );
 }

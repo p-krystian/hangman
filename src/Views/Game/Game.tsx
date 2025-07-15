@@ -1,17 +1,17 @@
-import styles from './Game.module.css';
-import Entry from '@/Components/Entry/Entry';
 import Board from '@/Components/Board/Board';
-import Keyboard from '@/Components/Keyboard/Keyboard';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
-import GameContext from '@/Contexts/GameContext';
-import Confirm from '@/Components/Confirm/Confirm';
 import Category from '@/Components/Category/Category';
+import Confirm from '@/Components/Confirm/Confirm';
+import Entry from '@/Components/Entry/Entry';
+import Keyboard from '@/Components/Keyboard/Keyboard';
+import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
-import { useState, useContext, useEffect, useLayoutEffect, useCallback } from 'react';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
-import usePlaySound from '@/Hooks/usePlaySound';
 import useLanguage from '@/Hooks/useLanguage';
+import usePlaySound from '@/Hooks/usePlaySound';
+import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import styles from './Game.module.css';
 
 interface GameProps {
   exit?: () => void;
@@ -19,7 +19,7 @@ interface GameProps {
   onWin: () => void;
 }
 
-function Game({ exit, onLose, onWin }: GameProps){
+function Game({ exit, onLose, onWin }: GameProps) {
   const [l] = useLanguage();
   const fullScreenManager = useFullScreen();
   const playSound = usePlaySound();
@@ -39,12 +39,12 @@ function Game({ exit, onLose, onWin }: GameProps){
     if (guessed.includes(char))
       return;
 
-    if (entry.includes(char)){
+    if (entry.includes(char)) {
       key.classList.add('correct');
       setGuessed(g => g.includes(char) ? g : g.concat(char));
       playSound('good');
     }
-    else{
+    else {
       key.classList.add('mistake');
       if (mistakes >= 9)
         return onLose();
@@ -54,29 +54,29 @@ function Game({ exit, onLose, onWin }: GameProps){
   }, [guessed, mistakes, playSound, entry, onLose]);
 
   return (
-    <div className={ styles.container }>
-      <div className={ styles.game }>
-        <Board progress={ mistakes } />
-        <Category entry={ entry } animation />
+    <div className={styles.container}>
+      <div className={styles.game}>
+        <Board progress={mistakes} />
+        <Category entry={entry} animation />
         <Entry
-          hide={ true }
-          guessed={ guessed }
-          winCallback={ onWin }
+          hide={true}
+          guessed={guessed}
+          winCallback={onWin}
         >
-          { entry }
+          {entry}
         </Entry>
-        <Keyboard keyEvent={ clickKey } />
+        <Keyboard keyEvent={clickKey} />
       </div>
       <ButtonWrap>
-        { !!exit && <Button onClick={ () => setShowExit(true) }>
-          { l('cancel') }
-        </Button> }
+        {!!exit && <Button onClick={() => setShowExit(true)}>
+          {l('cancel')}
+        </Button>}
       </ButtonWrap>
-      { !!showExit && (
-        <Confirm confirm={ () => exit && exit() } reject={ () => setShowExit(false) }>
-          { l('endGame') }
+      {!!showExit && (
+        <Confirm confirm={() => exit && exit()} reject={() => setShowExit(false)}>
+          {l('endGame')}
         </Confirm>
-      ) }
+      )}
     </div>
   );
 }

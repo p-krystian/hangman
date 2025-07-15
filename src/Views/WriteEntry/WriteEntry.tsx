@@ -1,17 +1,17 @@
-import Entry from '@/Components/Entry/Entry';
-import Keyboard from '@/Components/Keyboard/Keyboard';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import Entry from '@/Components/Entry/Entry';
+import Keyboard from '@/Components/Keyboard/Keyboard';
 import WithCaret from '@/Components/WithCaret/WithCaret';
 import GameContext from '@/Contexts/GameContext';
-import styles from './WriteEntry.module.css';
-import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useFullScreen from '@/Hooks/useFullScreen';
-import usePlaySound from '@/Hooks/usePlaySound';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLanguage';
+import usePlaySound from '@/Hooks/usePlaySound';
 import random from 'random';
-import { useState, useContext, useCallback, useEffect, useLayoutEffect } from 'react';
+import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import styles from './WriteEntry.module.css';
 
 interface WriteEntryProps {
   back?: () => void;
@@ -20,7 +20,7 @@ interface WriteEntryProps {
   nick?: string;
 }
 
-function WriteEntry({ back, backText, next, nick }: WriteEntryProps){
+function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
   const [l, extraLang] = useLanguage();
   const fullScreenManager = useFullScreen();
   const playSound = usePlaySound();
@@ -55,22 +55,22 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps){
   }, [entry, playSound]);
 
   return (
-    <div className={ styles.wrapper }>
-      <div className={ styles.container }>
-        <span className={ styles.text }>
-          { l('phraseFor') }{ nick || '' }:
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <span className={styles.text}>
+          {l('phraseFor')}{nick || ''}:
         </span>
         <Entry>
-          <WithCaret size={ 20 }>{ entry }</WithCaret>
+          <WithCaret size={20}>{entry}</WithCaret>
         </Entry>
-        <Keyboard keyEvent={ keyboardWrite } write={ true } />
+        <Keyboard keyEvent={keyboardWrite} write={true} />
       </div>
       <ButtonWrap>
-        <Button onClick={ updateContext } disabled={ entry.length < 3 }>
-          { l('next') }
+        <Button onClick={updateContext} disabled={entry.length < 3}>
+          {l('next')}
         </Button>
-        { !!back && <Button onClick={ back }>{ backText || l('back') }</Button> }
-        <Button onClick={ writeRandom }>{ l('randomize') }</Button>
+        {!!back && <Button onClick={back}>{backText || l('back')}</Button>}
+        <Button onClick={writeRandom}>{l('randomize')}</Button>
       </ButtonWrap>
     </div>
   );

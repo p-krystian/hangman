@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
 import App from '@/App';
 
 const ENABLE_STRICT_MODE = true;
@@ -11,6 +12,6 @@ ReactDOM
   .createRoot(document.getElementById('root')!)
   .render(
     <OptionalStrict>
-        <App />
+      <App />
     </OptionalStrict>,
   );

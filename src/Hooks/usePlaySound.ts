@@ -1,7 +1,7 @@
 import files from '../Assets/Sounds';
 import useSettings from './useSettings';
 
-for (const file of Object.values(files)){
+for (const file of Object.values(files)) {
   const audio = new Audio(file);
   audio.load();
   audio.volume = 10 ** -6;
@@ -12,7 +12,7 @@ for (const file of Object.values(files)){
 function usePlaySound(name: string) {
   const [getSettings] = useSettings();
 
-  if (!Object.keys(files).includes(name) || getSettings().soundVolume < 1){
+  if (!Object.keys(files).includes(name) || getSettings().soundVolume < 1) {
     return;
   }
   const src = files[name as keyof typeof files];

@@ -11,8 +11,8 @@ import Games from '@/Views/OnlineGames/OnlineGames';
 import Waiting from '@/Views/Waiting/Waiting';
 import WriteEntry from '@/Views/WriteEntry/WriteEntry';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
 import { io } from 'socket.io-client';
+import { useLocation } from 'wouter';
 
 const socket = io(env.SOCKET_URL, {
   autoConnect: false,
@@ -30,7 +30,7 @@ interface AlertType {
 
 function MultiPlayer() {
   const [l] = useLanguage();
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const [stage, setStage] = useState('connecting');
   const [gameList, setGameList] = useState<GameType[]>([]);
   const [resultKey, setResultKey] = useState('r-1-1');
@@ -45,7 +45,7 @@ function MultiPlayer() {
     prevRounds: [0, 0],
     win: false
   }), [l]);
-  const gameData = useRef<GameContextType>({...initialData});
+  const gameData = useRef<GameContextType>({ ...initialData });
 
   const backupData = useCallback(() => {
     gameData.current.prevPoints = [...gameData.current.points];
@@ -185,34 +185,34 @@ function MultiPlayer() {
   }, [backupData, exitAlert, l]);
 
   return (
-    <GameContext.Provider value={ gameData.current }>{
+    <GameContext.Provider value={gameData.current}>{
       stage === 'connecting' ? (
         <Connecting />
       ) : stage === 'lobby' ? (
         <Games
-          gameList={ gameList }
-          onJoin={ id => socket.emit(sOut.JOIN_GAME, id) }
-          onCreate={ () => setStage('create') }
+          gameList={gameList}
+          onJoin={id => socket.emit(sOut.JOIN_GAME, id)}
+          onCreate={() => setStage('create')}
         />
       ) : stage === 'create' ? (
         <Create
-          back={ () => setStage('lobby') }
-          submit={ createNewGame }
+          back={() => setStage('lobby')}
+          submit={createNewGame}
         />
       ) : stage === 'phrase' ? (
         <WriteEntry
-          nick={ l('opponents') }
-          next={ () => socket.emit(sOut.WRITE_PHRASE, gameData.current.entry) }
+          nick={l('opponents')}
+          next={() => socket.emit(sOut.WRITE_PHRASE, gameData.current.entry)}
         />
       ) : stage === 'game' ? (
         <Game
-          onWin={ winCallback }
-          onLose={ loseCallback }
+          onWin={winCallback}
+          onLose={loseCallback}
         />
       ) : stage === 'result' ? (
         <EndGame
-          pointsID={ resultKey }
-          next={ nextRound }
+          pointsID={resultKey}
+          next={nextRound}
         />
       ) : (
         <Waiting abort={
@@ -220,7 +220,7 @@ function MultiPlayer() {
         } />
       )
     }
-      { !!alert && <Alert { ...alert } /> }
+      {!!alert && <Alert {...alert} />}
     </GameContext.Provider>
   );
 }

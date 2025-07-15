@@ -1,17 +1,17 @@
 function useKeyboardWrite(
   setText: React.Dispatch<React.SetStateAction<string>>,
   maxLength: number
-){
-  function write(current: string, char: string){
+) {
+  function write(current: string, char: string) {
     char = char.replace('^32', ' ');
-    if (char === '^8'){
+    if (char === '^8') {
       return current.slice(0, -1);
     }
     if (
       current.length === 0 && char === ' '
       || char === ' ' && (current[current.length - 1] == ' '
       || current.length + 1 >= maxLength)
-    ){
+    ) {
       return current;
     }
 

@@ -3,7 +3,7 @@ function useKeyboardControl(
   enter?: () => void,
   up?: () => void,
   down?: () => void
-){
+) {
   const actions = {
     'escape': back,
     'enter': enter,
@@ -16,13 +16,13 @@ function useKeyboardControl(
   const listen = (e: KeyboardEvent) => {
     const code = e.key.toLowerCase();
 
-    if (!Object.keys(actions).includes(code)){
+    if (!Object.keys(actions).includes(code)) {
       return;
     }
 
     const key = code as keyof typeof actions;
     const action = actions[key];
-    if (typeof action === 'function'){
+    if (typeof action === 'function') {
       action();
     }
 

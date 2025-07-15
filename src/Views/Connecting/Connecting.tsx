@@ -1,12 +1,12 @@
-import styles from './Connecting.module.css';
 import Board from '@/Components/Board/Board';
-import Entry from '@/Components/Entry/Entry';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import Entry from '@/Components/Entry/Entry';
 import useLanguage from '@/Hooks/useLanguage';
 import { useEffect, useState } from 'react';
+import styles from './Connecting.module.css';
 
-function Connecting(){
+function Connecting() {
   const [progress, setProgress] = useState(10);
   const [l] = useLanguage();
 
@@ -25,13 +25,13 @@ function Connecting(){
   }, []);
 
   return (
-    <div className={ styles.wrapper }>
-      <div className={ styles.container }>
-        <Board progress={ progress } small={ true } />
-        <Entry>{ `${l('connecting')}...` }</Entry>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <Board progress={progress} small={true} />
+        <Entry>{`${l('connecting')}...`}</Entry>
       </div>
       <ButtonWrap>
-        <Button link='/'>Anuluj</Button>
+        <Button link='/'>{ l('cancel')}</Button>
       </ButtonWrap>
     </div>
   );

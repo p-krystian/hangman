@@ -1,20 +1,20 @@
-import styles from './CreateGame.module.css';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Input from '@/Components/Input/Input';
 import Keyboard from '@/Components/Keyboard/Keyboard';
-import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useFullScreen from '@/Hooks/useFullScreen';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLanguage';
-import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import styles from './CreateGame.module.css';
 
 interface CreateGameProps {
   back: () => void;
   submit: (name: string) => void;
 }
 
-function Create({ back, submit }: CreateGameProps){
+function Create({ back, submit }: CreateGameProps) {
   const [name, setName] = useState('');
   const [l] = useLanguage();
   const fullScreenManager = useFullScreen();
@@ -37,25 +37,25 @@ function Create({ back, submit }: CreateGameProps){
   ), [create, keyboardControl, back]);
 
   return (
-    <div className={ styles.wrapper }>
-      <div className={ styles.container }>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
         <Input
-          focus={ true }
-          value={ name }
-          placeholder={ l('enterName') }
-          size={ maxNameLength }
+          focus={true}
+          value={name}
+          placeholder={l('enterName')}
+          size={maxNameLength}
         />
         <Keyboard
-          write={ true }
-          keyEvent={ keyboardWrite }
+          write={true}
+          keyEvent={keyboardWrite}
         />
       </div>
       <ButtonWrap>
-        <Button onClick={ create } disabled={ name.length < 3 }>
-          { l('start') }
+        <Button onClick={create} disabled={name.length < 3}>
+          {l('start')}
         </Button>
-        <Button onClick={ back }>
-          { l('cancel') }
+        <Button onClick={back}>
+          {l('cancel')}
         </Button>
       </ButtonWrap>
     </div>

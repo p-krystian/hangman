@@ -1,4 +1,4 @@
-interface Settings{
+interface Settings {
   soundVolume: number;
   language: string;
 }

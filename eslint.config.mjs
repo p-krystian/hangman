@@ -23,7 +23,7 @@ export default tseslint.config(
       },
     },
     plugins: {
-      "react": reactPlugin,
+      react: reactPlugin,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
     },
@@ -31,12 +31,10 @@ export default tseslint.config(
       ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
+        "warn", { allowConstantExport: true }
       ],
       "react/jsx-curly-spacing": [
-        "warn",
-        { when: "always", allowMultiline: true, children: { when: "always" } },
+        "warn", { when: "never", allowMultiline: true }
       ],
       semi: ["warn", "always"],
     },

@@ -1,21 +1,21 @@
-import Input from '@/Components/Input/Input';
-import Keyboard from '@/Components/Keyboard/Keyboard';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
+import Input from '@/Components/Input/Input';
+import Keyboard from '@/Components/Keyboard/Keyboard';
 import GameContext from '@/Contexts/GameContext';
-import styles from './WriteNicks.module.css';
-import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useFullScreen from '@/Hooks/useFullScreen';
+import useKeyboardControl from '@/Hooks/useKeyboardControl';
+import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLanguage';
-import { useState, useContext, useEffect, useCallback, useLayoutEffect } from 'react';
+import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import styles from './WriteNicks.module.css';
 
 interface WriteNicksProps {
   back: () => void;
   next: () => void;
 }
 
-function WriteNicks({ back, next }: WriteNicksProps){
+function WriteNicks({ back, next }: WriteNicksProps) {
   const [l] = useLanguage();
   const fullScreenManager = useFullScreen();
   const keyboardControl = useKeyboardControl();
@@ -46,32 +46,32 @@ function WriteNicks({ back, next }: WriteNicksProps){
   ), [back, submit, keyboardControl]);
 
   return (
-    <div className={ styles.wrapper }>
-      <div className={ styles.container }>
-        <div className={ styles.inputs }>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.inputs}>
           <Input
-            focus={ focused === 0 }
-            value={ nick0 }
-            placeholder={ `${l('nick')} 1` }
-            size={ maxNickLength }
-            onClick={ () => setFocused(0) }
+            focus={focused === 0}
+            value={nick0}
+            placeholder={`${l('nick')} 1`}
+            size={maxNickLength}
+            onClick={() => setFocused(0)}
           />
           <Input
-            focus={ focused === 1 }
-            value={ nick1 }
-            placeholder={ `${l('nick')} 2` }
-            size={ maxNickLength }
-            onClick={ () => setFocused(1) }
+            focus={focused === 1}
+            value={nick1}
+            placeholder={`${l('nick')} 2`}
+            size={maxNickLength}
+            onClick={() => setFocused(1)}
           />
         </div>
         <Keyboard
-          write={ true }
-          keyEvent={ keyboardWrite }
+          write={true}
+          keyEvent={keyboardWrite}
         />
       </div>
       <ButtonWrap>
-        <Button onClick={ submit } disabled={ !pass }>{ l('next') }</Button>
-        <Button onClick={ back }>{ l('cancel') }</Button>
+        <Button onClick={submit} disabled={!pass}>{l('next')}</Button>
+        <Button onClick={back}>{l('cancel')}</Button>
       </ButtonWrap>
     </div>
   );

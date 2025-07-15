@@ -1,4 +1,4 @@
-function useFullScreen(){
+function useFullScreen() {
   const root = document.getElementById('root')!;
   let lastWindowH = 0;
 
@@ -6,7 +6,7 @@ function useFullScreen(){
     if (root.classList.contains('full') && window.innerHeight < lastWindowH)
       return;
 
-    if (root.offsetHeight > window.innerHeight){
+    if (root.offsetHeight > window.innerHeight) {
       lastWindowH = window.innerHeight + 25;
       root.classList.add('full');
     }

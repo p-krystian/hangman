@@ -1,12 +1,12 @@
-import styles from '@/Views/OnlineGames/OnlineGames.module.css';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Lobby from '@/Components/Lobby/Lobby';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLanguage';
 import GameType from '@/Types/OnlineGame';
+import styles from '@/Views/OnlineGames/OnlineGames.module.css';
+import { useEffect } from 'react';
+import { useLocation } from 'wouter';
 
 interface GamesProps {
   gameList: GameType[];
@@ -14,8 +14,8 @@ interface GamesProps {
   onJoin: (id: string) => void;
 }
 
-function Games({ gameList, onCreate, onJoin }: GamesProps){
-  const navigate = useNavigate();
+function Games({ gameList, onCreate, onJoin }: GamesProps) {
+  const [, navigate] = useLocation();
   const [l] = useLanguage();
   const keyboardControl = useKeyboardControl();
 
@@ -25,27 +25,27 @@ function Games({ gameList, onCreate, onJoin }: GamesProps){
   ), [keyboardControl, navigate, onCreate, gameList.length]);
 
   return (
-    <div className={ styles.wrapper }>
-      <div className={ styles.games }>{
+    <div className={styles.wrapper}>
+      <div className={styles.games}>{
         gameList.length < 1 ? (
-          <span className={ styles.info }>
-            { l('noGames') }
+          <span className={styles.info}>
+            {l('noGames')}
           </span>
         ) : (
           gameList.slice(0, 6).map(g => (
             <Lobby
-              key={ g.id }
-              name={ g.name }
-              submit={ () => onJoin(g.id) }
+              key={g.id}
+              name={g.name}
+              submit={() => onJoin(g.id)}
             />
           ))
         )
       }</div>
       <ButtonWrap>
-        <Button onClick={ onCreate } disabled={ gameList.length >= 6 }>
-          { l('create') }
+        <Button onClick={onCreate} disabled={gameList.length >= 6}>
+          {l('create')}
         </Button>
-        <Button link='/'>{ l('menu') }</Button>
+        <Button link='/'>{l('menu')}</Button>
       </ButtonWrap>
     </div>
   );

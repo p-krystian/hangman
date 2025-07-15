@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export interface GameContextType{
+export interface GameContextType {
   entry: string;
   nicks: string[];
   points: number[];
