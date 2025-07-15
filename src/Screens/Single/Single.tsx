@@ -1,4 +1,4 @@
-import GameContext, { GameContextType } from '@/Contexts/GameContext';
+import GameContext, { SingleGameContext } from '@/Contexts/GameContext';
 import useLanguage from '@/Hooks/useLanguage';
 import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
@@ -16,7 +16,7 @@ function SingleGame() {
   const [l, extraLang] = useLanguage();
   const randomWord = randomizer(l('randomize'), extraLang().words);
   const [stage, setStage] = useState('game');
-  const gameData = useRef<GameContextType>({
+  const gameData = useRef<SingleGameContext>({
     entry: randomWord.toUpperCase(),
     nicks: [l('result')],
     points: [0],
@@ -48,8 +48,8 @@ function SingleGame() {
   }, [randomWord]);
 
   return (
-    <GameContext.Provider value={gameData.current}>{
-      stage === 'endGame' ? (
+    <GameContext value={gameData.current}>
+      {stage === 'endGame' ? (
         <EndGame
           next={() => newGame()}
         />
@@ -59,8 +59,8 @@ function SingleGame() {
           onLose={() => gameEnd('lose')}
           onWin={() => gameEnd('win')}
         />
-      )
-    }</GameContext.Provider>
+      )}
+    </GameContext>
   );
 }
 export default SingleGame;

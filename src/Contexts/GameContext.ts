@@ -1,16 +1,27 @@
 import { createContext } from 'react';
 
-export interface GameContextType {
+type BaseGameContext = {
   entry: string;
-  nicks: string[];
-  points: number[];
-  prevPoints: number[];
-  rounds: number[];
-  prevRounds: number[];
   win: boolean;
-}
+};
 
-const GameContext = createContext<GameContextType>({
+type MultiGameContext = BaseGameContext & {
+  nicks: [string, string];
+  points: [number, number];
+  prevPoints: [number, number];
+  rounds: [number, number];
+  prevRounds: [number, number];
+};
+
+type SingleGameContext = BaseGameContext & {
+  nicks: [string];
+  points: [number];
+  prevPoints: [number];
+  rounds: [number];
+  prevRounds: [number];
+};
+
+const GameContext = createContext<SingleGameContext | MultiGameContext>({
   entry: '',
   nicks: [''],
   points: [0],
@@ -20,4 +31,5 @@ const GameContext = createContext<GameContextType>({
   win: false
 });
 
+export { type MultiGameContext, type SingleGameContext };
 export default GameContext;

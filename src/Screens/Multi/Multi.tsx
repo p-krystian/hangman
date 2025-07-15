@@ -1,6 +1,6 @@
 import Alert from '@/Components/Confirm/Confirm';
 import { appVersion, env, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
-import GameContext, { GameContextType } from '@/Contexts/GameContext';
+import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
 import useLanguage, { getCurrentCode } from '@/Hooks/useLanguage';
 import GameType from '@/Types/OnlineGame';
 import Connecting from '@/Views/Connecting/Connecting';
@@ -36,7 +36,7 @@ function MultiPlayer() {
   const [resultKey, setResultKey] = useState('r-1-1');
   const [alert, setAlert] = useState<AlertType | null>(null);
   const opponentExit = useRef(false);
-  const initialData = useMemo<GameContextType>(() => ({
+  const initialData = useMemo<MultiGameContext>(() => ({
     entry: '',
     nicks: [l('you'), l('opponent')],
     points: [0, 0],
@@ -45,7 +45,7 @@ function MultiPlayer() {
     prevRounds: [0, 0],
     win: false
   }), [l]);
-  const gameData = useRef<GameContextType>({ ...initialData });
+  const gameData = useRef<MultiGameContext>({ ...initialData });
 
   const backupData = useCallback(() => {
     gameData.current.prevPoints = [...gameData.current.points];
@@ -185,8 +185,8 @@ function MultiPlayer() {
   }, [backupData, exitAlert, l]);
 
   return (
-    <GameContext.Provider value={gameData.current}>{
-      stage === 'connecting' ? (
+    <GameContext.Provider value={gameData.current}>
+      {stage === 'connecting' ? (
         <Connecting />
       ) : stage === 'lobby' ? (
         <Games
@@ -218,8 +218,7 @@ function MultiPlayer() {
         <Waiting abort={
           () => socket.emit(sOut.JOIN_LOBBY)
         } />
-      )
-    }
+      )}
       {!!alert && <Alert {...alert} />}
     </GameContext.Provider>
   );
