@@ -1,5 +1,5 @@
 const mainLanguage = 'pl';
-const appVersion = import.meta.env.VITE_APP_VERSION;
+const appVersion = __APP_VERSION__ || 'VER';
 
 const env = {
   SOCKET_URL: import.meta.env.VITE_SOCKET_URL,

@@ -16,5 +16,8 @@ export default defineConfig({
       '@/': '/src/'
     }
   },
+  define: {
+    '__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+  },
   esbuild: { target: 'es2020' }
 });
