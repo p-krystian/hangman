@@ -20,7 +20,6 @@ interface EndGameProps {
 function EndGame({ next, pointsID }: EndGameProps) {
   const [l] = useLanguage();
   const playSound = usePlaySound();
-  const keyboardControl = useKeyboardControl();
   const gameContext = useContext(GameContext);
   const [, navigate] = useLocation();
   const result = {
@@ -31,11 +30,10 @@ function EndGame({ next, pointsID }: EndGameProps) {
     name: gameContext.win ? l('win') : l('lose'),
   };
 
-  useEffect(() => keyboardControl(
+  useKeyboardControl(
     () => navigate('/'),
     next
-  ), [next, keyboardControl, navigate]);
-
+  );
   useEffect(() => playSound(
     result.audio
   ), [playSound, result.audio]);

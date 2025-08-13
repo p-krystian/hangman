@@ -10,7 +10,7 @@ import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLanguage';
 import usePlaySound from '@/Hooks/usePlaySound';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import styles from './Game.module.css';
 
 interface GameProps {
@@ -22,7 +22,6 @@ interface GameProps {
 function Game({ exit, onLose, onWin }: GameProps) {
   const [l] = useLanguage();
   const playSound = usePlaySound();
-  const keyboardControl = useKeyboardControl();
   const gameContext = useContext(GameContext);
   const entry = gameContext.entry || '?';
   const [guessed, setGuessed] = useState<string[]>([]);
@@ -30,9 +29,9 @@ function Game({ exit, onLose, onWin }: GameProps) {
   const [showExit, setShowExit] = useState(false);
 
   useFullScreen();
-  useEffect(() => keyboardControl(
+  useKeyboardControl(
     () => exit && setShowExit(current => !current)
-  ), [keyboardControl, exit]);
+  );
 
   const clickKey = useCallback((char: string, key: Element) => {
     if (guessed.includes(char))

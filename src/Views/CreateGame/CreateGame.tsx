@@ -6,7 +6,7 @@ import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLanguage';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import styles from './CreateGame.module.css';
 
 interface CreateGameProps {
@@ -17,7 +17,6 @@ interface CreateGameProps {
 function Create({ back, submit }: CreateGameProps) {
   const [name, setName] = useState('');
   const [l] = useLanguage();
-  const keyboardControl = useKeyboardControl();
   const maxNameLength = 12;
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength);
 
@@ -29,11 +28,7 @@ function Create({ back, submit }: CreateGameProps) {
   }, [name, submit, maxNameLength]);
 
   useFullScreen();
-
-  useEffect(() => keyboardControl(
-    back,
-    create
-  ), [create, keyboardControl, back]);
+  useKeyboardControl(back, create);
 
   return (
     <div className={styles.wrapper}>

@@ -23,7 +23,6 @@ interface WriteEntryProps {
 function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
   const [l, extraLang] = useLanguage();
   const playSound = usePlaySound();
-  const keyboardControl = useKeyboardControl();
   const [entry, setEntry] = useState('');
   const gameContext = useContext(GameContext);
   const keyboardWrite = useKeyboardWrite(setEntry, 20);
@@ -42,10 +41,7 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
   }, [extraLang, l]);
 
   useFullScreen();
-  useEffect(() => keyboardControl(
-    back,
-    updateContext
-  ), [back, updateContext, keyboardControl]);
+  useKeyboardControl(back, updateContext);
 
   useEffect(() => {
     if (entry === '')

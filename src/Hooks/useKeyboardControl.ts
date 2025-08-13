@@ -1,34 +1,37 @@
+import { useEffect, useMemo } from 'react';
+
 function useKeyboardControl(
-  back?: () => void,
-  enter?: () => void,
-  up?: () => void,
-  down?: () => void
+  back?: () => unknown,
+  enter?: () => unknown,
+  prev?: () => unknown,
+  next?: () => unknown
 ) {
-  const actions = {
+  const actions = useMemo(() => ({
     'escape': back,
     'enter': enter,
-    'arrowup': up,
-    'arrowleft': up,
-    'arrowright': down,
-    'arrowdown': down
-  } as const;
+    'arrowup': prev,
+    'arrowleft': prev,
+    'arrowright': next,
+    'arrowdown': next
+  } as const), [back, enter, prev, next]);
 
-  const listen = (e: KeyboardEvent) => {
-    const code = e.key.toLowerCase();
+  useEffect(() => {
+    const listen = (e: KeyboardEvent) => {
+      const code = e.key.toLowerCase();
 
-    if (!Object.keys(actions).includes(code)) {
-      return;
-    }
+      if (!Object.keys(actions).includes(code)) {
+        return;
+      }
 
-    const key = code as keyof typeof actions;
-    const action = actions[key];
-    if (typeof action === 'function') {
-      action();
-    }
+      const key = code as keyof typeof actions;
+      const action = actions[key];
+      if (typeof action === 'function') {
+        action();
+      }
+    };
+    window.addEventListener('keyup', listen);
 
-  };
-  window.addEventListener('keyup', listen);
-
-  return () => window.removeEventListener('keyup', listen);
+    return () => window.removeEventListener('keyup', listen);
+  }, [actions]);
 }
-export default () => useKeyboardControl;
+export default useKeyboardControl;

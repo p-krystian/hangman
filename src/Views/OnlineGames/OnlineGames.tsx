@@ -5,7 +5,6 @@ import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLanguage';
 import GameType from '@/Types/OnlineGame';
 import styles from '@/Views/OnlineGames/OnlineGames.module.css';
-import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
 interface GamesProps {
@@ -17,12 +16,11 @@ interface GamesProps {
 function Games({ gameList, onCreate, onJoin }: GamesProps) {
   const [, navigate] = useLocation();
   const [l] = useLanguage();
-  const keyboardControl = useKeyboardControl();
 
-  useEffect(() => keyboardControl(
+  useKeyboardControl(
     () => navigate('/'),
     () => gameList.length < 6 && onCreate()
-  ), [keyboardControl, navigate, onCreate, gameList.length]);
+  );
 
   return (
     <div className={styles.wrapper}>
