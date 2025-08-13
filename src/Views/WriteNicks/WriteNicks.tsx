@@ -7,7 +7,7 @@ import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLanguage';
-import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './WriteNicks.module.css';
 
 interface WriteNicksProps {
@@ -17,7 +17,6 @@ interface WriteNicksProps {
 
 function WriteNicks({ back, next }: WriteNicksProps) {
   const [l] = useLanguage();
-  const fullScreenManager = useFullScreen();
   const keyboardControl = useKeyboardControl();
   const [nick0, setNick0] = useState('');
   const [nick1, setNick1] = useState('');
@@ -37,7 +36,7 @@ function WriteNicks({ back, next }: WriteNicksProps) {
     next();
   }, [nick0, nick1, pass, next, gameContext]);
 
-  useLayoutEffect(() => fullScreenManager(), [fullScreenManager]);
+  useFullScreen();
   useEffect(() => keyboardControl(
     back,
     submit,

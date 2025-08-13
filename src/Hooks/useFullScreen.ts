@@ -1,18 +1,21 @@
-function useFullScreen() {
-  const root = document.getElementById('root')!;
-  let lastWindowH = 0;
+import { useLayoutEffect } from 'react';
 
-  const setFull = () => {
-    if (root.classList.contains('full') && window.innerHeight < lastWindowH)
-      return;
+const root = document.getElementById('root')!;
+let lastWindowH = 0;
 
-    if (root.offsetHeight > window.innerHeight) {
-      lastWindowH = window.innerHeight + 25;
-      root.classList.add('full');
-    }
-    else
-      root.classList.remove('full');
-  };
+const setFull = () => {
+  if (root.classList.contains('full') && window.innerHeight < lastWindowH)
+    return;
+
+  if (root.offsetHeight > window.innerHeight) {
+    lastWindowH = window.innerHeight + 25;
+    root.classList.add('full');
+  }
+  else
+    root.classList.remove('full');
+};
+
+const useFullScreen = () => useLayoutEffect(() => {
   setFull();
   window.addEventListener('resize', setFull);
 
@@ -20,6 +23,6 @@ function useFullScreen() {
     window.removeEventListener('resize', setFull);
     root.classList.remove('full');
   };
-}
+}, []);
 
-export default () => useFullScreen;
+export default useFullScreen;

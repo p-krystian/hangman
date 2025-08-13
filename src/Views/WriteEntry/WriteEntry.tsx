@@ -10,7 +10,7 @@ import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLanguage';
 import usePlaySound from '@/Hooks/usePlaySound';
 import random from 'random';
-import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './WriteEntry.module.css';
 
 interface WriteEntryProps {
@@ -22,7 +22,6 @@ interface WriteEntryProps {
 
 function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
   const [l, extraLang] = useLanguage();
-  const fullScreenManager = useFullScreen();
   const playSound = usePlaySound();
   const keyboardControl = useKeyboardControl();
   const [entry, setEntry] = useState('');
@@ -42,7 +41,7 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
     setEntry(randomWord.toUpperCase());
   }, [extraLang, l]);
 
-  useLayoutEffect(() => fullScreenManager(), [fullScreenManager]);
+  useFullScreen();
   useEffect(() => keyboardControl(
     back,
     updateContext

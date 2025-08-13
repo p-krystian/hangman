@@ -10,7 +10,7 @@ import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLanguage';
 import usePlaySound from '@/Hooks/usePlaySound';
-import { useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './Game.module.css';
 
 interface GameProps {
@@ -21,7 +21,6 @@ interface GameProps {
 
 function Game({ exit, onLose, onWin }: GameProps) {
   const [l] = useLanguage();
-  const fullScreenManager = useFullScreen();
   const playSound = usePlaySound();
   const keyboardControl = useKeyboardControl();
   const gameContext = useContext(GameContext);
@@ -30,7 +29,7 @@ function Game({ exit, onLose, onWin }: GameProps) {
   const [mistakes, setMistakes] = useState(0);
   const [showExit, setShowExit] = useState(false);
 
-  useLayoutEffect(() => fullScreenManager(), [fullScreenManager]);
+  useFullScreen();
   useEffect(() => keyboardControl(
     () => exit && setShowExit(current => !current)
   ), [keyboardControl, exit]);
