@@ -5,7 +5,8 @@ const env = {
   SOCKET_URL: import.meta.env.VITE_SOCKET_URL,
   SOCKET_PATH: import.meta.env.VITE_SOCKET_PATH,
   EXIT_URL: import.meta.env.VITE_EXIT_URL,
-  AUTHOR_URL: import.meta.env.VITE_AUTHOR_URL
+  AUTHOR_URL: import.meta.env.VITE_AUTHOR_URL,
+  STORAGE_PREFIX: import.meta.env.VITE_STORAGE_PREFIX
 } as const;
 
 enum sioOutEvents {
