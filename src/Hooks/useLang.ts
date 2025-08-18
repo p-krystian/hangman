@@ -4,19 +4,19 @@ import { getDictionaries } from '@/Utils/international';
 import AppContext from '@/Contexts/AppContext';
 
 function useLanguage() {
-  const { appLang: selectedLang } = useContext(AppContext);
-  const [translations, /*words*/, data] = useMemo(
-    () => [...getDictionaries(), langs[selectedLang]],
-    [selectedLang]
+  const { appLang: currentLang, setLang } = useContext(AppContext);
+  const [translations, /*words*/, langData] = useMemo(
+    () => [...getDictionaries(), langs[currentLang]],
+    [currentLang]
   );
 
-  const getTranslation = useCallback((key: string) => (
+  const l = useCallback((key: string) => (
     translations[key] as string || key
   ), [translations]);
 
   // const getRandomWord = useCallback(() => ());
 
-  return [getTranslation, data] as const;
+  return { l, langData, setLang, currentLang } as const;
 }
 
 export default useLanguage;

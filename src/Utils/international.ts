@@ -1,11 +1,16 @@
+import { loadTranslations, loadWords } from '@/Assets/Langs';
+import { AppLangsT } from '@/Types/AppLangs';
+
 let TRANSLATIONS = {} as Record<string, string>;
 let WORDS = {} as Record<string, Record<string, string>>;
 
-function setDictionaries(translations: typeof TRANSLATIONS, words: typeof WORDS) {
-  TRANSLATIONS = translations;
-  WORDS = words;
+async function updateDictionaries(language: AppLangsT) {
+  const [t, w] = await Promise.all([loadTranslations(language), loadWords(language)]);
+
+  TRANSLATIONS = t;
+  WORDS = w;
 }
 
 const getDictionaries = () => [TRANSLATIONS, WORDS] as const;
 
-export { getDictionaries, setDictionaries };
+export { getDictionaries, updateDictionaries };

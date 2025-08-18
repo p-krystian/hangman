@@ -4,20 +4,21 @@ import Info from '@/Components/Info/Info';
 import InfoSymbol from '@/Components/InfoSymbol/InfoSymbol';
 import Volume from '@/Components/Volume/Volume';
 import { env } from '@/conf';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import { useRef, useState } from 'react';
 import styles from './Start.module.css';
+import { availableLangs } from '@/Assets/Langs';
 
 function MenuStart() {
   const volumeRef = useRef({ click: () => { } });
   const [showInfo, setShowInfo] = useState(false);
-  const [l, extraLang, setLanguage] = useLanguage();
+  const { l, langData, currentLang, setLang } = useLanguage();
 
   function nextLanguage() {
-    const allLangs = extraLang().availables;
-    const currentIndex = allLangs.indexOf(extraLang().code);
+    const allLangs = availableLangs;
+    const currentIndex = allLangs.indexOf(currentLang);
     const nextLang = allLangs[currentIndex + 1] || allLangs[0];
-    setLanguage(nextLang);
+    setLang(nextLang);
   }
 
   function exit() {
@@ -47,7 +48,7 @@ function MenuStart() {
           value={l('languageWord')}
           small
         >
-          <img src={extraLang().symbol} alt={extraLang().code} />
+          <img src={langData.flag} alt={langData.short} />
         </Button>
       </div>
       <Button link='/single'>{l('single')}</Button>

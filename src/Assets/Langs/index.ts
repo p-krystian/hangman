@@ -21,8 +21,10 @@ const langs = {
   }
 } as const;
 
+const availableLangs = [...Object.keys(langs)] as [keyof typeof langs];
+
 const loadTranslations = (lang: keyof typeof langs) => import(`./${lang}/translations.json`);
 const loadWords = (lang: keyof typeof langs) => import(`./${lang}/words.json`);
 
-export { loadTranslations, loadWords };
+export { availableLangs, loadTranslations, loadWords };
 export default langs;

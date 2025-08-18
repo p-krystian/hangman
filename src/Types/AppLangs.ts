@@ -1,8 +1,8 @@
 import * as z from 'zod/mini';
-import langs from '@/Assets/Langs';
+import { availableLangs } from '@/Assets/Langs';
 
-const AppLangsSchema = z.literal([...Object.keys(langs)]);
+const AppLangsSchema = z.literal(availableLangs);
 
-type AppLangsT = keyof typeof langs;
+type AppLangsT = z.infer<typeof AppLangsSchema>;
 
 export { AppLangsSchema, type AppLangsT };

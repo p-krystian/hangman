@@ -3,7 +3,7 @@ import './Header.css';
 // import useLanguage from '@/Hooks/useLanguage';
 
 function Header() {
-  const [l, langData] = useLanguage();
+  const { l, langData } = useLanguage();
   return (
     <header className='header'>
       <img alt={l('hangman')} src={langData.logo} />
