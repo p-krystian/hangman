@@ -1,6 +1,6 @@
 import Confirm from '@/Components/Confirm/Confirm';
 import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
 import WriteEntry from '@/Views/WriteEntry/WriteEntry';
@@ -9,7 +9,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 
 function Local() {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
   const [, navigate] = useLocation();
   const [stage, setStage] = useState('writeNicks');
   const [askExit, setAskExit] = useState(false);

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/Assets/Images/logo-en.webp" alt="Hangman">
+  <img src="src/Assets/Langs/en/logo.webp" alt="Hangman">
 </p>
 
 <p align="center">

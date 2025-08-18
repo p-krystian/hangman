@@ -24,10 +24,10 @@ const langs = {
 const availableLangs = [...Object.keys(langs)] as [keyof typeof langs];
 
 const loadTranslations = (lang: keyof typeof langs) => (
-  import(`./${lang}/translations.json`) as Promise<LangDictTranslations>
+  import(`./${lang}/translations.json`) as Promise<{ default: LangDictTranslations }>
 );
 const loadWords = (lang: keyof typeof langs) => (
-  import(`./${lang}/words.json`) as Promise<LangDictWords>
+  import(`./${lang}/words.json`) as Promise<{ default: LangDictWords }>
 );
 
 export { availableLangs, loadTranslations, loadWords };

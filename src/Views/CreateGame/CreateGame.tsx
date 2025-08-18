@@ -5,7 +5,7 @@ import Keyboard from '@/Components/Keyboard/Keyboard';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import { useCallback, useState } from 'react';
 import styles from './CreateGame.module.css';
 
@@ -16,7 +16,7 @@ interface CreateGameProps {
 
 function Create({ back, submit }: CreateGameProps) {
   const [name, setName] = useState('');
-  const [l] = useLanguage();
+  const { l } = useLanguage();
   const maxNameLength = 12;
   const keyboardWrite = useKeyboardWrite(setName, maxNameLength);
 

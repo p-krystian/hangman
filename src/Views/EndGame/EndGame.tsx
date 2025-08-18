@@ -6,7 +6,7 @@ import Category from '@/Components/Category/Category';
 import Points from '@/Components/Points/Points';
 import GameContext from '@/Contexts/GameContext';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import usePlaySound from '@/Hooks/usePlaySound';
 import { useContext, useEffect } from 'react';
 import { useLocation } from 'wouter';
@@ -18,7 +18,7 @@ interface EndGameProps {
 }
 
 function EndGame({ next, pointsID }: EndGameProps) {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
   const playSound = usePlaySound();
   const gameContext = useContext(GameContext);
   const [, navigate] = useLocation();

@@ -2,13 +2,13 @@ import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Entry from '@/Components/Entry/Entry';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import { useEffect, useState } from 'react';
 import styles from './Connecting.module.css';
 
 function Connecting() {
   const [progress, setProgress] = useState(10);
-  const [l] = useLanguage();
+  const { l } = useLanguage();
 
   useEffect(() => {
     let addend = -1;
@@ -31,7 +31,7 @@ function Connecting() {
         <Entry>{`${l('connecting')}...`}</Entry>
       </div>
       <ButtonWrap>
-        <Button link='/'>{ l('cancel')}</Button>
+        <Button link='/'>{l('cancel')}</Button>
       </ButtonWrap>
     </div>
   );

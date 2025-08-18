@@ -1,8 +1,9 @@
 import Alert from '@/Components/Confirm/Confirm';
-import { appVersion, env, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
+import { appVersion, env, keysLS, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
 import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
-import useLanguage, { getCurrentCode } from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import GameType from '@/Types/OnlineGame';
+import localStorage from '@/Utils/localStorage';
 import Connecting from '@/Views/Connecting/Connecting';
 import Create from '@/Views/CreateGame/CreateGame';
 import EndGame from '@/Views/EndGame/EndGame';
@@ -19,7 +20,7 @@ const socket = io(env.SOCKET_URL, {
   path: env.SOCKET_PATH,
   query: {
     version: appVersion,
-    language: getCurrentCode()
+    language: localStorage.read(keysLS.LANG, String, '')
   }
 });
 
@@ -29,7 +30,7 @@ interface AlertType {
 }
 
 function MultiPlayer() {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
   const [, navigate] = useLocation();
   const [stage, setStage] = useState('connecting');
   const [gameList, setGameList] = useState<GameType[]>([]);

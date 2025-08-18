@@ -7,8 +7,8 @@ let WORDS = {} as LangDictWords;
 async function updateDictionaries(language: AppLangsT) {
   const [t, w] = await Promise.all([loadTranslations(language), loadWords(language)]);
 
-  TRANSLATIONS = t;
-  WORDS = w;
+  TRANSLATIONS = t.default;
+  WORDS = w.default;
 }
 
 const getDictionaries = () => [TRANSLATIONS, WORDS] as const;

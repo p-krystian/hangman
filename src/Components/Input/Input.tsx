@@ -1,9 +1,9 @@
-import styles from './Input.module.css';
 import WithCaret from '@/Components/WithCaret/WithCaret';
-import { useEffect, useRef } from 'react';
 import usePlaySound from '@/Hooks/usePlaySound';
+import { useEffect, useRef } from 'react';
+import styles from './Input.module.css';
 
-interface InputProps{
+interface InputProps {
   value: string;
   focus?: boolean;
   size: number;
@@ -11,7 +11,7 @@ interface InputProps{
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-function Input(props: InputProps){
+function Input(props: InputProps) {
   const prevValue = useRef('');
   const playSound = usePlaySound();
   const { value, focus, size, placeholder, onClick } = props;
@@ -20,27 +20,27 @@ function Input(props: InputProps){
     if (value === prevValue.current)
       return;
 
-    playSound('click');
+    // playSound('click');
     prevValue.current = value;
   }, [value, playSound]);
 
   return (
     <div
-      className={ styles.input }
-      onClick={ onClick }
-      style={ {'--size': `${size+1}ch`} as React.CSSProperties }
-      data-focus={ focus?.toString() }
+      className={styles.input}
+      onClick={onClick}
+      style={{ '--size': `${size + 1}ch` } as React.CSSProperties}
+      data-focus={focus?.toString()}
     >{
-      value.trimStart().length > 0 ? (
-        <WithCaret size={ size } show={ focus }>
-          { value.trimStart() }
-        </WithCaret>
-      ) : (
-        <span className={ styles.placeholder }>
-          { placeholder }
-        </span>
-      )
-    }</div>
+        value.trimStart().length > 0 ? (
+          <WithCaret size={size} show={focus}>
+            {value.trimStart()}
+          </WithCaret>
+        ) : (
+          <span className={styles.placeholder}>
+            {placeholder}
+          </span>
+        )
+      }</div>
   );
 }
 export default Input;

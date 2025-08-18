@@ -2,7 +2,7 @@ import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Lobby from '@/Components/Lobby/Lobby';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import GameType from '@/Types/OnlineGame';
 import styles from '@/Views/OnlineGames/OnlineGames.module.css';
 import { useLocation } from 'wouter';
@@ -15,7 +15,7 @@ interface GamesProps {
 
 function Games({ gameList, onCreate, onJoin }: GamesProps) {
   const [, navigate] = useLocation();
-  const [l] = useLanguage();
+  const { l } = useLanguage();
 
   useKeyboardControl(
     () => navigate('/'),

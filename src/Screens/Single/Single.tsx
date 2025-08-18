@@ -1,23 +1,17 @@
 import GameContext, { SingleGameContext } from '@/Contexts/GameContext';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
-import random from 'random';
 import { useCallback, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 
-const randomizer = (fallback: string, words: Record<string, string[]>) => {
-  const randomWord = random.choice(Object.values(words).flat());
-  return randomWord || fallback;
-};
 
 function SingleGame() {
   const [, navigate] = useLocation();
-  const [l, extraLang] = useLanguage();
-  const randomWord = randomizer(l('randomize'), extraLang().words);
+  const { l, getRandomWord } = useLanguage();
   const [stage, setStage] = useState('game');
   const gameData = useRef<SingleGameContext>({
-    entry: randomWord.toUpperCase(),
+    entry: getRandomWord(l('randomize')),
     nicks: [l('result')],
     points: [0],
     prevPoints: [0],
@@ -42,10 +36,10 @@ function SingleGame() {
   const newGame = useCallback(() => {
     gameData.current = {
       ...gameData.current,
-      entry: randomWord.toUpperCase()
+      entry: getRandomWord(l('randomize'))
     };
     setStage('game');
-  }, [randomWord]);
+  }, [getRandomWord, l]);
 
   return (
     <GameContext value={gameData.current}>

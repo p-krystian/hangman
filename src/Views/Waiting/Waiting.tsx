@@ -1,7 +1,7 @@
 import head from '@/Assets/Animation/head.svg';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import styles from './Waiting.module.css';
 
 interface WaitingProps {
@@ -9,7 +9,7 @@ interface WaitingProps {
 }
 
 function Waiting({ abort }: WaitingProps) {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
 
   return (
     <div className={styles.wrapper}>

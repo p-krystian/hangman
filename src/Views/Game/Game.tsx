@@ -8,7 +8,7 @@ import Keyboard from '@/Components/Keyboard/Keyboard';
 import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import usePlaySound from '@/Hooks/usePlaySound';
 import { useCallback, useContext, useState } from 'react';
 import styles from './Game.module.css';
@@ -20,7 +20,7 @@ interface GameProps {
 }
 
 function Game({ exit, onLose, onWin }: GameProps) {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
   const playSound = usePlaySound();
   const gameContext = useContext(GameContext);
   const entry = gameContext.entry || '?';

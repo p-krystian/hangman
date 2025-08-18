@@ -1,18 +1,18 @@
-import styles from './Confirm.module.css';
 import Button from '@/Components/Button/Button';
-import useLanguage from '@/Hooks/useLanguage';
-import { createPortal } from 'react-dom';
+import useLanguage from '@/Hooks/useLang';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import styles from './Confirm.module.css';
 
-interface ConfirmProps{
+type ConfirmProps = {
   confirm: () => void;
   reject?: () => void;
   long?: boolean;
   children: React.ReactNode;
 }
 
-function Confirm({ confirm, reject, long, children }: ConfirmProps){
-  const [l] = useLanguage();
+function Confirm({ confirm, reject, long, children }: ConfirmProps) {
+  const { l } = useLanguage();
   const popupContainer = document.getElementById('popup')!;
   const confirmText = reject ? l('yes') : l('ok');
 
@@ -23,11 +23,11 @@ function Confirm({ confirm, reject, long, children }: ConfirmProps){
   }, [popupContainer]);
 
   return createPortal(
-    <div className={ `${styles.confirm} ${long ? styles.long : ''}` }>
-      <span>{ children }</span>
-      <div className={ styles.buttons }>
-        { reject && <Button small={ true } onClick={ reject }>{ l('no') }</Button> }
-        <Button small={ true } onClick={ confirm }>{ confirmText }</Button>
+    <div className={`${styles.confirm} ${long ? styles.long : ''}`}>
+      <span>{children}</span>
+      <div className={styles.buttons}>
+        {reject && <Button small={true} onClick={reject}>{l('no')}</Button>}
+        <Button small={true} onClick={confirm}>{confirmText}</Button>
       </div>
     </div>,
     popupContainer

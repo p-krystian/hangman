@@ -1,20 +1,20 @@
-import styles from './Lobby.module.css';
 import Button from '@/Components/Button/Button';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
+import styles from './Lobby.module.css';
 
 interface LobbyProps {
   name: string;
   submit: () => void;
 }
 
-function Lobby({ name, submit }: LobbyProps){
-  const [l] = useLanguage();
+function Lobby({ name, submit }: LobbyProps) {
+  const { l } = useLanguage();
 
   return (
-    <div className={ styles.lobby }>
-      <span>{ name }</span>
-      <Button small={ true } onClick={ submit }>
-        { l('join') }
+    <div className={styles.lobby}>
+      <span>{name}</span>
+      <Button small={true} onClick={submit}>
+        {l('join')}
       </Button>
     </div>
   );

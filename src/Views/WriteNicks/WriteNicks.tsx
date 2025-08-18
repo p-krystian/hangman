@@ -6,7 +6,7 @@ import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import { useCallback, useContext, useState } from 'react';
 import styles from './WriteNicks.module.css';
 
@@ -16,7 +16,7 @@ interface WriteNicksProps {
 }
 
 function WriteNicks({ back, next }: WriteNicksProps) {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
   const [nick0, setNick0] = useState('');
   const [nick1, setNick1] = useState('');
   const [focused, setFocused] = useState(0);

@@ -22,4 +22,4 @@ function usePlaySound(name: string) {
   audio.volume = volume * 0.2;
   audio.play().catch(() => 'Don\'t throw error');
 }
-export default () => usePlaySound;
+export default () => (name: unknown) => name || usePlaySound;

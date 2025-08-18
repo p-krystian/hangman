@@ -1,17 +1,17 @@
+import { useCallback, useEffect } from 'react';
 import styles from './Entry.module.css';
-import { useEffect, useCallback } from 'react';
 
-interface EntryProps{
+type EntryProps = {
   children: React.ReactNode;
   hide?: boolean;
   winCallback?: () => void;
   guessed?: string[];
 }
 
-function Entry({children, hide, winCallback=() => {}, guessed=[]}: EntryProps){
+function Entry({ children, hide, winCallback = () => { }, guessed = [] }: EntryProps) {
   const hideText = useCallback((text: string, guessed: string[]) => {
     let newText = '';
-    for (const char of text){
+    for (const char of text) {
       newText += char === ' ' ? ' ' : (
         guessed.includes(char) ? char : '-'
       );
@@ -27,8 +27,8 @@ function Entry({children, hide, winCallback=() => {}, guessed=[]}: EntryProps){
   }, [guessed, hiddenText, winCallback]);
 
   return (
-    <span className={ styles.entry }>
-      { hiddenText || children }
+    <span className={styles.entry}>
+      {hiddenText || children}
     </span>
   );
 }

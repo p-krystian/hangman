@@ -7,9 +7,8 @@ import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import usePlaySound from '@/Hooks/usePlaySound';
-import random from 'random';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './WriteEntry.module.css';
 
@@ -21,7 +20,7 @@ interface WriteEntryProps {
 }
 
 function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
-  const [l, extraLang] = useLanguage();
+  const { l, getRandomWord } = useLanguage();
   const playSound = usePlaySound();
   const [entry, setEntry] = useState('');
   const gameContext = useContext(GameContext);
@@ -32,13 +31,6 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
     gameContext.entry = entry.trim();
     next();
   }, [entry, next, gameContext]);
-
-  const writeRandom = useCallback(() => {
-    const words = extraLang().words;
-    const randomCat = random.choice(Object.keys(words)) as string;
-    const randomWord = random.choice(words[randomCat] || [l('randomize')]) as string;
-    setEntry(randomWord.toUpperCase());
-  }, [extraLang, l]);
 
   useFullScreen();
   useKeyboardControl(back, updateContext);
@@ -65,7 +57,9 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
           {l('next')}
         </Button>
         {!!back && <Button onClick={back}>{backText || l('back')}</Button>}
-        <Button onClick={writeRandom}>{l('randomize')}</Button>
+        <Button onClick={() => setEntry(getRandomWord(l('randomize')))}>
+          {l('randomize')}
+        </Button>
       </ButtonWrap>
     </div>
   );
