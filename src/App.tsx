@@ -1,9 +1,10 @@
 import Header from '@/Components/Header/Header';
-import { mainLang } from '@/conf';
+import { keysLS, mainLang, startVol } from '@/conf';
 import AppContext from '@/Contexts/AppContext';
 import useLanguage from '@/Hooks/useLanguage';
-import { AppLangsT } from '@/Types/AppLangs';
-import { VolumeT } from '@/Types/Volume';
+import useLocalStorage from '@/Hooks/useLocalStorage';
+import { AppLangsT, parseAppLangs } from '@/Parsers/AppLangs';
+import { parseVolume, VolumeT } from '@/Parsers/Volume';
 import { updateDictionaries } from '@/Utils/international';
 import { useCallback, useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'wouter';
@@ -17,14 +18,16 @@ import StartMenu from '@/Screens/Start/Start';
 
 function App() {
   const [, extraLang, setLanguage] = useLanguage();
-  const [volume, setVolume] = useState<VolumeT>(0);
-  const [appLang, setAppLang] = useState<AppLangsT>(mainLang);
+  const [volume, setVolume] = useLocalStorage<VolumeT>(startVol, keysLS.VOLUME, parseVolume);
+  const [appLang, setAppLang] = useLocalStorage<AppLangsT>(mainLang, keysLS.LANG, parseAppLangs);
   const [isLoading, setLoading] = useState(true);
 
   const setLang = useCallback(async (newLang: AppLangsT) => {
+    // setLoading(true);
     await updateDictionaries(newLang);
     setAppLang(newLang);
-  }, []);
+    // setLoading(false);
+  }, [setAppLang]);
 
   useEffect(() => {
     updateDictionaries(appLang).then(() => setLoading(false));

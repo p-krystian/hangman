@@ -1,5 +1,6 @@
-const mainLang = 'pl';
 const appVersion = __APP_VERSION__ || 'VER';
+const mainLang = 'pl';
+const startVol = 2;
 
 const env = {
   SOCKET_URL: import.meta.env.VITE_SOCKET_URL,
@@ -8,6 +9,11 @@ const env = {
   AUTHOR_URL: import.meta.env.VITE_AUTHOR_URL,
   STORAGE_PREFIX: import.meta.env.VITE_STORAGE_PREFIX
 } as const;
+
+enum keysLS {
+  VOLUME = 'volume',
+  LANG = 'language'
+};
 
 enum sioOutEvents {
   JOIN_LOBBY = 'join-lobby',
@@ -30,4 +36,4 @@ enum sioInEvents {
   INVALID_DATA = 'invalid-data',
 };
 
-export { appVersion, mainLang, env, sioOutEvents, sioInEvents };
+export { appVersion, mainLang, startVol, env, keysLS, sioOutEvents, sioInEvents };

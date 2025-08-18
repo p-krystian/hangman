@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { AppLangsT } from '@/Types/AppLangs';
-import { VolumeT } from '@/Types/Volume';
+import { AppLangsT } from '@/Parsers/AppLangs';
+import { VolumeT } from '@/Parsers/Volume';
 import { mainLang } from '@/conf';
 
 type AppContextT = {

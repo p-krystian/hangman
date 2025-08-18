@@ -5,4 +5,6 @@ const AppLangsSchema = z.literal(availableLangs);
 
 type AppLangsT = z.infer<typeof AppLangsSchema>;
 
-export { AppLangsSchema, type AppLangsT };
+const parseAppLangs = AppLangsSchema.parse;
+
+export { parseAppLangs, type AppLangsT };
