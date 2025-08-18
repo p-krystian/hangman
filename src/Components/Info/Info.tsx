@@ -1,9 +1,9 @@
 import { appVersion, env } from '@/conf';
-import useLanguage from '@/Hooks/useLanguage';
+import useLanguage from '@/Hooks/useLang';
 import styles from './Info.module.css';
 
 function Info() {
-  const [l] = useLanguage();
+  const { l } = useLanguage();
 
   return (
     <div className={styles.info}>
@@ -12,7 +12,7 @@ function Info() {
       <p>
         {`v${appVersion} - `}
         <a href={env.AUTHOR_URL} target="_blank" rel="noreferrer">
-          {l('signature')}
+          by Krystian Piątek
         </a>
       </p>
     </div>

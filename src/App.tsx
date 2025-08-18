@@ -1,11 +1,10 @@
 import Header from '@/Components/Header/Header';
 import { keysLS, mainLang, startVol } from '@/conf';
 import AppContext from '@/Contexts/AppContext';
-import useLanguage from '@/Hooks/useLanguage';
 import useLocalStorage from '@/Hooks/useLocalStorage';
 import { AppLangsT, parseAppLangs } from '@/Parsers/AppLangs';
 import { parseVolume, VolumeT } from '@/Parsers/Volume';
-import { updateDictionaries } from '@/Utils/international';
+import { updateDictionaries } from '@/Utils/lang';
 import { useCallback, useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'wouter';
 import { useHashLocation } from 'wouter/use-hash-location';
@@ -17,7 +16,6 @@ import SingleMenu from '@/Screens/Single/Single';
 import StartMenu from '@/Screens/Start/Start';
 
 function App() {
-  const [, extraLang, setLanguage] = useLanguage();
   const [volume, setVolume] = useLocalStorage<VolumeT>(startVol, keysLS.VOLUME, parseVolume);
   const [appLang, setAppLang] = useLocalStorage<AppLangsT>(mainLang, keysLS.LANG, parseAppLangs);
   const [isLoading, setLoading] = useState(true);
@@ -33,12 +31,6 @@ function App() {
     updateDictionaries(appLang).then(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    setLanguage(extraLang().code);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
 
   return isLoading ? (
     <div>LOADING</div>

@@ -15,7 +15,6 @@
   "online": "Online",
   "exit": "Exit",
   "info": "A Hangman game written using React and Vite.\nIt allows you to play alone or with other people, on one device or online.\nAll graphics used were created by the game's author.",
-  "signature": "by Krystian Piątek",
   "cancel": "Cancel",
   "back": "Back",
   "exitToMenu": "Exit to Menu?",

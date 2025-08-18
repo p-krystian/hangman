@@ -15,7 +15,6 @@
   "online": "online",
   "exit": "wyjdź",
   "info": "Gra w Wisielca napisana z użyciem React-a oraz Vite.\nUmożliwia grę samemu lub w dwie osoby, na jednym urządzeniu lub online.\nAutorem wszystkich użytych grafik jest autor gry.",
-  "signature": "by Krystian Piątek",
   "cancel": "anuluj",
   "back": "wstecz",
   "exitToMenu": "Wyjść do Menu?",

@@ -1,6 +1,6 @@
 import langs from '@/Assets/Langs';
 import { useContext, useMemo, useCallback } from 'react';
-import { getDictionaries } from '@/Utils/international';
+import { getDictionaries } from '@/Utils/lang';
 import AppContext from '@/Contexts/AppContext';
 
 function useLanguage() {
@@ -10,8 +10,8 @@ function useLanguage() {
     [currentLang]
   );
 
-  const l = useCallback((key: string) => (
-    translations[key] as string || key
+  const l = useCallback((key: keyof LangDictTranslations) => (
+    translations[key] || key
   ), [translations]);
 
   // const getRandomWord = useCallback(() => ());

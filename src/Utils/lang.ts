@@ -1,8 +1,8 @@
 import { loadTranslations, loadWords } from '@/Assets/Langs';
-import { AppLangsT } from '@/Types/AppLangs';
+import { AppLangsT } from '@/Parsers/AppLangs';
 
-let TRANSLATIONS = {} as Record<string, string>;
-let WORDS = {} as Record<string, Record<string, string>>;
+let TRANSLATIONS = {} as LangDictTranslations;
+let WORDS = {} as LangDictWords;
 
 async function updateDictionaries(language: AppLangsT) {
   const [t, w] = await Promise.all([loadTranslations(language), loadWords(language)]);
