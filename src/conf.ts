@@ -1,4 +1,4 @@
-const mainLanguage = 'pl';
+const mainLang = 'pl';
 const appVersion = __APP_VERSION__ || 'VER';
 
 const env = {
@@ -30,4 +30,4 @@ enum sioInEvents {
   INVALID_DATA = 'invalid-data',
 };
 
-export { appVersion, mainLanguage, env, sioOutEvents, sioInEvents };
+export { appVersion, mainLang, env, sioOutEvents, sioInEvents };

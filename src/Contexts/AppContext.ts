@@ -1,25 +1,23 @@
 import { createContext } from 'react';
-import langs, { AvailableLang } from '@/Assets/Lang';
+import { AppLangs } from '@/Assets/Langs';
+import { mainLang } from '@/conf';
+
+type VolumeValues = 0 | 1 | 2 | 3;
 
 type AppContextType = {
-  volume: number;
-  setVolume: (newVolume: number) => void;
+  volume: VolumeValues;
+  setVolume: (newVolume: VolumeValues) => void;
 
-  language: AvailableLang,
-  setLanguage: (newLanguage: keyof typeof langs) => void;
+  lang: AppLangs,
+  setLang: (newLang: AppLangs) => void;
 };
 
 const AppContext = createContext<AppContextType>({
   volume: 0,
   setVolume: () => { },
 
-  language: {
-    language: {},
-    words: {},
-    logo: '',
-    symbol: ''
-  },
-  setLanguage: () => { }
+  lang: mainLang,
+  setLang: () => { }
 });
 
 export { type AppContextType };
