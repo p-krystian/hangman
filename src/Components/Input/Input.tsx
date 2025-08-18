@@ -1,5 +1,5 @@
 import WithCaret from '@/Components/WithCaret/WithCaret';
-import usePlaySound from '@/Hooks/usePlaySound';
+import usePlayer from '@/Hooks/usePlayer';
 import { useEffect, useRef } from 'react';
 import styles from './Input.module.css';
 
@@ -13,14 +13,14 @@ interface InputProps {
 
 function Input(props: InputProps) {
   const prevValue = useRef('');
-  const playSound = usePlaySound();
+  const playSound = usePlayer();
   const { value, focus, size, placeholder, onClick } = props;
 
   useEffect(() => {
     if (value === prevValue.current)
       return;
 
-    // playSound('click');
+    playSound('click');
     prevValue.current = value;
   }, [value, playSound]);
 

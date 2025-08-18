@@ -8,7 +8,7 @@ import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
-import usePlaySound from '@/Hooks/usePlaySound';
+import usePlayer from '@/Hooks/usePlayer';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './WriteEntry.module.css';
 
@@ -21,7 +21,7 @@ interface WriteEntryProps {
 
 function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
   const { l, getRandomWord } = useLanguage();
-  const playSound = usePlaySound();
+  const playSound = usePlayer();
   const [entry, setEntry] = useState('');
   const gameContext = useContext(GameContext);
   const keyboardWrite = useKeyboardWrite(setEntry, 20);

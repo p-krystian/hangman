@@ -7,7 +7,7 @@ import Points from '@/Components/Points/Points';
 import GameContext from '@/Contexts/GameContext';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLang';
-import usePlaySound from '@/Hooks/usePlaySound';
+import usePlayer from '@/Hooks/usePlayer';
 import { useContext, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import styles from './EndGame.module.css';
@@ -19,7 +19,7 @@ interface EndGameProps {
 
 function EndGame({ next, pointsID }: EndGameProps) {
   const { l } = useLanguage();
-  const playSound = usePlaySound();
+  const playSound = usePlayer();
   const gameContext = useContext(GameContext);
   const [, navigate] = useLocation();
   const result = {
@@ -34,9 +34,12 @@ function EndGame({ next, pointsID }: EndGameProps) {
     () => navigate('/'),
     next
   );
-  useEffect(() => playSound(
-    result.audio
-  ), [playSound, result.audio]);
+  useEffect(() => {
+    // TODO: Add sound for alive
+    if (result.audio === 'dead') {
+      playSound(result.audio);
+    }
+  }, [playSound, result.audio]);
 
   return (
     <div className={styles.wrapper}>

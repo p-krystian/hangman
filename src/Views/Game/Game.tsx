@@ -9,7 +9,7 @@ import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLang';
-import usePlaySound from '@/Hooks/usePlaySound';
+import usePlayer from '@/Hooks/usePlayer';
 import { useCallback, useContext, useState } from 'react';
 import styles from './Game.module.css';
 
@@ -21,7 +21,7 @@ interface GameProps {
 
 function Game({ exit, onLose, onWin }: GameProps) {
   const { l } = useLanguage();
-  const playSound = usePlaySound();
+  const playSound = usePlayer();
   const gameContext = useContext(GameContext);
   const entry = gameContext.entry || '?';
   const [guessed, setGuessed] = useState<string[]>([]);
