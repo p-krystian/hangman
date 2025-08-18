@@ -24,11 +24,13 @@ function App() {
   const setLang = useCallback(async (newLang: AppLangsT) => {
     // setLoading(true);
     await updateDictionaries(newLang);
+    window.document.documentElement.lang = newLang;
     setAppLang(newLang);
     // setLoading(false);
   }, [setAppLang]);
 
   useEffect(() => {
+    window.document.documentElement.lang = appLang;
     updateDictionaries(appLang).then(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
