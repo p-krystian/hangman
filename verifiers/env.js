@@ -22,4 +22,14 @@ const envSchema = z.object({
   VITE_STORAGE_PREFIX: z.string(),
 });
 
-export default () => envSchema.safeParse(process.env);
+function verify() {
+  const res = envSchema.safeParse(process.env);
+
+  if (!res.success) {
+    const issue = res.error.issues[0];
+    return `${issue.path[0]}: ${issue.message}`;
+  }
+  return null;
+}
+
+export default verify;

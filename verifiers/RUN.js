@@ -1,28 +1,28 @@
-import envParse from './env.js';
+import envVerify from './env.js';
 
 const verifiers = [
-  { name: '.env', parse: envParse }
+  { name: '.env', verify: envVerify }
 ];
 
 const error = {
   name: '',
-  issue: null
+  content: ''
 };
 
-for (const verifier of verifiers){
-  const res = verifier.parse();
+for (const verifier of verifiers) {
+  const err = verifier.verify();
 
-  if (!res.success) {
+  if (err) {
     error.name = verifier.name;
-    error.issue = res.error.issues[0];
+    error.content = err;
     break;
   }
   console.log(`OK: ${verifier.name}`);
 }
 
-if (error.name && error.issue){
+if (error.name && error.content) {
   console.warn(`PROBLEM: ${error.name}`);
-  console.error(`${error.issue.path[0]}: ${error.issue.message}`);
+  console.error(error.content);
   console.log('');
 
   throw new Error(`Problem occured! Look above`);
