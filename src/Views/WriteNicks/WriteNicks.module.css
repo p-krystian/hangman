@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,13 +7,13 @@
   margin-top: auto;
   margin-bottom: auto;
 }
-.inputs{
+.inputs {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
 }
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;

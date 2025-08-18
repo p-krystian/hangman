@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,12 +7,12 @@
   flex: 1;
   gap: 1rem;
 }
-.text{
+.text {
   font-family: var(--font-simple);
   font-size: 2.6rem;
   color: var(--main);
 }
-.wrapper{
+.wrapper {
   width: 100%;
   min-height: inherit;
   display: flex;

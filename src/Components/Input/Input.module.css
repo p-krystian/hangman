@@ -1,11 +1,19 @@
 @keyframes blinking {
-  0%  { opacity: 1; }
-  40% { opacity: 0; }
-  60% { opacity: 0; }
-  100%{ opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.input{
+.input {
   color: var(--white);
   display: flex;
   align-items: center;
@@ -22,18 +30,18 @@
   overflow-x: auto;
   background-color: var(--dark-bg);
 }
-.input[data-focus="true"]{
+.input[data-focus="true"] {
   border-color: var(--main);
 }
-.placeholder{
+.placeholder {
   width: 100%;
   color: var(--main);
   text-align: center;
   font-family: var(--font-simple);
 }
-@supports selector(body:has(div)){
-  .input[data-focus="true"]:has(.placeholder)::before{
-    content: '_';
+@supports selector(body:has(div)) {
+  .input[data-focus="true"]:has(.placeholder)::before {
+    content: "_";
     position: absolute;
     animation: blinking 0.6s linear infinite;
   }

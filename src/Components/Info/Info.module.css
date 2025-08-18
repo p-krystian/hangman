@@ -1,14 +1,14 @@
-.info{
+.info {
   text-align: left;
 }
-.info p{
+.info p {
   text-align: center;
 }
-.info a{
+.info a {
   color: inherit;
   text-decoration: none;
   margin: auto;
 }
-.info a:hover{
+.info a:hover {
   text-decoration: underline;
 }

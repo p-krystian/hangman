@@ -1,4 +1,4 @@
-.buttons{
+.buttons {
   width: 16rem;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   margin: auto;
   gap: 0.8rem;
 }
-.small{
+.small {
   display: flex;
   justify-content: space-evenly;
   /* padding: 0 1rem; */

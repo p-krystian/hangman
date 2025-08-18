@@ -1,4 +1,4 @@
-.key{
+.key {
   appearance: none;
   display: flex;
   justify-content: center;
@@ -13,18 +13,17 @@
   width: 1.3em;
   height: 1.3em;
   user-select: none;
-  transition:
-    background-color 150ms ease-out;
+  transition: background-color 150ms ease-out;
   font-family: var(--font-simple);
   text-align: center;
 }
-.key:hover{
+.key:hover {
   background-color: var(--main-d);
 }
-.wide{
+.wide {
   width: 5em;
 }
-.key svg{
+.key svg {
   max-width: 80%;
   max-height: 80%;
 }

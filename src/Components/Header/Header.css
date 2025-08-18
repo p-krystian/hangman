@@ -1,4 +1,4 @@
-.header{
+.header {
   font-family: var(--font-main);
   display: flex;
   font-size: 5rem;
@@ -9,10 +9,10 @@
   padding-bottom: 0.5rem;
   height: var(--header-y);
 }
-.full .header{
+.full .header {
   display: none;
 }
-.header img{
+.header img {
   margin: auto;
   height: 90%;
   filter: drop-shadow(0 0 0.5rem var(--dark-bg));

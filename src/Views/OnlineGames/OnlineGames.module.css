@@ -1,11 +1,11 @@
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   min-height: inherit;
   width: 100%;
   align-items: center;
 }
-.games{
+.games {
   width: 22rem;
   flex-grow: 1;
   max-height: calc(100vh - 16rem);
@@ -21,7 +21,7 @@
   overflow-y: auto;
   background-color: var(--darker-a);
 }
-.info{
+.info {
   display: flex;
   margin: auto;
   width: 100%;
@@ -32,8 +32,8 @@
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11){
-  .games{
+@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+  .games {
     background-color: transparent;
     border: none;
     flex-grow: 0;

@@ -1,4 +1,4 @@
-.category{
+.category {
   --_s: 5;
   font-size: calc(-0.2rem * var(--_s) + 2.6rem);
   grid-area: category;
@@ -7,21 +7,21 @@
   max-height: 1em;
   overflow: hidden;
 }
-.name{
+.name {
   text-transform: uppercase;
 }
-.short{
+.short {
   font-size: 2.2rem;
   text-align: center;
   line-height: 0.8;
   margin-bottom: 0.6rem;
   max-height: unset;
 }
-.short .prefix{
+.short .prefix {
   display: none;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11){
-  .short .prefix{
+@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+  .short .prefix {
     display: inline;
   }
 }

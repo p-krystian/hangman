@@ -1,8 +1,12 @@
-@keyframes show{
-  from  { opacity: 0 }
-  to    { opacity: 1 }
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.result{
+.result {
   font-family: var(--font-mono);
   font-size: 2rem;
   width: 18rem;
@@ -10,7 +14,7 @@
   grid-area: result;
   margin-bottom: 2rem;
 }
-.result img{
+.result img {
   width: 100%;
   height: 100%;
   filter: brightness(var(--svg-bright));
@@ -21,13 +25,13 @@
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;
 }
-.win{
+.win {
   color: var(--correct);
 }
-.lose{
+.lose {
   color: var(--mistake);
 }
-.entry{
+.entry {
   font-size: 1.8rem;
   font-family: var(--font-mono);
   font-weight: 800;
@@ -38,7 +42,7 @@
   text-align: center;
   text-shadow: 0 0 0.5rem var(--dark-bg);
 }
-.container{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,20 +50,20 @@
   grid-area: main;
   flex: 1;
 }
-.wrapper{
+.wrapper {
   width: 100%;
   min-height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11){
-  .result{
+@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+  .result {
     width: 16rem;
     height: 16rem;
     margin-bottom: 0;
   }
-  .container{
+  .container {
     margin: auto;
     flex: 0;
     min-width: 620px;

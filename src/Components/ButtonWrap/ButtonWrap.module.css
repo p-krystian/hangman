@@ -1,4 +1,4 @@
-.buttons{
+.buttons {
   display: flex;
   flex-wrap: wrap-reverse;
   flex-direction: row-reverse;
@@ -8,8 +8,8 @@
   justify-content: space-evenly;
   width: 100%;
 }
-@media (min-width: 620px) and (orientation: landscape){
-  .buttons{
+@media (min-width: 620px) and (orientation: landscape) {
+  .buttons {
     justify-content: center;
     gap: 1rem;
   }

@@ -1,4 +1,4 @@
-.button{
+.button {
   appearance: none;
   display: inline-grid;
   min-width: 10rem;
@@ -18,23 +18,23 @@
     background-color 150ms ease-out,
     filter 150ms ease-in-out;
 }
-.button.small{
+.button.small {
   font-size: 1.3rem;
   padding: 0.2rem 0.6rem;
   margin: 0;
   min-width: 4rem;
   max-height: 2.2rem;
 }
-.button:hover{
+.button:hover {
   background-color: var(--main-d);
 }
 .button[data-disabled="true"],
-.button[disabled]{
+.button[disabled] {
   pointer-events: none;
   cursor: not-allowed;
   filter: brightness(50%);
 }
-button img{
+button img {
   width: 85%;
   height: 85%;
   object-fit: cover;

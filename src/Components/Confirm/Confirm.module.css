@@ -1,4 +1,4 @@
-.confirm{
+.confirm {
   display: block;
   font-size: 2.2rem;
   border: 3px solid var(--main-d);
@@ -9,19 +9,19 @@
   width: 20rem;
   white-space: pre-line;
 }
-.confirm.long{
+.confirm.long {
   font-size: 1.6rem;
   padding: 0.8rem;
   width: 22rem;
 }
-.confirm span{
+.confirm span {
   display: block;
   margin-bottom: 1rem;
 }
-.confirm.long span{
+.confirm.long span {
   margin-bottom: 0.2rem;
 }
-.buttons{
+.buttons {
   width: 100%;
   display: flex;
   padding: 0.5rem;
@@ -29,6 +29,6 @@
   justify-content: end;
   gap: 1rem;
 }
-.confirm.long .buttons{
+.confirm.long .buttons {
   padding: 0.1rem 0.5rem;
 }
