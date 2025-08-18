@@ -1,4 +1,5 @@
 import Header from '@/Components/Header/Header';
+import Splash from '@/Components/Splash/Splash';
 import { keysLS, mainLang, startVol } from '@/conf';
 import AppContext from '@/Contexts/AppContext';
 import useLocalStorage from '@/Hooks/useLocalStorage';
@@ -32,9 +33,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return isLoading ? (
-    <div>LOADING</div>
-  ) : (
+  return isLoading ? (<Splash />) : (
     <AppContext value={{ volume, setVolume, appLang, setLang }}>
       <Router hook={useHashLocation}>
         <Header />
