@@ -1,4 +1,4 @@
-interface OnlineGame {
+type OnlineGame = {
   id: string;
   name: string;
 }

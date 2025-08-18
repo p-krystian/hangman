@@ -12,7 +12,7 @@ import usePlayer from '@/Hooks/usePlayer';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './WriteEntry.module.css';
 
-interface WriteEntryProps {
+type WriteEntryProps = {
   back?: () => void;
   backText?: string;
   next: () => void;

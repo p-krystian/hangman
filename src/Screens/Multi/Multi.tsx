@@ -24,7 +24,7 @@ const socket = io(env.SOCKET_URL, {
   }
 });
 
-interface AlertType {
+type AlertType = {
   children: React.ReactNode;
   confirm: () => void;
 }

@@ -10,7 +10,7 @@ import useLanguage from '@/Hooks/useLang';
 import { useCallback, useContext, useState } from 'react';
 import styles from './WriteNicks.module.css';
 
-interface WriteNicksProps {
+type WriteNicksProps = {
   back: () => void;
   next: () => void;
 }

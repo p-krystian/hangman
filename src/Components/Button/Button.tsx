@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import styles from "./Button.module.css";
 
-interface ButtonProps {
+type ButtonProps = {
   link?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => unknown;
   value?: string;

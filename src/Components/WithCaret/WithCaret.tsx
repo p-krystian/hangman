@@ -1,18 +1,18 @@
 import styles from './WithCaret.module.css';
 
-interface WithCaretProps {
+type WithCaretProps = {
   size: number;
   show?: boolean | null;
   children: string;
 }
 
-function WithCaret({size, show, children}: WithCaretProps) {
-  return(
+function WithCaret({ size, show, children }: WithCaretProps) {
+  return (
     <>
-      { children }
-      { (children.length < size && (show === undefined || show === null ? true : show)) && (
-        <span className={ styles.caret }>_</span>
-      ) }
+      {children}
+      {(children.length < size && (show === undefined || show === null ? true : show)) && (
+        <span className={styles.caret}>_</span>
+      )}
     </>
   );
 }

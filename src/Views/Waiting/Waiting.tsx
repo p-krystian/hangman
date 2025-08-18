@@ -4,7 +4,7 @@ import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import useLanguage from '@/Hooks/useLang';
 import styles from './Waiting.module.css';
 
-interface WaitingProps {
+type WaitingProps = {
   abort?: () => void;
 }
 

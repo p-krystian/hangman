@@ -13,7 +13,7 @@ import usePlayer from '@/Hooks/usePlayer';
 import { useCallback, useContext, useState } from 'react';
 import styles from './Game.module.css';
 
-interface GameProps {
+type GameProps = {
   exit?: () => void;
   onLose: () => void;
   onWin: () => void;

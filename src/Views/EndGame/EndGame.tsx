@@ -12,7 +12,7 @@ import { useContext, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import styles from './EndGame.module.css';
 
-interface EndGameProps {
+type EndGameProps = {
   next: () => void;
   pointsID?: string;
 }

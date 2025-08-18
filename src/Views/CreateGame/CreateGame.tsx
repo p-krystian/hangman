@@ -9,7 +9,7 @@ import useLanguage from '@/Hooks/useLang';
 import { useCallback, useState } from 'react';
 import styles from './CreateGame.module.css';
 
-interface CreateGameProps {
+type CreateGameProps = {
   back: () => void;
   submit: (name: string) => void;
 }

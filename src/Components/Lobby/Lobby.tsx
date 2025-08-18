@@ -2,7 +2,7 @@ import Button from '@/Components/Button/Button';
 import useLanguage from '@/Hooks/useLang';
 import styles from './Lobby.module.css';
 
-interface LobbyProps {
+type LobbyProps = {
   name: string;
   submit: () => void;
 }

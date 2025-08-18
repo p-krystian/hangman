@@ -7,7 +7,7 @@ import GameType from '@/Types/OnlineGame';
 import styles from '@/Views/OnlineGames/OnlineGames.module.css';
 import { useLocation } from 'wouter';
 
-interface GamesProps {
+type GamesProps = {
   gameList: GameType[];
   onCreate: () => void;
   onJoin: (id: string) => void;

@@ -3,7 +3,7 @@ import usePlayer from '@/Hooks/usePlayer';
 import { useEffect, useRef } from 'react';
 import styles from './Input.module.css';
 
-interface InputProps {
+type InputProps = {
   value: string;
   focus?: boolean;
   size: number;
