@@ -12,8 +12,6 @@ ReactDOM
   .createRoot(document.getElementById('root')!)
   .render(
     <OptionalStrict>
-      <React.Suspense fallback={<div>LOAD</div>}>
-        <App />
-      </React.Suspense>
+      <App />
     </OptionalStrict>,
   );

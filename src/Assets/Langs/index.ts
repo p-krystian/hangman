@@ -21,10 +21,8 @@ const langs = {
   }
 } as const;
 
-type AppLangs = keyof typeof langs;
+const loadTranslations = (lang: keyof typeof langs) => import(`./${lang}/translations.json`);
+const loadWords = (lang: keyof typeof langs) => import(`./${lang}/words.json`);
 
-const loadTranslations = (lang: AppLangs) => import(`./${lang}/translations.json`);
-const loadWords = (lang: AppLangs) => import(`./${lang}/words.json`);
-
-export { type AppLangs, loadTranslations, loadWords };
+export { loadTranslations, loadWords };
 export default langs;

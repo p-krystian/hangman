@@ -4,7 +4,7 @@ import { getDictionaries } from '@/Utils/international';
 import AppContext from '@/Contexts/AppContext';
 
 function useLanguage() {
-  const { lang: selectedLang } = useContext(AppContext);
+  const { appLang: selectedLang } = useContext(AppContext);
   const [translations, /*words*/, data] = useMemo(
     () => [...getDictionaries(), langs[selectedLang]],
     [selectedLang]

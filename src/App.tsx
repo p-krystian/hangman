@@ -1,10 +1,12 @@
 import { loadTranslations, loadWords } from '@/Assets/Langs';
 import Header from '@/Components/Header/Header';
 import { mainLang } from '@/conf';
-import AppContext, { AppContextType } from '@/Contexts/AppContext';
+import AppContext from '@/Contexts/AppContext';
 import useLanguage from '@/Hooks/useLanguage';
+import { AppLangsT } from '@/Types/AppLangs';
+import { VolumeT } from '@/Types/Volume';
 import { setDictionaries } from '@/Utils/international';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'wouter';
 import { useHashLocation } from 'wouter/use-hash-location';
 import './App.css';
@@ -14,24 +16,25 @@ import MultiMenu from '@/Screens/Multi/Multi';
 import SingleMenu from '@/Screens/Single/Single';
 import StartMenu from '@/Screens/Start/Start';
 
+const updateDictionaries = async (newLang: AppLangsT) => (
+  setDictionaries(await loadTranslations(newLang), await loadWords(newLang))
+);
+
 function App() {
   const [, extraLang, setLanguage] = useLanguage();
-  const [volume, setVolume] = useState<AppContextType['volume']>(0);
-  const [lang, setLang] = useState<AppContextType['lang']>(mainLang);
+  const [volume, setVolume] = useState<VolumeT>(0);
+  const [appLang, setAppLang] = useState<AppLangsT>(mainLang);
   const [isLoading, setLoading] = useState(true);
 
-  const updateDictionaries = useCallback(async (newLang: AppContextType['lang']) => {
+  const setLang = useCallback(async (newLang: AppLangsT) => {
     setLoading(true);
-
-    const translations = await loadTranslations(newLang);
-    const words = await loadWords(newLang);
-    setDictionaries(translations, words);
-
+    await updateDictionaries(newLang);
+    setAppLang(newLang);
     setLoading(false);
   }, []);
 
-  useLayoutEffect(() => {
-    updateDictionaries(lang);
+  useEffect(() => {
+    updateDictionaries(appLang).then(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,7 +47,7 @@ function App() {
   return isLoading ? (
     <div>LOADING</div>
   ) : (
-    <AppContext value={{ volume, setVolume, lang, setLang }}>
+    <AppContext value={{ volume, setVolume, appLang, setLang }}>
       <Router hook={useHashLocation}>
         <Header />
         <main>

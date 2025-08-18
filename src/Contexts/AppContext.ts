@@ -1,24 +1,23 @@
 import { createContext } from 'react';
-import { AppLangs } from '@/Assets/Langs';
+import { AppLangsT } from '@/Types/AppLangs';
+import { VolumeT } from '@/Types/Volume';
 import { mainLang } from '@/conf';
 
-type VolumeValues = 0 | 1 | 2 | 3;
+type AppContextT = {
+  volume: VolumeT;
+  setVolume: (newVolume: VolumeT) => void;
 
-type AppContextType = {
-  volume: VolumeValues;
-  setVolume: (newVolume: VolumeValues) => void;
-
-  lang: AppLangs,
-  setLang: (newLang: AppLangs) => void;
+  appLang: AppLangsT,
+  setLang: (newLang: AppLangsT) => void;
 };
 
-const AppContext = createContext<AppContextType>({
+const AppContext = createContext<AppContextT>({
   volume: 0,
   setVolume: () => { },
 
-  lang: mainLang,
+  appLang: mainLang,
   setLang: () => { }
 });
 
-export { type AppContextType };
+export { type AppContextT };
 export default AppContext;
