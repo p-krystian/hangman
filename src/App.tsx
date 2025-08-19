@@ -1,24 +1,26 @@
 import Header from '@/Components/Header/Header';
 import Splash from '@/Components/Splash/Splash';
-import { keysLS, mainLang, startVol } from '@/conf';
+import { keysLS, startVol } from '@/conf';
 import AppContext from '@/Contexts/AppContext';
 import useLocalStorage from '@/Hooks/useLocalStorage';
 import { AppLangsT, parseAppLangs } from '@/Parsers/AppLangs';
 import { parseVolume, VolumeT } from '@/Parsers/Volume';
-import { updateDictionaries } from '@/Utils/lang';
+import { getUserLang, updateDictionaries } from '@/Utils/lang';
 import { useCallback, useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'wouter';
 import { useHashLocation } from 'wouter/use-hash-location';
 import './App.css';
-
+//
 import LocalMenu from '@/Screens/Local/Local';
 import MultiMenu from '@/Screens/Multi/Multi';
 import SingleMenu from '@/Screens/Single/Single';
 import StartMenu from '@/Screens/Start/Start';
 
+const userLang = getUserLang();
+
 function App() {
   const [volume, setVolume] = useLocalStorage<VolumeT>(startVol, keysLS.VOLUME, parseVolume);
-  const [appLang, setAppLang] = useLocalStorage<AppLangsT>(mainLang, keysLS.LANG, parseAppLangs);
+  const [appLang, setAppLang] = useLocalStorage<AppLangsT>(userLang, keysLS.LANG, parseAppLangs);
   const [isLoading, setLoading] = useState(true);
 
   const setLang = useCallback(async (newLang: AppLangsT) => {
