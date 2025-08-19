@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'wouter';
 import { useHashLocation } from 'wouter/use-hash-location';
 import './App.css';
-//
+
 import LocalMenu from '@/Screens/Local/Local';
 import MultiMenu from '@/Screens/Multi/Multi';
 import SingleMenu from '@/Screens/Single/Single';

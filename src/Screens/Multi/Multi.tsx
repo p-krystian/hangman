@@ -1,9 +1,8 @@
 import Alert from '@/Components/Confirm/Confirm';
-import { appVersion, env, keysLS, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
+import { appVersion, env, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
 import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
 import useLanguage from '@/Hooks/useLang';
-import GameType from '@/Types/OnlineGame';
-import localStorage from '@/Utils/localStorage';
+import { InEventsT, OnlineGameT, OutEventsT } from '@/Parsers/MultiData';
 import Connecting from '@/Views/Connecting/Connecting';
 import Create from '@/Views/CreateGame/CreateGame';
 import EndGame from '@/Views/EndGame/EndGame';
@@ -12,17 +11,8 @@ import Games from '@/Views/OnlineGames/OnlineGames';
 import Waiting from '@/Views/Waiting/Waiting';
 import WriteEntry from '@/Views/WriteEntry/WriteEntry';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 import { useLocation } from 'wouter';
-
-const socket = io(env.SOCKET_URL, {
-  autoConnect: false,
-  path: env.SOCKET_PATH,
-  query: {
-    version: appVersion,
-    language: localStorage.read(keysLS.LANG, String, '')
-  }
-});
 
 type AlertType = {
   children: React.ReactNode;
@@ -32,10 +22,10 @@ type AlertType = {
 type MultiStage = 'connecting' | 'lobby' | 'create' | 'phrase' | 'game' | 'result' | 'waiting';
 
 function MultiPlayer() {
-  const { l } = useLanguage();
+  const { l, currentLang } = useLanguage();
   const [, navigate] = useLocation();
   const [stage, setStage] = useState<MultiStage>('connecting');
-  const [gameList, setGameList] = useState<GameType[]>([]);
+  const [gameList, setGameList] = useState<OnlineGameT[]>([]);
   const [resultKey, setResultKey] = useState('r-1-1');
   const [alert, setAlert] = useState<AlertType | null>(null);
   const opponentExit = useRef(false);
@@ -49,6 +39,14 @@ function MultiPlayer() {
     win: false
   }), [l]);
   const gameData = useRef<MultiGameContext>({ ...initialData });
+  const socket: Socket<InEventsT, OutEventsT> = useMemo(() => io(env.SOCKET_URL, {
+    autoConnect: false,
+    path: env.SOCKET_PATH,
+    query: {
+      version: appVersion,
+      language: currentLang
+    }
+  }), [currentLang]);
 
   const backupData = useCallback(() => {
     gameData.current.prevPoints = [...gameData.current.points];
@@ -64,16 +62,16 @@ function MultiPlayer() {
       return;
     }
     socket.emit(sOut.CREATE_GAME, name);
-  }, [gameList, l]);
+  }, [socket, gameList, l]);
 
   const winCallback = useCallback(() => {
     gameData.current.win = true;
     socket.emit(sOut.END_ROUND, gameData.current.entry);
-  }, []);
+  }, [socket]);
   const loseCallback = useCallback(() => {
     gameData.current.win = false;
-    socket.emit(sOut.END_ROUND, false);
-  }, []);
+    socket.emit(sOut.END_ROUND, '');
+  }, [socket]);
 
   const nextRound = useMemo(() => {
     if (opponentExit.current) {
@@ -100,7 +98,7 @@ function MultiPlayer() {
         }
       }
     });
-  }, [stage, l, backupData]);
+  }, [socket, stage, l, backupData]);
 
   const exitAlert = useCallback((content: string) => {
     setAlert({
@@ -119,14 +117,14 @@ function MultiPlayer() {
 
     socket.on(sIn.OPPONENT_EXIT, onOpponentExit);
     return cleanup;
-  }, [onOpponentExit]);
+  }, [socket, onOpponentExit]);
 
   useEffect(() => {
     const cleanup = () => {
-      socket.off('game-list');
+      socket.off(sIn.GAME_LIST);
     };
 
-    socket.on('game-list', games => {
+    socket.on(sIn.GAME_LIST, games => {
       setGameList(games);
       if (stage !== 'create') {
         setResultKey('r-1-1');
@@ -136,7 +134,7 @@ function MultiPlayer() {
       }
     });
     return cleanup;
-  }, [stage, initialData]);
+  }, [socket, stage, initialData]);
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -185,7 +183,7 @@ function MultiPlayer() {
       socket.off(sIn.GAME_DATA);
       socket.disconnect();
     };
-  }, [backupData, exitAlert, l]);
+  }, [socket, backupData, exitAlert, l]);
 
   return (
     <GameContext.Provider value={gameData.current}>
