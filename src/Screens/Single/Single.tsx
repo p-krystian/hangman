@@ -11,7 +11,7 @@ function SingleGame() {
   const { l, getRandomWord } = useLanguage();
   const [stage, setStage] = useState('game');
   const gameData = useRef<SingleGameContext>({
-    entry: getRandomWord(l('randomize')),
+    entry: getRandomWord(),
     nicks: [l('result')],
     points: [0],
     prevPoints: [0],
@@ -36,10 +36,10 @@ function SingleGame() {
   const newGame = useCallback(() => {
     gameData.current = {
       ...gameData.current,
-      entry: getRandomWord(l('randomize'))
+      entry: getRandomWord()
     };
     setStage('game');
-  }, [getRandomWord, l]);
+  }, [getRandomWord]);
 
   return (
     <GameContext value={gameData.current}>

@@ -57,7 +57,7 @@ function WriteEntry({ back, backText, next, nick }: WriteEntryProps) {
           {l('next')}
         </Button>
         {!!back && <Button onClick={back}>{backText || l('back')}</Button>}
-        <Button onClick={() => setEntry(getRandomWord(l('randomize')))}>
+        <Button onClick={() => setEntry(getRandomWord())}>
           {l('randomize')}
         </Button>
       </ButtonWrap>
