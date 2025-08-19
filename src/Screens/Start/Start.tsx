@@ -9,6 +9,8 @@ import useLanguage from '@/Hooks/useLang';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Start.module.css';
 
+let timeoutID: ReturnType<typeof setTimeout>;
+
 function MenuStart() {
   const volumeRef = useRef({ click: () => { } });
   const [showInfo, setShowInfo] = useState(false);
@@ -19,7 +21,7 @@ function MenuStart() {
     const allLangs = availableLangs;
     const currentIndex = allLangs.indexOf(currentLang);
     const nextLang = allLangs[currentIndex + 1] || allLangs[0];
-    setChangingLang(true);
+    timeoutID = setTimeout(() => setChangingLang(true), 50);
     setLang(nextLang);
   }
 
@@ -29,7 +31,10 @@ function MenuStart() {
   }
 
   useEffect(() => {
+    clearTimeout(timeoutID);
     setChangingLang(false);
+
+    return () => clearTimeout(timeoutID);
   }, [currentLang]);
 
   return (
