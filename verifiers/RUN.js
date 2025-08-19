@@ -1,7 +1,9 @@
 import envVerify from './env.js';
+import wordsVerify from './words.js';
 
 const verifiers = [
-  { name: '.env', verify: envVerify }
+  { name: '.env', verify: envVerify },
+  { name: 'words.json', verify: wordsVerify }
 ];
 
 const error = {
