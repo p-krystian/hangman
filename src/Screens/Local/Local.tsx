@@ -8,10 +8,12 @@ import WriteNicks from '@/Views/WriteNicks/WriteNicks';
 import { useCallback, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 
+type LocalStage = 'writeNicks' | 'writeEntry' | 'game' | 'endGame';
+
 function Local() {
   const { l } = useLanguage();
   const [, navigate] = useLocation();
-  const [stage, setStage] = useState('writeNicks');
+  const [stage, setStage] = useState<LocalStage>('writeNicks');
   const [askExit, setAskExit] = useState(false);
   const currentPlayer = useRef(0);
   const gameData = useRef<MultiGameContext>({

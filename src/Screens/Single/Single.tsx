@@ -5,11 +5,12 @@ import Game from '@/Views/Game/Game';
 import { useCallback, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 
+type SingleStage = 'game' | 'endGame';
 
 function SingleGame() {
   const [, navigate] = useLocation();
   const { l, getRandomWord } = useLanguage();
-  const [stage, setStage] = useState('game');
+  const [stage, setStage] = useState<SingleStage>('game');
   const gameData = useRef<SingleGameContext>({
     entry: getRandomWord(),
     nicks: [l('result')],

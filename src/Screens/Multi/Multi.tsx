@@ -29,10 +29,12 @@ type AlertType = {
   confirm: () => void;
 }
 
+type MultiStage = 'connecting' | 'lobby' | 'create' | 'phrase' | 'game' | 'result' | 'waiting';
+
 function MultiPlayer() {
   const { l } = useLanguage();
   const [, navigate] = useLocation();
-  const [stage, setStage] = useState('connecting');
+  const [stage, setStage] = useState<MultiStage>('connecting');
   const [gameList, setGameList] = useState<GameType[]>([]);
   const [resultKey, setResultKey] = useState('r-1-1');
   const [alert, setAlert] = useState<AlertType | null>(null);
