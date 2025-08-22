@@ -31,13 +31,12 @@
   "result": "Wynik",
   "win": "Wygrana",
   "lose": "Przegrana",
-  "exitToMenu": "Wyjść do Menu?",
 
   "enterName": "Podaj nazwę",
   "endGame": "Zakończyć grę?",
   "phraseCategory": "Kategoria hasła",
   "categoryUnknown": "nieznana",
-  "phraseFor": "Hasło dla ",
+  "phraseFor": "Hasło dla",
   "randomize": "Losuj",
   "nick": "Nick gracza",
 

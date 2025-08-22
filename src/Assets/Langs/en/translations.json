@@ -31,13 +31,12 @@
   "result": "Score",
   "win": "Win",
   "lose": "Lose",
-  "exitToMenu": "Exit to Menu?",
 
   "enterName": "Enter the name",
   "endGame": "End the game?",
   "phraseCategory": "Phrase category",
   "categoryUnknown": "unknown",
-  "phraseFor": "Phrase for ",
+  "phraseFor": "Phrase for",
   "randomize": "Random",
   "nick": "Player name",
 

@@ -9,7 +9,7 @@ import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
 import Games from '@/Views/OnlineGames/OnlineGames';
 import Waiting from '@/Views/Waiting/Waiting';
-import WriteEntry from '@/Views/WriteEntry/WriteEntry';
+import WritePhrase from '@/Views/WritePhrase/WritePhrase';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useLocation } from 'wouter';
@@ -110,6 +110,11 @@ function MultiPlayer() {
     });
   }, [navigate]);
 
+  const onPhraseSubmit = useCallback((phrase: string) => {
+    gameData.current.entry = phrase;
+    socket.emit(sOut.WRITE_PHRASE, phrase);
+  }, [socket]);
+
   useEffect(() => {
     const cleanup = () => {
       socket.off(sIn.OPPONENT_EXIT, onOpponentExit);
@@ -201,9 +206,9 @@ function MultiPlayer() {
           submit={createNewGame}
         />
       ) : stage === 'phrase' ? (
-        <WriteEntry
+        <WritePhrase
           nick={l('opponents')}
-          next={() => socket.emit(sOut.WRITE_PHRASE, gameData.current.entry)}
+          goNext={onPhraseSubmit}
         />
       ) : stage === 'game' ? (
         <Game

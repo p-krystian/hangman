@@ -1,9 +1,7 @@
-import Confirm from '@/Components/Confirm/Confirm';
 import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
-import useLanguage from '@/Hooks/useLang';
 import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
-import WriteEntry from '@/Views/WriteEntry/WriteEntry';
+import WritePhrase from '@/Views/WritePhrase/WritePhrase';
 import WriteNicks from '@/Views/WriteNicks/WriteNicks';
 import { useCallback, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
@@ -11,28 +9,18 @@ import { useLocation } from 'wouter';
 type LocalStage = 'writeNicks' | 'writeEntry' | 'game' | 'endGame';
 
 function Local() {
-  const { l } = useLanguage();
   const [, navigate] = useLocation();
   const [stage, setStage] = useState<LocalStage>('writeNicks');
-  const [askExit, setAskExit] = useState(false);
   const currentPlayer = useRef(0);
   const gameData = useRef<MultiGameContext>({
     entry: '',
-    nicks: ['1', '2'],
+    nicks: ['', ''],
     points: [0, 0],
     prevPoints: [0, 0],
     rounds: [0, 0],
     prevRounds: [0, 0],
     win: false,
   });
-  const entryOpts = {
-    back: gameData.current.entry
-      ? () => setAskExit((current) => !current)
-      : () => setStage('writeNicks'),
-    backText: gameData.current.entry ? l('cancel') : l('back'),
-    next: () => setStage('game'),
-    nick: gameData.current.nicks[currentPlayer.current],
-  };
 
   const gameEnd = useCallback((resoult: string) => {
     gameData.current.prevPoints = [...gameData.current.points];
@@ -49,14 +37,11 @@ function Local() {
   return (
     <GameContext value={gameData.current}>
       {stage === 'writeEntry' ? (
-        <>
-          <WriteEntry {...entryOpts} />
-          {askExit && (
-            <Confirm confirm={() => navigate('/')} reject={() => setAskExit(false)}>
-              {l('exitToMenu')}
-            </Confirm>
-          )}
-        </>
+        <WritePhrase
+          goNext={(p) => { gameData.current.entry = p; setStage('game'); }}
+          nick={gameData.current.nicks[currentPlayer.current]}
+          goBack={() => gameData.current.entry ? navigate('/') : setStage('writeNicks')}
+        />
       ) : stage === 'game' ? (
         <Game
           exit={() => navigate('/')}
