@@ -1,16 +1,17 @@
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Lobby from '@/Components/Lobby/Lobby';
+import { limits } from '@/conf';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLang';
-import GameType from '@/Types/OnlineGame';
+import { OnlineGameT } from '@/Parsers/MultiData';
 import styles from '@/Views/OnlineGames/OnlineGames.module.css';
 import { useLocation } from 'wouter';
 
 type GamesProps = {
-  gameList: GameType[];
+  gameList: OnlineGameT[];
   onCreate: () => void;
-  onJoin: (id: string) => void;
+  onJoin: (id: OnlineGameT['id']) => void;
 }
 
 function Games({ gameList, onCreate, onJoin }: GamesProps) {
@@ -19,7 +20,7 @@ function Games({ gameList, onCreate, onJoin }: GamesProps) {
 
   useKeyboardControl(
     () => navigate('/'),
-    () => gameList.length < 6 && onCreate()
+    () => gameList.length < limits.ONLINE_GAMES && onCreate()
   );
 
   return (
@@ -30,7 +31,7 @@ function Games({ gameList, onCreate, onJoin }: GamesProps) {
             {l('noGames')}
           </span>
         ) : (
-          gameList.slice(0, 6).map(g => (
+          gameList.slice(0, limits.ONLINE_GAMES).map(g => (
             <Lobby
               key={g.id}
               name={g.name}
@@ -40,7 +41,7 @@ function Games({ gameList, onCreate, onJoin }: GamesProps) {
         )
       }</div>
       <ButtonWrap>
-        <Button onClick={onCreate} disabled={gameList.length >= 6}>
+        <Button onClick={onCreate} disabled={gameList.length >= limits.ONLINE_GAMES}>
           {l('create')}
         </Button>
         <Button link='/'>{l('menu')}</Button>

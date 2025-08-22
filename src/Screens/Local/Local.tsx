@@ -1,8 +1,8 @@
 import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
 import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
-import WritePhrase from '@/Views/WritePhrase/WritePhrase';
 import WriteNicks from '@/Views/WriteNicks/WriteNicks';
+import WritePhrase from '@/Views/WritePhrase/WritePhrase';
 import { useCallback, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 
@@ -11,7 +11,7 @@ type LocalStage = 'writeNicks' | 'writeEntry' | 'game' | 'endGame';
 function Local() {
   const [, navigate] = useLocation();
   const [stage, setStage] = useState<LocalStage>('writeNicks');
-  const currentPlayer = useRef(0);
+  const currentPlayer = useRef<0 | 1>(0);
   const gameData = useRef<MultiGameContext>({
     entry: '',
     nicks: ['', ''],
@@ -30,7 +30,7 @@ function Local() {
     }
     gameData.current.rounds[currentPlayer.current]++;
     gameData.current.win = Boolean(resoult === 'win');
-    currentPlayer.current = +!currentPlayer.current;
+    currentPlayer.current = +Boolean(currentPlayer.current) as 0 | 1;
     setStage('endGame');
   }, []);
 

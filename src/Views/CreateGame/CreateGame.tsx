@@ -2,6 +2,7 @@ import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Input from '@/Components/Input/Input';
 import Keyboard from '@/Components/Keyboard/Keyboard';
+import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
@@ -17,15 +18,14 @@ type CreateGameProps = {
 function Create({ back, submit }: CreateGameProps) {
   const [name, setName] = useState('');
   const { l } = useLanguage();
-  const maxNameLength = 12;
-  const keyboardWrite = useKeyboardWrite(setName, maxNameLength);
+  const keyboardWrite = useKeyboardWrite(setName, limits.NICK_MAX);
 
   const create = useCallback(() => {
-    if (name.length < 3)
+    if (name.length < limits.NICK_MIN)
       return;
 
-    submit(name.substring(0, maxNameLength));
-  }, [name, submit, maxNameLength]);
+    submit(name.substring(0, limits.NICK_MAX));
+  }, [name, submit]);
 
   useFullScreen();
   useKeyboardControl(back, create);
@@ -37,7 +37,7 @@ function Create({ back, submit }: CreateGameProps) {
           focus={true}
           value={name}
           placeholder={l('enterName')}
-          size={maxNameLength}
+          size={limits.NICK_MAX}
         />
         <Keyboard
           write={true}
@@ -45,7 +45,7 @@ function Create({ back, submit }: CreateGameProps) {
         />
       </div>
       <ButtonWrap>
-        <Button onClick={create} disabled={name.length < 3}>
+        <Button onClick={create} disabled={name.length < limits.NICK_MIN}>
           {l('start')}
         </Button>
         <Button onClick={back}>

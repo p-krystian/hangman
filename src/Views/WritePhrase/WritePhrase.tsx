@@ -5,6 +5,7 @@ import Entry from '@/Components/Entry/Entry';
 import Keyboard from '@/Components/Keyboard/Keyboard';
 import WithCaret from '@/Components/WithCaret/WithCaret';
 import GameContext from '@/Contexts/GameContext';
+import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
@@ -25,7 +26,7 @@ function WritePhrase({ goBack, goNext, nick }: WritePhraseProps) {
   const [phrase, setPhrase] = useState('');
   const [askExit, setAskExit] = useState(false);
   const gameContext = useContext(GameContext);
-  const keyboardWrite = useKeyboardWrite(setPhrase, 20);
+  const keyboardWrite = useKeyboardWrite(setPhrase, limits.PHRASE_MAX);
 
   const onBack = useMemo(() => (
     gameContext.entry && goBack
@@ -33,7 +34,7 @@ function WritePhrase({ goBack, goNext, nick }: WritePhraseProps) {
       : goBack
   ), [gameContext.entry, goBack]);
   const onNext = useMemo(() => (
-    phrase.length > 3
+    phrase.length >= limits.PHRASE_MIN
       ? () => goNext(phrase)
       : () => null
   ), [phrase, goNext]);
@@ -59,7 +60,7 @@ function WritePhrase({ goBack, goNext, nick }: WritePhraseProps) {
         <Keyboard keyEvent={keyboardWrite} write={true} />
       </div>
       <ButtonWrap>
-        <Button onClick={onNext} disabled={phrase.length < 3}>
+        <Button onClick={onNext} disabled={phrase.length < limits.PHRASE_MIN}>
           {l('next')}
         </Button>
         {!!goBack && (

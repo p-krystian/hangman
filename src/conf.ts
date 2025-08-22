@@ -10,6 +10,14 @@ const env = {
   STORAGE_PREFIX: import.meta.env.VITE_STORAGE_PREFIX
 } as const;
 
+const limits = {
+  PHRASE_MIN: 3,
+  PHRASE_MAX: 20,
+  NICK_MIN: 3,
+  NICK_MAX: 12,
+  ONLINE_GAMES: 6
+} as const;
+
 enum keysLS {
   VOLUME = 'volume',
   LANG = 'language'
@@ -36,4 +44,4 @@ enum sioInEvents {
   INVALID_DATA = 'invalid-data',
 };
 
-export { appVersion, mainLang, startVol, env, keysLS, sioOutEvents, sioInEvents };
+export { appVersion, mainLang, startVol, env, limits, keysLS, sioOutEvents, sioInEvents };

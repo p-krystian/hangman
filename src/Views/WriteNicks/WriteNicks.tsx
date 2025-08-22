@@ -2,6 +2,7 @@ import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Input from '@/Components/Input/Input';
 import Keyboard from '@/Components/Keyboard/Keyboard';
+import { limits as lt } from '@/conf';
 import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
@@ -21,12 +22,11 @@ function WriteNicks({ back, next }: WriteNicksProps) {
   const [nick1, setNick1] = useState('');
   const [focused, setFocused] = useState(0);
   const gameContext = useContext(GameContext);
-  const maxNickLength = 12;
-  const pass = (nick0.length > 2 && nick1.length > 2) && (nick0 !== nick1);
+  const pass = (nick0.length >= lt.NICK_MIN && nick1.length > lt.NICK_MIN) && (nick0 !== nick1);
 
   const keyboardWrite = useKeyboardWrite(
     focused ? setNick1 : setNick0,
-    maxNickLength
+    lt.NICK_MIN
   );
 
   const submit = useCallback(() => {
@@ -51,14 +51,14 @@ function WriteNicks({ back, next }: WriteNicksProps) {
             focus={focused === 0}
             value={nick0}
             placeholder={`${l('nick')} 1`}
-            size={maxNickLength}
+            size={lt.NICK_MAX}
             onClick={() => setFocused(0)}
           />
           <Input
             focus={focused === 1}
             value={nick1}
             placeholder={`${l('nick')} 2`}
-            size={maxNickLength}
+            size={lt.NICK_MAX}
             onClick={() => setFocused(1)}
           />
         </div>
