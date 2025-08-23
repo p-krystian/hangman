@@ -29,8 +29,8 @@ function Local() {
       gameData.current.points[currentPlayer.current]++;
     }
     gameData.current.rounds[currentPlayer.current]++;
-    gameData.current.win = Boolean(resoult === 'win');
-    currentPlayer.current = +Boolean(currentPlayer.current) as 0 | 1;
+    gameData.current.win = (resoult === 'win');
+    currentPlayer.current = (+!currentPlayer.current) as 0 | 1;
     setStage('endGame');
   }, []);
 
@@ -51,7 +51,10 @@ function Local() {
       ) : stage === 'endGame' ? (
         <EndGame next={() => setStage('writeEntry')} />
       ) : (
-        <WriteNicks back={() => navigate('/')} next={() => setStage('writeEntry')} />
+        <WriteNicks
+          goBack={() => navigate('/')}
+          goNext={(ns) => { gameData.current.nicks = ns; setStage('writeEntry'); }}
+        />
       )}
     </GameContext>
   );

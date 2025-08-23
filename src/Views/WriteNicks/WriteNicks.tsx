@@ -12,33 +12,33 @@ import { useCallback, useContext, useState } from 'react';
 import styles from './WriteNicks.module.css';
 
 type WriteNicksProps = {
-  back: () => void;
-  next: () => void;
+  goBack: () => void;
+  goNext: (nicks: [string, string]) => void;
 }
 
-function WriteNicks({ back, next }: WriteNicksProps) {
+function WriteNicks({ goBack, goNext }: WriteNicksProps) {
   const { l } = useLanguage();
-  const [nick0, setNick0] = useState('');
-  const [nick1, setNick1] = useState('');
-  const [focused, setFocused] = useState(0);
   const gameContext = useContext(GameContext);
-  const pass = (nick0.length >= lt.NICK_MIN && nick1.length > lt.NICK_MIN) && (nick0 !== nick1);
+  const [nick0, setNick0] = useState(gameContext.nicks[0]);
+  const [nick1, setNick1] = useState(gameContext.nicks[1] || '');
+  const [focused, setFocused] = useState<0 | 1>(0);
+  const pass = ((nick0 !== nick1) && nick0.length >= lt.NICK_MIN && nick1.length > lt.NICK_MIN);
 
   const keyboardWrite = useKeyboardWrite(
     focused ? setNick1 : setNick0,
-    lt.NICK_MIN
+    lt.NICK_MAX
   );
 
-  const submit = useCallback(() => {
-    if (!pass) return;
-    gameContext.nicks = [nick0, nick1];
-    next();
-  }, [nick0, nick1, pass, next, gameContext]);
+  const onNext = useCallback(() => {
+    if (pass) {
+      goNext([nick0, nick1]);
+    }
+  }, [pass, nick0, nick1, goNext]);
 
   useFullScreen();
   useKeyboardControl(
-    back,
-    submit,
+    goBack,
+    onNext,
     () => setFocused(0),
     () => setFocused(1)
   );
@@ -68,8 +68,8 @@ function WriteNicks({ back, next }: WriteNicksProps) {
         />
       </div>
       <ButtonWrap>
-        <Button onClick={submit} disabled={!pass}>{l('next')}</Button>
-        <Button onClick={back}>{l('cancel')}</Button>
+        <Button onClick={onNext} disabled={!pass}>{l('next')}</Button>
+        <Button onClick={goBack}>{l('cancel')}</Button>
       </ButtonWrap>
     </div>
   );
