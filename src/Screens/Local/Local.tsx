@@ -40,7 +40,8 @@ function Local() {
         <WritePhrase
           goNext={(p) => { gameData.current.entry = p; setStage('game'); }}
           nick={gameData.current.nicks[currentPlayer.current]}
-          goBack={() => gameData.current.entry ? navigate('/') : setStage('writeNicks')}
+          goBack={!gameData.current.entry ? () => setStage('writeNicks') : undefined}
+          goExit={gameData.current.entry ? () => navigate('/') : undefined}
         />
       ) : stage === 'game' ? (
         <Game
