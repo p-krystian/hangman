@@ -5,7 +5,7 @@ import { mainLang } from '@/conf';
 
 type AppContextT = {
   volume: VolumeT;
-  setVolume: (newVolume: VolumeT) => void;
+  setVolume: (newVolume: VolumeT | ((currVolume: VolumeT) => VolumeT)) => void;
 
   appLang: AppLangsT,
   setLang: (newLang: AppLangsT) => void;

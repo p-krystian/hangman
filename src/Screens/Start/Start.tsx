@@ -3,16 +3,17 @@ import InfoSymbol from '@/Assets/Symbols/info.svg?react';
 import Button from '@/Components/Button/Button';
 import Confirm from '@/Components/Confirm/Confirm';
 import Info from '@/Components/Info/Info';
-import Volume from '@/Components/Volume/Volume';
+import VolumeIcon from '@/Components/VolumeIcon/VolumeIcon';
 import { env } from '@/conf';
 import useLanguage from '@/Hooks/useLang';
-import { useEffect, useRef, useState } from 'react';
+import useVolumeControl from '@/Hooks/useVolumeControl';
+import { useEffect, useState } from 'react';
 import styles from './Start.module.css';
 
 let timeoutID: ReturnType<typeof setTimeout>;
 
 function MenuStart() {
-  const volumeRef = useRef({ click: () => { } });
+  const { nextVolume } = useVolumeControl();
   const [showInfo, setShowInfo] = useState(false);
   const [changingLang, setChangingLang] = useState(false);
   const { l, langData, currentLang, setLang } = useLanguage();
@@ -41,11 +42,11 @@ function MenuStart() {
     <div className={styles.buttons}>
       <div className={styles.small}>
         <Button
-          onClick={() => volumeRef.current?.click()}
+          onClick={nextVolume}
           value={l('volumeWord')}
           small
         >
-          <Volume ref={volumeRef} />
+          <VolumeIcon />
         </Button>
         <Button
           onClick={() => setShowInfo(true)}
