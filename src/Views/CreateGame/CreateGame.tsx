@@ -34,7 +34,7 @@ function Create({ back, submit }: CreateGameProps) {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Input
-          focus={true}
+          active={true}
           value={name}
           placeholder={l('enterName')}
           size={limits.NICK_MAX}

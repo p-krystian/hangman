@@ -48,18 +48,18 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
       <div className={styles.container}>
         <div className={styles.inputs}>
           <Input
-            focus={focused === 0}
+            active={focused === 0}
             value={nick0}
             placeholder={`${l('nick')} 1`}
             size={lt.NICK_MAX}
-            onClick={() => setFocused(0)}
+            onFocus={() => setFocused(0)}
           />
           <Input
-            focus={focused === 1}
+            active={focused === 1}
             value={nick1}
             placeholder={`${l('nick')} 2`}
             size={lt.NICK_MAX}
-            onClick={() => setFocused(1)}
+            onFocus={() => setFocused(1)}
           />
         </div>
         <Keyboard
