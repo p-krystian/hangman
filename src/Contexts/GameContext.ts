@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 type BaseGameContext = {
-  entry: string;
+  phrase: string;
   win: boolean;
 };
 
@@ -22,7 +22,7 @@ type SingleGameContext = BaseGameContext & {
 };
 
 const GameContext = createContext<SingleGameContext | MultiGameContext>({
-  entry: '',
+  phrase: '',
   nicks: [''],
   points: [0],
   prevPoints: [0],

@@ -19,7 +19,7 @@
     display: grid;
     grid-template-areas:
       "board category"
-      "board entry"
+      "board phrase"
       "board keyboard";
     align-items: end;
   }

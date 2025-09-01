@@ -23,7 +23,7 @@ function Game({ exit, onLose, onWin }: GameProps) {
   const { l } = useLanguage();
   const playSound = usePlayer();
   const gameContext = useContext(GameContext);
-  const entry = gameContext.entry || '?';
+  const phrase = gameContext.phrase || '?';
   const [guessed, setGuessed] = useState<string[]>([]);
   const [mistakes, setMistakes] = useState(0);
   const [showExit, setShowExit] = useState(false);
@@ -37,7 +37,7 @@ function Game({ exit, onLose, onWin }: GameProps) {
     if (guessed.includes(char))
       return;
 
-    if (entry.includes(char)) {
+    if (phrase.includes(char)) {
       key.classList.add('correct');
       setGuessed(g => g.includes(char) ? g : g.concat(char));
       playSound('good');
@@ -49,19 +49,19 @@ function Game({ exit, onLose, onWin }: GameProps) {
       setMistakes(m => m + 1);
       playSound('bad');
     }
-  }, [guessed, mistakes, playSound, entry, onLose]);
+  }, [guessed, mistakes, playSound, phrase, onLose]);
 
   return (
     <div className={styles.container}>
       <div className={styles.game}>
         <Board progress={mistakes} />
-        <Category entry={entry} animation />
+        <Category entry={phrase} animation />
         <Entry
           hide={true}
           guessed={guessed}
           winCallback={onWin}
         >
-          {entry}
+          {phrase}
         </Entry>
         <Keyboard keyEvent={clickKey} />
       </div>

@@ -3,6 +3,6 @@
   font-family: var(--font-mono);
   font-size: 1.8rem;
   text-transform: uppercase;
-  grid-area: entry;
+  grid-area: phrase;
   text-align: center;
 }

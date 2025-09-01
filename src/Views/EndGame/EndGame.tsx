@@ -26,7 +26,7 @@ function EndGame({ next, pointsID }: EndGameProps) {
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
     audio: gameContext.win ? 'alive' : 'dead',
-    entry: gameContext.entry || '?',
+    phrase: gameContext.phrase || '?',
     name: gameContext.win ? l('win') : l('lose'),
   };
 
@@ -47,9 +47,9 @@ function EndGame({ next, pointsID }: EndGameProps) {
         <div className={styles.result}>
           <img src={result.img} alt={result.name} />
         </div>
-        <Category entry={result.entry} short />
-        <span className={`${styles.entry} ${result.class}`}>
-          {result.entry}
+        <Category entry={result.phrase} short />
+        <span className={`${styles.phrase} ${result.class}`}>
+          {result.phrase}
         </span>
         <Points key={pointsID || 'r-1-1'} />
       </div>

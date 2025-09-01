@@ -31,7 +31,7 @@
 .lose {
   color: var(--mistake);
 }
-.entry {
+.phrase {
   font-size: 1.8rem;
   font-family: var(--font-mono);
   font-weight: 800;

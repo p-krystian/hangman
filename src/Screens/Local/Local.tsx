@@ -13,7 +13,7 @@ function Local() {
   const [stage, setStage] = useState<LocalStage>('writeNicks');
   const currentPlayer = useRef<0 | 1>(0);
   const gameData = useRef<MultiGameContext>({
-    entry: '',
+    phrase: '',
     nicks: ['', ''],
     points: [0, 0],
     prevPoints: [0, 0],
@@ -38,10 +38,10 @@ function Local() {
     <GameContext value={gameData.current}>
       {stage === 'writeEntry' ? (
         <WritePhrase
-          goNext={(p) => { gameData.current.entry = p; setStage('game'); }}
+          goNext={(p) => { gameData.current.phrase = p; setStage('game'); }}
           nick={gameData.current.nicks[currentPlayer.current]}
-          goBack={!gameData.current.entry ? () => setStage('writeNicks') : undefined}
-          goExit={gameData.current.entry ? () => navigate('/') : undefined}
+          goBack={!gameData.current.phrase ? () => setStage('writeNicks') : undefined}
+          goExit={gameData.current.phrase ? () => navigate('/') : undefined}
         />
       ) : stage === 'game' ? (
         <Game

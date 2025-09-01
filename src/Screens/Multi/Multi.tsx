@@ -30,7 +30,7 @@ function MultiPlayer() {
   const [alert, setAlert] = useState<AlertType | null>(null);
   const opponentExit = useRef(false);
   const initialData = useMemo<MultiGameContext>(() => ({
-    entry: '',
+    phrase: '',
     nicks: [l('you'), l('opponent')],
     points: [0, 0],
     prevPoints: [0, 0],
@@ -66,7 +66,7 @@ function MultiPlayer() {
 
   const winCallback = useCallback(() => {
     gameData.current.win = true;
-    socket.emit(sOut.END_ROUND, gameData.current.entry);
+    socket.emit(sOut.END_ROUND, gameData.current.phrase);
   }, [socket]);
   const loseCallback = useCallback(() => {
     gameData.current.win = false;
@@ -111,7 +111,7 @@ function MultiPlayer() {
   }, [navigate]);
 
   const onPhraseSubmit = useCallback((phrase: string) => {
-    gameData.current.entry = phrase;
+    gameData.current.phrase = phrase;
     socket.emit(sOut.WRITE_PHRASE, phrase);
   }, [socket]);
 
@@ -165,7 +165,7 @@ function MultiPlayer() {
     socket.on(sIn.WAIT_START, () => setStage('waiting'));
     socket.on(sIn.GIVE_PHRASE, () => setStage('phrase'));
     socket.on(sIn.START_GAME, phrase => {
-      gameData.current.entry = phrase;
+      gameData.current.phrase = phrase;
       setStage('game');
     });
     socket.on(sIn.GAME_DATA, data => {
