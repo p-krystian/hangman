@@ -1,10 +1,10 @@
 import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
-import Category from '@/Components/Category/Category';
 import Confirm from '@/Components/Confirm/Confirm';
 import Entry from '@/Components/Entry/Entry';
 import Keyboard from '@/Components/Keyboard/Keyboard';
+import PhraseCategory from '@/Components/PhraseCategory/PhraseCategory';
 import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
@@ -55,7 +55,7 @@ function Game({ exit, onLose, onWin }: GameProps) {
     <div className={styles.container}>
       <div className={styles.game}>
         <Board progress={mistakes} />
-        <Category entry={phrase} animation />
+        <PhraseCategory phrase={phrase} animate />
         <Entry
           hide={true}
           guessed={guessed}

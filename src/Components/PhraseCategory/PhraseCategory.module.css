@@ -1,3 +1,11 @@
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .category {
   --_s: 5;
   font-size: calc(-0.2rem * var(--_s) + 2.6rem);
@@ -6,9 +14,6 @@
   max-width: 22.4rem;
   max-height: 1em;
   overflow: hidden;
-}
-.name {
-  text-transform: uppercase;
 }
 .short {
   font-size: 2.2rem;
@@ -20,8 +25,24 @@
 .short .prefix {
   display: none;
 }
+.name {
+  text-transform: uppercase;
+  display: inline-block;
+}
+.name span {
+  --_d: 0;
+
+  animation-name: show;
+  animation-duration: 0;
+  animation-fill-mode: both;
+
+  animation-delay: calc(var(--_d) * 200ms);
+}
+.short .name {
+  display: block;
+}
 @media (min-width: 620px) and (min-aspect-ratio: 15/11) {
   .short .prefix {
-    display: inline;
+    display: inline-block;
   }
 }

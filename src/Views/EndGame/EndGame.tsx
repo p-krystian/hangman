@@ -2,7 +2,7 @@ import deadImg from '@/Assets/Animation/dead.svg';
 import liveImg from '@/Assets/Animation/live.svg';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
-import Category from '@/Components/Category/Category';
+import PhraseCategory from '@/Components/PhraseCategory/PhraseCategory';
 import Points from '@/Components/Points/Points';
 import GameContext from '@/Contexts/GameContext';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
@@ -47,7 +47,7 @@ function EndGame({ next, pointsID }: EndGameProps) {
         <div className={styles.result}>
           <img src={result.img} alt={result.name} />
         </div>
-        <Category entry={result.phrase} short />
+        <PhraseCategory phrase={result.phrase} short />
         <span className={`${styles.phrase} ${result.class}`}>
           {result.phrase}
         </span>
