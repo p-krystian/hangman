@@ -45,8 +45,8 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
   return (
     <div className={styles.keyboard} ref={keyboardRef}>
       <div className={styles.keys}>
-        {alphabet.map(ch => (
-          <Key key={`k-${ch}`} onClick={(e: React.MouseEvent) => clickEvent(e, ch)} char={ch}>
+        {alphabet.map((ch, i) => (
+          <Key key={`k-${ch}-${i}`} onClick={(e) => clickEvent(e, ch)} char={ch}>
             {ch}
           </Key>
         ))}

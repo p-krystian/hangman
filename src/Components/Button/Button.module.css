@@ -34,8 +34,11 @@
   cursor: not-allowed;
   filter: brightness(50%);
 }
-button img {
+button > img {
   width: 85%;
   height: 85%;
   object-fit: cover;
+}
+button > svg{
+  height: 100%;
 }

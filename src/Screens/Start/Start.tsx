@@ -1,8 +1,8 @@
 import { availableLangs } from '@/Assets/Langs';
+import InfoSymbol from '@/Assets/Symbols/info.svg?react';
 import Button from '@/Components/Button/Button';
 import Confirm from '@/Components/Confirm/Confirm';
 import Info from '@/Components/Info/Info';
-import InfoSymbol from '@/Components/InfoSymbol/InfoSymbol';
 import Volume from '@/Components/Volume/Volume';
 import { env } from '@/conf';
 import useLanguage from '@/Hooks/useLang';
@@ -52,7 +52,11 @@ function MenuStart() {
           value={l('infoWord')}
           small
         >
-          <InfoSymbol />
+          <InfoSymbol
+            title={l('infoWord')}
+            name={l('infoWord')}
+            aria-label={l('infoWord')}
+          />
         </Button>
         <Button
           onClick={() => nextLanguage()}
