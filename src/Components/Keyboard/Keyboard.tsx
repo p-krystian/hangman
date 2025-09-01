@@ -24,8 +24,6 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
 
   useEffect(() => {
     function translate(e: KeyboardEvent) {
-      e.preventDefault();
-
       let k = e.key.toUpperCase();
 
       if (k === ' ') {
@@ -36,6 +34,7 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
       }
 
       if (['^8', '^32', ...alphabet].includes(k) && keyboardRef.current) {
+        e.preventDefault();
         keyEvent(k, keyboardRef.current.querySelector(`[data-char="${k}"]`)!);
       }
     }

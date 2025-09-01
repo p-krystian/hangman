@@ -22,6 +22,7 @@ function useKeyboardControl(
       if (!Object.keys(actions).includes(code)) {
         return;
       }
+      e.preventDefault();
 
       const key = code as keyof typeof actions;
       const action = actions[key];
