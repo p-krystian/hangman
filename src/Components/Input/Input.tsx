@@ -5,20 +5,20 @@ import styles from './Input.module.css';
 
 type InputProps = {
   value: string;
-  focus?: boolean;
   size: number;
   placeholder: string;
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  active?: boolean;
+  onFocus?: () => unknown;
 }
 
-function Input(props: InputProps) {
-  const prevValue = useRef('');
+function Input({ value, active, size, placeholder, onFocus }: InputProps) {
+  const prevValue = useRef(value);
   const playSound = usePlayer();
-  const { value, focus, size, placeholder, onClick } = props;
 
   useEffect(() => {
-    if (value === prevValue.current)
+    if (value === prevValue.current) {
       return;
+    }
 
     playSound('click');
     prevValue.current = value;
@@ -26,21 +26,23 @@ function Input(props: InputProps) {
 
   return (
     <div
+      tabIndex={0}
       className={styles.input}
-      onClick={onClick}
+      onClick={onFocus}
+      onFocus={onFocus}
       style={{ '--size': `${size + 1}ch` } as React.CSSProperties}
-      data-focus={focus?.toString()}
-    >{
-        value.trimStart().length > 0 ? (
-          <WithCaret size={size} show={focus}>
-            {value.trimStart()}
-          </WithCaret>
-        ) : (
-          <span className={styles.placeholder}>
-            {placeholder}
-          </span>
-        )
-      }</div>
+      data-focus={active?.toString()}
+      aria-label={placeholder}
+    >
+      <WithCaret size={size} show={!!active}>
+        {value}
+      </WithCaret>
+      {value.length === 0 && (
+        <span className={styles.placeholder} aria-hidden>
+          {placeholder}
+        </span>
+      )}
+    </div>
   );
 }
 export default Input;
