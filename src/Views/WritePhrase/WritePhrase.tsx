@@ -1,9 +1,8 @@
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Confirm from '@/Components/Confirm/Confirm';
-import Entry from '@/Components/Entry/Entry';
+import Phrase from '@/Components/Phrase/Phrase';
 import Keyboard from '@/Components/Keyboard/Keyboard';
-import WithCaret from '@/Components/WithCaret/WithCaret';
 import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
@@ -48,9 +47,9 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
         <span className={styles.text}>
           {`${l('phraseFor')} ${nick}:`}
         </span>
-        <Entry>
-          <WithCaret size={20}>{phrase}</WithCaret>
-        </Entry>
+        <Phrase write>
+          {phrase}
+        </Phrase>
         <Keyboard keyEvent={keyboardWrite} write={true} />
       </div>
       <ButtonWrap>

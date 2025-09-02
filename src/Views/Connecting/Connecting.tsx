@@ -1,7 +1,7 @@
 import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
-import Entry from '@/Components/Entry/Entry';
+import Phrase from '@/Components/Phrase/Phrase';
 import useLanguage from '@/Hooks/useLang';
 import { useEffect, useState } from 'react';
 import styles from './Connecting.module.css';
@@ -28,7 +28,7 @@ function Connecting() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Board progress={progress} small={true} />
-        <Entry>{`${l('connecting')}...`}</Entry>
+        <Phrase>{`${l('connecting')}...`}</Phrase>
       </div>
       <ButtonWrap>
         <Button link='/'>{l('cancel')}</Button>

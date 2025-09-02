@@ -2,15 +2,15 @@ import styles from './WithCaret.module.css';
 
 type WithCaretProps = {
   size: number;
-  show?: boolean | null;
+  show?: boolean;
   children: string;
 }
 
-function WithCaret({ size, show, children }: WithCaretProps) {
+function WithCaret({ size, show = true, children }: WithCaretProps) {
   return (
     <>
       {children}
-      {(children.length < size && (show === undefined || show === null ? true : show)) && (
+      {(show && children.length < size) && (
         <span className={styles.caret}>_</span>
       )}
     </>

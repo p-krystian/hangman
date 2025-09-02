@@ -2,7 +2,7 @@ import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Confirm from '@/Components/Confirm/Confirm';
-import Entry from '@/Components/Entry/Entry';
+import Phrase from '@/Components/Phrase/Phrase';
 import Keyboard from '@/Components/Keyboard/Keyboard';
 import PhraseCategory from '@/Components/PhraseCategory/PhraseCategory';
 import GameContext from '@/Contexts/GameContext';
@@ -56,13 +56,12 @@ function Game({ exit, onLose, onWin }: GameProps) {
       <div className={styles.game}>
         <Board progress={mistakes} />
         <PhraseCategory phrase={phrase} animate />
-        <Entry
-          hide={true}
-          guessed={guessed}
-          winCallback={onWin}
+        <Phrase
+          onlyGuessed={guessed}
+          onGuessed={onWin}
         >
           {phrase}
-        </Entry>
+        </Phrase>
         <Keyboard keyEvent={clickKey} />
       </div>
       <ButtonWrap>
