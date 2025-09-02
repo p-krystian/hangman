@@ -1,19 +1,25 @@
+import random from 'random';
+import { memo } from 'react';
 import styles from './NumberSlider.module.css';
 
 type NumberSliderProps = {
   current: number;
-  old: number;
+  prev: number;
 }
 
-function NumberSlider({ current, old }: NumberSliderProps) {
-  const nStr = (n: number) => n < 0 ? '00' : n < 10 ? `0${n}` : `${n}`;
-  const slide = current !== old ? styles.slide : '';
+const nStr = (n: number) => n < 0 ? '00' : n < 10 ? `0${n}` : `${n}`;
+
+function NumberSlider({ current, prev }: NumberSliderProps) {
+  const slide = current !== prev ? styles.slide : '';
 
   return (
-    <ul className={`${styles.counter} ${slide}`}>
-      <li>{nStr(old)}</li>
+    <ul
+      className={`${styles.counter} ${slide}`}
+      style={{ '--_d': random.int(0, 350) } as React.CSSProperties}
+    >
+      <li aria-hidden>{nStr(prev)}</li>
       <li>{nStr(current)}</li>
     </ul>
   );
 }
-export default NumberSlider;
+export default memo(NumberSlider);

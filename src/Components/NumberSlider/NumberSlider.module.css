@@ -7,6 +7,8 @@
   }
 }
 .counter {
+  --_d: 0;
+
   display: inline-block;
   list-style-type: none;
   height: 1.1em;
@@ -16,9 +18,10 @@
   display: block;
   text-align: center;
   animation-duration: 400ms;
-  animation-delay: 200ms;
+  animation-delay: calc(1ms * var(--_d) + 200ms);
   animation-fill-mode: both;
   animation-timing-function: ease;
+  transform: translateY(-100%);
 }
 .slide li {
   animation-name: slide-up;
