@@ -5,21 +5,23 @@ import useLanguage from '@/Hooks/useLang';
 import styles from './Waiting.module.css';
 
 type WaitingProps = {
-  abort?: () => void;
+  goCancel?: () => unknown;
 }
 
-function Waiting({ abort }: WaitingProps) {
+function Waiting({ goCancel }: WaitingProps) {
   const { l } = useLanguage();
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <span>{l('waitingOpponent')}</span>
-        <img src={head} alt='X' className={styles.animation} />
+        <img src={head} alt="" className={styles.animation} aria-hidden />
       </div>
-      <ButtonWrap>
-        {!!abort && <Button onClick={abort}>{l('cancel')}</Button>}
-      </ButtonWrap>
+      {!!goCancel && (
+        <ButtonWrap>
+          <Button onClick={goCancel}>{l('cancel')}</Button>
+        </ButtonWrap>
+      )}
     </div>
   );
 }

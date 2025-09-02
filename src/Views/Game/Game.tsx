@@ -14,12 +14,12 @@ import { useCallback, useContext, useState } from 'react';
 import styles from './Game.module.css';
 
 type GameProps = {
-  exit?: () => void;
-  onLose: () => void;
-  onWin: () => void;
+  goExit?: () => unknown;
+  onLose: () => unknown;
+  onWin: (phrase?: string) => unknown;
 }
 
-function Game({ exit, onLose, onWin }: GameProps) {
+function Game({ goExit, onLose, onWin }: GameProps) {
   const { l } = useLanguage();
   const playSound = usePlayer();
   const gameContext = useContext(GameContext);
@@ -30,7 +30,7 @@ function Game({ exit, onLose, onWin }: GameProps) {
 
   useFullScreen();
   useKeyboardControl(
-    () => exit && setShowExit(current => !current)
+    () => goExit && setShowExit(current => !current)
   );
 
   const clickKey = useCallback((char: string, key: Element) => {
@@ -65,12 +65,12 @@ function Game({ exit, onLose, onWin }: GameProps) {
         <Keyboard keyEvent={clickKey} />
       </div>
       <ButtonWrap>
-        {!!exit && <Button onClick={() => setShowExit(true)}>
+        {!!goExit && <Button onClick={() => setShowExit(true)}>
           {l('cancel')}
         </Button>}
       </ButtonWrap>
       {!!showExit && (
-        <Confirm confirm={() => exit && exit()} reject={() => setShowExit(false)}>
+        <Confirm confirm={() => goExit && goExit()} reject={() => setShowExit(false)}>
           {l('endGame')}
         </Confirm>
       )}

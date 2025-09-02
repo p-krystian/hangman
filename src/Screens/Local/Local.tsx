@@ -45,12 +45,12 @@ function Local() {
         />
       ) : stage === 'game' ? (
         <Game
-          exit={() => navigate('/')}
+          goExit={() => navigate('/')}
           onLose={() => gameEnd('lose')}
           onWin={() => gameEnd('win')}
         />
       ) : stage === 'endGame' ? (
-        <EndGame next={() => setStage('writeEntry')} />
+        <EndGame goNext={() => setStage('writeEntry')} />
       ) : (
         <WriteNicks
           goBack={() => navigate('/')}

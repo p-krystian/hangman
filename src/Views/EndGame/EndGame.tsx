@@ -13,11 +13,10 @@ import { useLocation } from 'wouter';
 import styles from './EndGame.module.css';
 
 type EndGameProps = {
-  next: () => void;
-  pointsID?: string;
+  goNext: () => void;
 }
 
-function EndGame({ next, pointsID }: EndGameProps) {
+function EndGame({ goNext }: EndGameProps) {
   const { l } = useLanguage();
   const playSound = usePlayer();
   const gameContext = useContext(GameContext);
@@ -32,7 +31,7 @@ function EndGame({ next, pointsID }: EndGameProps) {
 
   useKeyboardControl(
     () => navigate('/'),
-    next
+    goNext
   );
   useEffect(() => {
     // TODO: Add sound for alive
@@ -51,10 +50,10 @@ function EndGame({ next, pointsID }: EndGameProps) {
         <span className={`${styles.phrase} ${result.class}`}>
           {result.phrase}
         </span>
-        <Points key={pointsID || 'r-1-1'} />
+        <Points />
       </div>
       <ButtonWrap>
-        <Button onClick={next} disabled={!next}>{l('next')}</Button>
+        <Button onClick={goNext} disabled={!goNext}>{l('next')}</Button>
         <Button link="/">{l('menu')}</Button>
       </ButtonWrap>
     </div>

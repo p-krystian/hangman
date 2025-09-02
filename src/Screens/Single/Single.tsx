@@ -43,11 +43,11 @@ function SingleGame() {
     <GameContext value={gameData.current}>
       {stage === 'endGame' ? (
         <EndGame
-          next={() => newGame()}
+          goNext={() => newGame()}
         />
       ) : (
         <Game
-          exit={() => navigate('/')}
+          goExit={() => navigate('/')}
           onLose={() => gameEnd('lose')}
           onWin={() => gameEnd('win')}
         />

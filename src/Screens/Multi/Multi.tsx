@@ -202,8 +202,8 @@ function MultiPlayer() {
         />
       ) : stage === 'create' ? (
         <Create
-          back={() => setStage('lobby')}
-          submit={createNewGame}
+          goBack={() => setStage('lobby')}
+          goNext={createNewGame}
         />
       ) : stage === 'phrase' ? (
         <WritePhrase
@@ -217,13 +217,12 @@ function MultiPlayer() {
         />
       ) : stage === 'result' ? (
         <EndGame
-          pointsID={resultKey}
-          next={nextRound}
+          goNext={nextRound}
         />
       ) : (
-        <Waiting abort={
-          () => socket.emit(sOut.JOIN_LOBBY)
-        } />
+        <Waiting
+          goCancel={() => socket.emit(sOut.JOIN_LOBBY)}
+        />
       )}
       {!!alert && <Alert {...alert} />}
     </GameContext.Provider>

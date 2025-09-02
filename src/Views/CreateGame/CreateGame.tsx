@@ -11,44 +11,44 @@ import { useCallback, useState } from 'react';
 import styles from './CreateGame.module.css';
 
 type CreateGameProps = {
-  back: () => void;
-  submit: (name: string) => void;
+  goBack: () => void;
+  goNext: (name: string) => void;
 }
 
-function Create({ back, submit }: CreateGameProps) {
-  const [name, setName] = useState('');
+function Create({ goBack, goNext }: CreateGameProps) {
   const { l } = useLanguage();
+  const [name, setName] = useState('');
   const keyboardWrite = useKeyboardWrite(setName, limits.NICK_MAX);
 
   const create = useCallback(() => {
     if (name.length < limits.NICK_MIN)
       return;
 
-    submit(name.substring(0, limits.NICK_MAX));
-  }, [name, submit]);
+    goNext(name);
+  }, [name, goNext]);
 
   useFullScreen();
-  useKeyboardControl(back, create);
+  useKeyboardControl(goBack, create);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Input
-          active={true}
           value={name}
           placeholder={l('enterName')}
           size={limits.NICK_MAX}
+          active
         />
         <Keyboard
-          write={true}
           keyEvent={keyboardWrite}
+          write
         />
       </div>
       <ButtonWrap>
         <Button onClick={create} disabled={name.length < limits.NICK_MIN}>
           {l('start')}
         </Button>
-        <Button onClick={back}>
+        <Button onClick={goBack}>
           {l('cancel')}
         </Button>
       </ButtonWrap>
