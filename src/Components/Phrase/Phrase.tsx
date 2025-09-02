@@ -5,21 +5,21 @@ import styles from './Phrase.module.css';
 
 type PhraseProps = {
   children: string;
-  onlyGuessed?: Set<string>;
+  hideChars?: Set<string>;
   write?: boolean;
 }
 
-function Phrase({ children, onlyGuessed, write = false }: PhraseProps) {
+function Phrase({ children, hideChars, write = false }: PhraseProps) {
   const content = useMemo(() => (
-    onlyGuessed ? (
+    hideChars ? (
       children
         .split('')
-        .map(ch => (onlyGuessed.has(ch) || ch === ' ') ? ch : '-')
+        .map(ch => hideChars.has(ch) ? '-' : ch)
         .join('')
     ) : (
       children
     )
-  ), [children, onlyGuessed]);
+  ), [children, hideChars]);
 
   return (
     <p className={styles.phrase}>

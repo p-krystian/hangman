@@ -24,8 +24,8 @@ function Game({ goExit, onLose, onWin }: GameProps) {
   const playSound = usePlayer();
   const gameContext = useContext(GameContext);
   const phrase = gameContext.phrase || '?';
-  const [guessed, setGuessed] = useState(new Set<string>([' ']));
-  const [mistakes, setMistakes] = useState(0);
+  const [toGuess, setToGuess] = useState(new Set(phrase.replace(/ /g, '')));
+  const [mistakes, setMistakes] = useState(new Set<string>());
   const [showExit, setShowExit] = useState(false);
 
   useFullScreen();
@@ -34,35 +34,38 @@ function Game({ goExit, onLose, onWin }: GameProps) {
   );
 
   const clickKey = useCallback((char: string, key: Element) => {
-    if (guessed.has(char)) {
+    if (mistakes.has(char) || (!toGuess.has(char) && phrase.includes(char))) {
       return;
     }
 
-    if (phrase.includes(char)) {
-      const newGuessed = new Set([...guessed, char]);
-      if ([...new Set(phrase)].every(ch => newGuessed.has(ch))) {
+    if (toGuess.has(char)) {
+      const newToGess = new Set(toGuess);
+      newToGess.delete(char);
+      if (newToGess.size < 1) {
         return onWin();
       }
       key.classList.add('correct');
-      setGuessed(newGuessed);
       playSound('good');
+      setToGuess(newToGess);
     }
     else {
-      if (mistakes >= 9) {
+      const newMistakes = new Set(mistakes);
+      newMistakes.add(char);
+      if (newMistakes.size > 9) {
         return onLose();
       }
       key.classList.add('mistake');
-      setMistakes(m => m + 1);
       playSound('bad');
+      setMistakes(newMistakes);
     }
-  }, [guessed, mistakes, playSound, phrase, onLose, onWin]);
+  }, [toGuess, mistakes, playSound, phrase, onLose, onWin]);
 
   return (
     <div className={styles.container}>
       <div className={styles.game}>
-        <Board progress={mistakes} />
+        <Board progress={mistakes.size} />
         <PhraseCategory phrase={phrase} animate />
-        <Phrase onlyGuessed={guessed}>
+        <Phrase hideChars={toGuess}>
           {phrase}
         </Phrase>
         <Keyboard keyEvent={clickKey} />

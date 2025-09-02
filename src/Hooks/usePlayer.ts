@@ -1,5 +1,5 @@
 import * as files from '@/Assets/Sounds';
-import { useContext } from 'react';
+import { useContext, useCallback } from 'react';
 import AppContext from '@/Contexts/AppContext';
 
 // for (const file of Object.values(files)) {
@@ -13,7 +13,7 @@ import AppContext from '@/Contexts/AppContext';
 function usePlayer() {
   const { volume } = useContext(AppContext);
 
-  const play = (name: keyof typeof files) => {
+  const play = useCallback((name: keyof typeof files) => {
     if (volume < 1) {
       return;
     }
@@ -23,7 +23,7 @@ function usePlayer() {
     audio.load();
     audio.volume = volume * 0.2;
     audio.play().catch(() => 'Silent pass');
-  };
+  }, [volume]);
 
   return play;
 }

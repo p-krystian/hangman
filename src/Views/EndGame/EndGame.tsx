@@ -24,20 +24,17 @@ function EndGame({ goNext }: EndGameProps) {
   const result = {
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
-    audio: gameContext.win ? 'alive' : 'dead',
+    audio: gameContext.win ? 'good' : 'dead',
     phrase: gameContext.phrase || '?',
     name: gameContext.win ? l('win') : l('lose'),
-  };
+  } as const;
 
   useKeyboardControl(
     () => navigate('/'),
     goNext
   );
   useEffect(() => {
-    // TODO: Add sound for alive
-    if (result.audio === 'dead') {
-      playSound(result.audio);
-    }
+    playSound(result.audio);
   }, [playSound, result.audio]);
 
   return (
