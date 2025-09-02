@@ -19,15 +19,10 @@ function PhraseCategory({ phrase, short = false, animate = false }: PhraseCatego
   const keyboardSize = Math.ceil(l('alphabet').length / 7);
 
   const updateCategory = useCallback(async () => {
-    const found = getWordCategory(phrase);
-    if (found) {
-      cache.phrase = phrase;
-      cache.category = found;
-      setCategory(found);
-    }
-    else {
-      setCategory(l('categoryUnknown'));
-    }
+    const found = getWordCategory(phrase) || l('categoryUnknown');
+    cache.phrase = phrase;
+    cache.category = found;
+    setCategory(found);
   }, [phrase, getWordCategory, l]);
 
   useEffect(() => {
