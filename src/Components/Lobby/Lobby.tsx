@@ -4,16 +4,16 @@ import styles from './Lobby.module.css';
 
 type LobbyProps = {
   name: string;
-  submit: () => void;
+  onSubmit: () => unknown;
 }
 
-function Lobby({ name, submit }: LobbyProps) {
+function Lobby({ name, onSubmit }: LobbyProps) {
   const { l } = useLanguage();
 
   return (
     <div className={styles.lobby}>
-      <span>{name}</span>
-      <Button small={true} onClick={submit}>
+      <p>{name}</p>
+      <Button onClick={onSubmit} small>
         {l('join')}
       </Button>
     </div>

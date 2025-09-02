@@ -24,7 +24,7 @@
   animation-timing-function: ease-in;
   animation-name: show;
 }
-.lobby span {
+.lobby p {
   display: block;
   text-align: center;
   font-size: 3rem;

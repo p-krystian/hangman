@@ -35,7 +35,7 @@ function Games({ gameList, onCreate, onJoin }: GamesProps) {
             <Lobby
               key={g.id}
               name={g.name}
-              submit={() => onJoin(g.id)}
+              onSubmit={() => onJoin(g.id)}
             />
           ))
         )
