@@ -6,21 +6,32 @@ import styles from './WriteKeys.module.css';
 
 type WriteKeysProps = {
   onKeyClick: (char: string, e?: React.MouseEvent) => unknown;
+  setKeyRef: (char: string) => (key: HTMLButtonElement) => void;
 }
 
-function WriteKeys({ onKeyClick }: WriteKeysProps) {
+function WriteKeys({ onKeyClick, setKeyRef }: WriteKeysProps) {
   const { l } = useLanguage();
 
   return (
     <div className={styles.keys}>
-      <Key onClick={(_, e) => onKeyClick('^32', e)} wide={true} char={'^32'}>
+      <Key
+        onClick={(_, e) => onKeyClick('^32', e)}
+        char={'^32'}
+        ref={setKeyRef('^32')}
+        wide
+      >
         <SpaceSymbol
           title={l('spaceWord')}
           name={l('spaceWord')}
           aria-label={l('spaceWord')}
         />
       </Key>
-      <Key onClick={(_, e) => onKeyClick('^8', e)} wide={true} char={'^8'}>
+      <Key
+        onClick={(_, e) => onKeyClick('^8', e)}
+        char={'^8'}
+        ref={setKeyRef('^8')}
+        wide
+      >
         <BackspaceSymbol
           title={l('backspaceWord')}
           name={l('backspaceWord')}

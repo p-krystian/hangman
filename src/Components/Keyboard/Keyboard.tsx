@@ -1,7 +1,7 @@
 import Key, { KeyStateT } from '@/Components/Key/Key';
 import WriteKeys from '@/Components/KeysWrite/WriteKeys';
 import useLanguage from '@/Hooks/useLang';
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import styles from './Keyboard.module.css';
 
 type KeyboardProps = {
@@ -9,14 +9,22 @@ type KeyboardProps = {
   write: true;
 } | {
   keyEvent: (char: string, setKeyState: (state: KeyStateT) => void) => void;
-  write?: false;
+  write: false | undefined;
 };
 
 function Keyboard({ keyEvent, write }: KeyboardProps) {
   const { l } = useLanguage();
-  const keyboardRef = useRef<HTMLDivElement>(null);
-
   const alphabet = useMemo(() => l('alphabet').split(''), [l]);
+  const keyRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+  const setKeyRef = useCallback((char: string) => (key: HTMLButtonElement) => {
+    if (key) {
+      keyRefs.current.set(char, key);
+    }
+    else {
+      keyRefs.current.delete(char);
+    }
+  }, []);
 
   useEffect(() => {
     function translate(e: KeyboardEvent) {
@@ -29,25 +37,30 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
         k = '^8';
       }
 
-      if (['^8', '^32', ...alphabet].includes(k) && keyboardRef.current) {
+      if (keyRefs.current.has(k)) {
         e.preventDefault();
-        (keyboardRef.current.querySelector(`[data-char="${k}"]`) as HTMLButtonElement)?.click();
+        keyRefs.current.get(k)!.click();
       }
     }
     window.addEventListener('keydown', translate);
     return () => window.removeEventListener('keydown', translate);
-  }, [keyEvent, alphabet]);
+  }, []);
 
   return (
-    <div className={styles.keyboard} ref={keyboardRef}>
+    <div className={styles.keyboard}>
       <div className={styles.keys}>
         {alphabet.map((ch, i) => (
-          <Key key={`k-${ch}-${i}`} onClick={(sKS) => keyEvent(ch, sKS)} char={ch}>
+          <Key
+            key={`k-${ch}-${i}`}
+            onClick={(sKS) => keyEvent(ch, sKS)}
+            char={ch}
+            ref={setKeyRef(ch)}
+          >
             {ch}
           </Key>
         ))}
       </div>
-      {write && <WriteKeys onKeyClick={(ch) => keyEvent(ch)} />}
+      {write && (<WriteKeys onKeyClick={(ch) => keyEvent(ch)} setKeyRef={setKeyRef} />)}
     </div>
   );
 }

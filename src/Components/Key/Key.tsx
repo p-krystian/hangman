@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import styles from './Key.module.css';
 
 type KeyStateT = 'correct' | 'mistake' | null;
@@ -8,17 +8,18 @@ type KeyProps = {
   children: React.ReactNode;
   char: string;
   wide?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
-function Key({ onClick, children, char, wide }: KeyProps) {
+function Key({ onClick, children, char, wide, ref }: KeyProps) {
   const [keyState, setKeyState] = useState<KeyStateT>(null);
 
-  const classNames = [
+  const classNames = useMemo(() => [
     styles.key,
     wide ? styles.wide : '',
     keyState === 'correct' ? styles.correct : '',
     keyState === 'mistake' ? styles.mistake : ''
-  ].join(' ');
+  ].join(' '), [wide, keyState]);
 
   return (
     <button
@@ -26,10 +27,11 @@ function Key({ onClick, children, char, wide }: KeyProps) {
       onClick={e => onClick(setKeyState, e)}
       data-char={char}
       tabIndex={keyState ? -1 : 0}
+      ref={ref}
     >
       {children}
     </button>
   );
 }
 export { type KeyStateT };
-export default Key;
+export default memo(Key);
