@@ -1,8 +1,8 @@
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Confirm from '@/Components/Confirm/Confirm';
-import Phrase from '@/Components/Phrase/Phrase';
 import Keyboard from '@/Components/Keyboard/Keyboard';
+import Phrase from '@/Components/Phrase/Phrase';
 import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardControl from '@/Hooks/useKeyboardControl';
@@ -50,7 +50,7 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
         <Phrase write>
           {phrase}
         </Phrase>
-        <Keyboard keyEvent={keyboardWrite} write={true} />
+        <Keyboard keyEvent={keyboardWrite} write />
       </div>
       <ButtonWrap>
         <Button onClick={onNext} disabled={phrase.length < limits.PHRASE_MIN}>

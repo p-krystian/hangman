@@ -16,6 +16,7 @@ function NumberSlider({ current, prev }: NumberSliderProps) {
     <ul
       className={`${styles.counter} ${slide}`}
       style={{ '--_d': random.int(0, 350) } as React.CSSProperties}
+      tabIndex={-1}
     >
       <li aria-hidden>{nStr(prev)}</li>
       <li>{nStr(current)}</li>

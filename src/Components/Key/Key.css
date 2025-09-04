@@ -1,8 +1,0 @@
-button.mistake, button.mistake:hover{
-  background-color: var(--mistake);
-  pointer-events: none;
-}
-button.correct, button.correct:hover{
-  background-color: var(--correct);
-  pointer-events: none;
-}

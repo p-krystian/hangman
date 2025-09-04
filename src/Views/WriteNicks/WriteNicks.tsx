@@ -63,8 +63,8 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
           />
         </div>
         <Keyboard
-          write={true}
           keyEvent={keyboardWrite}
+          write
         />
       </div>
       <ButtonWrap>

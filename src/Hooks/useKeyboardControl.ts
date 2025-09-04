@@ -30,7 +30,7 @@ function useKeyboardControl(
         action();
       }
     };
-    window.addEventListener('keyup', listen);
+    // window.addEventListener('keyup', listen);
 
     return () => window.removeEventListener('keyup', listen);
   }, [actions]);

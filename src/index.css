@@ -1,44 +1,50 @@
 @font-face {
-  src: url('./Assets/Fonts/humaroid.otf');
-  font-family: 'Humaroid';
+  src: url("./Assets/Fonts/humaroid.otf");
+  font-family: "Humaroid";
   font-display: fallback;
 }
 @font-face {
-  src: url('./Assets/Fonts/kingthings.otf');
-  font-family: 'Kingthings';
+  src: url("./Assets/Fonts/kingthings.otf");
+  font-family: "Kingthings";
   font-display: fallback;
 }
 @font-face {
-  src: url('./Assets/Fonts/unutterable.ttf');
-  font-family: 'Unutterable';
+  src: url("./Assets/Fonts/unutterable.ttf");
+  font-family: "Unutterable";
   font-display: fallback;
 }
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 :root {
-  --white:    #dadada;
-  --dark-bg:  #050505;
-  --main:     #225560;
-  --main-d:   #023540;
-  --correct:  #0c523d;
-  --mistake:  #6c1120;
+  --white: #dadada;
+  --dark-bg: #050505;
+  --main: #225560;
+  --main-d: #023540;
+  --correct: #0c523d;
+  --mistake: #6c1120;
   --darker-a: #00000088;
 
-  --svg-bright:   85%;
+  --svg-bright: 85%;
 
-  --font-mono:    'Kingthings', monospace;
-  --font-main:    'Unutterable','Comic Sans MS';
-  --font-simple:  'Humaroid', system-ui;
+  --font-mono: "Kingthings", monospace;
+  --font-main: "Unutterable", "Comic Sans MS";
+  --font-simple: "Humaroid", system-ui;
 
-  font-size:  16px;
+  font-size: 16px;
   --header-y: 7rem;
+}
+*:focus-visible {
+  outline: 0.2rem solid var(--main);
+  outline-offset: 0.1rem;
 }
 body {
   background-color: #090909;
-  background-image: url('./Assets/Images/bg.webp');
+  background-image: url("./Assets/Images/bg.webp");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -112,29 +118,47 @@ body {
 }
 
 @media (max-width: 399px) {
-  :root { font-size: 12px; }
+  :root {
+    font-size: 12px;
+  }
 }
 @media (max-width: 899px) and (max-height: 399px) {
-  :root { font-size: 12px; }
+  :root {
+    font-size: 12px;
+  }
 }
 @media (min-width: 600px) and (max-aspect-ratio: 15/11) {
-  :root { font-size: 22px; }
+  :root {
+    font-size: 22px;
+  }
 }
 @media (min-width: 620px) and (min-aspect-ratio: 15/11) {
-  #root { min-height: 280px; }
+  #root {
+    min-height: 280px;
+  }
 }
 @media (max-width: 699px) and (min-aspect-ratio: 15/11) {
-  :root { font-size: 11px; }
+  :root {
+    font-size: 11px;
+  }
 }
 @media (min-height: 580px) and (min-aspect-ratio: 15/11) {
-  :root { font-size: 18px; }
+  :root {
+    font-size: 18px;
+  }
 }
 @media (min-height: 660px) and (min-aspect-ratio: 15/11) {
-  :root { font-size: 20px; }
+  :root {
+    font-size: 20px;
+  }
 }
 @media (min-height: 820px) and (min-aspect-ratio: 15/11) {
-  :root { font-size: 22px; }
+  :root {
+    font-size: 22px;
+  }
 }
 @media (min-height: 880px) and (min-aspect-ratio: 15/11) {
-  :root { font-size: 25px; }
+  :root {
+    font-size: 25px;
+  }
 }

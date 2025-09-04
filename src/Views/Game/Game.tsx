@@ -2,6 +2,7 @@ import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Confirm from '@/Components/Confirm/Confirm';
+import { KeyStateT } from '@/Components/Key/Key';
 import Keyboard from '@/Components/Keyboard/Keyboard';
 import Phrase from '@/Components/Phrase/Phrase';
 import PhraseCategory from '@/Components/PhraseCategory/PhraseCategory';
@@ -33,7 +34,7 @@ function Game({ goExit, onLose, onWin }: GameProps) {
     () => goExit && setShowExit(current => !current)
   );
 
-  const clickKey = useCallback((char: string, key: Element) => {
+  const clickKey = useCallback((char: string, setKeyState: (s: KeyStateT) => unknown) => {
     if (mistakes.has(char) || (!toGuess.has(char) && phrase.includes(char))) {
       return;
     }
@@ -44,7 +45,7 @@ function Game({ goExit, onLose, onWin }: GameProps) {
       if (newToGess.size < 1) {
         return onWin();
       }
-      key.classList.add('correct');
+      setKeyState('correct');
       playSound('good');
       setToGuess(newToGess);
     }
@@ -54,7 +55,7 @@ function Game({ goExit, onLose, onWin }: GameProps) {
       if (newMistakes.size > 9) {
         return onLose();
       }
-      key.classList.add('mistake');
+      setKeyState('mistake');
       playSound('bad');
       setMistakes(newMistakes);
     }

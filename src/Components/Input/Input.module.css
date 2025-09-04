@@ -17,7 +17,6 @@
   position: relative;
   isolation: isolate;
   cursor: text;
-  outline: none;
 }
 .input[data-focus="true"] {
   border-color: var(--main);

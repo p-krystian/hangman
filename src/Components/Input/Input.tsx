@@ -14,6 +14,7 @@ type InputProps = {
 function Input({ value, active, size, placeholder, onFocus }: InputProps) {
   const prevValue = useRef(value);
   const playSound = usePlayer();
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (value === prevValue.current) {
@@ -24,6 +25,13 @@ function Input({ value, active, size, placeholder, onFocus }: InputProps) {
     prevValue.current = value;
   }, [value, playSound]);
 
+  useEffect(() => {
+    if (active) {
+      inputRef.current?.focus({ preventScroll: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div
       tabIndex={0}
@@ -33,6 +41,7 @@ function Input({ value, active, size, placeholder, onFocus }: InputProps) {
       style={{ '--size': `${size + 1}ch` } as React.CSSProperties}
       data-focus={active?.toString()}
       aria-label={placeholder}
+      ref={inputRef}
     >
       <WithCaret size={size} show={!!active}>
         {value}
