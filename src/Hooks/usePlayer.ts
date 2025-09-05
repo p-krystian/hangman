@@ -1,14 +1,11 @@
 import * as files from '@/Assets/Sounds';
 import { useContext, useCallback } from 'react';
 import AppContext from '@/Contexts/AppContext';
+import preload from '@/Utils/preload';
 
-// for (const file of Object.values(files)) {
-//   const audio = new Audio(file);
-//   audio.load();
-//   audio.volume = 10 ** -6;
-//   audio.autoplay = true;
-//   audio.play().catch(() => 'Don\'t throw error');
-// }
+for (const fileSrc of Object.values(files)) {
+  preload(fileSrc, 'audio');
+}
 
 function usePlayer() {
   const { volume } = useContext(AppContext);

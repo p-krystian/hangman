@@ -88,6 +88,9 @@ body {
   opacity: 1;
   visibility: visible;
 }
+#preload {
+  display: none;
+}
 #splash {
   position: fixed;
   top: 0;
