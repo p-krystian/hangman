@@ -30,7 +30,7 @@
   margin-top: 10%;
   width: 75%;
   height: 75%;
-  animation: show 0.15s ease-out;
+  animation: show var(--trans-d) ease-out;
   filter: brightness(var(--svg-bright));
   z-index: 2;
 }

@@ -15,8 +15,8 @@
   text-align: center;
   place-items: center;
   transition:
-    background-color 150ms ease-out,
-    filter 150ms ease-in-out;
+    background-color var(--trans-d) ease-out,
+    filter var(--trans-d) ease-in-out;
 }
 .button.small {
   font-size: 1.3rem;

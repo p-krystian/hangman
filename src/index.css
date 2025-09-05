@@ -35,6 +35,8 @@
   --font-main: "Unutterable", "Comic Sans MS";
   --font-simple: "Humaroid", system-ui;
 
+  --trans-d: 150ms;
+
   font-size: 16px;
   --header-y: 7rem;
 }
@@ -79,8 +81,8 @@ body {
   bottom: 0;
   z-index: 100;
   transition:
-    visibility 150ms ease,
-    opacity 150ms ease;
+    visibility var(--trans-d) ease,
+    opacity var(--trans-d) ease;
 }
 #popup.active {
   opacity: 1;
@@ -109,12 +111,18 @@ body {
   z-index: -1000;
   visibility: hidden;
   transition:
-    z-index 150ms ease 150ms,
-    visibility 150ms ease 150ms,
-    opacity 150ms ease 150ms;
+    z-index var(--trans-d) ease var(--trans-d),
+    visibility var(--trans-d) ease var(--trans-d),
+    opacity var(--trans-d) ease var(--trans-d);
 }
 #splash p {
   opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --trans-d: 0ms;
+  }
 }
 
 @media (max-width: 399px) {

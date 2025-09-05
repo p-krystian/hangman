@@ -18,8 +18,8 @@
   gap: 0.4rem;
 
   opacity: 0;
-  animation-delay: 50ms;
-  animation-duration: 200ms;
+  animation-delay: calc(var(--trans-d) / 2);
+  animation-duration: calc(var(--trans-d) * 1.5);
   animation-fill-mode: both;
   animation-timing-function: ease-in;
   animation-name: show;

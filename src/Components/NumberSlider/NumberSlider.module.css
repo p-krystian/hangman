@@ -17,8 +17,8 @@
 .counter li {
   display: block;
   text-align: center;
-  animation-duration: 400ms;
-  animation-delay: calc(1ms * var(--_d) + 200ms);
+  animation-duration: calc(var(--trans-d) * 3);
+  animation-delay: calc(1ms * var(--_d) + var(--trans-d));
   animation-fill-mode: both;
   animation-timing-function: ease;
   transform: translateY(-100%);
