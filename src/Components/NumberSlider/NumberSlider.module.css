@@ -26,3 +26,9 @@
 .slide li {
   animation-name: slide-up;
 }
+@media (prefers-reduced-motion: reduce) {
+  .counter li {
+    animation-duration: 0ms;
+    animation-delay: 0ms;
+  }
+}
