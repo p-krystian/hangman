@@ -2,6 +2,7 @@ import svgs from '@/Assets/Animation';
 import bg from '@/Assets/Images/board-bg.svg';
 import fg from '@/Assets/Images/board-fg.svg';
 import useLanguage from '@/Hooks/useLang';
+import { memo } from 'react';
 import styles from './Board.module.css';
 
 type BoardProps = {
@@ -32,4 +33,4 @@ function Board({ progress, small }: BoardProps) {
     </div>
   );
 }
-export default Board;
+export default memo(Board);

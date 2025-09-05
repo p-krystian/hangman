@@ -1,5 +1,5 @@
 import useLanguage from '@/Hooks/useLang';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './PhraseCategory.module.css';
 
 const cache = { phrase: '123', category: '' };
@@ -55,4 +55,4 @@ function PhraseCategory({ phrase, short = false, animate = false }: PhraseCatego
     </div>
   );
 }
-export default PhraseCategory;
+export default memo(PhraseCategory);

@@ -7,7 +7,7 @@ import VolumeIcon from '@/Components/VolumeIcon/VolumeIcon';
 import { env } from '@/conf';
 import useLanguage from '@/Hooks/useLang';
 import useVolumeControl from '@/Hooks/useVolumeControl';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from './Start.module.css';
 
 let timeoutID: ReturnType<typeof setTimeout>;
@@ -81,4 +81,4 @@ function MenuStart() {
     </div>
   );
 }
-export default MenuStart;
+export default memo(MenuStart);

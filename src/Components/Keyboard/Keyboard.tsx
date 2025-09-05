@@ -1,7 +1,7 @@
 import Key, { KeyStateT } from '@/Components/Key/Key';
 import WriteKeys from '@/Components/KeysWrite/WriteKeys';
 import useLanguage from '@/Hooks/useLang';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import styles from './Keyboard.module.css';
 
 type KeyboardProps = {
@@ -9,7 +9,7 @@ type KeyboardProps = {
   write: true;
 } | {
   keyEvent: (char: string, setKeyState: (state: KeyStateT) => void) => void;
-  write: false | undefined;
+  write?: false | undefined;
 };
 
 function Keyboard({ keyEvent, write }: KeyboardProps) {
@@ -64,4 +64,4 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
     </div>
   );
 }
-export default Keyboard;
+export default memo(Keyboard);
