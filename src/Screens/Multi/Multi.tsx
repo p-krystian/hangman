@@ -2,7 +2,8 @@ import Alert from '@/Components/Confirm/Confirm';
 import { appVersion, env, limits, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
 import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
 import useLanguage from '@/Hooks/useLang';
-import { InEventsT, OnlineGameT, OutEventsT, parseGameData, parseOnlineGame, parsePhrase } from '@/Parsers/MultiData';
+import type { InEventsT, OnlineGameT, OutEventsT } from '@/Parsers/MultiData';
+import { parseGameData, parseOnlineGame, parsePhrase } from '@/Parsers/MultiData';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useLocation } from 'wouter';
@@ -16,20 +17,20 @@ import Waiting from '@/Views/Waiting/Waiting';
 import WritePhrase from '@/Views/WritePhrase/WritePhrase';
 
 type MultiStage = 'connecting' | 'lobby' | 'create' | 'phrase' | 'game' | 'result' | 'waiting';
-type AlertType = Pick<Parameters<typeof Alert>[0], 'children' | 'confirm'>
+type AlertT = Pick<Parameters<typeof Alert>[0], 'children' | 'confirm'>;
+
+const initialData: Omit<MultiGameContext, 'nicks'> = {
+  phrase: '?',
+  points: [0, 0],
+  prevPoints: [0, 0],
+  rounds: [0, 0],
+  prevRounds: [0, 0],
+  win: false
+};
 
 function Multi() {
   const { l, currentLang } = useLanguage();
   const [, navigate] = useLocation();
-  const initialData = useMemo<MultiGameContext>(() => ({
-    phrase: '',
-    nicks: [l('you'), l('opponent')],
-    points: [0, 0],
-    prevPoints: [0, 0],
-    rounds: [0, 0],
-    prevRounds: [0, 0],
-    win: false
-  }), [l]);
   const socket: Socket<InEventsT, OutEventsT> = useMemo(() => io(env.SOCKET_URL, {
     autoConnect: false,
     path: env.SOCKET_PATH,
@@ -41,9 +42,12 @@ function Multi() {
 
   const [stage, setStage] = useState<MultiStage>('connecting');
   const [gameList, setGameList] = useState<OnlineGameT[]>([]);
-  const [alert, setAlert] = useState<AlertType | null>(null);
+  const [alert, setAlert] = useState<AlertT | null>(null);
   const opponentExited = useRef(false);
-  const gameData = useRef(initialData);
+  const [gameData, setGameData] = useState<MultiGameContext>({
+    ...initialData,
+    nicks: [l('you'), l('opponent')]
+  });
 
   const setExitAlert = useCallback((content: string) => (
     setAlert({
@@ -64,7 +68,7 @@ function Multi() {
   const nextRound = (
     opponentExited.current ? (
       () => socket.emit(sOut.JOIN_LOBBY)
-    ) : gameData.current.rounds[0] !== gameData.current.rounds[1] ? (
+    ) : gameData.rounds[0] !== gameData.rounds[1] ? (
       null
     ) : (
       () => socket.emit(sOut.NEXT_ROUND)
@@ -85,7 +89,7 @@ function Multi() {
       if (!res.success) {
         return setExitAlert(l('serverDataInvalid'));
       }
-      gameData.current.phrase = res.data;
+      setGameData(cGD => ({ ...cGD, phrase: res.data }));
       setStage('game');
     }
     async function onGameData(data: unknown) {
@@ -93,11 +97,14 @@ function Multi() {
       if (!res.success) {
         return setExitAlert(l('serverDataInvalid'));
       }
-      gameData.current.win = res.data.wins > gameData.current.points[0];
-      gameData.current.prevPoints = [...gameData.current.points];
-      gameData.current.prevRounds = [...gameData.current.rounds];
-      gameData.current.points = [res.data.wins, res.data.oWins];
-      gameData.current.rounds = [res.data.rounds, res.data.oRounds];
+      setGameData(cGD => ({
+        ...cGD,
+        win: cGD.rounds[0] === res.data.rounds ? cGD.win : res.data.wins > cGD.points[0],
+        points: [res.data.wins, res.data.oWins],
+        prevPoints: cGD.points,
+        rounds: [res.data.rounds, res.data.oRounds],
+        prevRounds: cGD.rounds
+      }));
       setStage('result');
     }
 
@@ -126,6 +133,8 @@ function Multi() {
       socket.off('connect');
       socket.off('disconnect');
       socket.off('connect_error');
+
+      socket.disconnect();
     };
   }, [socket, l, setExitAlert]);
 
@@ -147,7 +156,7 @@ function Multi() {
       setGameList(await getGameList(games));
       if (stage !== 'create') {
         opponentExited.current = false;
-        gameData.current = { ...initialData };
+        setGameData(cGD => ({ ...cGD, ...initialData }));
         setStage('lobby');
       }
     }
@@ -171,10 +180,10 @@ function Multi() {
       socket.off(sIn.GAME_LIST);
       socket.off(sIn.OPPONENT_EXIT);
     };
-  }, [socket, stage, initialData, l]);
+  }, [socket, stage, l]);
 
   return (
-    <GameContext value={gameData.current}>
+    <GameContext value={gameData}>
       {stage === 'connecting' ? (
         <Connecting />
       ) : stage === 'lobby' ? (
@@ -195,7 +204,7 @@ function Multi() {
         />
       ) : stage === 'game' ? (
         <Game
-          onWin={() => socket.emit(sOut.END_ROUND, gameData.current.phrase)}
+          onWin={() => socket.emit(sOut.END_ROUND, gameData.phrase)}
           onLose={() => socket.emit(sOut.END_ROUND, '')}
         />
       ) : stage === 'result' ? (
