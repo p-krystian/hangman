@@ -5,10 +5,9 @@ import Keyboard from '@/Components/Keyboard/Keyboard';
 import { limits as lt } from '@/conf';
 import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
-import { useCallback, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './WriteNicks.module.css';
 
 type WriteNicksProps = {
@@ -29,19 +28,7 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
     lt.NICK_MAX
   );
 
-  const onNext = useCallback(() => {
-    if (pass) {
-      goNext([nick0, nick1]);
-    }
-  }, [pass, nick0, nick1, goNext]);
-
   useFullScreen();
-  useKeyboardControl(
-    goBack,
-    onNext,
-    () => setFocused(0),
-    () => setFocused(1)
-  );
 
   return (
     <div className={styles.wrapper}>
@@ -68,8 +55,12 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
         />
       </div>
       <ButtonWrap>
-        <Button onClick={onNext} disabled={!pass}>{l('next')}</Button>
-        <Button onClick={goBack}>{l('cancel')}</Button>
+        <Button onClick={() => goNext([nick0, nick1])} disabled={!pass} shortcut="accept">
+          {l('next')}
+        </Button>
+        <Button onClick={goBack} shortcut="cancel">
+          {l('cancel')}
+        </Button>
       </ButtonWrap>
     </div>
   );

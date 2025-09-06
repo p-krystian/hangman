@@ -2,11 +2,9 @@ import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Lobby from '@/Components/Lobby/Lobby';
 import { limits } from '@/conf';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLang';
 import { OnlineGameT } from '@/Parsers/MultiData';
 import styles from '@/Views/OnlineGames/OnlineGames.module.css';
-import { useLocation } from 'wouter';
 
 type GamesProps = {
   gameList: OnlineGameT[];
@@ -15,13 +13,7 @@ type GamesProps = {
 }
 
 function Games({ gameList, onCreate, onJoin }: GamesProps) {
-  const [, navigate] = useLocation();
   const { l } = useLanguage();
-
-  useKeyboardControl(
-    () => navigate('/'),
-    () => gameList.length < limits.ONLINE_GAMES && onCreate()
-  );
 
   return (
     <div className={styles.wrapper}>
@@ -41,10 +33,16 @@ function Games({ gameList, onCreate, onJoin }: GamesProps) {
         )
       }</div>
       <ButtonWrap>
-        <Button onClick={onCreate} disabled={gameList.length >= limits.ONLINE_GAMES}>
+        <Button
+          onClick={onCreate}
+          disabled={gameList.length >= limits.ONLINE_GAMES}
+          shortcut="accept"
+        >
           {l('create')}
         </Button>
-        <Button link='/'>{l('menu')}</Button>
+        <Button link="/" shortcut="cancel">
+          {l('menu')}
+        </Button>
       </ButtonWrap>
     </div>
   );

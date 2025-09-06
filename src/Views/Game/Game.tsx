@@ -8,7 +8,6 @@ import Phrase from '@/Components/Phrase/Phrase';
 import PhraseCategory from '@/Components/PhraseCategory/PhraseCategory';
 import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLang';
 import usePlayer from '@/Hooks/usePlayer';
 import { useCallback, useContext, useState } from 'react';
@@ -30,9 +29,6 @@ function Game({ goExit, onLose, onWin }: GameProps) {
   const [showExit, setShowExit] = useState(false);
 
   useFullScreen();
-  useKeyboardControl(
-    () => goExit && setShowExit(current => !current)
-  );
 
   const clickKey = useCallback((char: string, setKeyState: (s: KeyStateT) => unknown) => {
     if (mistakes.has(char) || (!toGuess.has(char) && phrase.includes(char))) {
@@ -72,9 +68,11 @@ function Game({ goExit, onLose, onWin }: GameProps) {
         <Keyboard keyEvent={clickKey} />
       </div>
       <ButtonWrap>
-        {!!goExit && <Button onClick={() => setShowExit(true)}>
-          {l('cancel')}
-        </Button>}
+        {!!goExit && (
+          <Button onClick={() => setShowExit(true)} shortcut="cancel">
+            {l('cancel')}
+          </Button>
+        )}
       </ButtonWrap>
       {!!showExit && (
         <Confirm confirm={() => goExit && goExit()} reject={() => setShowExit(false)}>

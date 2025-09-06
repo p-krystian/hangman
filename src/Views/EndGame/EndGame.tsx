@@ -5,11 +5,9 @@ import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import PhraseCategory from '@/Components/PhraseCategory/PhraseCategory';
 import Points from '@/Components/Points/Points';
 import GameContext from '@/Contexts/GameContext';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useLanguage from '@/Hooks/useLang';
 import usePlayer from '@/Hooks/usePlayer';
 import { useContext, useEffect } from 'react';
-import { useLocation } from 'wouter';
 import styles from './EndGame.module.css';
 
 type EndGameProps = {
@@ -20,7 +18,6 @@ function EndGame({ goNext }: EndGameProps) {
   const { l } = useLanguage();
   const playSound = usePlayer();
   const gameContext = useContext(GameContext);
-  const [, navigate] = useLocation();
   const result = {
     img: gameContext.win ? liveImg : deadImg,
     class: gameContext.win ? styles.win : styles.lose,
@@ -29,10 +26,6 @@ function EndGame({ goNext }: EndGameProps) {
     name: gameContext.win ? l('win') : l('lose'),
   } as const;
 
-  useKeyboardControl(
-    () => navigate('/'),
-    goNext || (() => null)
-  );
   useEffect(() => {
     playSound(result.audio);
   }, [playSound, result.audio]);
@@ -50,10 +43,16 @@ function EndGame({ goNext }: EndGameProps) {
         <Points />
       </div>
       <ButtonWrap>
-        <Button onClick={goNext || (() => null)} disabled={!goNext}>
+        <Button
+          onClick={goNext || (() => null)}
+          disabled={!goNext}
+          shortcut="accept"
+        >
           {l('next')}
         </Button>
-        <Button link="/">{l('menu')}</Button>
+        <Button link="/" shortcut="cancel">
+          {l('menu')}
+        </Button>
       </ButtonWrap>
     </div>
   );

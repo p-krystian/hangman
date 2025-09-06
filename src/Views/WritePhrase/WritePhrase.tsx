@@ -5,11 +5,10 @@ import Keyboard from '@/Components/Keyboard/Keyboard';
 import Phrase from '@/Components/Phrase/Phrase';
 import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
 import usePlayer from '@/Hooks/usePlayer';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './WritePhrase.module.css';
 
 type WritePhraseProps = {
@@ -26,15 +25,7 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
   const [askExit, setAskExit] = useState(false);
   const keyboardWrite = useKeyboardWrite(setPhrase, limits.PHRASE_MAX);
 
-  const onNext = useMemo(() => (
-    phrase.length >= limits.PHRASE_MIN
-      ? () => goNext(phrase)
-      : () => null
-  ), [phrase, goNext]);
-
   useFullScreen();
-  useKeyboardControl(goExit ? (() => setAskExit(c => !c)) : goBack, onNext);
-
   useEffect(() => {
     if (phrase === '')
       return;
@@ -53,11 +44,15 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
         <Keyboard keyEvent={keyboardWrite} write />
       </div>
       <ButtonWrap>
-        <Button onClick={onNext} disabled={phrase.length < limits.PHRASE_MIN}>
+        <Button
+          onClick={() => goNext(phrase)}
+          disabled={phrase.length < limits.PHRASE_MIN}
+          shortcut="accept"
+        >
           {l('next')}
         </Button>
         {(!!goBack || !!goExit) && (
-          <Button onClick={goExit ? (() => setAskExit(true)) : goBack}>
+          <Button onClick={goExit ? (() => setAskExit(true)) : goBack} shortcut="cancel">
             {goExit ? l('cancel') : l('back')}
           </Button>
         )}

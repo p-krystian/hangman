@@ -4,10 +4,9 @@ import Input from '@/Components/Input/Input';
 import Keyboard from '@/Components/Keyboard/Keyboard';
 import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
-import useKeyboardControl from '@/Hooks/useKeyboardControl';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import styles from './CreateGame.module.css';
 
 type CreateGameProps = {
@@ -20,15 +19,7 @@ function Create({ goBack, goNext }: CreateGameProps) {
   const [name, setName] = useState('');
   const keyboardWrite = useKeyboardWrite(setName, limits.NICK_MAX);
 
-  const create = useCallback(() => {
-    if (name.length < limits.NICK_MIN)
-      return;
-
-    goNext(name);
-  }, [name, goNext]);
-
   useFullScreen();
-  useKeyboardControl(goBack, create);
 
   return (
     <div className={styles.wrapper}>
@@ -45,10 +36,14 @@ function Create({ goBack, goNext }: CreateGameProps) {
         />
       </div>
       <ButtonWrap>
-        <Button onClick={create} disabled={name.length < limits.NICK_MIN}>
+        <Button
+          onClick={() => goNext(name)}
+          disabled={name.length < limits.NICK_MIN}
+          shortcut="accept"
+        >
           {l('start')}
         </Button>
-        <Button onClick={goBack}>
+        <Button onClick={goBack} shortcut="cancel">
           {l('cancel')}
         </Button>
       </ButtonWrap>
