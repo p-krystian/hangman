@@ -50,6 +50,7 @@
   "opponentExit": "The opponent chickened out",
   "serverDisconnect": "Server disconnect",
   "serverReconnected": "Reconnected to server",
+  "serverDataInvalid": "A server error occurred.\nWe apologize.",
   "unsupportedLang": "This language is not supported for online mode",
   "oldVersion": "You are using an old version. Try refresh the page"
 }

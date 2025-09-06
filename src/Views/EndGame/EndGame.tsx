@@ -13,7 +13,7 @@ import { useLocation } from 'wouter';
 import styles from './EndGame.module.css';
 
 type EndGameProps = {
-  goNext: () => void;
+  goNext: (() => void) | null;
 }
 
 function EndGame({ goNext }: EndGameProps) {
@@ -31,7 +31,7 @@ function EndGame({ goNext }: EndGameProps) {
 
   useKeyboardControl(
     () => navigate('/'),
-    goNext
+    goNext || (() => null)
   );
   useEffect(() => {
     playSound(result.audio);
@@ -50,7 +50,9 @@ function EndGame({ goNext }: EndGameProps) {
         <Points />
       </div>
       <ButtonWrap>
-        <Button onClick={goNext} disabled={!goNext}>{l('next')}</Button>
+        <Button onClick={goNext || (() => null)} disabled={!goNext}>
+          {l('next')}
+        </Button>
         <Button link="/">{l('menu')}</Button>
       </ButtonWrap>
     </div>

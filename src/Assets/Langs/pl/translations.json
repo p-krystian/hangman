@@ -50,6 +50,7 @@
   "opponentExit": "Przeciwnik stchórzył",
   "serverDisconnect": "Rozłączono z serwerem",
   "serverReconnected": "Połączono ponownie",
+  "serverDataInvalid": "Wystąpił błąd serwera.\nPrzepraszamy.",
   "unsupportedLang": "W tym języku nie można grać w trybie online",
   "oldVersion": "Używasz zbyt starej wersji. Spróbuj odświeżyć stronę"
 }

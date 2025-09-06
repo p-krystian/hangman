@@ -1,9 +1,14 @@
 import * as z from 'zod/mini';
-import { sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
+import { sioInEvents as sIn, sioOutEvents as sOut, limits } from '@/conf';
 
-const PhraseSchema = z.string();
+const PhraseSchema = z.string().check(
+  z.trim(),
+  z.toUpperCase(),
+  z.minLength(limits.PHRASE_MIN),
+  z.maxLength(limits.PHRASE_MAX)
+);
 type PhraseT = z.infer<typeof PhraseSchema>;
-const parsePhrase = PhraseSchema.parse;
+const parsePhrase = PhraseSchema.safeParseAsync;
 
 const OnlineGameSchema = z.object({
   id: z.string(),
@@ -11,8 +16,8 @@ const OnlineGameSchema = z.object({
 });
 const OnlineGamesSchema = z.array(OnlineGameSchema);
 type OnlineGameT = z.infer<typeof OnlineGameSchema>;
-const parseOnlineGame = OnlineGameSchema.parse;
-const parseOnlineGames = OnlineGamesSchema.parse;
+const parseOnlineGame = OnlineGameSchema.safeParseAsync;
+const parseOnlineGames = OnlineGamesSchema.safeParseAsync;
 
 const GameData = z.object({
   wins: z.number().check(z.gte(0)),
@@ -21,7 +26,7 @@ const GameData = z.object({
   oRounds: z.number().check(z.gte(0))
 });
 type GameDataT = z.infer<typeof GameData>;
-const parseGameData = GameData.parse;
+const parseGameData = GameData.safeParseAsync;
 
 type OutEventsT = {
   [sOut.JOIN_LOBBY]: () => void;
@@ -33,11 +38,11 @@ type OutEventsT = {
 };
 
 type InEventsT = {
-  [sIn.GAME_LIST]: (games: OnlineGameT[] /*| unknown*/) => void;
+  [sIn.GAME_LIST]: (games: OnlineGameT[] | unknown) => void;
   [sIn.WAIT_START]: () => void;
   [sIn.GIVE_PHRASE]: () => void;
-  [sIn.START_GAME]: (phrase: PhraseT /*| unknown*/) => void;
-  [sIn.GAME_DATA]: (data: GameDataT /*| unknown*/) => void;
+  [sIn.START_GAME]: (phrase: PhraseT | unknown) => void;
+  [sIn.GAME_DATA]: (data: GameDataT | unknown) => void;
   [sIn.OPPONENT_EXIT]: () => void;
   [sIn.OLD_VERSION]: () => void;
   [sIn.UNSUPPORTED_LANG]: () => void;

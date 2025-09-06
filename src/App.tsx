@@ -11,10 +11,10 @@ import { Route, Router, Switch } from 'wouter';
 import { useHashLocation } from 'wouter/use-hash-location';
 import './App.css';
 
-import LocalMenu from '@/Screens/Local/Local';
-import MultiMenu from '@/Screens/Multi/Multi';
-import SingleMenu from '@/Screens/Single/Single';
-import StartMenu from '@/Screens/Start/Start';
+import Local from '@/Screens/Local/Local';
+import Multi from '@/Screens/Multi/Multi';
+import Single from '@/Screens/Single/Single';
+import Start from '@/Screens/Start/Start';
 
 const userLang = getUserLang();
 
@@ -43,10 +43,10 @@ function App() {
         <Header />
         <main>
           <Switch>
-            <Route path='/single' component={SingleMenu} />
-            <Route path='/local' component={LocalMenu} />
-            <Route path='/multi' component={MultiMenu} />
-            <Route path='*' component={StartMenu} />
+            <Route path='/single' component={Single} />
+            <Route path='/local' component={Local} />
+            <Route path='/multi' component={Multi} />
+            <Route path='*' component={Start} />
           </Switch>
         </main>
       </Router>
