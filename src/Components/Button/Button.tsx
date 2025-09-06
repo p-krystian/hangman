@@ -1,5 +1,13 @@
-import { Link } from "wouter";
-import styles from "./Button.module.css";
+import { useEffect, useRef } from 'react';
+import { Link } from 'wouter';
+import styles from './Button.module.css';
+
+const shortcutKeys = {
+  cancel: new Set(['escape']),
+  accept: new Set(['enter']),
+  prev: new Set(['arrowup', 'arrowleft']),
+  next: new Set(['arrowdown', 'arrowright'])
+} as const;
 
 type ButtonProps = {
   link?: string;
@@ -8,26 +16,47 @@ type ButtonProps = {
   children: React.ReactNode;
   disabled?: boolean;
   small?: boolean;
+  shortcut?: keyof typeof shortcutKeys;
 }
 
-function Button(props: ButtonProps) {
-  const { link, onClick, value, children, disabled = false, small = false } = props;
+function Button({ link, onClick, value, children, disabled, small, shortcut }: ButtonProps) {
+  const btnRef = useRef<HTMLElement>(null);
+  const classNames = `${styles.button} ${small ? styles.small : ""}`;
+
+  useEffect(() => {
+    function listener(e: KeyboardEvent) {
+      const code = e.key.toLowerCase();
+      if (!shortcut || !e.ctrlKey || !shortcutKeys[shortcut].has(code)){
+        return;
+      }
+      e.preventDefault();
+      btnRef.current?.click();
+    }
+
+    if (shortcut){
+      window.addEventListener('keyup', listener);
+    }
+    return () => window.removeEventListener('keyup', listener);
+  }, [shortcut]);
 
   return link ? (
     <Link
-      to={disabled ? "" : link}
-      data-disabled={disabled}
-      onClick={disabled ? () => "disabled" : onClick}
-      className={`${styles.button} ${small ? styles.small : ""}`}
+      className={classNames}
+      onClick={disabled ? () => null : onClick}
+      to={disabled ? '' : link}
+      aria-disabled={disabled}
+      ref={btnRef as React.RefObject<HTMLAnchorElement>}
     >
       {children}
     </Link>
   ) : (
     <button
-      disabled={disabled}
+      className={classNames}
+      onClick={disabled ? () => null : onClick}
       value={value}
-      onClick={disabled ? () => "disabled" : onClick}
-      className={`${styles.button} ${small ? styles.small : ""}`}
+      disabled={disabled}
+      aria-disabled={disabled}
+      ref={btnRef as React.RefObject<HTMLButtonElement>}
     >
       {children}
     </button>
