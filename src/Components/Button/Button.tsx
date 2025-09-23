@@ -1,5 +1,6 @@
-import shortcutListener, { type ShortcutT } from '@/Utils/shortcutListener';
-import { useCallback, useEffect, useRef } from 'react';
+import shortcutListener from '@/Utils/shortcutListener';
+import { binds } from '@/conf';
+import { memo, useCallback, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import styles from './Button.module.css';
 
@@ -10,7 +11,7 @@ type ButtonProps = {
   children: React.ReactNode;
   disabled?: boolean;
   small?: boolean;
-  shortcut?: ShortcutT;
+  shortcut?: keyof typeof binds;
 }
 
 function Button({ link, onClick, value, children, disabled, small, shortcut }: ButtonProps) {
@@ -51,4 +52,4 @@ function Button({ link, onClick, value, children, disabled, small, shortcut }: B
     </button>
   );
 }
-export default Button;
+export default memo(Button);

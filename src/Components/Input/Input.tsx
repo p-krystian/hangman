@@ -1,6 +1,8 @@
 import WithCaret from '@/Components/WithCaret/WithCaret';
 import usePlayer from '@/Hooks/usePlayer';
-import { useEffect, useRef } from 'react';
+import shortcutListener from '@/Utils/shortcutListener';
+import { binds } from '@/conf';
+import { memo, useEffect, useRef } from 'react';
 import styles from './Input.module.css';
 
 type InputProps = {
@@ -9,9 +11,10 @@ type InputProps = {
   placeholder: string;
   active?: boolean;
   onFocus?: () => unknown;
+  shortcut?: keyof typeof binds;
 }
 
-function Input({ value, active, size, placeholder, onFocus }: InputProps) {
+function Input({ value, active, size, placeholder, onFocus, shortcut }: InputProps) {
   const prevValue = useRef(value);
   const playSound = usePlayer();
   const inputRef = useRef<HTMLDivElement>(null);
@@ -31,6 +34,12 @@ function Input({ value, active, size, placeholder, onFocus }: InputProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (shortcut && onFocus) {
+      shortcutListener(shortcut, onFocus);
+    }
+  }, [shortcut, onFocus]);
 
   return (
     <div
@@ -54,4 +63,4 @@ function Input({ value, active, size, placeholder, onFocus }: InputProps) {
     </div>
   );
 }
-export default Input;
+export default memo(Input);

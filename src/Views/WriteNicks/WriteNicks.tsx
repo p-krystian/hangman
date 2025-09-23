@@ -21,7 +21,7 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
   const [nick0, setNick0] = useState(gameContext.nicks[0]);
   const [nick1, setNick1] = useState(gameContext.nicks[1] || '');
   const [focused, setFocused] = useState<0 | 1>(0);
-  const pass = ((nick0 !== nick1) && nick0.length >= lt.NICK_MIN && nick1.length > lt.NICK_MIN);
+  const pass = ((nick0 !== nick1) && nick0.length >= lt.NICK_MIN && nick1.length >= lt.NICK_MIN);
 
   const keyboardWrite = useKeyboardWrite(
     focused ? setNick1 : setNick0,
@@ -55,10 +55,10 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
         />
       </div>
       <ButtonWrap>
-        <Button onClick={() => goNext([nick0, nick1])} disabled={!pass} shortcut="accept">
+        <Button onClick={() => goNext([nick0, nick1])} disabled={!pass} shortcut="ACCEPT">
           {l('next')}
         </Button>
-        <Button onClick={goBack} shortcut="cancel">
+        <Button onClick={goBack} shortcut="CANCEL">
           {l('cancel')}
         </Button>
       </ButtonWrap>

@@ -1,19 +1,11 @@
-const shortcuts = {
-  cancel: 'escape',
-  accept: 'accept',
-  prev: 'arrowleft',
-  next: 'arrowright',
-  random: 'r'
-} as const;
+import { binds } from "@/conf";
 
-type ShortcutT = keyof typeof shortcuts;
-
-function shortcutListener(shortcut: ShortcutT, action: () => unknown) {
+function shortcutListener(bind: keyof typeof binds, action: () => unknown) {
   const controller = new AbortController();
 
   window.addEventListener('keydown', (e) => {
     const code = e.key.toLowerCase();
-    if (!e.ctrlKey || !(shortcuts[shortcut] === code)) {
+    if (!e.ctrlKey || !(binds[bind] === code)) {
       return;
     }
     e.preventDefault();
@@ -21,10 +13,8 @@ function shortcutListener(shortcut: ShortcutT, action: () => unknown) {
   }, { signal: controller.signal });
 
   return () => {
-    console.log('shortcutListener unmounted');
     controller.abort();
   };
 }
 
-export { type ShortcutT };
 export default shortcutListener;

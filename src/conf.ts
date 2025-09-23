@@ -18,6 +18,14 @@ const limits = {
   ONLINE_GAMES: 6
 } as const;
 
+const binds = {
+  CANCEL: 'escape',
+  ACCEPT: 'enter',
+  PREV: 'arrowleft',
+  NEXT: 'arrowright',
+  RANDOM: 'r'
+} as const;
+
 enum keysLS {
   VOLUME = 'volume',
   LANG = 'language'
@@ -44,4 +52,4 @@ enum sioInEvents {
   INVALID_DATA = 'invalid-data',
 };
 
-export { appVersion, mainLang, startVol, env, limits, keysLS, sioOutEvents, sioInEvents };
+export { appVersion, mainLang, startVol, env, limits, binds, keysLS, sioOutEvents, sioInEvents };
