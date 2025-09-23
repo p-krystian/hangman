@@ -1,0 +1,27 @@
+.indicator {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 0.8em;
+  font-family: var(--font-simple);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid var(--main-d);
+  background-color: var(--main);
+  border-radius: 0.25em;
+  transform: translate(25%, 25%);
+  z-index: 5;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.indicator svg {
+  width: 0.75em;
+  height: 0.75em;
+}
+:global(#root:not(.control)) .indicator {
+  display: none;
+}

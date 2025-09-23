@@ -2,6 +2,7 @@ import Header from '@/Components/Header/Header';
 import Splash from '@/Components/Splash/Splash';
 import { keysLS, startVol } from '@/conf';
 import AppContext from '@/Contexts/AppContext';
+import useControlKey from '@/Hooks/useControlKey';
 import useLocalStorage from '@/Hooks/useLocalStorage';
 import { AppLangsT, parseAppLangs } from '@/Parsers/AppLangs';
 import { parseVolume, VolumeT } from '@/Parsers/Volume';
@@ -36,6 +37,8 @@ function App() {
     updateDictionaries(appLang).then(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useControlKey();
 
   return isLoading ? (<Splash />) : (
     <AppContext value={{ volume, setVolume, appLang, setLang }}>

@@ -4,6 +4,7 @@ import shortcutListener from '@/Utils/shortcutListener';
 import { binds } from '@/conf';
 import { memo, useEffect, useRef } from 'react';
 import styles from './Input.module.css';
+import KeyIndicator from '@/Components/KeyIndicator/KeyIndicator';
 
 type InputProps = {
   value: string;
@@ -60,6 +61,7 @@ function Input({ value, active, size, placeholder, onFocus, shortcut }: InputPro
           {placeholder}
         </span>
       )}
+      {!!shortcut && <KeyIndicator shortcut={shortcut} />}
     </div>
   );
 }

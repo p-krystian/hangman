@@ -1,3 +1,4 @@
+import KeyIndicator from '@/Components/KeyIndicator/KeyIndicator';
 import shortcutListener from '@/Utils/shortcutListener';
 import { binds } from '@/conf';
 import { memo, useCallback, useEffect, useRef } from 'react';
@@ -38,6 +39,7 @@ function Button({ link, onClick, value, children, disabled, small, shortcut }: B
       ref={setRef}
     >
       {children}
+      {!!shortcut && <KeyIndicator shortcut={shortcut} />}
     </Link>
   ) : (
     <button
@@ -49,6 +51,7 @@ function Button({ link, onClick, value, children, disabled, small, shortcut }: B
       ref={setRef}
     >
       {children}
+      {!!shortcut && <KeyIndicator shortcut={shortcut} />}
     </button>
   );
 }
