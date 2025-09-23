@@ -1,13 +1,7 @@
-import { useEffect, useRef } from 'react';
+import shortcutListener, { type ShortcutT } from '@/Utils/shortcutListener';
+import { useCallback, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import styles from './Button.module.css';
-
-const shortcutKeys = {
-  cancel: new Set(['escape']),
-  accept: new Set(['enter']),
-  prev: new Set(['arrowup', 'arrowleft']),
-  next: new Set(['arrowdown', 'arrowright'])
-} as const;
 
 type ButtonProps = {
   link?: string;
@@ -16,27 +10,22 @@ type ButtonProps = {
   children: React.ReactNode;
   disabled?: boolean;
   small?: boolean;
-  shortcut?: keyof typeof shortcutKeys;
+  shortcut?: ShortcutT;
 }
 
 function Button({ link, onClick, value, children, disabled, small, shortcut }: ButtonProps) {
-  const btnRef = useRef<HTMLElement>(null);
+  const btnRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const classNames = `${styles.button} ${small ? styles.small : ""}`;
 
-  useEffect(() => {
-    function listener(e: KeyboardEvent) {
-      const code = e.key.toLowerCase();
-      if (!shortcut || !e.ctrlKey || !shortcutKeys[shortcut].has(code)){
-        return;
-      }
-      e.preventDefault();
-      btnRef.current?.click();
-    }
+  const setRef = useCallback((element: HTMLButtonElement | HTMLAnchorElement | null) => {
+    btnRef.current = element;
+    return () => { btnRef.current = null; };
+  }, []);
 
-    if (shortcut){
-      window.addEventListener('keyup', listener);
+  useEffect(() => {
+    if (shortcut) {
+      return shortcutListener(shortcut, () => btnRef.current?.click());
     }
-    return () => window.removeEventListener('keyup', listener);
   }, [shortcut]);
 
   return link ? (
@@ -45,7 +34,7 @@ function Button({ link, onClick, value, children, disabled, small, shortcut }: B
       onClick={disabled ? () => null : onClick}
       to={disabled ? '' : link}
       aria-disabled={disabled}
-      ref={btnRef as React.RefObject<HTMLAnchorElement>}
+      ref={setRef}
     >
       {children}
     </Link>
@@ -56,7 +45,7 @@ function Button({ link, onClick, value, children, disabled, small, shortcut }: B
       value={value}
       disabled={disabled}
       aria-disabled={disabled}
-      ref={btnRef as React.RefObject<HTMLButtonElement>}
+      ref={setRef}
     >
       {children}
     </button>
