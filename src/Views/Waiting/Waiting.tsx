@@ -19,7 +19,9 @@ function Waiting({ goCancel }: WaitingProps) {
       </div>
       {!!goCancel && (
         <ButtonWrap>
-          <Button onClick={goCancel}>{l('cancel')}</Button>
+          <Button onClick={goCancel} shortcut="CANCEL">
+            {l('cancel')}
+          </Button>
         </ButtonWrap>
       )}
     </div>

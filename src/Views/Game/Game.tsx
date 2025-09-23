@@ -69,7 +69,7 @@ function Game({ goExit, onLose, onWin }: GameProps) {
       </div>
       <ButtonWrap>
         {!!goExit && (
-          <Button onClick={() => setShowExit(true)} shortcut="cancel">
+          <Button onClick={() => setShowExit(true)} shortcut="CANCEL">
             {l('cancel')}
           </Button>
         )}

@@ -40,6 +40,7 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
             placeholder={`${l('nick')} 1`}
             size={lt.NICK_MAX}
             onFocus={() => setFocused(0)}
+            shortcut="PREV"
           />
           <Input
             active={focused === 1}
@@ -47,6 +48,7 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
             placeholder={`${l('nick')} 2`}
             size={lt.NICK_MAX}
             onFocus={() => setFocused(1)}
+            shortcut="NEXT"
           />
         </div>
         <Keyboard

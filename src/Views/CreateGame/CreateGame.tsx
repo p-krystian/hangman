@@ -39,11 +39,11 @@ function Create({ goBack, goNext }: CreateGameProps) {
         <Button
           onClick={() => goNext(name)}
           disabled={name.length < limits.NICK_MIN}
-          shortcut="accept"
+          shortcut="ACCEPT"
         >
           {l('start')}
         </Button>
-        <Button onClick={goBack} shortcut="cancel">
+        <Button onClick={goBack} shortcut="CANCEL">
           {l('cancel')}
         </Button>
       </ButtonWrap>

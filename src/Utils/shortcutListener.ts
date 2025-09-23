@@ -5,7 +5,7 @@ function shortcutListener(bind: keyof typeof binds, action: () => unknown) {
 
   window.addEventListener('keydown', (e) => {
     const code = e.key.toLowerCase();
-    if (!e.ctrlKey || !(binds[bind] === code)) {
+    if (!e.ctrlKey || e.repeat || !(binds[bind] === code)) {
       return;
     }
     e.preventDefault();

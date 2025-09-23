@@ -46,11 +46,11 @@ function EndGame({ goNext }: EndGameProps) {
         <Button
           onClick={goNext || (() => null)}
           disabled={!goNext}
-          shortcut="accept"
+          shortcut="ACCEPT"
         >
           {l('next')}
         </Button>
-        <Button link="/" shortcut="cancel">
+        <Button link="/" shortcut="CANCEL">
           {l('menu')}
         </Button>
       </ButtonWrap>

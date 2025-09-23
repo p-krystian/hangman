@@ -47,16 +47,16 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
         <Button
           onClick={() => goNext(phrase)}
           disabled={phrase.length < limits.PHRASE_MIN}
-          shortcut="accept"
+          shortcut="ACCEPT"
         >
           {l('next')}
         </Button>
         {(!!goBack || !!goExit) && (
-          <Button onClick={goExit ? (() => setAskExit(true)) : goBack} shortcut="cancel">
+          <Button onClick={goExit ? (() => setAskExit(true)) : goBack} shortcut="CANCEL">
             {goExit ? l('cancel') : l('back')}
           </Button>
         )}
-        <Button onClick={() => setPhrase(getRandomWord())}>
+        <Button onClick={() => setPhrase(getRandomWord())} shortcut="RANDOMIZE">
           {l('randomize')}
         </Button>
       </ButtonWrap>

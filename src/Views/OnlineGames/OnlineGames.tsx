@@ -36,11 +36,11 @@ function Games({ gameList, onCreate, onJoin }: GamesProps) {
         <Button
           onClick={onCreate}
           disabled={gameList.length >= limits.ONLINE_GAMES}
-          shortcut="accept"
+          shortcut="ACCEPT"
         >
           {l('create')}
         </Button>
-        <Button link="/" shortcut="cancel">
+        <Button link="/" shortcut="CANCEL">
           {l('menu')}
         </Button>
       </ButtonWrap>

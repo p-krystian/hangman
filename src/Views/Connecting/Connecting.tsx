@@ -31,7 +31,9 @@ function Connecting() {
         <Phrase>{`${l('connecting')}...`}</Phrase>
       </div>
       <ButtonWrap>
-        <Button link='/'>{l('cancel')}</Button>
+        <Button link='/' shortcut="CANCEL">
+          {l('cancel')}
+        </Button>
       </ButtonWrap>
     </div>
   );

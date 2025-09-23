@@ -46,8 +46,12 @@ function Confirm({ confirm, reject, long, children }: ConfirmProps) {
     <div className={`${styles.confirm} ${long ? styles.long : ''}`}>
       <span>{children}</span>
       <div className={styles.buttons}>
-        {reject && <Button small={true} onClick={reject}>{l('no')}</Button>}
-        <Button small={true} onClick={confirm}>{confirmText}</Button>
+        {reject && <Button small={true} onClick={reject} shortcut="CANCEL">
+          {l('no')}
+        </Button>}
+        <Button small={true} onClick={confirm} shortcut="ACCEPT">
+          {confirmText}
+        </Button>
       </div>
     </div>,
     popupContainer

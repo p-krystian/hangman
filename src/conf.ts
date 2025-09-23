@@ -23,7 +23,13 @@ const binds = {
   ACCEPT: 'enter',
   PREV: 'arrowleft',
   NEXT: 'arrowright',
-  RANDOM: 'r'
+  RANDOMIZE: 'r',
+  "1": '1',
+  "2": '2',
+  "3": '3',
+  "4": '4',
+  "5": '5',
+  "6": '6'
 } as const;
 
 enum keysLS {

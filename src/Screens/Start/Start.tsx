@@ -68,10 +68,10 @@ function MenuStart() {
           <img src={langData.flag} alt={langData.short} />
         </Button>
       </div>
-      <Button link='/single'>{l('single')}</Button>
-      <Button link='/local'>{l('local')}</Button>
-      <Button link='/multi'>{l('online')}</Button>
-      <Button onClick={exit}>{l('exit')}</Button>
+      <Button link="/single" shortcut="1">{l('single')}</Button>
+      <Button link="/local" shortcut="2">{l('local')}</Button>
+      <Button link="/multi" shortcut="3">{l('online')}</Button>
+      <Button onClick={exit} shortcut="4">{l('exit')}</Button>
 
       {showInfo && (
         <Confirm confirm={() => setShowInfo(false)} long>
