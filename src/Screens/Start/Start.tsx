@@ -1,3 +1,4 @@
+import { memo, useEffect, useState } from 'react';
 import { availableLangs } from '@/Assets/Langs';
 import InfoSymbol from '@/Assets/Symbols/info.svg?react';
 import Button from '@/Components/Button/Button';
@@ -7,7 +8,6 @@ import VolumeIcon from '@/Components/VolumeIcon/VolumeIcon';
 import { env } from '@/conf';
 import useLanguage from '@/Hooks/useLang';
 import useVolumeControl from '@/Hooks/useVolumeControl';
-import { memo, useEffect, useState } from 'react';
 import styles from './Start.module.css';
 
 let timeoutID: ReturnType<typeof setTimeout>;
@@ -31,6 +31,7 @@ function MenuStart() {
     location.href = env.EXIT_URL;
   }
 
+  // biome-ignore lint: It have to clear timeout on language change
   useEffect(() => {
     clearTimeout(timeoutID);
     setChangingLang(false);
@@ -41,23 +42,11 @@ function MenuStart() {
   return (
     <div className={styles.buttons}>
       <div className={styles.small}>
-        <Button
-          onClick={nextVolume}
-          value={l('volumeWord')}
-          small
-        >
+        <Button onClick={nextVolume} value={l('volumeWord')} small>
           <VolumeIcon />
         </Button>
-        <Button
-          onClick={() => setShowInfo(true)}
-          value={l('infoWord')}
-          small
-        >
-          <InfoSymbol
-            title={l('infoWord')}
-            name={l('infoWord')}
-            aria-label={l('infoWord')}
-          />
+        <Button onClick={() => setShowInfo(true)} value={l('infoWord')} small>
+          <InfoSymbol title={l('infoWord')} name={l('infoWord')} aria-label={l('infoWord')} />
         </Button>
         <Button
           onClick={() => nextLanguage()}
@@ -68,10 +57,18 @@ function MenuStart() {
           <img src={langData.flag} alt={langData.short} />
         </Button>
       </div>
-      <Button link="/single" shortcut="1">{l('single')}</Button>
-      <Button link="/local" shortcut="2">{l('local')}</Button>
-      <Button link="/multi" shortcut="3">{l('online')}</Button>
-      <Button onClick={exit} shortcut="4">{l('exit')}</Button>
+      <Button link="/single" shortcut="1">
+        {l('single')}
+      </Button>
+      <Button link="/local" shortcut="2">
+        {l('local')}
+      </Button>
+      <Button link="/multi" shortcut="3">
+        {l('online')}
+      </Button>
+      <Button onClick={exit} shortcut="4">
+        {l('exit')}
+      </Button>
 
       {showInfo && (
         <Confirm confirm={() => setShowInfo(false)} long>

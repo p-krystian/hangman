@@ -8,26 +8,26 @@
 }
 .category {
   --_s: 5;
-  font-size: calc(-0.2rem * var(--_s) + 2.6rem);
   grid-area: category;
-  white-space: break-spaces;
   max-width: 22.4rem;
   max-height: 1em;
   overflow: hidden;
+  font-size: calc(-0.2rem * var(--_s) + 2.6rem);
+  white-space: break-spaces;
 }
 .short {
-  font-size: 2.2rem;
-  text-align: center;
-  line-height: 0.8;
-  margin-bottom: 0.6rem;
   max-height: unset;
+  margin-bottom: 0.6rem;
+  font-size: 2.2rem;
+  line-height: 0.8;
+  text-align: center;
 }
 .short .prefix {
   display: none;
 }
 .name {
-  text-transform: uppercase;
   display: inline-block;
+  text-transform: uppercase;
 }
 .name span {
   --_d: 0;
@@ -41,7 +41,7 @@
 .short .name {
   display: block;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+@media (min-width: 620px) and (min-aspect-ratio: 15 / 11) {
   .short .prefix {
     display: inline-block;
   }

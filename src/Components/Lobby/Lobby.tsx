@@ -5,8 +5,8 @@ import styles from './Lobby.module.css';
 type LobbyProps = {
   name: string;
   onSubmit: () => unknown;
-  shortcut?: Parameters<typeof Button>[0]['shortcut']
-}
+  shortcut?: Parameters<typeof Button>[0]['shortcut'];
+};
 
 function Lobby({ name, onSubmit, shortcut }: LobbyProps) {
   const { l } = useLanguage();

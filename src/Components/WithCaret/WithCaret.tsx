@@ -4,15 +4,13 @@ type WithCaretProps = {
   size: number;
   show?: boolean;
   children: string;
-}
+};
 
 function WithCaret({ size, show = true, children }: WithCaretProps) {
   return (
     <>
       {children}
-      {(show && children.length < size) && (
-        <span className={styles.caret}>_</span>
-      )}
+      {show && children.length < size && <span className={styles.caret}>_</span>}
     </>
   );
 }

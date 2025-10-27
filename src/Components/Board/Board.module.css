@@ -8,17 +8,17 @@
 }
 .board {
   --_s: 5;
+  position: relative;
+  display: flex;
+  grid-area: board;
+  align-items: center;
+  justify-content: center;
   width: calc(var(--_s) * 2.7rem + 7.4rem);
   height: calc(var(--_s) * 2.7rem + 7.4rem);
+  overflow: hidden;
+  background-color: var(--dark-bg);
   border: 3px solid var(--main-d);
   border-radius: 1rem;
-  grid-area: board;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-color: var(--dark-bg);
-  overflow: hidden;
   isolation: isolate;
 }
 .board.small {
@@ -27,12 +27,12 @@
 }
 .image {
   position: absolute;
-  margin-top: 10%;
+  z-index: 2;
   width: 75%;
   height: 75%;
-  animation: show var(--trans-d) ease-out;
+  margin-top: 10%;
   filter: brightness(var(--svg-bright));
-  z-index: 2;
+  animation: show var(--trans-d) ease-out;
 }
 .bg,
 .fg {
@@ -41,10 +41,10 @@
   height: 100%;
 }
 .bg {
-  filter: brightness(calc(var(--svg-bright) * 0.7));
   z-index: 1;
+  filter: brightness(calc(var(--svg-bright) * 0.7));
 }
 .fg {
-  filter: brightness(calc(var(--svg-bright) * 0.85));
   z-index: 3;
+  filter: brightness(calc(var(--svg-bright) * 0.85));
 }

@@ -7,12 +7,12 @@
   }
 }
 .result {
-  font-family: var(--font-mono);
-  font-size: 2rem;
+  grid-area: result;
   width: 18rem;
   height: 18rem;
-  grid-area: result;
   margin-bottom: 2rem;
+  font-family: var(--font-mono);
+  font-size: 2rem;
 }
 .result img {
   width: 100%;
@@ -32,49 +32,49 @@
   color: var(--mistake);
 }
 .phrase {
-  font-size: 1.8rem;
-  font-family: var(--font-mono);
-  font-weight: 800;
   display: block;
-  line-height: 1.8;
-  text-transform: uppercase;
   grid-area: entry;
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.8;
   text-align: center;
+  text-transform: uppercase;
   text-shadow: 0 0 0.5rem var(--dark-bg);
 }
 .container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  grid-area: main;
   flex: 1;
+  flex-direction: column;
+  grid-area: main;
+  align-items: center;
+  justify-content: center;
 }
 .wrapper {
-  width: 100%;
-  min-height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  min-height: inherit;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+@media (min-width: 620px) and (min-aspect-ratio: 15 / 11) {
   .result {
     width: 16rem;
     height: 16rem;
     margin-bottom: 0;
   }
   .container {
-    margin: auto;
-    flex: 0;
-    min-width: 620px;
-    gap: 1rem;
     display: grid;
-    grid-template-columns: auto 23rem;
+    flex: 0;
     grid-template-areas:
       "result category"
       "result entry"
       "result points";
-    justify-content: center;
+    grid-template-columns: auto 23rem;
+    gap: 1rem;
     align-items: center;
+    justify-content: center;
+    min-width: 620px;
+    margin: auto;
   }
 }

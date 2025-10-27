@@ -1,32 +1,34 @@
 .key {
-  appearance: none;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: var(--white);
-  border: 2px solid var(--main-d);
-  border-radius: 0.5rem;
-  background-color: var(--main);
-  cursor: pointer;
-  padding: 0.1rem;
-  font-size: 2rem;
+  justify-content: center;
   width: 1.3em;
   height: 1.3em;
-  user-select: none;
-  transition: background-color var(--trans-d) ease-out;
+  padding: 0.1rem;
   font-family: var(--font-simple);
+  font-size: 2rem;
+  color: var(--white);
   text-align: center;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--main);
+  border: 2px solid var(--main-d);
+  border-radius: 0.5rem;
+  transition: background-color var(--trans-d) ease-out;
 }
 .key:hover {
   background-color: var(--main-d);
 }
-.mistake, .mistake:hover{
+.mistake,
+.mistake:hover {
+  pointer-events: none;
   background-color: var(--mistake);
-  pointer-events: none;
 }
-.correct, .correct:hover{
-  background-color: var(--correct);
+.correct,
+.correct:hover {
   pointer-events: none;
+  background-color: var(--correct);
 }
 .key svg {
   max-width: 80%;

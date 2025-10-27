@@ -1,17 +1,16 @@
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Button from '@/Components/Button/Button';
 import useAnimaionEnd from '@/Hooks/useAnimationEnd';
 import useLanguage from '@/Hooks/useLang';
-import { useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './Confirm.module.css';
-
 
 type ConfirmProps = {
   confirm: () => void;
   reject?: () => void;
   long?: boolean;
   children: React.ReactNode;
-}
+};
 const popupContainer = document.getElementById('popup')!;
 
 function afterAnimation() {
@@ -19,8 +18,7 @@ function afterAnimation() {
 
   if (focusElement) {
     (focusElement as HTMLButtonElement).focus({ preventScroll: true });
-  }
-  else {
+  } else {
     popupContainer.focus({ preventScroll: true });
   }
 }
@@ -46,9 +44,11 @@ function Confirm({ confirm, reject, long, children }: ConfirmProps) {
     <div className={`${styles.confirm} ${long ? styles.long : ''}`}>
       <span>{children}</span>
       <div className={styles.buttons}>
-        {reject && <Button small={true} onClick={reject}>
-          {l('no')}
-        </Button>}
+        {reject && (
+          <Button small={true} onClick={reject}>
+            {l('no')}
+          </Button>
+        )}
         <Button small={true} onClick={confirm}>
           {confirmText}
         </Button>

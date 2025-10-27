@@ -1,19 +1,19 @@
+import { useContext, useState } from 'react';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Input from '@/Components/Input/Input';
 import Keyboard from '@/Components/Keyboard/Keyboard';
-import { limits as lt } from '@/conf';
 import GameContext from '@/Contexts/GameContext';
+import { limits as lt } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
-import { useContext, useState } from 'react';
 import styles from './WriteNicks.module.css';
 
 type WriteNicksProps = {
   goBack: () => void;
   goNext: (nicks: [string, string]) => void;
-}
+};
 
 function WriteNicks({ goBack, goNext }: WriteNicksProps) {
   const { l } = useLanguage();
@@ -21,12 +21,9 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
   const [nick0, setNick0] = useState(gameContext.nicks[0]);
   const [nick1, setNick1] = useState(gameContext.nicks[1] || '');
   const [focused, setFocused] = useState<0 | 1>(0);
-  const pass = ((nick0 !== nick1) && nick0.length >= lt.NICK_MIN && nick1.length >= lt.NICK_MIN);
+  const pass = nick0 !== nick1 && nick0.length >= lt.NICK_MIN && nick1.length >= lt.NICK_MIN;
 
-  const keyboardWrite = useKeyboardWrite(
-    focused ? setNick1 : setNick0,
-    lt.NICK_MAX
-  );
+  const keyboardWrite = useKeyboardWrite(focused ? setNick1 : setNick0, lt.NICK_MAX);
 
   useFullScreen();
 
@@ -51,10 +48,7 @@ function WriteNicks({ goBack, goNext }: WriteNicksProps) {
             shortcut="NEXT"
           />
         </div>
-        <Keyboard
-          keyEvent={keyboardWrite}
-          write
-        />
+        <Keyboard keyEvent={keyboardWrite} write />
       </div>
       <ButtonWrap>
         <Button onClick={() => goNext([nick0, nick1])} disabled={!pass} shortcut="ACCEPT">

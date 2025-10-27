@@ -1,11 +1,11 @@
 .buttons {
-  width: 16rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  margin: auto;
   gap: 0.8rem;
+  align-items: stretch;
+  justify-content: center;
+  width: 16rem;
+  margin: auto;
 }
 .small {
   display: flex;

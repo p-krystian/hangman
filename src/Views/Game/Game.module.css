@@ -5,22 +5,22 @@
   min-height: inherit;
 }
 .game {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  gap: 0.25rem 1rem;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem 1rem;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+@media (min-width: 620px) and (min-aspect-ratio: 15 / 11) {
   .game {
-    margin: auto;
-    flex: 0;
     display: grid;
+    flex: 0;
     grid-template-areas:
       "board category"
       "board phrase"
       "board keyboard";
     align-items: end;
+    margin: auto;
   }
 }

@@ -10,9 +10,9 @@
   --_d: 0;
 
   display: inline-block;
-  list-style-type: none;
   height: 1.1em;
   overflow-y: hidden;
+  list-style-type: none;
 }
 .counter li {
   display: block;

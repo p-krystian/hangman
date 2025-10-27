@@ -1,47 +1,47 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: inherit;
-  width: 100%;
   align-items: center;
+  width: 100%;
+  min-height: inherit;
 }
 .games {
-  width: 22rem;
-  flex-grow: 1;
-  max-height: calc(100vh - 16rem);
-  margin: auto;
-  border: 3px solid var(--main-d);
-  padding: 1rem;
-  border-radius: 0.5rem;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
-  justify-content: start;
-  align-items: stretch;
   gap: 1rem;
+  align-items: stretch;
+  justify-content: start;
+  width: 22rem;
+  max-height: calc(100vh - 16rem);
+  padding: 1rem;
+  margin: auto;
   overflow-y: auto;
   background-color: var(--darker-a);
+  border: 3px solid var(--main-d);
+  border-radius: 0.5rem;
 }
 .info {
   display: flex;
-  margin: auto;
-  width: 100%;
-  text-align: center;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  font-size: 2.2rem;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  text-align: center;
+  text-transform: uppercase;
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+@media (min-width: 620px) and (min-aspect-ratio: 15 / 11) {
   .games {
-    background-color: transparent;
-    border: none;
     flex-grow: 0;
-    width: 40rem;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
+    width: 40rem;
     max-height: unset;
+    background-color: transparent;
+    border: none;
   }
 }

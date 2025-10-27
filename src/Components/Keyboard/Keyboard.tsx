@@ -1,30 +1,34 @@
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import Key, { KeyStateT } from '@/Components/Key/Key';
 import WriteKeys from '@/Components/KeysWrite/WriteKeys';
 import useLanguage from '@/Hooks/useLang';
-import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import styles from './Keyboard.module.css';
 
-type KeyboardProps = {
-  keyEvent: (char: string) => void;
-  write: true;
-} | {
-  keyEvent: (char: string, setKeyState: (state: KeyStateT) => void) => void;
-  write?: false | undefined;
-};
+type KeyboardProps =
+  | {
+      keyEvent: (char: string) => void;
+      write: true;
+    }
+  | {
+      keyEvent: (char: string, setKeyState: (state: KeyStateT) => void) => void;
+      write?: false | undefined;
+    };
 
 function Keyboard({ keyEvent, write }: KeyboardProps) {
   const { l } = useLanguage();
   const alphabet = useMemo(() => l('alphabet').split(''), [l]);
   const keyRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
-  const setKeyRef = useCallback((char: string) => (key: HTMLButtonElement) => {
-    if (key) {
-      keyRefs.current.set(char, key);
-    }
-    else {
-      keyRefs.current.delete(char);
-    }
-  }, []);
+  const setKeyRef = useCallback(
+    (char: string) => (key: HTMLButtonElement) => {
+      if (key) {
+        keyRefs.current.set(char, key);
+      } else {
+        keyRefs.current.delete(char);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     function translate(e: KeyboardEvent) {
@@ -32,8 +36,7 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
 
       if (k === ' ') {
         k = '^32';
-      }
-      else if (k === 'BACKSPACE') {
+      } else if (k === 'BACKSPACE') {
         k = '^8';
       }
 
@@ -51,8 +54,8 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
       <div className={styles.keys}>
         {alphabet.map((ch, i) => (
           <Key
-            key={`k-${ch}-${i}`}
-            onClick={(sKS) => keyEvent(ch, sKS)}
+            key={`k-${i}-${ch}`}
+            onClick={sKS => keyEvent(ch, sKS)}
             char={ch}
             ref={setKeyRef(ch)}
           >
@@ -60,7 +63,7 @@ function Keyboard({ keyEvent, write }: KeyboardProps) {
           </Key>
         ))}
       </div>
-      {write && (<WriteKeys onKeyClick={(ch) => keyEvent(ch)} setKeyRef={setKeyRef} />)}
+      {write && <WriteKeys onKeyClick={ch => keyEvent(ch)} setKeyRef={setKeyRef} />}
     </div>
   );
 }

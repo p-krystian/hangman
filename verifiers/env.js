@@ -19,7 +19,7 @@ const envSchema = z.object({
   VITE_EXIT_URL: z.url(),
   VITE_DATA_URL: z.url(),
   VITE_AUTHOR_URL: z.url(),
-  VITE_STORAGE_PREFIX: z.string(),
+  VITE_STORAGE_PREFIX: z.string()
 });
 
 function verify() {

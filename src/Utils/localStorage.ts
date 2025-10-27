@@ -7,8 +7,7 @@ function read<T>(key: string, parser: (data: unknown) => T, fallback: T) {
     const readed = window.localStorage.getItem(getPrefixedKey(key)) || '';
     const json = JSON.parse(readed);
     return parser(json);
-  }
-  catch {
+  } catch {
     return fallback;
   }
 }
@@ -16,8 +15,7 @@ function read<T>(key: string, parser: (data: unknown) => T, fallback: T) {
 function save<T>(key: string, value: T) {
   try {
     window.localStorage.setItem(getPrefixedKey(key), JSON.stringify(value));
-  }
-  catch (e: unknown) {
+  } catch (e: unknown) {
     console.warn(e);
   }
   return value;
@@ -26,8 +24,7 @@ function save<T>(key: string, value: T) {
 function del(key: string) {
   try {
     window.localStorage.removeItem(getPrefixedKey(key));
-  }
-  catch (e: unknown) {
+  } catch (e: unknown) {
     console.warn(e);
   }
   return key;

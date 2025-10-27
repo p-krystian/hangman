@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Input from '@/Components/Input/Input';
@@ -6,13 +7,12 @@ import { limits } from '@/conf';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
-import { useState } from 'react';
 import styles from './CreateGame.module.css';
 
 type CreateGameProps = {
   goBack: () => void;
   goNext: (name: string) => void;
-}
+};
 
 function Create({ goBack, goNext }: CreateGameProps) {
   const { l } = useLanguage();
@@ -24,16 +24,8 @@ function Create({ goBack, goNext }: CreateGameProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <Input
-          value={name}
-          placeholder={l('enterName')}
-          size={limits.NICK_MAX}
-          active
-        />
-        <Keyboard
-          keyEvent={keyboardWrite}
-          write
-        />
+        <Input value={name} placeholder={l('enterName')} size={limits.NICK_MAX} active />
+        <Keyboard keyEvent={keyboardWrite} write />
       </div>
       <ButtonWrap>
         <Button

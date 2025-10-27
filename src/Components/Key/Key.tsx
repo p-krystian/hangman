@@ -9,17 +9,21 @@ type KeyProps = {
   char: string;
   wide?: boolean;
   ref?: React.Ref<HTMLButtonElement>;
-}
+};
 
 function Key({ onClick, children, char, wide, ref }: KeyProps) {
   const [keyState, setKeyState] = useState<KeyStateT>(null);
 
-  const classNames = useMemo(() => [
-    styles.key,
-    wide ? styles.wide : '',
-    keyState === 'correct' ? styles.correct : '',
-    keyState === 'mistake' ? styles.mistake : ''
-  ].join(' '), [wide, keyState]);
+  const classNames = useMemo(
+    () =>
+      [
+        styles.key,
+        wide ? styles.wide : '',
+        keyState === 'correct' ? styles.correct : '',
+        keyState === 'mistake' ? styles.mistake : ''
+      ].join(' '),
+    [wide, keyState]
+  );
 
   return (
     <button

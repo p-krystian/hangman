@@ -17,8 +17,8 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 :root {
   --white: #dadada;
@@ -36,57 +36,57 @@
   --font-simple: "Humaroid", system-ui;
 
   --trans-d: 150ms;
+  --header-y: 7rem;
 
   font-size: 16px;
-  --header-y: 7rem;
 }
 *:focus-visible {
   outline: 0.2rem solid var(--main);
   outline-offset: 0.1rem;
 }
 body {
-  background-color: #090909;
-  background-image: url("./Assets/Images/bg.webp");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  user-select: none;
   font-family: var(--font-simple);
   font-size: 1rem;
+  color: var(--white);
+  user-select: none;
+  background-color: #090909;
+  background-image: url("./Assets/Images/bg.webp");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 #root {
+  display: flex;
+  flex-direction: column;
   min-width: 310px;
   min-height: 620px;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
 }
 #popup {
-  visibility: hidden;
-  display: flex;
-  opacity: 0;
   position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
   background-color: var(--darker-a);
+  opacity: 0;
   backdrop-filter: blur(2px);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
   transition:
     visibility var(--trans-d) ease,
     opacity var(--trans-d) ease;
 }
 #popup.active {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 #preload {
   display: none;
@@ -95,24 +95,24 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
+  display: flex;
+  visibility: visible;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #090909;
-  pointer-events: none;
   padding: 32px;
+  pointer-events: none;
+  background-color: #090909;
   opacity: 1;
-  z-index: 1000;
-  visibility: visible;
 }
 #splash.hide {
-  opacity: 0;
   z-index: -1000;
   visibility: hidden;
+  opacity: 0;
   transition:
     z-index var(--trans-d) ease var(--trans-d),
     visibility var(--trans-d) ease var(--trans-d),
@@ -138,37 +138,37 @@ body {
     font-size: 12px;
   }
 }
-@media (min-width: 600px) and (max-aspect-ratio: 15/11) {
+@media (min-width: 600px) and (max-aspect-ratio: 15 / 11) {
   :root {
     font-size: 22px;
   }
 }
-@media (min-width: 620px) and (min-aspect-ratio: 15/11) {
+@media (min-width: 620px) and (min-aspect-ratio: 15 / 11) {
   #root {
     min-height: 280px;
   }
 }
-@media (max-width: 699px) and (min-aspect-ratio: 15/11) {
+@media (max-width: 699px) and (min-aspect-ratio: 15 / 11) {
   :root {
     font-size: 11px;
   }
 }
-@media (min-height: 580px) and (min-aspect-ratio: 15/11) {
+@media (min-height: 580px) and (min-aspect-ratio: 15 / 11) {
   :root {
     font-size: 18px;
   }
 }
-@media (min-height: 660px) and (min-aspect-ratio: 15/11) {
+@media (min-height: 660px) and (min-aspect-ratio: 15 / 11) {
   :root {
     font-size: 20px;
   }
 }
-@media (min-height: 820px) and (min-aspect-ratio: 15/11) {
+@media (min-height: 820px) and (min-aspect-ratio: 15 / 11) {
   :root {
     font-size: 22px;
   }
 }
-@media (min-height: 880px) and (min-aspect-ratio: 15/11) {
+@media (min-height: 880px) and (min-aspect-ratio: 15 / 11) {
   :root {
     font-size: 25px;
   }

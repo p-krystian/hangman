@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react';
 import deadImg from '@/Assets/Animation/dead.svg';
 import liveImg from '@/Assets/Animation/live.svg';
 import Button from '@/Components/Button/Button';
@@ -7,12 +8,11 @@ import Points from '@/Components/Points/Points';
 import GameContext from '@/Contexts/GameContext';
 import useLanguage from '@/Hooks/useLang';
 import usePlayer from '@/Hooks/usePlayer';
-import { useContext, useEffect } from 'react';
 import styles from './EndGame.module.css';
 
 type EndGameProps = {
   goNext: (() => void) | null;
-}
+};
 
 function EndGame({ goNext }: EndGameProps) {
   const { l } = useLanguage();
@@ -23,7 +23,7 @@ function EndGame({ goNext }: EndGameProps) {
     class: gameContext.win ? styles.win : styles.lose,
     audio: gameContext.win ? 'good' : 'dead',
     phrase: gameContext.phrase || '?',
-    name: gameContext.win ? l('win') : l('lose'),
+    name: gameContext.win ? l('win') : l('lose')
   } as const;
 
   useEffect(() => {
@@ -37,17 +37,11 @@ function EndGame({ goNext }: EndGameProps) {
           <img src={result.img} alt={result.name} />
         </div>
         <PhraseCategory phrase={result.phrase} short />
-        <span className={`${styles.phrase} ${result.class}`}>
-          {result.phrase}
-        </span>
+        <span className={`${styles.phrase} ${result.class}`}>{result.phrase}</span>
         <Points />
       </div>
       <ButtonWrap>
-        <Button
-          onClick={goNext || (() => null)}
-          disabled={!goNext}
-          shortcut="ACCEPT"
-        >
+        <Button onClick={goNext || (() => null)} disabled={!goNext} shortcut="ACCEPT">
           {l('next')}
         </Button>
         <Button link="/" shortcut="CANCEL">

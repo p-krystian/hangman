@@ -1,5 +1,5 @@
-import useLanguage from '@/Hooks/useLang';
 import { memo, useCallback, useEffect, useState } from 'react';
+import useLanguage from '@/Hooks/useLang';
 import styles from './PhraseCategory.module.css';
 
 const cache = { phrase: '123', category: '' };
@@ -9,7 +9,7 @@ type PhraseCategoryProps = {
   phrase: string;
   short?: boolean;
   animate?: boolean;
-}
+};
 
 function PhraseCategory({ phrase, short = false, animate = false }: PhraseCategoryProps) {
   const { l, getWordCategory } = useLanguage();
@@ -38,9 +38,7 @@ function PhraseCategory({ phrase, short = false, animate = false }: PhraseCatego
       className={`${styles.category} ${short ? styles.short : ''}`}
       style={{ '--_kbd-s': keyboardSize } as React.CSSProperties}
     >
-      <span className={styles.prefix}>
-        {`${l('phraseCategory')}:${short ? '' : ' '}`}
-      </span>
+      <span className={styles.prefix}>{`${l('phraseCategory')}:${short ? '' : ' '}`}</span>
       <p className={styles.name} aria-label={category}>
         {category.split('').map((ch, i) => (
           <span

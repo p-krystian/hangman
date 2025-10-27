@@ -1,12 +1,9 @@
 import * as z from 'zod/mini';
-import { sioInEvents as sIn, sioOutEvents as sOut, limits } from '@/conf';
+import { limits, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
 
-const PhraseSchema = z.string().check(
-  z.trim(),
-  z.toUpperCase(),
-  z.minLength(limits.PHRASE_MIN),
-  z.maxLength(limits.PHRASE_MAX)
-);
+const PhraseSchema = z
+  .string()
+  .check(z.trim(), z.toUpperCase(), z.minLength(limits.PHRASE_MIN), z.maxLength(limits.PHRASE_MAX));
 type PhraseT = z.infer<typeof PhraseSchema>;
 const parsePhrase = PhraseSchema.safeParseAsync;
 
@@ -50,8 +47,13 @@ type InEventsT = {
 };
 
 export {
-  parsePhrase, type PhraseT,
-  parseOnlineGame, parseOnlineGames, type OnlineGameT,
-  parseGameData, type GameDataT,
-  type OutEventsT, type InEventsT
+  parsePhrase,
+  type PhraseT,
+  parseOnlineGame,
+  parseOnlineGames,
+  type OnlineGameT,
+  parseGameData,
+  type GameDataT,
+  type OutEventsT,
+  type InEventsT
 };

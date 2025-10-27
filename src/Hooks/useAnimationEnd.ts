@@ -1,16 +1,20 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 function useAnimaionEnd(target: HTMLElement, action: () => unknown, once = true) {
   let controller = new AbortController();
 
-  function onAction() {
+  const cleanUp = useCallback(() => {
+    controller.abort();
+  }, [controller]);
+
+  const onAction = useCallback(() => {
     action();
     if (once) {
       cleanUp();
     }
-  }
+  }, [action, once, cleanUp]);
 
-  function assignAction() {
+  const assignAction = useCallback(() => {
     controller.abort();
     controller = new AbortController();
     if (!target.getAnimations()?.length) {
@@ -21,14 +25,9 @@ function useAnimaionEnd(target: HTMLElement, action: () => unknown, once = true)
     target.addEventListener('animationcancel', onAction, { once, signal: controller.signal });
     target.addEventListener('transitionend', onAction, { once, signal: controller.signal });
     target.addEventListener('transitioncancel', onAction, { once, signal: controller.signal });
-  };
+  }, [target, action, once, onAction, controller]);
 
-  function cleanUp() {
-    controller.abort();
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo(() => [assignAction, cleanUp] as const, [target, action, once]);
+  return useMemo(() => [assignAction, cleanUp] as const, [assignAction, cleanUp]);
 }
 
 export default useAnimaionEnd;

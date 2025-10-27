@@ -9,6 +9,4 @@ import anim8 from './8.svg';
 import anim9 from './9.svg';
 import anim10 from './10.svg';
 
-export default [
-  anim1, anim2, anim3, anim4, anim5, anim6, anim7, anim8, anim9, anim10
-] as const;
+export default [anim1, anim2, anim3, anim4, anim5, anim6, anim7, anim8, anim9, anim10] as const;

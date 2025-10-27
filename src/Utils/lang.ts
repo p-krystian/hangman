@@ -1,6 +1,6 @@
-import { loadTranslations, loadWords, availableLangs } from '@/Assets/Langs';
-import { AppLangsT } from '@/Parsers/AppLangs';
+import { availableLangs, loadTranslations, loadWords } from '@/Assets/Langs';
 import { mainLang } from '@/conf';
+import { AppLangsT } from '@/Parsers/AppLangs';
 
 let TRANSLATIONS = {} as LangDictTranslations;
 let WORDS = {} as LangDictWords;
@@ -15,12 +15,8 @@ async function updateDictionaries(language: AppLangsT) {
 function getUserLang() {
   const navigatorLang = window.navigator.language.substring(0, 2) as AppLangsT;
 
-  return availableLangs.includes(navigatorLang) ? (
-    navigatorLang
-  ) : (
-    mainLang
-  );
-};
+  return availableLangs.includes(navigatorLang) ? navigatorLang : mainLang;
+}
 
 const getDictionaries = () => [TRANSLATIONS, WORDS] as const;
 

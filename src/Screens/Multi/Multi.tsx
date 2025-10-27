@@ -1,12 +1,12 @@
-import Alert from '@/Components/Confirm/Confirm';
-import { appVersion, env, limits, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
-import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
-import useLanguage from '@/Hooks/useLang';
-import type { InEventsT, OnlineGameT, OutEventsT } from '@/Parsers/MultiData';
-import { parseGameData, parseOnlineGame, parsePhrase } from '@/Parsers/MultiData';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useLocation } from 'wouter';
+import Alert from '@/Components/Confirm/Confirm';
+import GameContext, { MultiGameContext } from '@/Contexts/GameContext';
+import { appVersion, env, limits, sioInEvents as sIn, sioOutEvents as sOut } from '@/conf';
+import useLanguage from '@/Hooks/useLang';
+import type { InEventsT, OnlineGameT, OutEventsT } from '@/Parsers/MultiData';
+import { parseGameData, parseOnlineGame, parsePhrase } from '@/Parsers/MultiData';
 
 import Connecting from '@/Views/Connecting/Connecting';
 import Create from '@/Views/CreateGame/CreateGame';
@@ -31,14 +31,18 @@ const initialData: Omit<MultiGameContext, 'nicks'> = {
 function Multi() {
   const { l, currentLang } = useLanguage();
   const [, navigate] = useLocation();
-  const socket: Socket<InEventsT, OutEventsT> = useMemo(() => io(env.SOCKET_URL, {
-    autoConnect: false,
-    path: env.SOCKET_PATH,
-    query: {
-      version: appVersion,
-      language: currentLang
-    }
-  }), [currentLang]);
+  const socket: Socket<InEventsT, OutEventsT> = useMemo(
+    () =>
+      io(env.SOCKET_URL, {
+        autoConnect: false,
+        path: env.SOCKET_PATH,
+        query: {
+          version: appVersion,
+          language: currentLang
+        }
+      }),
+    [currentLang]
+  );
 
   const [stage, setStage] = useState<MultiStage>('connecting');
   const [gameList, setGameList] = useState<OnlineGameT[]>([]);
@@ -49,40 +53,41 @@ function Multi() {
     nicks: [l('you'), l('opponent')]
   });
 
-  const setExitAlert = useCallback((content: string) => (
-    setAlert({
-      children: content,
-      confirm: () => navigate('/')
-    })
-  ), [navigate]);
-  const onCreateGame = useCallback((name: string) => {
-    if (gameList.length >= limits.ONLINE_GAMES) {
+  const setExitAlert = useCallback(
+    (content: string) =>
       setAlert({
-        children: l('maxGames'),
-        confirm: () => setAlert(null)
-      });
-      return;
-    }
-    socket.emit(sOut.CREATE_GAME, name);
-  }, [socket, gameList, l]);
-  const nextRound = (
-    opponentExited.current ? (
-      () => socket.emit(sOut.JOIN_LOBBY)
-    ) : gameData.rounds[0] !== gameData.rounds[1] ? (
-      null
-    ) : (
-      () => socket.emit(sOut.NEXT_ROUND)
-    )
+        children: content,
+        confirm: () => navigate('/')
+      }),
+    [navigate]
   );
+  const onCreateGame = useCallback(
+    (name: string) => {
+      if (gameList.length >= limits.ONLINE_GAMES) {
+        setAlert({
+          children: l('maxGames'),
+          confirm: () => setAlert(null)
+        });
+        return;
+      }
+      socket.emit(sOut.CREATE_GAME, name);
+    },
+    [socket, gameList, l]
+  );
+  const nextRound = opponentExited.current
+    ? () => socket.emit(sOut.JOIN_LOBBY)
+    : gameData.rounds[0] !== gameData.rounds[1]
+      ? null
+      : () => socket.emit(sOut.NEXT_ROUND);
 
   useEffect(() => {
     function onConnect() {
       setTimeout(() => socket.emit(sOut.JOIN_LOBBY), 400);
-      setAlert(current => (
+      setAlert(current =>
         current?.children === l('serverDisconnect')
           ? { children: l('serverReconnected'), confirm: () => setAlert(null) }
           : current
-      ));
+      );
     }
     async function onStartGame(phrase: unknown) {
       const res = await parsePhrase(phrase);
@@ -189,32 +194,22 @@ function Multi() {
       ) : stage === 'lobby' ? (
         <Games
           gameList={gameList}
-          onJoin={(id) => socket.emit(sOut.JOIN_GAME, id)}
+          onJoin={id => socket.emit(sOut.JOIN_GAME, id)}
           onCreate={() => setStage('create')}
         />
       ) : stage === 'create' ? (
-        <Create
-          goBack={() => setStage('lobby')}
-          goNext={onCreateGame}
-        />
+        <Create goBack={() => setStage('lobby')} goNext={onCreateGame} />
       ) : stage === 'phrase' ? (
-        <WritePhrase
-          nick={l('opponents')}
-          goNext={(p) => socket.emit(sOut.WRITE_PHRASE, p)}
-        />
+        <WritePhrase nick={l('opponents')} goNext={p => socket.emit(sOut.WRITE_PHRASE, p)} />
       ) : stage === 'game' ? (
         <Game
           onWin={() => socket.emit(sOut.END_ROUND, gameData.phrase)}
           onLose={() => socket.emit(sOut.END_ROUND, '')}
         />
       ) : stage === 'result' ? (
-        <EndGame
-          goNext={nextRound}
-        />
+        <EndGame goNext={nextRound} />
       ) : (
-        <Waiting
-          goCancel={() => socket.emit(sOut.JOIN_LOBBY)}
-        />
+        <Waiting goCancel={() => socket.emit(sOut.JOIN_LOBBY)} />
       )}
       {!!alert && <Alert {...alert} />}
     </GameContext>

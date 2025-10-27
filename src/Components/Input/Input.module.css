@@ -1,22 +1,22 @@
 .input {
-  color: var(--white);
+  position: relative;
   display: flex;
   align-items: center;
+  width: var(--size);
+  max-width: 22rem;
+  height: 4rem;
+  padding: 0 0.5rem;
   font-family: var(--font-mono);
   font-size: 2.5rem;
-  border: 3px solid var(--main-d);
-  border-radius: 0.5rem;
-  padding: 0 0.5rem;
-  max-width: 22rem;
-  user-select: none;
-  width: var(--size);
-  height: 4rem;
+  color: var(--white);
   white-space: pre;
+  cursor: text;
+  user-select: none;
   /*overflow-x: auto;*/
   background-color: var(--dark-bg);
-  position: relative;
+  border: 3px solid var(--main-d);
+  border-radius: 0.5rem;
   isolation: isolate;
-  cursor: text;
 }
 .input[data-focus="true"] {
   border-color: var(--main);
@@ -24,9 +24,9 @@
 .placeholder {
   position: absolute;
   left: 0;
+  z-index: -1;
   width: 100%;
+  font-family: var(--font-simple);
   color: var(--main);
   text-align: center;
-  font-family: var(--font-simple);
-  z-index: -1;
 }

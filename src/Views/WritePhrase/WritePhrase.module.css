@@ -1,11 +1,11 @@
 .container {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  grid-area: main;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  grid-area: main;
-  flex: 1;
-  gap: 1rem;
 }
 .text {
   font-family: var(--font-simple);
@@ -13,8 +13,8 @@
   color: var(--main);
 }
 .wrapper {
-  width: 100%;
-  min-height: inherit;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-height: inherit;
 }

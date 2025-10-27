@@ -24,18 +24,18 @@ const binds = {
   PREV: 'arrowleft',
   NEXT: 'arrowright',
   RANDOMIZE: 'r',
-  "1": '1',
-  "2": '2',
-  "3": '3',
-  "4": '4',
-  "5": '5',
-  "6": '6'
+  '1': '1',
+  '2': '2',
+  '3': '3',
+  '4': '4',
+  '5': '5',
+  '6': '6'
 } as const;
 
 enum keysLS {
   VOLUME = 'volume',
   LANG = 'language'
-};
+}
 
 enum sioOutEvents {
   JOIN_LOBBY = 'join-lobby',
@@ -43,8 +43,8 @@ enum sioOutEvents {
   JOIN_GAME = 'join-game',
   WRITE_PHRASE = 'write-phrase',
   END_ROUND = 'end-round',
-  NEXT_ROUND = 'next-round',
-};
+  NEXT_ROUND = 'next-round'
+}
 
 enum sioInEvents {
   GAME_LIST = 'game-list',
@@ -55,7 +55,7 @@ enum sioInEvents {
   OPPONENT_EXIT = 'opponent-exit',
   OLD_VERSION = 'old-version',
   UNSUPPORTED_LANG = 'unsupported-lang',
-  INVALID_DATA = 'invalid-data',
-};
+  INVALID_DATA = 'invalid-data'
+}
 
 export { appVersion, mainLang, startVol, env, limits, binds, keysLS, sioOutEvents, sioInEvents };

@@ -8,11 +8,12 @@ function Info() {
   return (
     <div className={styles.info}>
       {l('info')}
-      <br /><br />
+      <br />
+      <br />
       <p>
         {`v${appVersion} - `}
         <a href={env.AUTHOR_URL} target="_blank" rel="noreferrer">
-          by Krystian Piątek
+          {'by Krystian Piątek'}
         </a>
       </p>
     </div>

@@ -5,9 +5,9 @@ import styles from './NumberSlider.module.css';
 type NumberSliderProps = {
   current: number;
   prev: number;
-}
+};
 
-const nStr = (n: number) => n < 0 ? '00' : n < 10 ? `0${n}` : `${n}`;
+const nStr = (n: number) => (n < 0 ? '00' : n < 10 ? `0${n}` : `${n}`);
 
 function NumberSlider({ current, prev }: NumberSliderProps) {
   const slide = current !== prev ? styles.slide : '';

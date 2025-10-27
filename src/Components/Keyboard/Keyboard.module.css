@@ -1,9 +1,9 @@
 .keyboard {
-  border: 3px solid var(--main-d);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
   grid-area: keyboard;
+  padding: 0.5rem;
   background-color: var(--dark-bg);
+  border: 3px solid var(--main-d);
+  border-radius: 0.5rem;
 }
 .keys {
   /* display: grid;
@@ -11,6 +11,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  width: 21.2rem;
   justify-content: center;
+  width: 21.2rem;
 }

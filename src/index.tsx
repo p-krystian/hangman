@@ -8,10 +8,8 @@ const ENABLE_STRICT_MODE = true;
 
 const OptionalStrict = ENABLE_STRICT_MODE ? React.StrictMode : React.Fragment;
 
-ReactDOM
-  .createRoot(document.getElementById('root')!)
-  .render(
-    <OptionalStrict>
-      <App />
-    </OptionalStrict>,
-  );
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <OptionalStrict>
+    <App />
+  </OptionalStrict>
+);

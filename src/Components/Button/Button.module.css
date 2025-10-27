@@ -1,31 +1,31 @@
 .button {
-  appearance: none;
+  position: relative;
   display: inline-grid;
+  place-items: center;
   min-width: 10rem;
-  font-size: 2rem;
   padding: 0.4rem;
   font-family: var(--font-main);
+  font-size: 2rem;
+  color: var(--white);
+  text-align: center;
+  text-transform: lowercase;
+  text-decoration: none;
+  appearance: none;
+  cursor: pointer;
   background-color: var(--main);
   border: 2px solid var(--main-d);
   border-radius: 0.5rem;
-  color: var(--white);
-  cursor: pointer;
-  text-decoration: none;
-  text-transform: lowercase;
-  text-align: center;
-  place-items: center;
-  position: relative;
   isolation: isolate;
   transition:
     background-color var(--trans-d) ease-out,
     filter var(--trans-d) ease-in-out;
 }
 .button.small {
-  font-size: 1.3rem;
-  padding: 0.2rem 0.6rem;
-  margin: 0;
   min-width: 4rem;
   max-height: 2.2rem;
+  padding: 0.2rem 0.6rem;
+  margin: 0;
+  font-size: 1.3rem;
 }
 .button:hover {
   background-color: var(--main-d);
@@ -41,6 +41,6 @@ button > img {
   height: 85%;
   object-fit: cover;
 }
-button > svg{
+button > svg {
   height: 100%;
 }

@@ -1,3 +1,4 @@
+import { useCallback, useContext, useState } from 'react';
 import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
@@ -10,14 +11,13 @@ import GameContext from '@/Contexts/GameContext';
 import useFullScreen from '@/Hooks/useFullScreen';
 import useLanguage from '@/Hooks/useLang';
 import usePlayer from '@/Hooks/usePlayer';
-import { useCallback, useContext, useState } from 'react';
 import styles from './Game.module.css';
 
 type GameProps = {
   goExit?: () => unknown;
   onLose: () => unknown;
   onWin: () => unknown;
-}
+};
 
 function Game({ goExit, onLose, onWin }: GameProps) {
   const { l } = useLanguage();
@@ -30,41 +30,41 @@ function Game({ goExit, onLose, onWin }: GameProps) {
 
   useFullScreen();
 
-  const clickKey = useCallback((char: string, setKeyState: (s: KeyStateT) => unknown) => {
-    if (mistakes.has(char) || (!toGuess.has(char) && phrase.includes(char))) {
-      return;
-    }
+  const clickKey = useCallback(
+    (char: string, setKeyState: (s: KeyStateT) => unknown) => {
+      if (mistakes.has(char) || (!toGuess.has(char) && phrase.includes(char))) {
+        return;
+      }
 
-    if (toGuess.has(char)) {
-      const newToGess = new Set(toGuess);
-      newToGess.delete(char);
-      if (newToGess.size < 1) {
-        return onWin();
+      if (toGuess.has(char)) {
+        const newToGess = new Set(toGuess);
+        newToGess.delete(char);
+        if (newToGess.size < 1) {
+          return onWin();
+        }
+        setKeyState('correct');
+        playSound('good');
+        setToGuess(newToGess);
+      } else {
+        const newMistakes = new Set(mistakes);
+        newMistakes.add(char);
+        if (newMistakes.size > 9) {
+          return onLose();
+        }
+        setKeyState('mistake');
+        playSound('bad');
+        setMistakes(newMistakes);
       }
-      setKeyState('correct');
-      playSound('good');
-      setToGuess(newToGess);
-    }
-    else {
-      const newMistakes = new Set(mistakes);
-      newMistakes.add(char);
-      if (newMistakes.size > 9) {
-        return onLose();
-      }
-      setKeyState('mistake');
-      playSound('bad');
-      setMistakes(newMistakes);
-    }
-  }, [toGuess, mistakes, playSound, phrase, onLose, onWin]);
+    },
+    [toGuess, mistakes, playSound, phrase, onLose, onWin]
+  );
 
   return (
     <div className={styles.container}>
       <div className={styles.game}>
         <Board progress={mistakes.size} />
         <PhraseCategory phrase={phrase} animate />
-        <Phrase hideChars={toGuess}>
-          {phrase}
-        </Phrase>
+        <Phrase hideChars={toGuess}>{phrase}</Phrase>
         <Keyboard keyEvent={clickKey} />
       </div>
       <ButtonWrap>

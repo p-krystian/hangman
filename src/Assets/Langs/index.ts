@@ -1,8 +1,7 @@
-import plFlag from './pl/flag.svg';
-import plLogo from './pl/logo-beta.webp';
-
 import enFlag from './en/flag.svg';
 import enLogo from './en/logo-beta.webp';
+import plFlag from './pl/flag.svg';
+import plLogo from './pl/logo-beta.webp';
 
 const langs = {
   pl: {
@@ -23,12 +22,10 @@ const langs = {
 
 const availableLangs = [...Object.keys(langs)] as [keyof typeof langs];
 
-const loadTranslations = (lang: keyof typeof langs) => (
-  import(`./${lang}/translations.json`) as Promise<{ default: LangDictTranslations }>
-);
-const loadWords = (lang: keyof typeof langs) => (
-  import(`./${lang}/words.json`) as Promise<{ default: LangDictWords }>
-);
+const loadTranslations = (lang: keyof typeof langs) =>
+  import(`./${lang}/translations.json`) as Promise<{ default: LangDictTranslations }>;
+const loadWords = (lang: keyof typeof langs) =>
+  import(`./${lang}/words.json`) as Promise<{ default: LangDictWords }>;
 
 export { availableLangs, loadTranslations, loadWords };
 export default langs;

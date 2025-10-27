@@ -13,16 +13,17 @@ const onKeyUp = (e: KeyboardEvent) => {
   }
 };
 
-const useControlKey = () => useEffect(() => {
-  const controller = new AbortController();
+const useControlKey = () =>
+  useEffect(() => {
+    const controller = new AbortController();
 
-  window.addEventListener('keydown', onKeyDown, { signal: controller.signal });
-  window.addEventListener('keyup', onKeyUp, { signal: controller.signal });
+    window.addEventListener('keydown', onKeyDown, { signal: controller.signal });
+    window.addEventListener('keyup', onKeyUp, { signal: controller.signal });
 
-  return () => {
-    controller.abort();
-    root.classList.remove('control');
-  };
-}, []);
+    return () => {
+      controller.abort();
+      root.classList.remove('control');
+    };
+  }, []);
 
 export default useControlKey;

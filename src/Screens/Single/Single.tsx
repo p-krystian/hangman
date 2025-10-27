@@ -1,9 +1,9 @@
+import { useCallback, useRef, useState } from 'react';
+import { useLocation } from 'wouter';
 import GameContext, { SingleGameContext } from '@/Contexts/GameContext';
 import useLanguage from '@/Hooks/useLang';
 import EndGame from '@/Views/EndGame/EndGame';
 import Game from '@/Views/Game/Game';
-import { useCallback, useRef, useState } from 'react';
-import { useLocation } from 'wouter';
 
 type SingleStage = 'game' | 'endGame';
 
@@ -42,9 +42,7 @@ function SingleGame() {
   return (
     <GameContext value={gameData.current}>
       {stage === 'endGame' ? (
-        <EndGame
-          goNext={() => newGame()}
-        />
+        <EndGame goNext={() => newGame()} />
       ) : (
         <Game
           goExit={() => navigate('/')}

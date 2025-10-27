@@ -8,9 +8,8 @@ function useKeyboardWrite(
       return current.slice(0, -1);
     }
     if (
-      current.length === 0 && char === ' '
-      || char === ' ' && (current[current.length - 1] == ' '
-      || current.length + 1 >= maxLength)
+      (current.length === 0 && char === ' ') ||
+      (char === ' ' && (current[current.length - 1] == ' ' || current.length + 1 >= maxLength))
     ) {
       return current;
     }

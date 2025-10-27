@@ -6,7 +6,7 @@ import styles from './Waiting.module.css';
 
 type WaitingProps = {
   goCancel?: () => unknown;
-}
+};
 
 function Waiting({ goCancel }: WaitingProps) {
   const { l } = useLanguage();

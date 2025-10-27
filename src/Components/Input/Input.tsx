@@ -1,10 +1,10 @@
+import { memo, useEffect, useRef } from 'react';
+import KeyIndicator from '@/Components/KeyIndicator/KeyIndicator';
 import WithCaret from '@/Components/WithCaret/WithCaret';
+import { binds } from '@/conf';
 import usePlayer from '@/Hooks/usePlayer';
 import shortcutListener from '@/Utils/shortcutListener';
-import { binds } from '@/conf';
-import { memo, useEffect, useRef } from 'react';
 import styles from './Input.module.css';
-import KeyIndicator from '@/Components/KeyIndicator/KeyIndicator';
 
 type InputProps = {
   value: string;
@@ -13,7 +13,7 @@ type InputProps = {
   active?: boolean;
   onFocus?: () => unknown;
   shortcut?: keyof typeof binds;
-}
+};
 
 function Input({ value, active, size, placeholder, onFocus, shortcut }: InputProps) {
   const prevValue = useRef(value);
@@ -29,11 +29,11 @@ function Input({ value, active, size, placeholder, onFocus, shortcut }: InputPro
     prevValue.current = value;
   }, [value, playSound]);
 
+  // biome-ignore lint: Run once on mount
   useEffect(() => {
     if (active) {
       inputRef.current?.focus({ preventScroll: true });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

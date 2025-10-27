@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Confirm from '@/Components/Confirm/Confirm';
@@ -8,7 +9,6 @@ import useFullScreen from '@/Hooks/useFullScreen';
 import useKeyboardWrite from '@/Hooks/useKeyboardWrite';
 import useLanguage from '@/Hooks/useLang';
 import usePlayer from '@/Hooks/usePlayer';
-import { useEffect, useState } from 'react';
 import styles from './WritePhrase.module.css';
 
 type WritePhraseProps = {
@@ -16,7 +16,7 @@ type WritePhraseProps = {
   nick: string;
   goBack?: () => void;
   goExit?: () => void;
-}
+};
 
 function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
   const { l, getRandomWord } = useLanguage();
@@ -27,20 +27,15 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
 
   useFullScreen();
   useEffect(() => {
-    if (phrase === '')
-      return;
+    if (phrase === '') return;
     playSound('click');
   }, [phrase, playSound]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <span className={styles.text}>
-          {`${l('phraseFor')} ${nick}:`}
-        </span>
-        <Phrase write>
-          {phrase}
-        </Phrase>
+        <span className={styles.text}>{`${l('phraseFor')} ${nick}:`}</span>
+        <Phrase write>{phrase}</Phrase>
         <Keyboard keyEvent={keyboardWrite} write />
       </div>
       <ButtonWrap>
@@ -52,7 +47,7 @@ function WritePhrase({ goNext, nick, goBack, goExit }: WritePhraseProps) {
           {l('next')}
         </Button>
         {(!!goBack || !!goExit) && (
-          <Button onClick={goExit ? (() => setAskExit(true)) : goBack} shortcut="CANCEL">
+          <Button onClick={goExit ? () => setAskExit(true) : goBack} shortcut="CANCEL">
             {goExit ? l('cancel') : l('back')}
           </Button>
         )}

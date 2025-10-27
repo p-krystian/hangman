@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
 import Board from '@/Components/Board/Board';
 import Button from '@/Components/Button/Button';
 import ButtonWrap from '@/Components/ButtonWrap/ButtonWrap';
 import Phrase from '@/Components/Phrase/Phrase';
 import useLanguage from '@/Hooks/useLang';
-import { useEffect, useState } from 'react';
 import styles from './Connecting.module.css';
 
 function Connecting() {
@@ -14,10 +14,8 @@ function Connecting() {
     let addend = -1;
     const interval = setInterval(() => {
       setProgress(current => {
-        if (current <= 0)
-          addend = 1;
-        if (current >= 10)
-          addend = -1;
+        if (current <= 0) addend = 1;
+        if (current >= 10) addend = -1;
         return current + addend;
       });
     }, 350);
@@ -31,7 +29,7 @@ function Connecting() {
         <Phrase>{`${l('connecting')}...`}</Phrase>
       </div>
       <ButtonWrap>
-        <Button link='/' shortcut="CANCEL">
+        <Button link="/" shortcut="CANCEL">
           {l('cancel')}
         </Button>
       </ButtonWrap>

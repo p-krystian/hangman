@@ -1,8 +1,8 @@
-import KeyIndicator from '@/Components/KeyIndicator/KeyIndicator';
-import shortcutListener from '@/Utils/shortcutListener';
-import { binds } from '@/conf';
 import { memo, useCallback, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
+import KeyIndicator from '@/Components/KeyIndicator/KeyIndicator';
+import { binds } from '@/conf';
+import shortcutListener from '@/Utils/shortcutListener';
 import styles from './Button.module.css';
 
 type ButtonProps = {
@@ -13,15 +13,17 @@ type ButtonProps = {
   disabled?: boolean;
   small?: boolean;
   shortcut?: keyof typeof binds;
-}
+};
 
 function Button({ link, onClick, value, children, disabled, small, shortcut }: ButtonProps) {
   const btnRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
-  const classNames = `${styles.button} ${small ? styles.small : ""}`;
+  const classNames = `${styles.button} ${small ? styles.small : ''}`;
 
   const setRef = useCallback((element: HTMLButtonElement | HTMLAnchorElement | null) => {
     btnRef.current = element;
-    return () => { btnRef.current = null; };
+    return () => {
+      btnRef.current = null;
+    };
   }, []);
 
   useEffect(() => {
