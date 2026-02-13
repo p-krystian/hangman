@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'wouter';
-import { useHashLocation } from 'wouter/use-hash-location';
 import Header from '@/Components/Header/Header';
 import Splash from '@/Components/Splash/Splash';
 import AppContext from '@/Contexts/AppContext';
@@ -47,7 +46,7 @@ function App() {
     <Splash />
   ) : (
     <AppContext value={{ volume, setVolume, appLang, setLang }}>
-      <Router hook={useHashLocation}>
+      <Router>
         <Header />
         <main>
           <Switch>
